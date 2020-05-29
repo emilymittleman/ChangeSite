@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ChangeSite2
+@testable import ChangeSite3
 
 class ChangeSite2Tests: XCTestCase {
 
