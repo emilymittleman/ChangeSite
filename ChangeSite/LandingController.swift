@@ -270,7 +270,7 @@ class LandingController: UIViewController {
         return Calendar.current.weekdaySymbols[index-1]
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -278,6 +278,6 @@ class LandingController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
