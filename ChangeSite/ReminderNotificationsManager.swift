@@ -61,13 +61,14 @@ class ReminderNotificationsManager {
         self.saveToStorage(reminderNotifications: self.reminderNotifications)
     }
     
-    func retrieveFromStorage() {
+    func retrieveFromStorage() -> [ReminderNotification] {
         if let reminderNotifications = try? PropertyListDecoder().decode([ReminderNotification].self, from: UserDefaults.standard.object(forKey: "reminderNotifications") as! Data) {
             self.reminderNotifications = reminderNotifications
         } else {
             self.reminderNotifications = []
             self.setDefaultValues()
         }
+        return self.reminderNotifications
     }
     
 }

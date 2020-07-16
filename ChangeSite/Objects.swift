@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Reminder : Codable {
+struct Reminder1 : Codable {
     var startDate : Date
     var daysBtwn : Int
     var endDate : Date {
@@ -32,6 +32,27 @@ struct ReminderNotification1 : Codable {
     var occurrence: String  // "none", "single", "repeating"
     var soundOn: Bool       // true, false
     var frequency: Date     // Date object: 5 minutes
+}
+
+
+
+
+class Reminder : Codable {
+    var startDate : Date
+    var daysBtwn : Int
+    var endDate : Date {
+        var d = startDate
+        d.addTimeInterval(TimeInterval(daysBtwn * 60 * 60 * 24))
+        return d
+    }
+    var overdue : Bool {
+        return endDate < Date() //the endDate is earlier than the current date
+    }
+    
+    init(startDate: Date, daysBtwn: Int) {
+        self.startDate = startDate
+        self.daysBtwn = daysBtwn
+    }
 }
 
 class ReminderNotification: Codable {

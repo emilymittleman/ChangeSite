@@ -9,11 +9,9 @@
 import UIKit
 
 class LandingController: UIViewController {
-    var reminder = ( try? PropertyListDecoder().decode(Reminder.self, from: UserDefaults.standard.object(forKey: "reminder") as! Data) )!
     
-    func saveReminder(reminder: Reminder) {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(reminder), forKey: "reminder")
-    }
+    var reminder: Reminder = ReminderManager.shared.reminder
+    var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
     
     // var timer: Timer
     var firstTimeLeft = 0
@@ -42,8 +40,8 @@ class LandingController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
         // save the current date from datepicker
-        reminder.startDate = startDatePicker.date
-        saveReminder(reminder: reminder)
+        self.reminder.startDate = startDatePicker.date
+        //ReminderManager.shared.saveToStorage(reminder: self.reminder)
         
         // show the "New site started" button & hide the rest of start date objects
         newSiteButton.isHidden = false
@@ -55,7 +53,7 @@ class LandingController: UIViewController {
         timer = nil
         
         // reset the labels at the top, the timer, the time shown, & progress circle %
-        var interval = reminder.endDate.timeIntervalSince(Date())
+        var interval = self.reminder.endDate.timeIntervalSince(Date())
         
         let seconds: Int = Int(interval)
         let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
@@ -85,7 +83,7 @@ class LandingController: UIViewController {
         }
         
         // find percent of how much time is left & set the circle progress bar
-        totalSeconds = reminder.daysBtwn * 86400
+        totalSeconds = self.reminder.daysBtwn * 86400
         percent = 1 - Double(seconds) / Double(totalSeconds)
         progressBar.setProgress(to: percent, withAnimation: true)
         
@@ -95,7 +93,7 @@ class LandingController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
         
         // set day of week at top of screen
-        endDateLabel.text = getDayOfWeek(date: reminder.endDate)
+        endDateLabel.text = getDayOfWeek(date: self.reminder.endDate)
         
     }
     
@@ -111,8 +109,10 @@ class LandingController: UIViewController {
     @IBAction func startDatePickerChanged(_ sender: Any) {
     }
     
+    // MARK: ------- Setup -------
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // if this view has ever loaded, then newUser = false
         UserDefaults.standard.set(false, forKey: "newUser")
     }
@@ -135,7 +135,7 @@ class LandingController: UIViewController {
         
         // days, hours, and minutes depends on current timer
         // find how many seconds until endDate
-        var interval = reminder.endDate.timeIntervalSince(Date())
+        var interval = self.reminder.endDate.timeIntervalSince(Date())
         
         let seconds: Int = Int(interval)
         let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
@@ -145,14 +145,14 @@ class LandingController: UIViewController {
         let minutes: Int = Int ((interval / 60).rounded(.down))
         
         // find percent of how much time is left & set the circle progress bar
-        totalSeconds = reminder.daysBtwn * 86400
+        totalSeconds = self.reminder.daysBtwn * 86400
         percent = 1 - Double(seconds) / Double(totalSeconds)
         
         timeLeft = seconds
         firstTimeLeft = timeLeft
         
         // deal with the case where the timer is past it's due date
-        var intervalOT = Date().timeIntervalSince(reminder.endDate)
+        var intervalOT = Date().timeIntervalSince(self.reminder.endDate)
         
         let secondsOT: Int = Int(intervalOT)
         let daysOT: Int = Int ((intervalOT / (24.0 * 3600)).rounded(.down))
@@ -174,7 +174,7 @@ class LandingController: UIViewController {
         }
         
         // set day of week at top of screen
-        endDateLabel.text = getDayOfWeek(date: reminder.endDate)
+        endDateLabel.text = getDayOfWeek(date: self.reminder.endDate)
         
         hideNewStartDate()
     }

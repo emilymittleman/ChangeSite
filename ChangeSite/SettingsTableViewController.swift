@@ -9,18 +9,9 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
-    // variables ... I wanted all of these to have Label in the variable name but they don't
-    // and I don't want to break the connection
-    //   wanna do this bc Reminder's instance variables are the same as the label's variable names
     
-    // need to define each reminder inside the function so it's a local variable
-    func getReminder() -> Reminder {
-        let reminder = ( try? PropertyListDecoder().decode(Reminder.self, from: UserDefaults.standard.object(forKey: "reminder") as! Data) )!
-        return reminder
-    }
-    func saveReminder(reminder: Reminder) {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(reminder), forKey: "reminder")
-    }
+    var reminder: Reminder = ReminderManager.shared.reminder
+    var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
     
     @IBOutlet weak var startDate: UILabel!
     
@@ -28,10 +19,11 @@ class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var stepper: UIStepper!
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        var reminder = getReminder()
         daysBtwn.text = Int(sender.value).description
-        reminder.daysBtwn = Int(sender.value)
-        saveReminder(reminder: reminder)
+        
+        self.reminder.daysBtwn = Int(sender.value)
+        ReminderManager.shared.mutateNotification(newReminder: self.reminder)
+        //ReminderManager.shared.saveToStorage(reminder: self.reminder)
     }
     
     @IBOutlet weak var cell1: UITableViewCell!
@@ -39,7 +31,6 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var cell3: UITableViewCell!
     @IBOutlet weak var cell4: UITableViewCell!
     @IBOutlet weak var cell5: UITableViewCell!
-    
     
     @IBOutlet weak var occurrence0: UILabel!
     @IBOutlet weak var occurrence1: UILabel!
@@ -50,46 +41,35 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let reminder = getReminder()
-
         stepper.autorepeat = true
         
-        // set the startDate text
-        setStartDateLabel()
-        // set the days between number
-        daysBtwn.text = String(reminder.daysBtwn)
-        // set the labels for each reminderNotification settings (none, single, or repeating)
-        setReminderNotificationText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // calls this function every time the settings screen appears (or reappears like if you hit back)
-        // pretty sure I can just use this method & not viewDidLoad()
         super.viewWillAppear(true)
         
-        let reminder = getReminder()
+        self.reminder = ReminderManager.shared.retrieveFromStorage()
+        self.reminderNotifications = ReminderNotificationsManager.shared.retrieveFromStorage()
         
-        // set the startDate text
+        // --- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications)---
         setStartDateLabel()
-        // you have to update reminder
         daysBtwn.text = String(reminder.daysBtwn)
-        // set the labels for each reminderNotification settings (none, single, or repeating)
         setReminderNotificationText()
     }
     
     func setStartDateLabel() {
-        let reminder = getReminder() //reminder might've been updated in UserDefaults, so you have to get it from there again
+        self.reminder = ReminderManager.shared.retrieveFromStorage()
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.short
         
-        let strDate = dateFormatter.string(from: reminder.startDate)
+        let strDate = dateFormatter.string(from: self.reminder.startDate)
         startDate.text = strDate
     }
     
     func setReminderNotificationText() {
-        let reminderNotifications = (try? PropertyListDecoder().decode([ReminderNotification].self, from: UserDefaults.standard.object(forKey: "reminderNotifications") as! Data))!
+        self.reminderNotifications = ReminderNotificationsManager.shared.retrieveFromStorage()
         occurrence0.text = reminderNotifications[0].occurrence
         occurrence1.text = reminderNotifications[1].occurrence
         occurrence2.text = reminderNotifications[2].occurrence
@@ -102,25 +82,32 @@ class SettingsTableViewController: UITableViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if let nextViewController = segue.destination as? ReminderFrequencyController {
-            //nextViewController.whichNotification = ReminderNotificationPressed(name: segue.identifier!)
-            
             if (segue.identifier == "segue1") {
                 nextViewController.index = 0
+                nextViewController.type = "oneDayBefore"
+                nextViewController.reminderNotification = reminderNotifications[0]
             }
             else if (segue.identifier == "segue2") {
                 nextViewController.index = 1
+                nextViewController.type = "dayOf"
+                nextViewController.reminderNotification = reminderNotifications[1]
             }
             else if (segue.identifier == "segue3") {
                 nextViewController.index = 2
+                nextViewController.type = "oneDayAfter"
+                nextViewController.reminderNotification = reminderNotifications[2]
             }
             else if (segue.identifier == "segue4") {
                 nextViewController.index = 3
+                nextViewController.type = "twoDaysAfter"
+                nextViewController.reminderNotification = reminderNotifications[3]
             }
             else {
                 nextViewController.index = 4
+                nextViewController.type = "threeDaysAfter"
+                nextViewController.reminderNotification = reminderNotifications[4]
             }
         }
-        
     }
     
 
