@@ -1,15 +1,15 @@
 //
-//  ChangeSite2Tests.swift
-//  ChangeSite2Tests
+//  ChangeSiteTests.swift
+//  ChangeSiteTests
 //
 //  Created by Emily Mittleman on 8/11/19.
 //  Copyright © 2019 Emily Mittleman. All rights reserved.
 //
 
 import XCTest
-@testable import ChangeSite3
+@testable import ChangeSite
 
-class ChangeSite2Tests: XCTestCase {
+class ChangeSiteTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
