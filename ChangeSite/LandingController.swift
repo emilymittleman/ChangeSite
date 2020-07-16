@@ -10,6 +10,7 @@ import UIKit
 
 class LandingController: UIViewController {
     var reminder = ( try? PropertyListDecoder().decode(Reminder.self, from: UserDefaults.standard.object(forKey: "reminder") as! Data) )!
+    
     func saveReminder(reminder: Reminder) {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(reminder), forKey: "reminder")
     }
@@ -116,7 +117,6 @@ class LandingController: UIViewController {
         UserDefaults.standard.set(false, forKey: "newUser")
     }
     
-    // change this to viewWillAppear() ?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         

@@ -27,15 +27,30 @@ struct Reminder : Codable {
     }
 }
 
-struct ReminderNotification : Codable {
-    var occurrence: String
-    var soundOn: Bool
-    var frequency: Date //change to Double or Date?
+struct ReminderNotification1 : Codable {
+    var type: String        // "oneDayBefore", "dayOf", "oneDayAfter", etc.
+    var occurrence: String  // "none", "single", "repeating"
+    var soundOn: Bool       // true, false
+    var frequency: Date     // Date object: 5 minutes
 }
 
+class ReminderNotification: Codable {
+    var type: String        // "oneDayBefore", "dayOf", "oneDayAfter", etc.
+    var occurrence: String  // "none", "single", "repeating"
+    var soundOn: Bool       // true, false
+    var frequency: Date     // Date object: 5 minutes
+    
+    init(type: String, occurrence: String = "none", soundOn: Bool = false, frequency: Date = Calendar.current.date(bySettingHour:0, minute:5, second:0, of:Date())!) {
+        self.type = type
+        self.occurrence = occurrence
+        self.soundOn = soundOn
+        self.frequency = frequency
+    }
+}
+/*
 struct ReminderNotificationPressed : Codable {
     var name: String
-}
+}*/
 
 extension UIColor {
     class var teal: UIColor {

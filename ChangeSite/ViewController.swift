@@ -14,16 +14,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        var newUser: Bool
         
         //UserDefaults.standard.set(true, forKey: "newUser")
-        //let newUser = UserDefaults.standard.object(forKey: "newUser") as! Bool
-        let newUser = UserDefaults.standard.object(forKey: "newUser")
+        // if newUser exists in UserDefaults, set it, but if it's nil, then they are a new user so newUser = true
+        if UserDefaults.standard.object(forKey: "newUser") != nil {
+            newUser = UserDefaults.standard.bool(forKey: "newUser")
+        } else {
+            newUser = true
+        }
         
-        // if newUser is false, go to landingScreen, but if it's nil, then they are a newUser
-        // if (newUser != nil)
-        // if (newUser == false)
-        // if (newUser != true)
-        if(newUser != nil) { //skip welcome screen & go to landing page
+        if(!newUser) { //skip welcome screen & go to landing page
             let signInPage = self.storyboard?.instantiateViewController(withIdentifier: "LandingScreen") as UIViewController?
             let appDelegate = UIApplication.shared.delegate
             appDelegate?.window??.rootViewController = signInPage

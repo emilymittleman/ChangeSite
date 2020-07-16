@@ -17,9 +17,10 @@ class ReminderFrequencyController: UIViewController {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(reminderNotifications), forKey: "reminderNotifications")
     }
     
-    var whichNotification = ReminderNotificationPressed(name: "segue1")
+    //var whichNotification = ReminderNotificationPressed(name: "segue1")
     var index = 0
     
+    // Returns data about the specific reminder notification
     func getReminderNotification() -> ReminderNotification {
         let reminderNotifications = getReminderNotifications()
         return reminderNotifications[index]
