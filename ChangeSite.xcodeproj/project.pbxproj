@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		5D09CDFD23026991006E914F /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09CDFC23026991006E914F /* Objects.swift */; };
 		5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */; };
-		5D1B011724C0635200EE9633 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011624C0635200EE9633 /* ReminderManager.swift */; };
+		5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011624C0635200EE9633 /* PumpSiteManager.swift */; };
 		5D786881230096FB00A54436 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D786880230096FB00A54436 /* ContainerController.swift */; };
-		5D7868832300984B00A54436 /* LandingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7868822300984B00A54436 /* LandingController.swift */; };
+		5D7868832300984B00A54436 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7868822300984B00A54436 /* HomeViewController.swift */; };
 		5DB89115230029090000BFC6 /* colorGradient.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5DB89114230029080000BFC6 /* colorGradient.jpeg */; };
 		5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */; };
 		5DB8911923003FE80000BFC6 /* StartDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911823003FE80000BFC6 /* StartDateController.swift */; };
@@ -48,9 +48,9 @@
 /* Begin PBXFileReference section */
 		5D09CDFC23026991006E914F /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotificationsManager.swift; sourceTree = "<group>"; };
-		5D1B011624C0635200EE9633 /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderManager.swift; sourceTree = "<group>"; };
+		5D1B011624C0635200EE9633 /* PumpSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteManager.swift; sourceTree = "<group>"; };
 		5D786880230096FB00A54436 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
-		5D7868822300984B00A54436 /* LandingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingController.swift; sourceTree = "<group>"; };
+		5D7868822300984B00A54436 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5DB89114230029080000BFC6 /* colorGradient.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = colorGradient.jpeg; sourceTree = "<group>"; };
 		5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		5DB8911823003FE80000BFC6 /* StartDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateController.swift; sourceTree = "<group>"; };
@@ -98,6 +98,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5DAE572C251A1B01006151A2 /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Reminder;
+			sourceTree = "<group>";
+		};
 		5DCD3293230023AB00BC2E07 = {
 			isa = PBXGroup;
 			children = (
@@ -121,15 +128,16 @@
 		5DCD329E230023AB00BC2E07 /* ChangeSite */ = {
 			isa = PBXGroup;
 			children = (
+				5DAE572C251A1B01006151A2 /* Reminder */,
 				5DCD329F230023AB00BC2E07 /* AppDelegate.swift */,
 				5DCD32A1230023AB00BC2E07 /* ViewController.swift */,
 				5D09CDFC23026991006E914F /* Objects.swift */,
 				5DCD32A3230023AB00BC2E07 /* Main.storyboard */,
-				5D7868822300984B00A54436 /* LandingController.swift */,
+				5D7868822300984B00A54436 /* HomeViewController.swift */,
 				5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */,
-				5D1B011624C0635200EE9633 /* ReminderManager.swift */,
 				5DB8911823003FE80000BFC6 /* StartDateController.swift */,
 				5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */,
+				5D1B011624C0635200EE9633 /* PumpSiteManager.swift */,
 				5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */,
 				5D786880230096FB00A54436 /* ContainerController.swift */,
 				5DCD32A6230023AD00BC2E07 /* Assets.xcassets */,
@@ -298,12 +306,12 @@
 				5DCD32A2230023AB00BC2E07 /* ViewController.swift in Sources */,
 				5DE8D52F23BFC45E0044808A /* CircularProgressBar.swift in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
-				5D7868832300984B00A54436 /* LandingController.swift in Sources */,
+				5D7868832300984B00A54436 /* HomeViewController.swift in Sources */,
 				5D786881230096FB00A54436 /* ContainerController.swift in Sources */,
 				5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */,
 				5D09CDFD23026991006E914F /* Objects.swift in Sources */,
 				5DB8911B2300401E0000BFC6 /* ReminderFrequencyController.swift in Sources */,
-				5D1B011724C0635200EE9633 /* ReminderManager.swift in Sources */,
+				5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */,
 				5DE8D53223BFCE550044808A /* circularProgressBar.xcdatamodeld in Sources */,
 				5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */,
 			);

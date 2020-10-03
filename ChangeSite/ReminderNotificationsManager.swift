@@ -40,7 +40,6 @@ class ReminderNotificationsManager {
     
     // Update a certain notification in UserDefaults & self
     func mutateNotification(newReminderNotif: ReminderNotification) {
-        
         for reminderNotif in self.reminderNotifications {
             if reminderNotif.type == newReminderNotif.type {
                 reminderNotif.occurrence = newReminderNotif.occurrence
@@ -62,9 +61,11 @@ class ReminderNotificationsManager {
     }
     
     func retrieveFromStorage() -> [ReminderNotification] {
-        if let reminderNotifications = try? PropertyListDecoder().decode([ReminderNotification].self, from: UserDefaults.standard.object(forKey: "reminderNotifications") as! Data) {
-            self.reminderNotifications = reminderNotifications
-        } else {
+        if UserDefaults.standard.object(forKey: "reminderNotifications") != nil {
+            if let reminderNotifications = try? PropertyListDecoder().decode([ReminderNotification].self, from: UserDefaults.standard.object(forKey: "reminderNotifications") as! Data) {
+                self.reminderNotifications = reminderNotifications
+            }
+        } else { // If it is nil in UserDefaults, set up default values
             self.reminderNotifications = []
             self.setDefaultValues()
         }

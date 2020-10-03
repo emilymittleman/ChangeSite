@@ -10,7 +10,7 @@ import UIKit
 
 class ReminderFrequencyController: UIViewController {
     
-    var reminder: Reminder = ReminderManager.shared.reminder
+    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     //var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
     
     var index = 0
@@ -92,8 +92,6 @@ class ReminderFrequencyController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //loadSetUp()
-        
         //soundLabel.font = UIFont(name: "Helectiva", size: soundLabel.font.pointSize)
         //soundLabel.font = UIFont(name: "DINAlternate-Bold", size: soundLabel.font.pointSize)
 
@@ -102,7 +100,7 @@ class ReminderFrequencyController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.reminder = ReminderManager.shared.retrieveFromStorage()
+        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         
         loadSetUp()
         

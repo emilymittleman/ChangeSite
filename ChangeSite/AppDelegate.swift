@@ -29,10 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         let newUser = UserDefaults.standard.bool(forKey: "newUser")
         if !newUser {
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(ReminderManager.shared.reminder), forKey: "reminder")
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(PumpSiteManager.shared.pumpSite), forKey: "pumpSite")
             UserDefaults.standard.set(try? PropertyListEncoder().encode(ReminderNotificationsManager.shared.reminderNotifications), forKey: "reminderNotifications")
         } else {
-            UserDefaults.standard.removeObject(forKey: "reminder")
+            UserDefaults.standard.removeObject(forKey: "pumpSite")
             UserDefaults.standard.removeObject(forKey: "reminderNotification")
         }
     }

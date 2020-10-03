@@ -8,9 +8,9 @@
 
 import UIKit
 
-class LandingController: UIViewController {
+class HomeViewController: UIViewController {
     
-    var reminder: Reminder = ReminderManager.shared.reminder
+    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
     
     // var timer: Timer
@@ -40,8 +40,8 @@ class LandingController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
         // save the current date from datepicker
-        self.reminder.startDate = startDatePicker.date
-        //ReminderManager.shared.saveToStorage(reminder: self.reminder)
+        self.pumpSite.startDate = startDatePicker.date
+        PumpSiteManager.shared.saveToStorage(pumpSite: self.pumpSite)
         
         // show the "New site started" button & hide the rest of start date objects
         newSiteButton.isHidden = false
@@ -53,7 +53,7 @@ class LandingController: UIViewController {
         timer = nil
         
         // reset the labels at the top, the timer, the time shown, & progress circle %
-        var interval = self.reminder.endDate.timeIntervalSince(Date())
+        var interval = self.pumpSite.endDate.timeIntervalSince(Date())
         
         let seconds: Int = Int(interval)
         let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
@@ -63,7 +63,7 @@ class LandingController: UIViewController {
         let minutes: Int = Int ((interval / 60).rounded(.down))
         
         // deal with the case where the timer is past it's due date
-        var intervalOT = Date().timeIntervalSince(reminder.endDate)
+        var intervalOT = Date().timeIntervalSince(pumpSite.endDate)
         
         let secondsOT: Int = Int(intervalOT)
         let daysOT: Int = Int ((intervalOT / (24.0 * 3600)).rounded(.down))
@@ -83,7 +83,7 @@ class LandingController: UIViewController {
         }
         
         // find percent of how much time is left & set the circle progress bar
-        totalSeconds = self.reminder.daysBtwn * 86400
+        totalSeconds = self.pumpSite.daysBtwn * 86400
         percent = 1 - Double(seconds) / Double(totalSeconds)
         progressBar.setProgress(to: percent, withAnimation: true)
         
@@ -93,7 +93,7 @@ class LandingController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
         
         // set day of week at top of screen
-        endDateLabel.text = getDayOfWeek(date: self.reminder.endDate)
+        endDateLabel.text = getDayOfWeek(date: self.pumpSite.endDate)
         
     }
     
@@ -135,7 +135,7 @@ class LandingController: UIViewController {
         
         // days, hours, and minutes depends on current timer
         // find how many seconds until endDate
-        var interval = self.reminder.endDate.timeIntervalSince(Date())
+        var interval = self.pumpSite.endDate.timeIntervalSince(Date())
         
         let seconds: Int = Int(interval)
         let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
@@ -145,14 +145,14 @@ class LandingController: UIViewController {
         let minutes: Int = Int ((interval / 60).rounded(.down))
         
         // find percent of how much time is left & set the circle progress bar
-        totalSeconds = self.reminder.daysBtwn * 86400
+        totalSeconds = self.pumpSite.daysBtwn * 86400
         percent = 1 - Double(seconds) / Double(totalSeconds)
         
         timeLeft = seconds
         firstTimeLeft = timeLeft
         
         // deal with the case where the timer is past it's due date
-        var intervalOT = Date().timeIntervalSince(self.reminder.endDate)
+        var intervalOT = Date().timeIntervalSince(self.pumpSite.endDate)
         
         let secondsOT: Int = Int(intervalOT)
         let daysOT: Int = Int ((intervalOT / (24.0 * 3600)).rounded(.down))
@@ -174,7 +174,7 @@ class LandingController: UIViewController {
         }
         
         // set day of week at top of screen
-        endDateLabel.text = getDayOfWeek(date: self.reminder.endDate)
+        endDateLabel.text = getDayOfWeek(date: self.pumpSite.endDate)
         
         hideNewStartDate()
     }

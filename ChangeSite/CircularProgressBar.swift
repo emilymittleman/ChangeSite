@@ -11,7 +11,7 @@ import UIKit
 
 class CircularProgressBar: UIView {
     
-    var reminder = ( try? PropertyListDecoder().decode(Reminder.self, from: UserDefaults.standard.object(forKey: "reminder") as! Data) )!
+    var reminder = ( try? PropertyListDecoder().decode(PumpSite.self, from: UserDefaults.standard.object(forKey: "reminder") as! Data) )!
     
     //MARK: awakeFromNib
     

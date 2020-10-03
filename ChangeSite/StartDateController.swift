@@ -11,15 +11,14 @@ import UIKit
 class StartDateController: UIViewController {
     
     // define reminder & saveReminder at the top of each class to use throughout (get it from UserDefaults)
-    var reminder: Reminder = ReminderManager.shared.reminder
+    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     
     @IBOutlet weak var startDatePicker: UIDatePicker!
     
     @IBAction func startDatePickerChanged(_ sender: Any) {
-        self.reminder.startDate = startDatePicker.date
+        self.pumpSite.startDate = startDatePicker.date
         
-        ReminderManager.shared.mutateNotification(newReminder: self.reminder)
-        //ReminderManager.shared.saveToStorage(reminder: self.reminder)
+        PumpSiteManager.shared.mutateNotification(newPumpSite: self.pumpSite)
     }
     
     override func viewDidLoad() {
@@ -27,10 +26,10 @@ class StartDateController: UIViewController {
         
         view.backgroundColor = UIColor.systemBackground
         
-        self.reminder = ReminderManager.shared.retrieveFromStorage()
+        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         
         // set the actual date
-        startDatePicker.setDate(self.reminder.startDate, animated: true)
+        startDatePicker.setDate(self.pumpSite.startDate, animated: true)
     }
     
 

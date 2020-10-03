@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     
-    var reminder: Reminder = ReminderManager.shared.reminder
+    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
     
     @IBOutlet weak var startDate: UILabel!
@@ -21,9 +21,8 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         daysBtwn.text = Int(sender.value).description
         
-        self.reminder.daysBtwn = Int(sender.value)
-        ReminderManager.shared.mutateNotification(newReminder: self.reminder)
-        //ReminderManager.shared.saveToStorage(reminder: self.reminder)
+        self.pumpSite.daysBtwn = Int(sender.value)
+        PumpSiteManager.shared.mutateNotification(newPumpSite: self.pumpSite)
     }
     
     @IBOutlet weak var cell1: UITableViewCell!
@@ -42,34 +41,31 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         stepper.autorepeat = true
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.reminder = ReminderManager.shared.retrieveFromStorage()
+        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         self.reminderNotifications = ReminderNotificationsManager.shared.retrieveFromStorage()
         
-        // --- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications)---
+        // ----- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications) -----
         setStartDateLabel()
-        daysBtwn.text = String(reminder.daysBtwn)
+        daysBtwn.text = String(pumpSite.daysBtwn)
         setReminderNotificationText()
     }
     
     func setStartDateLabel() {
-        self.reminder = ReminderManager.shared.retrieveFromStorage()
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.short
         
-        let strDate = dateFormatter.string(from: self.reminder.startDate)
+        let strDate = dateFormatter.string(from: self.pumpSite.startDate)
         startDate.text = strDate
     }
     
     func setReminderNotificationText() {
-        self.reminderNotifications = ReminderNotificationsManager.shared.retrieveFromStorage()
         occurrence0.text = reminderNotifications[0].occurrence
         occurrence1.text = reminderNotifications[1].occurrence
         occurrence2.text = reminderNotifications[2].occurrence

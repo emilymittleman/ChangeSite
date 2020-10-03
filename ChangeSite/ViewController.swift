@@ -15,13 +15,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        var newUser: Bool
-        
-        UserDefaults.standard.removeObject(forKey: "reminder")
+        UserDefaults.standard.removeObject(forKey: "pumpSite")
         UserDefaults.standard.removeObject(forKey: "reminderNotification")
         
-        //UserDefaults.standard.set(true, forKey: "newUser")
-        // if newUser exists in UserDefaults, set it, but if it's nil, then they are a new user so newUser = true
+        //UserDefaults.standard.set(true, forKey: "newUser") //testing purposes only
+        
+        var newUser: Bool
+        /* 3 possible cases for the boolean newUser that is stored in UserDefaults:
+         *    newUser = nil  ---> This means newUser has never been initiated before, so must be a new user.
+         *    newUser = true ---> This means user started setup but did not finish, so they are still a new user.
+         *    newUser = false --> Most common case; a user finished setup, so now they always go straight to main screen.
+         */
         if UserDefaults.standard.object(forKey: "newUser") != nil {
             newUser = UserDefaults.standard.bool(forKey: "newUser")
         } else {
@@ -30,7 +34,7 @@ class ViewController: UIViewController {
         }
         
         if(!newUser) { //skip welcome screen & go to landing page
-            let signInPage = self.storyboard?.instantiateViewController(withIdentifier: "LandingScreen") as UIViewController?
+            let signInPage = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreen") as UIViewController?
             let appDelegate = UIApplication.shared.delegate
             appDelegate?.window??.rootViewController = signInPage
         }

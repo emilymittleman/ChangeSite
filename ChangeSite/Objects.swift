@@ -37,7 +37,7 @@ struct ReminderNotification1 : Codable {
 
 
 
-class Reminder : Codable {
+class PumpSite : Codable {
     var startDate : Date
     var daysBtwn : Int
     var endDate : Date {
