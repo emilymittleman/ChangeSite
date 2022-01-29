@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     
     // var timer: Timer
     var firstTimeLeft = 0
-    var timeLeft = 0
+    var timeLeft = 0 //only a positive int ///isn't actually being used for anything rn
     var firstTimePast = 0
     var timePast = 0
     var timer:Timer?
@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
         // save the current date from datepicker
-        self.pumpSite.startDate = startDatePicker.date
+        self.pumpSite.setStartDate(startDate: startDatePicker.date)
         PumpSiteManager.shared.saveToStorage(pumpSite: self.pumpSite)
         
         // show the "New site started" button & hide the rest of start date objects
@@ -52,49 +52,12 @@ class HomeViewController: UIViewController {
         timer?.invalidate()
         timer = nil
         
-        // reset the labels at the top, the timer, the time shown, & progress circle %
-        var interval = self.pumpSite.endDate.timeIntervalSince(Date())
-        
-        let seconds: Int = Int(interval)
-        let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
-        interval = interval.truncatingRemainder(dividingBy: (24 * 3600))
-        let hours: Int = Int ((interval / 3600).rounded(.down))
-        interval = interval.truncatingRemainder(dividingBy: 3600)
-        let minutes: Int = Int ((interval / 60).rounded(.down))
-        
-        // deal with the case where the timer is past it's due date
-        var intervalOT = Date().timeIntervalSince(pumpSite.endDate)
-        
-        let secondsOT: Int = Int(intervalOT)
-        let daysOT: Int = Int ((intervalOT / (24.0 * 3600)).rounded(.down))
-        intervalOT = intervalOT.truncatingRemainder(dividingBy: (24 * 3600))
-        let hoursOT: Int = Int ((intervalOT / 3600).rounded(.down))
-        intervalOT = intervalOT.truncatingRemainder(dividingBy: 3600)
-        let minutesOT: Int = Int ((intervalOT / 60).rounded(.down))
-        
-        timePast = secondsOT
-        firstTimePast = timePast
-        
-        if(timePast >= 0) {
-            progressBar.setLabelText(days: String(daysOT), hours: String(hoursOT), minutes: String(minutesOT))
-        }
-        else {
-            progressBar.setLabelText(days: String(days), hours: String(hours), minutes: String(minutes))
-        }
-        
-        // find percent of how much time is left & set the circle progress bar
-        totalSeconds = self.pumpSite.daysBtwn * 86400
-        percent = 1 - Double(seconds) / Double(totalSeconds)
-        progressBar.setProgress(to: percent, withAnimation: true)
+        let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
+        updateProgressBar(interval: interval)
         
         // reset timer
-        timeLeft = seconds
-        firstTimeLeft = timeLeft
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
-        
-        // set day of week at top of screen
-        endDateLabel.text = getDayOfWeek(date: self.pumpSite.endDate)
-        
+        timeLeft = abs(Int(self.pumpSite.getEndDate().timeIntervalSince(Date())))
+        timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
     }
     
     @IBOutlet weak var cancelButton: UIButton!
@@ -118,78 +81,92 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
+        
+        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         
         view.backgroundColor = UIColor.systemBackground
-        progressBar.backgroundColor = UIColor.systemBackground
+        setupProgressBarAppearance()
         
-        progressBar.safePercent = 100
-        progressBar.lineColor = UIColor.teal
-        progressBar.lineFinishColor = .red
-        progressBar.lineBackgroundColor = .gray
-        progressBar.lineWidth = 20
-        progressBar.wholeCircleAnimationDuration = 4
-        
-        progressBar.labelSize = 40 //this changes
-        progressBar.labelFont = "DINAlternate-Bold"
-        
-        // days, hours, and minutes depends on current timer
-        // find how many seconds until endDate
-        var interval = self.pumpSite.endDate.timeIntervalSince(Date())
-        
-        let seconds: Int = Int(interval)
-        let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
-        interval = interval.truncatingRemainder(dividingBy: (24 * 3600))
-        let hours: Int = Int ((interval / 3600).rounded(.down))
-        interval = interval.truncatingRemainder(dividingBy: 3600)
-        let minutes: Int = Int ((interval / 60).rounded(.down))
-        
-        // find percent of how much time is left & set the circle progress bar
-        totalSeconds = self.pumpSite.daysBtwn * 86400
-        percent = 1 - Double(seconds) / Double(totalSeconds)
-        
-        timeLeft = seconds
-        firstTimeLeft = timeLeft
-        
-        // deal with the case where the timer is past it's due date
-        var intervalOT = Date().timeIntervalSince(self.pumpSite.endDate)
-        
-        let secondsOT: Int = Int(intervalOT)
-        let daysOT: Int = Int ((intervalOT / (24.0 * 3600)).rounded(.down))
-        intervalOT = intervalOT.truncatingRemainder(dividingBy: (24 * 3600))
-        let hoursOT: Int = Int ((intervalOT / 3600).rounded(.down))
-        intervalOT = intervalOT.truncatingRemainder(dividingBy: 3600)
-        let minutesOT: Int = Int ((intervalOT / 60).rounded(.down))
-        
-        timePast = secondsOT
-        firstTimePast = timePast
-        
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
-        
-        if(timePast >= 0) {
-            progressBar.setLabelText(days: String(daysOT), hours: String(hoursOT), minutes: String(minutesOT))
-        }
-        else {
-            progressBar.setLabelText(days: String(days), hours: String(hours), minutes: String(minutes))
-        }
-        
-        // set day of week at top of screen
-        endDateLabel.text = getDayOfWeek(date: self.pumpSite.endDate)
+        timeLeft = abs(Int(self.pumpSite.getEndDate().timeIntervalSince(Date())))
+        updateProgressBar(interval: Double(timeLeft))
         
         hideNewStartDate()
     }
     
     // set the current percentage and it will animate
     override func viewDidAppear(_ animated: Bool) {
-        percent = 1 - Double(timeLeft) / Double(totalSeconds)
+        setProgressBarPercentage(animated: true)
+        /*
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.onTimerFires), userInfo: nil, repeats: true)
+        }*/
+        DispatchQueue.main.asyncAfter(deadline: .now() + PROGRESS_ANIMATION_DURATION) {
+            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.onTimerFires), userInfo: nil, repeats: true)
+        }
+    }
+    
+    private func setupProgressBarAppearance() {
+        progressBar.backgroundColor = UIColor.systemBackground
+        progressBar.safePercent = 100
+        progressBar.lineColor = UIColor.teal
+        progressBar.lineFinishColor = .red
+        progressBar.lineBackgroundColor = .gray
+        progressBar.lineWidth = 20
+        progressBar.wholeCircleAnimationDuration = 4
+        progressBar.labelSize = 40 //this changes
+        progressBar.labelFont = "DINAlternate-Bold"
+    }
+    
+    private func updateProgressBar(interval: Double) {
+        // seconds is the total seconds until pump site expires
+        timeLeft = abs(Int(interval))
         
-        progressBar.setProgress(to: percent, withAnimation: true)
+        let days = abs(Int((abs(interval) / (24.0 * 3600)).rounded(.down)))
+        let intervalHours = abs(interval).truncatingRemainder(dividingBy: (24 * 3600))
+        let hours = abs(Int((intervalHours / 3600).rounded(.down)))
+        
+        setProgressBarPercentage(animated: false)
+        
+        progressBar.setLabelText(days: String(days), hours: String(hours))
+        
+        // set day of week at top of screen
+        updateNextChangeText()
+    }
+    
+    func setProgressBarPercentage(animated: Bool) {
+        // if overdue, just set the whole thing to red
+        if pumpSite.isOverdue() {
+            // MARK: TODO - set to red
+            percent = 1
+            progressBar.lineColor = .red
+            progressBar.setProgress(to: percent, withAnimation: false)
+        } else {
+            totalSeconds = self.pumpSite.getDaysBtwn() * 86400
+            percent = 1 - Double(timeLeft) / Double(totalSeconds)
+            progressBar.setProgress(to: percent, withAnimation: animated)
+        }
+    }
+    
+    func updateNextChangeText() {
+        endDateLabel.text = getDayOfWeek(date: self.pumpSite.getEndDate())
+        
+        if(pumpSite.isOverdue()) {
+            nextChangeLabel.text = "LAST CHANGE WAS DUE:"
+        } else {
+            nextChangeLabel.text = "Next change is due"
+        }
+        
     }
     
     @objc func onTimerFires() {
-        timeLeft -= 1
+        timeLeft = abs(Int(self.pumpSite.getEndDate().timeIntervalSince(Date())))
+        updateProgressBar(interval: Double(timeLeft))
+        /*
+        //timeLeft -= 1
         if timeLeft > 0 {
             // find new day, minute, and hour
+            
             var interval = Double(timeLeft)
             
             let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
@@ -230,8 +207,9 @@ class HomeViewController: UIViewController {
             if(Double(timePast - firstTimePast) > progressBar.wholeCircleAnimationDuration) {
                 progressBar.setProgress(to: percent, withAnimation: false)
             }
-        }
+        } */
     }
+    
     
     func hideNewStartDate() {
         // hide all buttons

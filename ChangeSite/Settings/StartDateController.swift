@@ -16,7 +16,8 @@ class StartDateController: UIViewController {
     @IBOutlet weak var startDatePicker: UIDatePicker!
     
     @IBAction func startDatePickerChanged(_ sender: Any) {
-        self.pumpSite.startDate = startDatePicker.date
+        //self.pumpSite.startDate = startDatePicker.date
+        self.pumpSite.setStartDate(startDate: startDatePicker.date)
         
         PumpSiteManager.shared.mutateNotification(newPumpSite: self.pumpSite)
     }
@@ -29,7 +30,7 @@ class StartDateController: UIViewController {
         self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         
         // set the actual date
-        startDatePicker.setDate(self.pumpSite.startDate, animated: true)
+        startDatePicker.setDate(self.pumpSite.getStartDate(), animated: true)
     }
     
 

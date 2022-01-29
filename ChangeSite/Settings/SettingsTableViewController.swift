@@ -21,7 +21,7 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         daysBtwn.text = Int(sender.value).description
         
-        self.pumpSite.daysBtwn = Int(sender.value)
+        self.pumpSite.setDaysBtwn(daysBtwn: Int(sender.value))
         PumpSiteManager.shared.mutateNotification(newPumpSite: self.pumpSite)
     }
     
@@ -51,7 +51,7 @@ class SettingsTableViewController: UITableViewController {
         
         // ----- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications) -----
         setStartDateLabel()
-        daysBtwn.text = String(pumpSite.daysBtwn)
+        daysBtwn.text = String(pumpSite.getDaysBtwn())
         setReminderNotificationText()
     }
     
@@ -61,7 +61,7 @@ class SettingsTableViewController: UITableViewController {
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.short
         
-        let strDate = dateFormatter.string(from: self.pumpSite.startDate)
+        let strDate = dateFormatter.string(from: self.pumpSite.getStartDate())
         startDate.text = strDate
     }
     

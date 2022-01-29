@@ -9,21 +9,21 @@
 import Foundation
 import UIKit
 
+let PROGRESS_ANIMATION_DURATION = 4.0
+
 class CircularProgressBar: UIView {
     
-    var reminder = ( try? PropertyListDecoder().decode(PumpSite.self, from: UserDefaults.standard.object(forKey: "reminder") as! Data) )!
+    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     
     //MARK: awakeFromNib
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         setupView()
         label.text = "0"
     }
     
-    
     //MARK: Public
-    
     public var lineWidth:CGFloat = 50 {
         didSet{
             foregroundLayer.lineWidth = lineWidth
@@ -55,7 +55,7 @@ class CircularProgressBar: UIView {
         }
     }
     
-    public var wholeCircleAnimationDuration: Double = 2
+    public var wholeCircleAnimationDuration: Double = PROGRESS_ANIMATION_DURATION
     
     public var lineBackgroundColor: UIColor = .gray
     public var lineColor: UIColor = UIColor.teal
@@ -63,7 +63,7 @@ class CircularProgressBar: UIView {
     
     
     public func setProgress(to progressConstant: Double, withAnimation: Bool) {
-        
+        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         var progress: Double {
             get {
                 if progressConstant > 1 { return 1 }
@@ -82,19 +82,15 @@ class CircularProgressBar: UIView {
             animation.toValue = progress
             animation.duration = animationDuration
             foregroundLayer.add(animation, forKey: "foregroundAnimation")
-            
         }
         
         var currentTime:Double = 0
-        //print(progress)
+        // MARK: attach this timer to the main thread
         let timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { (timer) in
             if currentTime >= animationDuration {
                 timer.invalidate()
             } else {
                 currentTime += 0.01
-                //let percent = currentTime/self.wholeCircleAnimationDuration * 100
-                //print(percent)
-                //self.label.text = "\(Int(percent))"
                 if((currentTime/self.wholeCircleAnimationDuration * 100) >= Double(self.safePercent)) {
                     self.setForegroundLayerColorForSafePercent()
                 }
@@ -107,14 +103,13 @@ class CircularProgressBar: UIView {
     
     public var days: String = "0"
     public var hours: String = "0"
-    public var minutes: String = "0"
     
-    public func setLabelText(days: String, hours: String, minutes: String) {
+    public func setLabelText(days: String, hours: String) {
+        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         self.days = days
         self.hours = hours
-        self.minutes = minutes
         
-        label = makeLabel(days: days, hours: hours, minutes: minutes)
+        label = makeLabel(days: days, hours: hours)
         label.adjustsFontSizeToFitWidth = true
         
         //layoutDone = false
@@ -123,14 +118,10 @@ class CircularProgressBar: UIView {
         configLabel()
     }
     
-    
-    
-    
     //MARK: Private -----------------------------------------------------------------
     private var label = UILabel()
     private var labelDays = UILabel()
     private var labelHours = UILabel()
-    private var labelMinutes = UILabel()
     private let foregroundLayer = CAShapeLayer()
     private let backgroundLayer = CAShapeLayer()
     private var radius: CGFloat {
@@ -157,11 +148,9 @@ class CircularProgressBar: UIView {
         self.backgroundLayer.lineWidth = lineWidth - (lineWidth * 20/100)
         self.backgroundLayer.fillColor = UIColor.clear.cgColor
         self.layer.addSublayer(backgroundLayer)
-        
     }
     
     private func drawForegroundLayer(){
-        
         let startAngle = (-CGFloat.pi/2)
         let endAngle = 2 * CGFloat.pi + startAngle
         
@@ -175,10 +164,9 @@ class CircularProgressBar: UIView {
         foregroundLayer.strokeEnd = 0
         
         self.layer.addSublayer(foregroundLayer)
-        
     }
     
-    private func makeLabel(days: String, hours: String, minutes: String) -> UILabel {
+    private func makeLabel(days: String, hours: String) -> UILabel {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: radius*2, height: radius*2))
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -186,12 +174,10 @@ class CircularProgressBar: UIView {
         var labelString: String = days
         if(days == "1") { labelString += " Day\n" + hours }
         else { labelString += " Days\n" + hours }
-        if(hours == "1") { labelString += " Hour\n" + minutes }
-        else { labelString += " Hours\n" + minutes }
-        if(minutes == "1") { labelString += " Minute" }
-        else { labelString += " Minutes" }
+        if(hours == "1") { labelString += " Hour\n" }
+        else { labelString += " Hours\n" }
         // add OVERDUE
-        if(reminder.overdue) {
+        if(pumpSite.isOverdue()) {
             labelString += "\n" + "OVERDUE"
         }
         
@@ -208,7 +194,7 @@ class CircularProgressBar: UIView {
         let myString: String = label.text!
         
         var proportion: CGFloat = 0.4968559451219512
-        if(reminder.overdue) {
+        if(pumpSite.isOverdue()) {
             proportion = 0.6
         }
         let newHeight: CGFloat = proportion * radius * 2
@@ -237,10 +223,7 @@ class CircularProgressBar: UIView {
         self.addSubview(label)
     }
     
-    
-    
     //Layout Sublayers
-
     public var layoutDone = false
     override func layoutSublayers(of layer: CALayer) {
         if !layoutDone {

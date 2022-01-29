@@ -7,23 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D09CDFD23026991006E914F /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09CDFC23026991006E914F /* Objects.swift */; };
+		5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09CDFC23026991006E914F /* ClassExtensions.swift */; };
 		5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */; };
 		5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011624C0635200EE9633 /* PumpSiteManager.swift */; };
+		5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E26B252D4BB500DB49CA /* PumpSite.swift */; };
+		5D30E271252D4BD300DB49CA /* ReminderNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E270252D4BD300DB49CA /* ReminderNotification.swift */; };
 		5D786881230096FB00A54436 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D786880230096FB00A54436 /* ContainerController.swift */; };
 		5D7868832300984B00A54436 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7868822300984B00A54436 /* HomeViewController.swift */; };
+		5DB5C33326C6E44C00877646 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */; };
+		5DB5C33526C6E6F200877646 /* StartDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33426C6E6F200877646 /* StartDateCell.swift */; };
+		5DB5C33726C6E94F00877646 /* DaysBtwnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */; };
+		5DB5C33926C6E98D00877646 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33826C6E98D00877646 /* ReminderCell.swift */; };
 		5DB89115230029090000BFC6 /* colorGradient.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5DB89114230029080000BFC6 /* colorGradient.jpeg */; };
 		5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */; };
 		5DB8911923003FE80000BFC6 /* StartDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911823003FE80000BFC6 /* StartDateController.swift */; };
 		5DB8911B2300401E0000BFC6 /* ReminderFrequencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */; };
 		5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD329F230023AB00BC2E07 /* AppDelegate.swift */; };
-		5DCD32A2230023AB00BC2E07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD32A1230023AB00BC2E07 /* ViewController.swift */; };
+		5DCD32A2230023AB00BC2E07 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */; };
 		5DCD32A5230023AB00BC2E07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DCD32A3230023AB00BC2E07 /* Main.storyboard */; };
 		5DCD32A7230023AD00BC2E07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DCD32A6230023AD00BC2E07 /* Assets.xcassets */; };
 		5DCD32AA230023AD00BC2E07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DCD32A8230023AD00BC2E07 /* LaunchScreen.storyboard */; };
 		5DCD32B5230023AE00BC2E07 /* ChangeSiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD32B4230023AE00BC2E07 /* ChangeSiteTests.swift */; };
 		5DCD32C0230023AE00BC2E07 /* ChangeSiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD32BF230023AE00BC2E07 /* ChangeSiteUITests.swift */; };
-		5DE8D52D23AC38800044808A /* diabetes-dribbble.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DE8D52C23AC387F0044808A /* diabetes-dribbble.png */; };
 		5DE8D52F23BFC45E0044808A /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8D52E23BFC45E0044808A /* CircularProgressBar.swift */; };
 		5DE8D53223BFCE550044808A /* circularProgressBar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8D53023BFCE550044808A /* circularProgressBar.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -46,18 +51,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5D09CDFC23026991006E914F /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		5D09CDFC23026991006E914F /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotificationsManager.swift; sourceTree = "<group>"; };
 		5D1B011624C0635200EE9633 /* PumpSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteManager.swift; sourceTree = "<group>"; };
+		5D30E25F252D4A3000DB49CA /* diabetes-dribbble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "diabetes-dribbble.png"; path = "../../../../diabetes-dribbble.png"; sourceTree = "<group>"; };
+		5D30E26B252D4BB500DB49CA /* PumpSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSite.swift; sourceTree = "<group>"; };
+		5D30E270252D4BD300DB49CA /* ReminderNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotification.swift; sourceTree = "<group>"; };
 		5D786880230096FB00A54436 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		5D7868822300984B00A54436 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
+		5DB5C33426C6E6F200877646 /* StartDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateCell.swift; sourceTree = "<group>"; };
+		5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysBtwnCell.swift; sourceTree = "<group>"; };
+		5DB5C33826C6E98D00877646 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		5DB89114230029080000BFC6 /* colorGradient.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = colorGradient.jpeg; sourceTree = "<group>"; };
 		5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		5DB8911823003FE80000BFC6 /* StartDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateController.swift; sourceTree = "<group>"; };
 		5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFrequencyController.swift; sourceTree = "<group>"; };
 		5DCD329C230023AB00BC2E07 /* ChangeSite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChangeSite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DCD329F230023AB00BC2E07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5DCD32A1230023AB00BC2E07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		5DCD32A4230023AB00BC2E07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5DCD32A6230023AD00BC2E07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DCD32A9230023AD00BC2E07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,7 +80,6 @@
 		5DCD32BB230023AE00BC2E07 /* ChangeSiteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChangeSiteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DCD32BF230023AE00BC2E07 /* ChangeSiteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSiteUITests.swift; sourceTree = "<group>"; };
 		5DCD32C1230023AE00BC2E07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5DE8D52C23AC387F0044808A /* diabetes-dribbble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "diabetes-dribbble.png"; path = "../../../diabetes-dribbble.png"; sourceTree = "<group>"; };
 		5DE8D52E23BFC45E0044808A /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		5DE8D53123BFCE550044808A /* circularProgressBar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = circularProgressBar.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,11 +109,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5DAE572C251A1B01006151A2 /* Reminder */ = {
+		5D30E25D252D49BA00DB49CA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5DE8D53023BFCE550044808A /* circularProgressBar.xcdatamodeld */,
+				5DB89114230029080000BFC6 /* colorGradient.jpeg */,
+				5D30E25F252D4A3000DB49CA /* diabetes-dribbble.png */,
 			);
-			path = Reminder;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5D30E266252D4AB100DB49CA /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5D7868822300984B00A54436 /* HomeViewController.swift */,
+				5DE8D52E23BFC45E0044808A /* CircularProgressBar.swift */,
+			);
+			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		5D30E267252D4AED00DB49CA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */,
+				5DB8911823003FE80000BFC6 /* StartDateController.swift */,
+				5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */,
+				5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */,
+				5DB5C33826C6E98D00877646 /* ReminderCell.swift */,
+				5DB5C33426C6E6F200877646 /* StartDateCell.swift */,
+				5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5DAE572C251A1B01006151A2 /* PumpSite */ = {
+			isa = PBXGroup;
+			children = (
+				5D30E26B252D4BB500DB49CA /* PumpSite.swift */,
+				5D1B011624C0635200EE9633 /* PumpSiteManager.swift */,
+				5D30E270252D4BD300DB49CA /* ReminderNotification.swift */,
+				5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */,
+			);
+			path = PumpSite;
 			sourceTree = "<group>";
 		};
 		5DCD3293230023AB00BC2E07 = {
@@ -128,25 +176,18 @@
 		5DCD329E230023AB00BC2E07 /* ChangeSite */ = {
 			isa = PBXGroup;
 			children = (
-				5DAE572C251A1B01006151A2 /* Reminder */,
 				5DCD329F230023AB00BC2E07 /* AppDelegate.swift */,
-				5DCD32A1230023AB00BC2E07 /* ViewController.swift */,
-				5D09CDFC23026991006E914F /* Objects.swift */,
+				5D09CDFC23026991006E914F /* ClassExtensions.swift */,
 				5DCD32A3230023AB00BC2E07 /* Main.storyboard */,
-				5D7868822300984B00A54436 /* HomeViewController.swift */,
-				5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */,
-				5DB8911823003FE80000BFC6 /* StartDateController.swift */,
-				5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */,
-				5D1B011624C0635200EE9633 /* PumpSiteManager.swift */,
-				5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */,
-				5D786880230096FB00A54436 /* ContainerController.swift */,
+				5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */,
+				5DAE572C251A1B01006151A2 /* PumpSite */,
+				5D30E267252D4AED00DB49CA /* Settings */,
+				5D30E266252D4AB100DB49CA /* HomeScreen */,
 				5DCD32A6230023AD00BC2E07 /* Assets.xcassets */,
 				5DCD32A8230023AD00BC2E07 /* LaunchScreen.storyboard */,
 				5DCD32AB230023AD00BC2E07 /* Info.plist */,
-				5DE8D52C23AC387F0044808A /* diabetes-dribbble.png */,
-				5DB89114230029080000BFC6 /* colorGradient.jpeg */,
-				5DE8D52E23BFC45E0044808A /* CircularProgressBar.swift */,
-				5DE8D53023BFCE550044808A /* circularProgressBar.xcdatamodeld */,
+				5D786880230096FB00A54436 /* ContainerController.swift */,
+				5D30E25D252D49BA00DB49CA /* Resources */,
 			);
 			path = ChangeSite;
 			sourceTree = "<group>";
@@ -232,7 +273,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Emily Mittleman";
 				TargetAttributes = {
 					5DCD329B230023AB00BC2E07 = {
@@ -274,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DCD32AA230023AD00BC2E07 /* LaunchScreen.storyboard in Resources */,
-				5DE8D52D23AC38800044808A /* diabetes-dribbble.png in Resources */,
 				5DCD32A7230023AD00BC2E07 /* Assets.xcassets in Resources */,
 				5DCD32A5230023AB00BC2E07 /* Main.storyboard in Resources */,
 				5DB89115230029090000BFC6 /* colorGradient.jpeg in Resources */,
@@ -303,14 +343,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DB8911923003FE80000BFC6 /* StartDateController.swift in Sources */,
-				5DCD32A2230023AB00BC2E07 /* ViewController.swift in Sources */,
+				5DB5C33326C6E44C00877646 /* SettingsTableVC.swift in Sources */,
+				5DCD32A2230023AB00BC2E07 /* LaunchViewController.swift in Sources */,
+				5D30E271252D4BD300DB49CA /* ReminderNotification.swift in Sources */,
 				5DE8D52F23BFC45E0044808A /* CircularProgressBar.swift in Sources */,
+				5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
 				5D7868832300984B00A54436 /* HomeViewController.swift in Sources */,
 				5D786881230096FB00A54436 /* ContainerController.swift in Sources */,
 				5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */,
-				5D09CDFD23026991006E914F /* Objects.swift in Sources */,
+				5DB5C33526C6E6F200877646 /* StartDateCell.swift in Sources */,
+				5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */,
 				5DB8911B2300401E0000BFC6 /* ReminderFrequencyController.swift in Sources */,
+				5DB5C33926C6E98D00877646 /* ReminderCell.swift in Sources */,
+				5DB5C33726C6E94F00877646 /* DaysBtwnCell.swift in Sources */,
 				5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */,
 				5DE8D53223BFCE550044808A /* circularProgressBar.xcdatamodeld in Sources */,
 				5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */,
@@ -394,6 +440,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -419,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -455,6 +502,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -474,7 +522,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

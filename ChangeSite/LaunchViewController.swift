@@ -9,14 +9,14 @@
 // WELCOME PAGE
 import UIKit
 
-class ViewController: UIViewController {
+class LaunchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        UserDefaults.standard.removeObject(forKey: "pumpSite")
-        UserDefaults.standard.removeObject(forKey: "reminderNotification")
+        //UserDefaults.standard.removeObject(forKey: "pumpSite")
+        //UserDefaults.standard.removeObject(forKey: "reminderNotification")
         
         //UserDefaults.standard.set(true, forKey: "newUser") //testing purposes only
         

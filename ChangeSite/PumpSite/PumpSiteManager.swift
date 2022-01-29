@@ -46,8 +46,8 @@ class PumpSiteManager {
     
     // Update a certain notification in UserDefaults & self
     func mutateNotification(newPumpSite: PumpSite) {
-        self.pumpSite.startDate = newPumpSite.startDate
-        self.pumpSite.daysBtwn = newPumpSite.daysBtwn
+        self.pumpSite.setStartDate(startDate: newPumpSite.getStartDate())
+        self.pumpSite.setDaysBtwn(daysBtwn: newPumpSite.getDaysBtwn())
         
         self.saveToStorage()
     }
