@@ -26,8 +26,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var nextChangeLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     
-    @IBOutlet weak var progressBar: CircularProgressBar!
-    
     @IBOutlet weak var newSiteButton: UIButton!
     @IBAction func newSitePressed(_ sender: Any) {
         // reset the start date & end date
@@ -53,7 +51,7 @@ class HomeViewController: UIViewController {
         timer = nil
         
         let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
-        updateProgressBar(interval: interval)
+        updateDates(interval: interval)
         
         // reset timer
         timeLeft = abs(Int(self.pumpSite.getEndDate().timeIntervalSince(Date())))
@@ -84,130 +82,51 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
-        
         view.backgroundColor = UIColor.systemBackground
-        setupProgressBarAppearance()
-        
-        timeLeft = abs(Int(self.pumpSite.getEndDate().timeIntervalSince(Date())))
-        updateProgressBar(interval: Double(timeLeft))
-        
+        let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
+        timeLeft = abs(Int(interval))
+        updateDates(interval: interval)
         hideNewStartDate()
     }
     
     // set the current percentage and it will animate
     override func viewDidAppear(_ animated: Bool) {
-        setProgressBarPercentage(animated: true)
-        /*
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.onTimerFires), userInfo: nil, repeats: true)
-        }*/
         DispatchQueue.main.asyncAfter(deadline: .now() + PROGRESS_ANIMATION_DURATION) {
             self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.onTimerFires), userInfo: nil, repeats: true)
         }
     }
     
-    private func setupProgressBarAppearance() {
-        progressBar.backgroundColor = UIColor.systemBackground
-        progressBar.safePercent = 100
-        progressBar.lineColor = UIColor.teal
-        progressBar.lineFinishColor = .red
-        progressBar.lineBackgroundColor = .gray
-        progressBar.lineWidth = 20
-        progressBar.wholeCircleAnimationDuration = 4
-        progressBar.labelSize = 40 //this changes
-        progressBar.labelFont = "DINAlternate-Bold"
-    }
-    
-    private func updateProgressBar(interval: Double) {
+    private func updateDates(interval: Double) {
         // seconds is the total seconds until pump site expires
         timeLeft = abs(Int(interval))
+        var days: Int
         
-        let days = abs(Int((abs(interval) / (24.0 * 3600)).rounded(.down)))
-        let intervalHours = abs(interval).truncatingRemainder(dividingBy: (24 * 3600))
-        let hours = abs(Int((intervalHours / 3600).rounded(.down)))
-        
-        setProgressBarPercentage(animated: false)
-        
-        progressBar.setLabelText(days: String(days), hours: String(hours))
-        
-        // set day of week at top of screen
-        updateNextChangeText()
-    }
-    
-    func setProgressBarPercentage(animated: Bool) {
-        // if overdue, just set the whole thing to red
-        if pumpSite.isOverdue() {
-            // MARK: TODO - set to red
-            percent = 1
-            progressBar.lineColor = .red
-            progressBar.setProgress(to: percent, withAnimation: false)
-        } else {
-            totalSeconds = self.pumpSite.getDaysBtwn() * 86400
-            percent = 1 - Double(timeLeft) / Double(totalSeconds)
-            progressBar.setProgress(to: percent, withAnimation: animated)
+        let month = Calendar.current.component(.month, from: self.pumpSite.getEndDate())
+        if month == Calendar.current.component(.month, from: Date()) {
+            let siteDay = Calendar.current.component(.day, from: self.pumpSite.getEndDate())
+            let currentDay = Calendar.current.component(.day, from: Date())
+            days = abs(siteDay - currentDay)
         }
-    }
-    
-    func updateNextChangeText() {
-        endDateLabel.text = getDayOfWeek(date: self.pumpSite.getEndDate())
+        else {
+            days = abs(Int((abs(interval) / (24.0 * 3600)).rounded(.up)))
+        }
         
+        // update labels
         if(pumpSite.isOverdue()) {
-            nextChangeLabel.text = "LAST CHANGE WAS DUE:"
+            nextChangeLabel.text = "Next change was due " + getDateAbbr(date: self.pumpSite.getEndDate())
+            endDateLabel.text = String(days) + " Days Late"
+            endDateLabel.textColor = .red
         } else {
-            nextChangeLabel.text = "Next change is due"
+            nextChangeLabel.text = "Next change is due " + getDateAbbr(date: self.pumpSite.getEndDate())
+            endDateLabel.text = String(days) + " Days Left"
+            endDateLabel.textColor = .black
         }
-        
     }
     
     @objc func onTimerFires() {
-        timeLeft = abs(Int(self.pumpSite.getEndDate().timeIntervalSince(Date())))
-        updateProgressBar(interval: Double(timeLeft))
-        /*
-        //timeLeft -= 1
-        if timeLeft > 0 {
-            // find new day, minute, and hour
-            
-            var interval = Double(timeLeft)
-            
-            let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
-            interval = interval.truncatingRemainder(dividingBy: (24 * 3600))
-            let hours: Int = Int ((interval / 3600).rounded(.down))
-            interval = interval.truncatingRemainder(dividingBy: 3600)
-            let minutes: Int = Int ((interval / 60).rounded(.down))
-            
-            // test if the minute, hour, or day has changed
-            if(progressBar.days != String(days) || progressBar.hours != String(hours) || progressBar.minutes != String(minutes)) {
-                progressBar.setLabelText(days: String(days), hours: String(hours), minutes: String(minutes))
-            }
-            
-            // set the progress bar percentage
-            percent = 1 - Double(timeLeft) / Double(totalSeconds)
-            if(Double(firstTimeLeft - timeLeft) > progressBar.wholeCircleAnimationDuration) {
-                progressBar.setProgress(to: percent, withAnimation: false)
-            }
-        }
-        
-        if timeLeft <= 0 {
-            timePast += 1
-            var interval = Double(timePast)
-            
-            let days: Int = Int ((interval / (24.0 * 3600)).rounded(.down))
-            interval = interval.truncatingRemainder(dividingBy: (24 * 3600))
-            let hours: Int = Int ((interval / 3600).rounded(.down))
-            interval = interval.truncatingRemainder(dividingBy: 3600)
-            let minutes: Int = Int ((interval / 60).rounded(.down))
-            
-            // test if the minute, hour, or day has changed
-            if(progressBar.days != String(days) || progressBar.hours != String(hours) || progressBar.minutes != String(minutes)) {
-                progressBar.setLabelText(days: String(days), hours: String(hours), minutes: String(minutes))
-            }
-            
-            // set the progress bar percentage
-            percent = 1 - Double(timeLeft) / Double(totalSeconds)
-            if(Double(timePast - firstTimePast) > progressBar.wholeCircleAnimationDuration) {
-                progressBar.setProgress(to: percent, withAnimation: false)
-            }
-        } */
+        let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
+        timeLeft = abs(Int(interval))
+        updateDates(interval: interval)
     }
     
     
@@ -243,9 +162,10 @@ class HomeViewController: UIViewController {
         startDatePicker.setDate(startingDate, animated: true)
     }
     
-    func getDayOfWeek(date: Date) -> String {
-        let index = Calendar.current.component(.weekday, from: date)
-        return Calendar.current.weekdaySymbols[index-1]
+    func getDateAbbr(date: Date) -> String {
+        let index = Calendar.current.component(.month, from: date)
+        let abbrevs = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+        return abbrevs[index-1] + " " + String(Calendar.current.component(.day, from: date))
     }
     
     

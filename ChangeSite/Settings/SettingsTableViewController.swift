@@ -52,6 +52,7 @@ class SettingsTableViewController: UITableViewController {
         // ----- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications) -----
         setStartDateLabel()
         daysBtwn.text = String(pumpSite.getDaysBtwn())
+        stepper.value = Double(pumpSite.getDaysBtwn())
         setReminderNotificationText()
     }
     

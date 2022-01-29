@@ -22,10 +22,10 @@ class ReminderNotificationsManager {
     // Initialize array to the 5 default reminder notification types that came with the app
     private func setDefaultValues() {
         let oneDayBefore = ReminderNotification(type: "oneDayBefore")
-        let dayOf = ReminderNotification(type: "dayOf", occurrence: "single")
-        let oneDayAfter = ReminderNotification(type: "oneDayAfter", occurrence: "repeating")
-        let twoDaysAfter = ReminderNotification(type: "twoDaysAfter", occurrence: "repeating")
-        let threeDaysAfter = ReminderNotification(type: "threeDaysAfter", occurrence: "repeating")
+        let dayOf = ReminderNotification(type: "dayOf")
+        let oneDayAfter = ReminderNotification(type: "oneDayAfter")
+        let twoDaysAfter = ReminderNotification(type: "twoDaysAfter")
+        let threeDaysAfter = ReminderNotification(type: "threeDaysAfter")
         
         // Make a list of ReminderNotifications and store it in UserDefaults as a data structure to hold all the reminderNotifications
         self.reminderNotifications = []
