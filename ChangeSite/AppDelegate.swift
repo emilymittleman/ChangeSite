@@ -9,18 +9,12 @@
 import UIKit
 import UserNotifications
 
-enum Identifiers {
-  static let newSiteAction = "NEW_SITE_IDENTIFIER"
-  static let newSiteCategory = "NEW_SITE_CATEGORY"
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UNUserNotificationCenter.current().delegate = self
         registerForPushNotifications(application: application)
         
         return true
@@ -61,21 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
             print("Permission granted: \(granted)")
             guard granted else { return }
-            // Make custom actions on notifications
-            let newSiteAction = UNNotificationAction(
-              identifier: Identifiers.newSiteAction,
-              title: "New site started",
-              options: [.foreground])
-            let newSiteCategory = UNNotificationCategory(
-              identifier: Identifiers.newSiteCategory,
-              actions: [newSiteAction],
-              intentIdentifiers: [],
-              options: [])
-            UNUserNotificationCenter.current().setNotificationCategories([newSiteCategory])
             self?.getNotificationSettings()
-            /*DispatchQueue.main.async {
-                application.registerForRemoteNotifications()
-            }*/
         }
     }
     
@@ -98,18 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register: \(error)")
         // set a flag and try to register again in the future
-    }
-}
-
-// MARK: - UNUserNotificationCenterDelegate
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if response.actionIdentifier == Identifiers.newSiteAction {
-            // TODO: User reset pump site, so handle accordingly (assume they changed it when they tapped the notification)
-        }
-        
-        completionHandler()
     }
 }
 

@@ -9,11 +9,22 @@
 import Foundation
 import ARKit
 
+enum ReminderOccurrence: String {
+    case none, single, repeating
+}
+
+enum ReminderType: Int {
+    case oneDayBefore = -1, dayOf, oneDayAfter, twoDaysAfter, extendedDaysAfter
+}
+
 class ReminderNotification: Codable {
+    // TODO: refactor type as enum
     var type: String        // "oneDayBefore", "dayOf", "oneDayAfter", etc.
+    // TODO: refactor occurrence as enum
     var occurrence: String  // "none", "single", "repeating"
     var soundOn: Bool       // true, false
     var frequency: Date     // Date object: 5 minutes
+    var id = UUID().uuidString
     
     init(type: String, occurrence: String = "none", soundOn: Bool = false, frequency: Date = Calendar.current.date(bySettingHour:0, minute:5, second:0, of:Date())!) {
         self.type = type

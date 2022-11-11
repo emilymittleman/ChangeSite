@@ -15,6 +15,7 @@
 		5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011624C0635200EE9633 /* PumpSiteManager.swift */; };
 		5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E26B252D4BB500DB49CA /* PumpSite.swift */; };
 		5D30E271252D4BD300DB49CA /* ReminderNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E270252D4BD300DB49CA /* ReminderNotification.swift */; };
+		5D6D2703291E042500BEC655 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2702291E042500BEC655 /* NotificationManager.swift */; };
 		5D786881230096FB00A54436 /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D786880230096FB00A54436 /* ContainerController.swift */; };
 		5D7868832300984B00A54436 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7868822300984B00A54436 /* HomeViewController.swift */; };
 		5DB5C33326C6E44C00877646 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */; };
@@ -85,6 +86,7 @@
 		5D30E25F252D4A3000DB49CA /* diabetes-dribbble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "diabetes-dribbble.png"; path = "../../../../diabetes-dribbble.png"; sourceTree = "<group>"; };
 		5D30E26B252D4BB500DB49CA /* PumpSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSite.swift; sourceTree = "<group>"; };
 		5D30E270252D4BD300DB49CA /* ReminderNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotification.swift; sourceTree = "<group>"; };
+		5D6D2702291E042500BEC655 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		5D786880230096FB00A54436 /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		5D7868822300984B00A54436 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
@@ -144,13 +146,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5D13E79227A4E47F007CC645 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
 		5D13E7AE27A4F732007CC645 /* ChangeSiteNotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +188,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		5D6D2701291E036000BEC655 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				5D6D2702291E042500BEC655 /* NotificationManager.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		5DAE572C251A1B01006151A2 /* PumpSite */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,11 +233,11 @@
 			isa = PBXGroup;
 			children = (
 				5D13E7A827A4ECC5007CC645 /* ChangeSite.entitlements */,
-				5D13E79227A4E47F007CC645 /* Notifications */,
 				5DCD329F230023AB00BC2E07 /* AppDelegate.swift */,
 				5D09CDFC23026991006E914F /* ClassExtensions.swift */,
 				5DCD32A3230023AB00BC2E07 /* Main.storyboard */,
 				5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */,
+				5D6D2701291E036000BEC655 /* Notifications */,
 				5DAE572C251A1B01006151A2 /* PumpSite */,
 				5D30E267252D4AED00DB49CA /* Settings */,
 				5D30E266252D4AB100DB49CA /* HomeScreen */,
@@ -437,6 +440,7 @@
 			files = (
 				5DB8911923003FE80000BFC6 /* StartDateController.swift in Sources */,
 				5DB5C33326C6E44C00877646 /* SettingsTableVC.swift in Sources */,
+				5D6D2703291E042500BEC655 /* NotificationManager.swift in Sources */,
 				5DCD32A2230023AB00BC2E07 /* LaunchViewController.swift in Sources */,
 				5D30E271252D4BD300DB49CA /* ReminderNotification.swift in Sources */,
 				5DE8D52F23BFC45E0044808A /* CircularProgressBar.swift in Sources */,
