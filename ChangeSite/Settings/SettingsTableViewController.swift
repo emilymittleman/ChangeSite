@@ -12,6 +12,7 @@ class SettingsTableViewController: UITableViewController {
     
     var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
+    var notificationManager = NotificationManager.shared
     
     @IBOutlet weak var startDate: UILabel!
     
@@ -49,6 +50,17 @@ class SettingsTableViewController: UITableViewController {
         self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         self.reminderNotifications = ReminderNotificationsManager.shared.retrieveFromStorage()
         
+        // Special case: If user turned off notifications while app was running, need to reset reminders
+        if !notificationManager.notificationsEnabled() {
+            for reminderNotification in reminderNotifications {
+                if reminderNotification.type != "none" {
+                    reminderNotification.type = "none"
+                    ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
+                    notificationManager.removeAllNotifications()
+                }
+            }
+        }
+        
         // ----- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications) -----
         setStartDateLabel()
         daysBtwn.text = String(pumpSite.getDaysBtwn())
@@ -79,29 +91,22 @@ class SettingsTableViewController: UITableViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if let nextViewController = segue.destination as? ReminderFrequencyController {
+            NotificationManager.shared.requestAuthorization { granted in
+                print("Permission granted: \(granted)")
+            }
             if (segue.identifier == "segue1") {
-                nextViewController.index = 0
-                nextViewController.type = "oneDayBefore"
                 nextViewController.reminderNotification = reminderNotifications[0]
             }
             else if (segue.identifier == "segue2") {
-                nextViewController.index = 1
-                nextViewController.type = "dayOf"
                 nextViewController.reminderNotification = reminderNotifications[1]
             }
             else if (segue.identifier == "segue3") {
-                nextViewController.index = 2
-                nextViewController.type = "oneDayAfter"
                 nextViewController.reminderNotification = reminderNotifications[2]
             }
             else if (segue.identifier == "segue4") {
-                nextViewController.index = 3
-                nextViewController.type = "twoDaysAfter"
                 nextViewController.reminderNotification = reminderNotifications[3]
             }
             else {
-                nextViewController.index = 4
-                nextViewController.type = "threeDaysAfter"
                 nextViewController.reminderNotification = reminderNotifications[4]
             }
         }

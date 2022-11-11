@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
     var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
+    var notificationManager = NotificationManager.shared
     
     // var timer: Timer
     var firstTimeLeft = 0
@@ -76,6 +77,17 @@ class HomeViewController: UIViewController {
         
         // if this view has ever loaded, then newUser = false
         UserDefaults.standard.set(false, forKey: "newUser")
+        
+        // Special case: If user turned off notifications, need to reset reminders
+        if !notificationManager.notificationsEnabled() {
+            for reminderNotification in reminderNotifications {
+                if reminderNotification.type != "none" {
+                    reminderNotification.type = "none"
+                    ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
+                    notificationManager.removeAllNotifications()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

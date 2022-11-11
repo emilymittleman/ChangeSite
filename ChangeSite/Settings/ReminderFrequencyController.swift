@@ -11,10 +11,7 @@ import UIKit
 class ReminderFrequencyController: UIViewController {
     
     var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
-    //var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
-    
-    var index = 0
-    var type: String?
+    var notificationManager = NotificationManager.shared
     var reminderNotification: ReminderNotification?
     
     @IBOutlet weak var soundLabel: UILabel!
@@ -26,8 +23,8 @@ class ReminderFrequencyController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBAction func indexChanged(_ sender: Any) {
-        //var reminderNotifications = getReminderNotifications()
-        //var reminderNotification = getReminderNotification()
+        if !notificationManager.notificationsEnabled() { return }
+        
         switch segmentedControl.selectedSegmentIndex
         {
         case 0:

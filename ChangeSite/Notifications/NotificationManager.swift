@@ -30,6 +30,13 @@ class NotificationManager: ObservableObject {
         }
     }
     
+    func notificationsEnabled() -> Bool {
+        guard let settings = self.settings else {
+            return false
+        }
+        return settings.authorizationStatus == UNAuthorizationStatus.authorized
+    }
+    
     // Remove all pending and delivered notifications
     func removeAllNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -38,6 +45,12 @@ class NotificationManager: ObservableObject {
     
     func removeScheduledNotification(reminder: ReminderNotification) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [reminder.id])
+    }
+    
+    func scheduleNotifications(reminders: [ReminderNotification], pumpExiredDate: Date) {
+        for reminder in reminders {
+            scheduleNotification(reminder: reminder, pumpExiredDate: pumpExiredDate)
+        }
     }
     
     func scheduleNotification(reminder: ReminderNotification, pumpExiredDate: Date) {
