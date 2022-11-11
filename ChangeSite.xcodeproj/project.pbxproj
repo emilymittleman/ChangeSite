@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09CDFC23026991006E914F /* ClassExtensions.swift */; };
-		5D13E79427A4E4F1007CC645 /* CustomNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E79327A4E4F1007CC645 /* CustomNotificationDelegate.swift */; };
-		5D13E79C27A4E794007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E79B27A4E794007CC645 /* NotificationService.swift */; };
-		5D13E7A027A4E794007CC645 /* PayloadModification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5D13E79927A4E794007CC645 /* PayloadModification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		5D13E7A627A4EB41007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E79B27A4E794007CC645 /* NotificationService.swift */; };
+		5D13E7B027A4F732007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E7AF27A4F732007CC645 /* NotificationService.swift */; };
+		5D13E7B427A4F732007CC645 /* ChangeSiteNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5D13E7B927A4F96D007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E7AF27A4F732007CC645 /* NotificationService.swift */; };
 		5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */; };
 		5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011624C0635200EE9633 /* PumpSiteManager.swift */; };
 		5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E26B252D4BB500DB49CA /* PumpSite.swift */; };
@@ -38,12 +37,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5D13E79E27A4E794007CC645 /* PBXContainerItemProxy */ = {
+		5D13E7B227A4F732007CC645 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DCD3294230023AB00BC2E07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5D13E79827A4E794007CC645;
-			remoteInfo = PayloadModification;
+			remoteGlobalIDString = 5D13E7AC27A4F732007CC645;
+			remoteInfo = ChangeSiteNotificationService;
 		};
 		5DCD32B1230023AD00BC2E07 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -62,13 +61,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		5D13E7A427A4E794007CC645 /* Embed App Extensions */ = {
+		5D13E7B827A4F732007CC645 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				5D13E7A027A4E794007CC645 /* PayloadModification.appex in Embed App Extensions */,
+				5D13E7B427A4F732007CC645 /* ChangeSiteNotificationService.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,11 +76,10 @@
 
 /* Begin PBXFileReference section */
 		5D09CDFC23026991006E914F /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
-		5D13E79327A4E4F1007CC645 /* CustomNotificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNotificationDelegate.swift; sourceTree = "<group>"; };
-		5D13E79927A4E794007CC645 /* PayloadModification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PayloadModification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D13E79B27A4E794007CC645 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		5D13E79D27A4E794007CC645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D13E7A827A4ECC5007CC645 /* ChangeSite.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChangeSite.entitlements; sourceTree = "<group>"; };
+		5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChangeSiteNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D13E7AF27A4F732007CC645 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		5D13E7B127A4F732007CC645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotificationsManager.swift; sourceTree = "<group>"; };
 		5D1B011624C0635200EE9633 /* PumpSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteManager.swift; sourceTree = "<group>"; };
 		5D30E25F252D4A3000DB49CA /* diabetes-dribbble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "diabetes-dribbble.png"; path = "../../../../diabetes-dribbble.png"; sourceTree = "<group>"; };
@@ -115,7 +113,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5D13E79627A4E794007CC645 /* Frameworks */ = {
+		5D13E7AA27A4F732007CC645 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -149,18 +147,17 @@
 		5D13E79227A4E47F007CC645 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				5D13E79327A4E4F1007CC645 /* CustomNotificationDelegate.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
 		};
-		5D13E79A27A4E794007CC645 /* PayloadModification */ = {
+		5D13E7AE27A4F732007CC645 /* ChangeSiteNotificationService */ = {
 			isa = PBXGroup;
 			children = (
-				5D13E79B27A4E794007CC645 /* NotificationService.swift */,
-				5D13E79D27A4E794007CC645 /* Info.plist */,
+				5D13E7AF27A4F732007CC645 /* NotificationService.swift */,
+				5D13E7B127A4F732007CC645 /* Info.plist */,
 			);
-			path = PayloadModification;
+			path = ChangeSiteNotificationService;
 			sourceTree = "<group>";
 		};
 		5D30E25D252D49BA00DB49CA /* Resources */ = {
@@ -213,7 +210,7 @@
 				5DCD329E230023AB00BC2E07 /* ChangeSite */,
 				5DCD32B3230023AE00BC2E07 /* ChangeSiteTests */,
 				5DCD32BE230023AE00BC2E07 /* ChangeSiteUITests */,
-				5D13E79A27A4E794007CC645 /* PayloadModification */,
+				5D13E7AE27A4F732007CC645 /* ChangeSiteNotificationService */,
 				5DCD329D230023AB00BC2E07 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -224,7 +221,7 @@
 				5DCD329C230023AB00BC2E07 /* ChangeSite.app */,
 				5DCD32B0230023AD00BC2E07 /* ChangeSiteTests.xctest */,
 				5DCD32BB230023AE00BC2E07 /* ChangeSiteUITests.xctest */,
-				5D13E79927A4E794007CC645 /* PayloadModification.appex */,
+				5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,21 +268,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5D13E79827A4E794007CC645 /* PayloadModification */ = {
+		5D13E7AC27A4F732007CC645 /* ChangeSiteNotificationService */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5D13E7A127A4E794007CC645 /* Build configuration list for PBXNativeTarget "PayloadModification" */;
+			buildConfigurationList = 5D13E7B527A4F732007CC645 /* Build configuration list for PBXNativeTarget "ChangeSiteNotificationService" */;
 			buildPhases = (
-				5D13E79527A4E794007CC645 /* Sources */,
-				5D13E79627A4E794007CC645 /* Frameworks */,
-				5D13E79727A4E794007CC645 /* Resources */,
+				5D13E7A927A4F732007CC645 /* Sources */,
+				5D13E7AA27A4F732007CC645 /* Frameworks */,
+				5D13E7AB27A4F732007CC645 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = PayloadModification;
-			productName = PayloadModification;
-			productReference = 5D13E79927A4E794007CC645 /* PayloadModification.appex */;
+			name = ChangeSiteNotificationService;
+			productName = ChangeSiteNotificationService;
+			productReference = 5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		5DCD329B230023AB00BC2E07 /* ChangeSite */ = {
@@ -295,12 +292,12 @@
 				5DCD3298230023AB00BC2E07 /* Sources */,
 				5DCD3299230023AB00BC2E07 /* Frameworks */,
 				5DCD329A230023AB00BC2E07 /* Resources */,
-				5D13E7A427A4E794007CC645 /* Embed App Extensions */,
+				5D13E7B827A4F732007CC645 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5D13E79F27A4E794007CC645 /* PBXTargetDependency */,
+				5D13E7B327A4F732007CC645 /* PBXTargetDependency */,
 			);
 			name = ChangeSite;
 			productName = ChangeSite2;
@@ -353,7 +350,7 @@
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Emily Mittleman";
 				TargetAttributes = {
-					5D13E79827A4E794007CC645 = {
+					5D13E7AC27A4F732007CC645 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
 					5DCD329B230023AB00BC2E07 = {
@@ -385,13 +382,13 @@
 				5DCD329B230023AB00BC2E07 /* ChangeSite */,
 				5DCD32AF230023AD00BC2E07 /* ChangeSiteTests */,
 				5DCD32BA230023AE00BC2E07 /* ChangeSiteUITests */,
-				5D13E79827A4E794007CC645 /* PayloadModification */,
+				5D13E7AC27A4F732007CC645 /* ChangeSiteNotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5D13E79727A4E794007CC645 /* Resources */ = {
+		5D13E7AB27A4F732007CC645 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,11 +423,11 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5D13E79527A4E794007CC645 /* Sources */ = {
+		5D13E7A927A4F732007CC645 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D13E79C27A4E794007CC645 /* NotificationService.swift in Sources */,
+				5D13E7B027A4F732007CC645 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,8 +442,8 @@
 				5DE8D52F23BFC45E0044808A /* CircularProgressBar.swift in Sources */,
 				5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
+				5D13E7B927A4F96D007CC645 /* NotificationService.swift in Sources */,
 				5D7868832300984B00A54436 /* HomeViewController.swift in Sources */,
-				5D13E7A627A4EB41007CC645 /* NotificationService.swift in Sources */,
 				5D786881230096FB00A54436 /* ContainerController.swift in Sources */,
 				5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */,
 				5DB5C33526C6E6F200877646 /* StartDateCell.swift in Sources */,
@@ -455,7 +452,6 @@
 				5DB5C33926C6E98D00877646 /* ReminderCell.swift in Sources */,
 				5DB5C33726C6E94F00877646 /* DaysBtwnCell.swift in Sources */,
 				5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */,
-				5D13E79427A4E4F1007CC645 /* CustomNotificationDelegate.swift in Sources */,
 				5DE8D53223BFCE550044808A /* circularProgressBar.xcdatamodeld in Sources */,
 				5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */,
 			);
@@ -480,10 +476,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5D13E79F27A4E794007CC645 /* PBXTargetDependency */ = {
+		5D13E7B327A4F732007CC645 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5D13E79827A4E794007CC645 /* PayloadModification */;
-			targetProxy = 5D13E79E27A4E794007CC645 /* PBXContainerItemProxy */;
+			target = 5D13E7AC27A4F732007CC645 /* ChangeSiteNotificationService */;
+			targetProxy = 5D13E7B227A4F732007CC645 /* PBXContainerItemProxy */;
 		};
 		5DCD32B2230023AD00BC2E07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -517,7 +513,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		5D13E7A227A4E794007CC645 /* Debug */ = {
+		5D13E7B627A4F732007CC645 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -525,8 +521,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PayloadModification/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PayloadModification;
+				INFOPLIST_FILE = ChangeSiteNotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ChangeSiteNotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Emily Mittleman. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -535,7 +531,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite.PayloadModification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite.ChangeSiteNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -544,7 +540,7 @@
 			};
 			name = Debug;
 		};
-		5D13E7A327A4E794007CC645 /* Release */ = {
+		5D13E7B727A4F732007CC645 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -552,8 +548,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PayloadModification/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PayloadModification;
+				INFOPLIST_FILE = ChangeSiteNotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ChangeSiteNotificationService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Emily Mittleman. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -562,7 +558,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite.PayloadModification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite.ChangeSiteNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -812,11 +808,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5D13E7A127A4E794007CC645 /* Build configuration list for PBXNativeTarget "PayloadModification" */ = {
+		5D13E7B527A4F732007CC645 /* Build configuration list for PBXNativeTarget "ChangeSiteNotificationService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5D13E7A227A4E794007CC645 /* Debug */,
-				5D13E7A327A4E794007CC645 /* Release */,
+				5D13E7B627A4F732007CC645 /* Debug */,
+				5D13E7B727A4F732007CC645 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

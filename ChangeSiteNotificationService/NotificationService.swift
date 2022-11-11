@@ -1,6 +1,6 @@
 //
 //  NotificationService.swift
-//  PayloadModification
+//  ChangeSiteNotificationService
 //
 //  Created by Emily Mittleman on 1/28/22.
 //  Copyright © 2022 Emily Mittleman. All rights reserved.
@@ -14,13 +14,19 @@ class NotificationService: UNNotificationServiceExtension {
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
 
+    // Change contents of notification (currently not being used)
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
-        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+        self.bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        if let bestAttemptContent = bestAttemptContent {
+        if let bestAttemptContent = self.bestAttemptContent {
             // Modify the notification content here...
-            bestAttemptContent.title = "\(bestAttemptContent.title) !!! [modified]"
+            bestAttemptContent.title = "\(bestAttemptContent.title)"
+            
+            let data = bestAttemptContent.userInfo as NSDictionary
+            let pref = UserDefaults.init(suiteName: "group.com.EmilyMittleman.ChangeSite")
+            pref?.set(data, forKey: "NOTIF_DATA")
+            pref?.synchronize()
             
             contentHandler(bestAttemptContent)
         }

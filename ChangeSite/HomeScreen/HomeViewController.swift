@@ -113,12 +113,18 @@ class HomeViewController: UIViewController {
         
         // update labels
         if(pumpSite.isOverdue()) {
-            nextChangeLabel.text = "Next change was due " + getDateAbbr(date: self.pumpSite.getEndDate())
-            endDateLabel.text = String(days) + " Days Late"
+            nextChangeLabel.text = "Change was due " + getDateAbbr(date: self.pumpSite.getEndDate())
+            endDateLabel.text = String(days) + " DAYS LATE"
+            if(days==1) {
+                endDateLabel.text = String(days) + " DAY LATE"
+            }
             endDateLabel.textColor = .red
         } else {
             nextChangeLabel.text = "Next change is due " + getDateAbbr(date: self.pumpSite.getEndDate())
             endDateLabel.text = String(days) + " Days Left"
+            if(days==1) {
+                endDateLabel.text = String(days) + " Day Left"
+            }
             endDateLabel.textColor = .black
         }
     }
