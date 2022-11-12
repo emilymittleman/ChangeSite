@@ -29,7 +29,6 @@ class NavigationMenuBaseController: UITabBarController {
     
     func setupCustomTabBar(_ items: [TabItem], completion: @escaping ([UIViewController]) -> Void) {
         // handle creation of the tab bar and attach touch event listeners
-        print(tabBar.frame)
         let frame = CGRect(x: tabBar.frame.origin.x,
                            y: tabBar.frame.origin.x,
                            width: tabBar.frame.width,
@@ -53,7 +52,6 @@ class NavigationMenuBaseController: UITabBarController {
             self.customTabBar.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor)
         ])
         
-        print(customTabBar.frame)
         var controllers = [UIViewController]()
         for i in 0 ..< items.count {
             controllers.append(items[i].viewController) // we fetch the matching view controller and append here
@@ -65,7 +63,5 @@ class NavigationMenuBaseController: UITabBarController {
     
     func changeTab(tab: Int) {
         self.selectedIndex = tab
-        print("selected: \(self.selectedIndex) ")
-        print("controller: \(self.viewControllers![self.selectedIndex])")
     }
 }

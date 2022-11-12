@@ -7,10 +7,21 @@
 //
 
 import UIKit
+import CoreData
 import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    // MARK: - Core Data Saving support
+    lazy var coreDataStack: CoreDataStack = .init(modelName: "PumpSite")
+    
+    static let sharedAppDelegate: AppDelegate = {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Unexpected app delegate type, did it change? \(String(describing: UIApplication.shared.delegate))")
+        }
+        return delegate
+    }()
 
     var window: UIWindow?
 
@@ -31,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !newUser {
             UserDefaults.standard.set(try? PropertyListEncoder().encode(PumpSiteManager.shared.pumpSite), forKey: "pumpSite")
             UserDefaults.standard.set(try? PropertyListEncoder().encode(ReminderNotificationsManager.shared.reminderNotifications), forKey: "reminderNotifications")
+            AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         } else {
             UserDefaults.standard.removeObject(forKey: "pumpSite")
             UserDefaults.standard.removeObject(forKey: "reminderNotification")

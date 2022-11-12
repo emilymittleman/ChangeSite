@@ -52,7 +52,6 @@ class SettingsTableViewController: UITableViewController {
         
         // Special case: If user turned off notifications while app was running, need to reset reminders
         /*if !notificationManager.notificationsEnabled() {
-            print("this is getting called")
             for reminderNotification in reminderNotifications {
                 if reminderNotification.frequency != .none {
                     reminderNotification.frequency = .none

@@ -1,0 +1,6 @@
+framework module Pods_ChangeSite {
+  umbrella header "Pods-ChangeSite-umbrella.h"
+
+  export *
+  module * { export * }
+}

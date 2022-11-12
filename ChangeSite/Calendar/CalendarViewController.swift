@@ -7,28 +7,140 @@
 //
 
 import UIKit
+import FSCalendar
 
-class CalendarViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+    
+    fileprivate let gregorian = Calendar(identifier: .gregorian)
+    fileprivate let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
+    fileprivate weak var calendar: FSCalendar!
+    
+    
+    
+    override func loadView() {
+        let view = UIView(frame: UIScreen.main.bounds)
+        let mode = traitCollection.userInterfaceStyle
+        view.backgroundColor = UIColor.background(mode)
+        self.view = view
         
-        let label = UILabel(frame: CGRect.zero)
-        label.text = "Calendar View Controller"
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.clipsToBounds = true
-        label.sizeToFit()
+        let height: CGFloat = UIDevice.current.model.hasPrefix("iPad") ? 400 : 300
+        let calendar = FSCalendar(frame: CGRect(x: 0, y: 64, width:self.view.bounds.size.width, height:height))
+        calendar.dataSource = self
+        calendar.delegate = self
+        self.view.addSubview(calendar)
+        self.calendar = calendar
         
-        self.view.addSubview(label)
+        calendar.register(CustomCalendarCell.self, forCellReuseIdentifier: "cell")
         
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ])
+        // Calender actions
+        calendar.allowsSelection = false
+        calendar.today = Date()
+        calendar.swipeToChooseGesture.isEnabled = true // Swipe-To-Choose
+        
+        // Calendar UI
+        calendar.backgroundColor = UIColor.white
+        calendar.appearance.todayColor = UIColor.lightBlue
+        calendar.appearance.weekdayTextColor = UIColor.lightBlue
+        calendar.appearance.titleDefaultColor = UIColor.charcoal
+        
+        calendar.appearance.weekdayFont = UIFont(name: "Rubik-Regular", size: 17)
+        calendar.appearance.titleFont = UIFont(name: "Rubik-Regular", size: 15)
+        calendar.appearance.headerTitleFont = UIFont(name: "Rubik-Regular", size: 20)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "FSCalendar"
+        
+        let dates = [
+            self.gregorian.date(byAdding: .day, value: -1, to: Date()),
+            Date(),
+            self.gregorian.date(byAdding: .day, value: 1, to: Date())
+        ]
+        dates.forEach { (date) in
+            self.calendar.select(date, scrollToDate: false)
+        }
+        
+        print(calendar.selectedDates)
+    }
+    
+    // MARK: - FSCalendarDataSource
+    
+    func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
+        let cell = calendar.dequeueReusableCell(withIdentifier: "cell", for: date, at: position)
+        return cell
+    }
+    
+    func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
+        self.configure(cell: cell, for: date, at: position)
+    }
+    
+    // MARK: - FSCalendarDelegate
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        self.calendar.frame.size.height = bounds.height
+        // self.eventLabel.frame.origin.y = calendar.frame.maxY + 10
+    }
+    
+    // MARK: - Private functions
+    
+    private func configureVisibleCells() {
+        calendar.visibleCells().forEach { (cell) in
+            let date = calendar.date(for: cell)
+            let position = calendar.monthPosition(for: cell)
+            self.configure(cell: cell, for: date!, at: position)
+        }
+    }
+    
+    private func configure(cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
+        let cell = (cell as! CustomCalendarCell)
+        // Custom today circle
+        if cell.dateIsToday {
+            cell.shapeLayer.isHidden = false
+        }
+        // Configure selection layer
+        if position == .current {
+            
+            var selectionType = SelectionType.none
+            
+            if calendar.selectedDates.contains(date) {
+                let previousDate = self.gregorian.date(byAdding: .day, value: -1, to: date)!
+                let nextDate = self.gregorian.date(byAdding: .day, value: 1, to: date)!
+                if calendar.selectedDates.contains(date) {
+                    if calendar.selectedDates.contains(previousDate) && calendar.selectedDates.contains(nextDate) {
+                        selectionType = .middle
+                    }
+                    else if calendar.selectedDates.contains(previousDate) && calendar.selectedDates.contains(date) {
+                        selectionType = .rightBorder
+                    }
+                    else if calendar.selectedDates.contains(nextDate) {
+                        selectionType = .leftBorder
+                    }
+                    else {
+                        selectionType = .single
+                    }
+                }
+            }
+            else {
+                selectionType = .none
+            }
+            if selectionType == .none {
+                cell.selectionLayer.isHidden = true
+                return
+            }
+            cell.selectionLayer.isHidden = false
+            cell.selectionType = selectionType
+            
+        } else {
+            //cell.circleImageView.isHidden = true
+            cell.selectionLayer.isHidden = true
+        }
+    }
 
     /*
     // MARK: - Navigation

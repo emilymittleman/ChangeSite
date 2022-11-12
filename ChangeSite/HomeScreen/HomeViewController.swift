@@ -83,8 +83,7 @@ class HomeViewController: UIViewController {
         UserDefaults.standard.set(false, forKey: "newUser")
         
         // Special case: If user turned off notifications, need to reset reminders
-        /*print(notificationManager.notificationsEnabled())
-        notificationManager.notificationsEnabled { enabled in
+        /* notificationManager.notificationsEnabled { enabled in
             if enabled { [weak self] in
                 for reminderNotification in self.reminderNotifications {
                     if reminderNotification.frequency != "none" {
