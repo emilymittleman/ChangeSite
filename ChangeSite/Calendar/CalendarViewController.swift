@@ -8,13 +8,13 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+class CalendarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let label = UILabel(frame: CGRect.zero)
-        label.text = "Home View Controller"
+        label.text = "Calendar View Controller"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -19,7 +19,7 @@ enum TabItem: String, CaseIterable {
         case .home:
             return HomeViewController.viewController()
         case .calendar:
-            return HomeVC() // TODO: implement CalendarVC
+            return CalendarViewController() // TODO: implement CalendarVC
         case .settings:
             let navController = UINavigationController()
             let settingsVC = SettingsTableViewController.viewController()

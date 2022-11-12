@@ -16,7 +16,7 @@
 		5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E26B252D4BB500DB49CA /* PumpSite.swift */; };
 		5D30E271252D4BD300DB49CA /* ReminderNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E270252D4BD300DB49CA /* ReminderNotification.swift */; };
 		5D6D2703291E042500BEC655 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2702291E042500BEC655 /* NotificationManager.swift */; };
-		5D6D2705291F672300BEC655 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2704291F672300BEC655 /* HomeVC.swift */; };
+		5D6D2705291F672300BEC655 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2704291F672300BEC655 /* CalendarViewController.swift */; };
 		5D6D2708291F684A00BEC655 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2707291F684A00BEC655 /* TabItem.swift */; };
 		5D6D270A291F699A00BEC655 /* NavigationBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2709291F699A00BEC655 /* NavigationBaseController.swift */; };
 		5D6D270C291F6A5B00BEC655 /* TabNavigationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D270B291F6A5B00BEC655 /* TabNavigationMenu.swift */; };
@@ -96,7 +96,7 @@
 		5D30E26B252D4BB500DB49CA /* PumpSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSite.swift; sourceTree = "<group>"; };
 		5D30E270252D4BD300DB49CA /* ReminderNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotification.swift; sourceTree = "<group>"; };
 		5D6D2702291E042500BEC655 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		5D6D2704291F672300BEC655 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		5D6D2704291F672300BEC655 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		5D6D2707291F684A00BEC655 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
 		5D6D2709291F699A00BEC655 /* NavigationBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBaseController.swift; sourceTree = "<group>"; };
 		5D6D270B291F6A5B00BEC655 /* TabNavigationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationMenu.swift; sourceTree = "<group>"; };
@@ -188,7 +188,6 @@
 			children = (
 				5D7868822300984B00A54436 /* HomeViewController.swift */,
 				5DE8D52E23BFC45E0044808A /* CircularProgressBar.swift */,
-				5D6D2704291F672300BEC655 /* HomeVC.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -283,6 +282,7 @@
 				5D30E267252D4AED00DB49CA /* Settings */,
 				5D6D2706291F682000BEC655 /* Navigation */,
 				5D30E266252D4AB100DB49CA /* HomeScreen */,
+				5DF50C452920048800E3695C /* Calendar */,
 				5DCD32A6230023AD00BC2E07 /* Assets.xcassets */,
 				5DCD32A8230023AD00BC2E07 /* LaunchScreen.storyboard */,
 				5DCD32AB230023AD00BC2E07 /* Info.plist */,
@@ -309,6 +309,14 @@
 				5DCD32C1230023AE00BC2E07 /* Info.plist */,
 			);
 			path = ChangeSiteUITests;
+			sourceTree = "<group>";
+		};
+		5DF50C452920048800E3695C /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				5D6D2704291F672300BEC655 /* CalendarViewController.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,7 +512,7 @@
 				5DB5C33526C6E6F200877646 /* StartDateCell.swift in Sources */,
 				5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */,
 				5DB8911B2300401E0000BFC6 /* ReminderFrequencyController.swift in Sources */,
-				5D6D2705291F672300BEC655 /* HomeVC.swift in Sources */,
+				5D6D2705291F672300BEC655 /* CalendarViewController.swift in Sources */,
 				5DB5C33926C6E98D00877646 /* ReminderCell.swift in Sources */,
 				5DB5C33726C6E94F00877646 /* DaysBtwnCell.swift in Sources */,
 				5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */,
