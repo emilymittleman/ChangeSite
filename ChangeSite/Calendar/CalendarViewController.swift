@@ -8,6 +8,7 @@
 
 import UIKit
 import FSCalendar
+import CoreData
 
 class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
@@ -20,7 +21,8 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     fileprivate weak var calendar: FSCalendar!
     
-    
+    // var siteDates = [SiteDates]()
+    var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
     
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
@@ -53,23 +55,31 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.appearance.headerTitleFont = UIFont(name: "Rubik-Regular", size: 20)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.siteDatesProvider.fetchData() // optimize so only refreshes when there are updates
+        
+        let siteDates = siteDatesProvider.siteDates
+        print(siteDates)
+        
+        //updateUIRanges()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "FSCalendar"
-        
-        let dates = [
-            self.gregorian.date(byAdding: .day, value: -1, to: Date()),
-            Date(),
-            self.gregorian.date(byAdding: .day, value: 1, to: Date())
-        ]
-        dates.forEach { (date) in
-            self.calendar.select(date, scrollToDate: false)
-        }
-        
-        print(calendar.selectedDates)
+    }
+    
+    func updateUIRanges() {
+        print(calendar.visibleCells())
     }
     
     // MARK: - FSCalendarDataSource
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        print("page changing!")
+        updateUIRanges()
+    }
     
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
         let cell = calendar.dequeueReusableCell(withIdentifier: "cell", for: date, at: position)
@@ -107,6 +117,10 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         if position == .current {
             
             var selectionType = SelectionType.none
+            
+            let siteDates = siteDatesProvider.siteDates
+            // print(siteDates)
+            // siteDates[1].
             
             if calendar.selectedDates.contains(date) {
                 let previousDate = self.gregorian.date(byAdding: .day, value: -1, to: date)!

@@ -41,6 +41,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
         // save the current date from datepicker
+        // TODO: ensure that new startdate is not earlier than original startdate (can't go back in time)
         self.pumpSite.setStartDate(startDate: startDatePicker.date)
         PumpSiteManager.shared.saveToStorage(pumpSite: self.pumpSite)
         

@@ -49,6 +49,7 @@
 		5DF50C512920175D00E3695C /* SiteDates+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C4F2920175D00E3695C /* SiteDates+CoreDataClass.swift */; };
 		5DF50C522920175D00E3695C /* SiteDates+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C502920175D00E3695C /* SiteDates+CoreDataProperties.swift */; };
 		5DF50C5429202AD500E3695C /* CustomCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5329202AD500E3695C /* CustomCalendarCell.swift */; };
+		5DF50C5629203E7000E3695C /* SiteDatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5529203E7000E3695C /* SiteDatesProvider.swift */; };
 		6A9B1D20C188259F216AD60B /* Pods_ChangeSite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */; };
 		AA7D7A8B310AF1E171640778 /* Pods_ChangeSite_ChangeSiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5235BCE46BFFD0E6673471 /* Pods_ChangeSite_ChangeSiteUITests.framework */; };
 		E7CCA52E36F500A1D5A8A3B7 /* Pods_ChangeSiteNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7F2F2D496B9C6DBC2CD4FB /* Pods_ChangeSiteNotificationService.framework */; };
@@ -145,6 +146,7 @@
 		5DF50C4F2920175D00E3695C /* SiteDates+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SiteDates+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5DF50C502920175D00E3695C /* SiteDates+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SiteDates+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5DF50C5329202AD500E3695C /* CustomCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarCell.swift; sourceTree = "<group>"; };
+		5DF50C5529203E7000E3695C /* SiteDatesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteDatesProvider.swift; sourceTree = "<group>"; };
 		6016E7C231B920940EFABFA4 /* Pods-ChangeSite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite.release.xcconfig"; path = "Target Support Files/Pods-ChangeSite/Pods-ChangeSite.release.xcconfig"; sourceTree = "<group>"; };
 		65E15DDE77717047C2C892E2 /* Pods-ChangeSite-ChangeSiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite-ChangeSiteUITests.release.xcconfig"; path = "Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		835EC653B7795330AAB47568 /* Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				5DF50C4F2920175D00E3695C /* SiteDates+CoreDataClass.swift */,
 				5DF50C502920175D00E3695C /* SiteDates+CoreDataProperties.swift */,
 				5DF50C4A292012EF00E3695C /* CoreDataStack.swift */,
+				5DF50C5529203E7000E3695C /* SiteDatesProvider.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
 				5D13E7B927A4F96D007CC645 /* NotificationService.swift in Sources */,
 				5D7868832300984B00A54436 /* HomeViewController.swift in Sources */,
+				5DF50C5629203E7000E3695C /* SiteDatesProvider.swift in Sources */,
 				5D6D2708291F684A00BEC655 /* TabItem.swift in Sources */,
 				5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */,
 				5D6D270C291F6A5B00BEC655 /* TabNavigationMenu.swift in Sources */,
