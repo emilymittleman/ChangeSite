@@ -27,10 +27,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var nextChangeLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     
+    @IBOutlet weak var newSiteButtonOutline: UIImageView!
     @IBOutlet weak var newSiteButton: UIButton!
     @IBAction func newSitePressed(_ sender: Any) {
         // reset the start date & end date
         newSiteButton.isHidden = true
+        newSiteButtonOutline.isHidden = true
         newSiteButton.isEnabled = false
         showNewStartDate()
     }
@@ -44,6 +46,7 @@ class HomeViewController: UIViewController {
         
         // show the "New site started" button & hide the rest of start date objects
         newSiteButton.isHidden = false
+        newSiteButtonOutline.isHidden = false
         newSiteButton.isEnabled = true
         hideNewStartDate()
         
@@ -63,6 +66,7 @@ class HomeViewController: UIViewController {
     @IBAction func cancelButtonPressed(_ sender: Any) {
         // show the "New site started" button & hide the rest of start date objects
         newSiteButton.isHidden = false
+        newSiteButtonOutline.isHidden = false
         newSiteButton.isEnabled = true
         hideNewStartDate()
     }
@@ -96,19 +100,37 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.updateUI()
+        
         self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
-        view.backgroundColor = UIColor.systemBackground
         let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
         timeLeft = abs(Int(interval))
         updateDates(interval: interval)
         hideNewStartDate()
     }
     
-    // set the current percentage and it will animate
-    override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + PROGRESS_ANIMATION_DURATION) {
-            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.onTimerFires), userInfo: nil, repeats: true)
-        }
+    private func updateUI() {
+        // deal with light and dark mode
+        let mode = traitCollection.userInterfaceStyle
+        view.backgroundColor = UIColor.background(mode)
+        
+        nextChangeLabel.font = UIFont(name: "Rubik-Regular", size: 25)
+        endDateLabel.font = UIFont(name: "Rubik-Bold", size: 40)
+        newSiteButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
+        chooseStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 19)
+        saveButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
+        cancelButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
+        
+        nextChangeLabel.textColor = UIColor.charcoal(mode)
+        endDateLabel.textColor = UIColor.charcoal
+        newSiteButton.titleLabel?.textColor = UIColor.charcoal
+        chooseStartDateLabel.textColor = UIColor.charcoal
+        saveButton.titleLabel?.textColor = UIColor.charcoal
+        cancelButton.titleLabel?.textColor = UIColor.charcoal
+        
+        chooseStartDateLabel.backgroundColor = UIColor.lightBlue
+        saveButton.titleLabel?.backgroundColor = UIColor.lightBlue
+        cancelButton.titleLabel?.backgroundColor = UIColor.lightBlue
     }
     
     private func updateDates(interval: Double) {
@@ -140,7 +162,7 @@ class HomeViewController: UIViewController {
             if(days==1) {
                 endDateLabel.text = String(days) + " Day Left"
             }
-            endDateLabel.textColor = .black
+            endDateLabel.textColor = UIColor.charcoal
         }
     }
     
@@ -184,9 +206,11 @@ class HomeViewController: UIViewController {
     }
     
     func getDateAbbr(date: Date) -> String {
-        let index = Calendar.current.component(.month, from: date)
+        /*
+        let index = Calendar.current.component(.weekday, from: date)
         let abbrevs = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
-        return abbrevs[index-1] + " " + String(Calendar.current.component(.day, from: date))
+        return abbrevs[index-1] + " " + String(Calendar.current.component(.day, from: date)) */
+        return date.dayOfWeek() ?? ""
     }
     
     
@@ -196,6 +220,10 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+    }
+    
+    class func viewController() -> HomeViewController {
+        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
     }
     
 

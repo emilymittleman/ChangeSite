@@ -10,6 +10,39 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    
+    // Dark mode returns charcoal
+    class func background(_ mode: UIUserInterfaceStyle) -> UIColor {
+        if mode == .dark {
+            return charcoal
+        }
+        return UIColor.systemBackground.resolvedColor(with: UITraitCollection.init(userInterfaceStyle: .light))
+    }
+    
+    // Dark mode returns white
+    class func charcoal(_ mode: UIUserInterfaceStyle) -> UIColor {
+        if mode == .dark {
+            return background(.light)
+        }
+        return UIColor(red: 63/255.0, green: 63/255.0, blue: 63/255.0, alpha: 1.0)
+    }
+    
+    class var charcoal: UIColor {
+        return charcoal(.light)
+    }
+    
+    class var lightBlue: UIColor {
+        return UIColor(red: 147/255.0, green: 222/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    
+    class var purpleBlue: UIColor {
+        return UIColor(red: 92/255.0, green: 109/255.0, blue: 255/255.0, alpha: 1.0)
+    }
+    
+    class var tabGrey: UIColor {
+        return UIColor(red: 92/255.0, green: 97/255.0, blue: 113/255.0, alpha: 1.0)
+    }
+    
     class var teal: UIColor {
         return UIColor(red: 0, green: 204/255.0, blue: 204/255.0, alpha: 1.0)
     }
@@ -31,7 +64,6 @@ extension UIColor {
 
 extension Date {
     func offsetFrom(date : Date) -> String {
-
         let dayHourMinuteSecond: Set<Calendar.Component> = [.day, .hour, .minute, .second]
         let difference = NSCalendar.current.dateComponents(dayHourMinuteSecond, from: date, to: self);
 
@@ -45,5 +77,12 @@ extension Date {
         if let minute = difference.minute, minute > 0 { return minutes }
         if let second = difference.second, second > 0 { return seconds }
         return ""
+    }
+    
+    func dayOfWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: self).capitalized
+        // or use capitalized(with: locale) if you want
     }
 }

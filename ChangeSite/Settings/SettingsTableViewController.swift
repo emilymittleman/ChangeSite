@@ -115,7 +115,10 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-
+    class func viewController() -> SettingsTableViewController {
+        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsTableViewController") as! SettingsTableViewController
+    }
+    
     // MARK: - Table view data source
     
     /*

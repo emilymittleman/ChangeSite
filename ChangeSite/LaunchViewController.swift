@@ -11,6 +11,12 @@ import UIKit
 
 class LaunchViewController: UIViewController {
     
+    @IBOutlet weak var beginButton: UIButton!
+    
+    @IBAction func beginButtonTapped(_ sender: Any) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -35,6 +41,7 @@ class LaunchViewController: UIViewController {
         
         if(!newUser) { //skip welcome screen & go to landing page
             let signInPage = self.storyboard?.instantiateViewController(withIdentifier: "HomeScreen") as UIViewController?
+            
             let appDelegate = UIApplication.shared.delegate
             appDelegate?.window??.rootViewController = signInPage
         }
