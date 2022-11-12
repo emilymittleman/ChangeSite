@@ -51,14 +51,19 @@ class SettingsTableViewController: UITableViewController {
         self.reminderNotifications = ReminderNotificationsManager.shared.retrieveFromStorage()
         
         // Special case: If user turned off notifications while app was running, need to reset reminders
-        if !notificationManager.notificationsEnabled() {
+        /*if !notificationManager.notificationsEnabled() {
+            print("this is getting called")
             for reminderNotification in reminderNotifications {
-                if reminderNotification.type != "none" {
-                    reminderNotification.type = "none"
+                if reminderNotification.occurrence != "none" {
+                    reminderNotification.occurrence = "none"
                     ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
                     notificationManager.removeAllNotifications()
                 }
             }
+        }*/
+        
+        for reminderNotification in reminderNotifications {
+            print(reminderNotification.description)
         }
         
         // ----- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications) -----
@@ -91,9 +96,11 @@ class SettingsTableViewController: UITableViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if let nextViewController = segue.destination as? ReminderFrequencyController {
-            NotificationManager.shared.requestAuthorization { granted in
-                print("Permission granted: \(granted)")
-            }
+            // Will only actually be prompted first time user opens app
+            /*if !NotificationManager.shared.notificationsEnabled() {
+                NotificationManager.shared.requestAuthorization { _ in
+                }
+            }*/
             if (segue.identifier == "segue1") {
                 nextViewController.reminderNotification = reminderNotifications[0]
             }

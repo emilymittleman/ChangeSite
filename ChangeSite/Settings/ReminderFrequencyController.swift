@@ -23,7 +23,16 @@ class ReminderFrequencyController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBAction func indexChanged(_ sender: Any) {
-        if !notificationManager.notificationsEnabled() { return }
+        // TODO: If user tapped "Don't Allow" notifications but try to turn them on, prompt them to allow notifications in settings
+        // guarantee that this is the only possibility if notifications are not enabled and they try changing a reminder
+        // task-n
+        /*if !notificationManager.notificationsEnabled() {
+            // add a custom alert with this completion handler
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString){
+               UIApplication.shared.open(settingsURL)
+            }
+            // after returning to app, refresh notificationManager.fetchNotificationSettings() so that settings reload
+        }*/
         
         switch segmentedControl.selectedSegmentIndex
         {
@@ -136,6 +145,16 @@ class ReminderFrequencyController: UIViewController {
         // frequency
         datePicker.date = self.reminderNotification?.frequency as! Date
     }
+    
+    // task-notification
+    /*override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let reminderNotification = self.reminderNotification,
+           notificationManager.notificationsEnabled() {
+            notificationManager.removeScheduledNotification(reminder: reminderNotification)
+            notificationManager.scheduleNotification(reminder: reminderNotification, pumpExiredDate: pumpSite.getEndDate())
+        }
+    }*/
 
     /*
     // MARK: - Navigation

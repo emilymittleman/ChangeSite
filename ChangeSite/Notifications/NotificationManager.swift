@@ -37,6 +37,13 @@ class NotificationManager: ObservableObject {
         return settings.authorizationStatus == UNAuthorizationStatus.authorized
     }
     
+    // Async version is for HomeScreen, since this is the only place settings might not be loaded yet
+    func notificationsEnabled(completion: @escaping (Bool) -> () ) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            completion(settings.authorizationStatus == UNAuthorizationStatus.authorized)
+        }
+    }
+    
     // Remove all pending and delivered notifications
     func removeAllNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -88,8 +95,11 @@ class NotificationManager: ObservableObject {
         var triggerDate = pumpExiredDate
         triggerDate.addTimeInterval(TimeInterval(daysBtwnReminderAndExpire * 60 * 60 * 24))
         
-        let trigger = UNCalendarNotificationTrigger(
+        /*let trigger = UNCalendarNotificationTrigger(
             dateMatching: Calendar.current.dateComponents([.minute, .hour, .day, .month, .year], from: triggerDate),
+            repeats: false)*/
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: 10,
             repeats: false)
         
         let request = UNNotificationRequest(identifier: reminder.id,

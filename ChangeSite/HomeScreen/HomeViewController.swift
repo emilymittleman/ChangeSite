@@ -79,15 +79,18 @@ class HomeViewController: UIViewController {
         UserDefaults.standard.set(false, forKey: "newUser")
         
         // Special case: If user turned off notifications, need to reset reminders
-        if !notificationManager.notificationsEnabled() {
-            for reminderNotification in reminderNotifications {
-                if reminderNotification.type != "none" {
-                    reminderNotification.type = "none"
-                    ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
-                    notificationManager.removeAllNotifications()
+        /*print(notificationManager.notificationsEnabled())
+        notificationManager.notificationsEnabled { enabled in
+            if enabled { [weak self] in
+                for reminderNotification in self.reminderNotifications {
+                    if reminderNotification.occurrence != "none" {
+                        reminderNotification.occurrence = "none"
+                        ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
+                        notificationManager.removeAllNotifications()
+                    }
                 }
             }
-        }
+        } */
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -25,6 +25,9 @@ class ReminderNotification: Codable {
     var soundOn: Bool       // true, false
     var frequency: Date     // Date object: 5 minutes
     var id = UUID().uuidString
+    var description: String {
+        return "Type: \(type), Occurrence: \(occurrence), Sound: \(soundOn)"
+    }
     
     init(type: String, occurrence: String = "none", soundOn: Bool = false, frequency: Date = Calendar.current.date(bySettingHour:0, minute:5, second:0, of:Date())!) {
         self.type = type
