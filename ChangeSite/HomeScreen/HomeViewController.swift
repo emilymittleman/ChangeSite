@@ -83,8 +83,8 @@ class HomeViewController: UIViewController {
         notificationManager.notificationsEnabled { enabled in
             if enabled { [weak self] in
                 for reminderNotification in self.reminderNotifications {
-                    if reminderNotification.occurrence != "none" {
-                        reminderNotification.occurrence = "none"
+                    if reminderNotification.frequency != "none" {
+                        reminderNotification.frequency = "none"
                         ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
                         notificationManager.removeAllNotifications()
                     }

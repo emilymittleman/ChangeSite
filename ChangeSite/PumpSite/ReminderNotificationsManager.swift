@@ -21,11 +21,11 @@ class ReminderNotificationsManager {
     
     // Initialize array to the 5 default reminder notification types that came with the app
     private func setDefaultValues() {
-        let oneDayBefore = ReminderNotification(type: "oneDayBefore")
-        let dayOf = ReminderNotification(type: "dayOf")
-        let oneDayAfter = ReminderNotification(type: "oneDayAfter")
-        let twoDaysAfter = ReminderNotification(type: "twoDaysAfter")
-        let threeDaysAfter = ReminderNotification(type: "threeDaysAfter")
+        let oneDayBefore = ReminderNotification(type: .oneDayBefore)
+        let dayOf = ReminderNotification(type: .dayOf)
+        let oneDayAfter = ReminderNotification(type: .oneDayAfter)
+        let twoDaysAfter = ReminderNotification(type: .twoDaysAfter)
+        let threeDaysAfter = ReminderNotification(type: .extendedDaysAfter)
         
         // Make a list of ReminderNotifications and store it in UserDefaults as a data structure to hold all the reminderNotifications
         self.reminderNotifications = []
@@ -42,9 +42,9 @@ class ReminderNotificationsManager {
     func mutateNotification(newReminderNotif: ReminderNotification) {
         for reminderNotif in self.reminderNotifications {
             if reminderNotif.type == newReminderNotif.type {
-                reminderNotif.occurrence = newReminderNotif.occurrence
-                reminderNotif.soundOn = newReminderNotif.soundOn
                 reminderNotif.frequency = newReminderNotif.frequency
+                reminderNotif.soundOn = newReminderNotif.soundOn
+                reminderNotif.repeatingFrequency = newReminderNotif.repeatingFrequency
             }
         }
         
@@ -61,11 +61,10 @@ class ReminderNotificationsManager {
     }
     
     func retrieveFromStorage() -> [ReminderNotification] {
-        if UserDefaults.standard.object(forKey: "reminderNotifications") != nil {
-            if let reminderNotifications = try? PropertyListDecoder().decode([ReminderNotification].self, from: UserDefaults.standard.object(forKey: "reminderNotifications") as! Data) {
+        if UserDefaults.standard.object(forKey: "reminderNotifications") != nil,
+           let reminderNotifications = try? PropertyListDecoder().decode([ReminderNotification].self, from: UserDefaults.standard.object(forKey: "reminderNotifications") as! Data) {
                 self.reminderNotifications = reminderNotifications
-            }
-        } else { // If it is nil in UserDefaults, set up default values
+        } else { // If it is nil in UserDefaults or can't be decoded, set up default values
             self.reminderNotifications = []
             self.setDefaultValues()
         }

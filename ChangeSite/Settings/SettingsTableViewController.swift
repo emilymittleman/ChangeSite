@@ -54,17 +54,13 @@ class SettingsTableViewController: UITableViewController {
         /*if !notificationManager.notificationsEnabled() {
             print("this is getting called")
             for reminderNotification in reminderNotifications {
-                if reminderNotification.occurrence != "none" {
-                    reminderNotification.occurrence = "none"
+                if reminderNotification.frequency != .none {
+                    reminderNotification.frequency = .none
                     ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
                     notificationManager.removeAllNotifications()
                 }
             }
         }*/
-        
-        for reminderNotification in reminderNotifications {
-            print(reminderNotification.description)
-        }
         
         // ----- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications) -----
         setStartDateLabel()
@@ -84,11 +80,11 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func setReminderNotificationText() {
-        occurrence0.text = reminderNotifications[0].occurrence
-        occurrence1.text = reminderNotifications[1].occurrence
-        occurrence2.text = reminderNotifications[2].occurrence
-        occurrence3.text = reminderNotifications[3].occurrence
-        occurrence4.text = reminderNotifications[4].occurrence
+        occurrence0.text = reminderNotifications[0].frequency.rawValue
+        occurrence1.text = reminderNotifications[1].frequency.rawValue
+        occurrence2.text = reminderNotifications[2].frequency.rawValue
+        occurrence3.text = reminderNotifications[3].frequency.rawValue
+        occurrence4.text = reminderNotifications[4].frequency.rawValue
     }
     
     // NAVIGATION -- figure out a way to send which segue was pressed so you know which reminderNotification to change

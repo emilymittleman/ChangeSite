@@ -60,7 +60,7 @@ class SettingsTableVC: UITableViewController {
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "reminderCell", for: indexPath) as! ReminderCell
-            cell.occurrenceLabel.text = reminderNotifications[indexPath[1]].occurrence
+            cell.occurrenceLabel.text = reminderNotifications[indexPath[1]].frequency.rawValue
             switch indexPath[1] {
             case 0:
                 cell.timingLabel.text = "1 day before change is due"

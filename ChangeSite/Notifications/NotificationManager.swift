@@ -62,33 +62,26 @@ class NotificationManager: ObservableObject {
     
     func scheduleNotification(reminder: ReminderNotification, pumpExiredDate: Date) {
         // TODO: figure out repeating notifications (maybe make loop to add a bunch of new triggerDates each 5 min after triggerDate extending up to 24 hours) https://codecrew.codewithchris.com/t/repeating-notifications/17441/2
-        if reminder.occurrence == ReminderOccurrence.none.rawValue { return }
+        if reminder.frequency == ReminderFrequency.none { return }
         
         let content = UNMutableNotificationContent()
         content.title = "Change Your Pump Site"
         content.sound = reminder.soundOn ? UNNotificationSound.default : nil
         
-        // let daysBtwnReminderAndExpire = reminder.type.rawValue
-        var daysBtwnReminderAndExpire = 0
+        let daysBtwnReminderAndExpire = reminder.type.rawValue
+        
         switch reminder.type {
-        case "oneDayBefore":
-            daysBtwnReminderAndExpire = -1
+        case .oneDayBefore:
             content.title = "Change Your Pump Site Soon"
             content.body = "Pump site will expire tomorrow!"
-        case "dayOf":
-            daysBtwnReminderAndExpire = 0
+        case .dayOf:
             content.body = "Pump site expired, change it now!"
-        case "oneDayAfter":
-            daysBtwnReminderAndExpire = 1
+        case .oneDayAfter:
             content.body = "Pump site expired 1 day ago, change it now!"
-        case "twoDaysAfter":
-            daysBtwnReminderAndExpire = 2
+        case .twoDaysAfter:
             content.body = "Pump site expired 2 days ago, change it now!"
-        case "extendedDaysAfter":
-            daysBtwnReminderAndExpire = 3 //figure this case out
+        case .extendedDaysAfter:
             content.body = "Pump site expired 3 days ago, change it now!" //figure out
-        default:
-            daysBtwnReminderAndExpire = 0
         }
         //content.body = "Pump site expired \(daysBtwnReminderAndExpire) days ago, change it now!"
         
