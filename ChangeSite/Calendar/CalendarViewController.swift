@@ -47,14 +47,18 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         // Calendar UI
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
-        calendar.backgroundColor = UIColor.white
-        calendar.appearance.todayColor = UIColor.purpleBlue
+        calendar.backgroundColor = UIColor.background(mode)
+        calendar.appearance.todayColor = UIColor.lightBlue
         calendar.appearance.weekdayTextColor = UIColor.lightBlue
-        calendar.appearance.titleDefaultColor = UIColor.charcoal
+        calendar.appearance.titleDefaultColor = UIColor.charcoal(mode)
+        calendar.appearance.headerTitleColor = UIColor.purpleBlue(mode)
+        calendar.appearance.titleTodayColor = UIColor.background(mode)
         
         calendar.appearance.weekdayFont = UIFont(name: "Rubik-Regular", size: 17)
         calendar.appearance.titleFont = UIFont(name: "Rubik-Regular", size: 15)
         calendar.appearance.headerTitleFont = UIFont(name: "Rubik-Regular", size: 20)
+        
+        calendar.scrollDirection = .horizontal
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,7 +100,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         // Configure symbols for change days and overdue days
         if position == .current {
             if overdueDates.contains(date) {
-                cell.backgroundColor = UIColor.transparentRed
+                cell.backgroundColor = UIColor.transparentRed(traitCollection.userInterfaceStyle)
             } else {
                 cell.backgroundColor = UIColor.clear
             }

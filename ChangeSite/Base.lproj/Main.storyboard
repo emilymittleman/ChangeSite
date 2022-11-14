@@ -595,12 +595,19 @@
                                 <color key="textColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2 days left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RjX-Sj-xcS">
+                                <rect key="frame" x="16" y="382" width="343" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="40"/>
+                                <color key="textColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="PGx-7p-4tu">
                                 <rect key="frame" x="37" y="573" width="299" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="30"/>
                                 <color key="tintColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="New site">
+                                <state key="normal" title="New site" backgroundImage="ButtonOutline">
                                     <color key="titleColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -647,28 +654,26 @@
                                     <action selector="cancelButtonPressed:" destination="vIe-eI-SVQ" eventType="touchUpInside" id="Bny-zz-COQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2 days left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RjX-Sj-xcS">
-                                <rect key="frame" x="16" y="382" width="343" height="48"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RNP-op-krW" customClass="FSCalendar">
+                                <rect key="frame" x="16" y="47" width="343" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="40"/>
-                                <color key="textColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ButtonOutline" translatesAutoresizingMaskIntoConstraints="NO" id="lx0-s7-jFP">
-                                <rect key="frame" x="16" y="559" width="343" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vIe-eI-SVQ" id="fgM-ci-CHg"/>
+                                    <outlet property="delegate" destination="vIe-eI-SVQ" id="2Uu-nQ-dfY"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="slH-Xf-4tR"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="bcG-3F-a09"/>
                     <connections>
+                        <outlet property="calendar" destination="RNP-op-krW" id="r9R-U8-ygY"/>
                         <outlet property="cancelButton" destination="lyo-9l-dcm" id="8i9-MV-YER"/>
                         <outlet property="chooseStartDateLabel" destination="rvs-et-bcU" id="7Md-6f-dv6"/>
                         <outlet property="endDateLabel" destination="RjX-Sj-xcS" id="U33-NN-tTR"/>
                         <outlet property="newSiteButton" destination="PGx-7p-4tu" id="E3m-7H-VTC"/>
-                        <outlet property="newSiteButtonOutline" destination="lx0-s7-jFP" id="XeK-rJ-lrD"/>
                         <outlet property="nextChangeLabel" destination="e3h-2D-Mt9" id="3Gp-Cv-RBu"/>
                         <outlet property="saveButton" destination="Xoy-gX-KIB" id="Ftw-ob-MUO"/>
                         <outlet property="startDatePicker" destination="qgD-1r-9UE" id="3aI-0b-gzW"/>
@@ -676,7 +681,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFn-zK-3Fy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2206" y="2387"/>
+            <point key="canvasLocation" x="2205.5999999999999" y="2386.6995073891626"/>
         </scene>
         <!--Item-->
         <scene sceneID="ArS-Fq-5wg">

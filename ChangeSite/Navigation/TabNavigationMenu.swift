@@ -25,11 +25,6 @@ class TabNavigationMenu: UIView {
     convenience init(menuItems: [TabItem], frame: CGRect) {
         self.init(frame: frame)
         
-        //self.image = UIImage(named: "tabBarbg")
-        //self.isUserInteractionEnabled = true
-        
-        self.layer.backgroundColor = UIColor.white.cgColor
-        
         for i in 0 ..< menuItems.count {
             let itemWidth = self.frame.width / CGFloat(menuItems.count)
             let leadingAnchor = itemWidth * CGFloat(i)
@@ -53,7 +48,17 @@ class TabNavigationMenu: UIView {
         self.activateTab(tab: 0)
     }
     
+    func addTopBorder(with color: UIColor?, andWidth borderWidth: CGFloat) {
+        let border = UIView()
+        border.backgroundColor = color
+        border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+        border.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: borderWidth)
+        addSubview(border)
+    }
+    
     func createTabItem(item: TabItem) -> UIView {
+        let mode = traitCollection.userInterfaceStyle
+        
         let tabBarItem = UIView(frame: CGRect.zero)
         let itemTitleLabel = UILabel(frame: CGRect.zero)
         let itemIconView = UIImageView(frame: CGRect.zero)
@@ -65,18 +70,18 @@ class TabNavigationMenu: UIView {
         
         itemTitleLabel.text = item.displayTitle
         itemTitleLabel.font = UIFont(name: "Rubik-Light", size: 12)
-        //itemTitleLabel.font = UIFont.systemFont(ofSize: 12)
+        itemTitleLabel.textColor = UIColor.tabGrey(mode)
         itemTitleLabel.textAlignment = .center
         itemTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         itemTitleLabel.clipsToBounds = true
         
         itemIconView.image = item.icon.withRenderingMode(.alwaysTemplate)
-        itemIconView.tintColor = UIColor.tabGrey
+        itemIconView.tintColor = UIColor.tabGrey(mode)
         itemIconView.contentMode = .scaleAspectFill // added to stop stretching
         itemIconView.translatesAutoresizingMaskIntoConstraints = false
         itemIconView.clipsToBounds = true
         
-        tabBarItem.layer.backgroundColor = UIColor.white.cgColor
+        tabBarItem.layer.backgroundColor = UIColor.tabBarTint(mode).cgColor
         tabBarItem.addSubview(itemIconView)
         tabBarItem.addSubview(itemTitleLabel)
         tabBarItem.translatesAutoresizingMaskIntoConstraints = false
@@ -105,13 +110,14 @@ class TabNavigationMenu: UIView {
     }
     
     func activateTab(tab: Int) {
+        let mode = traitCollection.userInterfaceStyle
         let tabToActivate = self.subviews[tab]
         
         if let tabLabel = tabToActivate.viewWithTag(12) as? UILabel {
-            tabLabel.textColor = UIColor.purpleBlue
+            tabLabel.textColor = UIColor.purpleBlue(mode)
         }
         if let tabIcon = tabToActivate.viewWithTag(13) as? UIImageView {
-            tabIcon.tintColor = UIColor.purpleBlue
+            tabIcon.tintColor = UIColor.purpleBlue(mode)
         }
         
         self.itemTapped?(tab)
@@ -119,13 +125,14 @@ class TabNavigationMenu: UIView {
     }
     
     func deactivateTab(tab: Int) {
+        let mode = traitCollection.userInterfaceStyle
         let inactiveTab = self.subviews[tab]
         
         if let tabLabel = inactiveTab.viewWithTag(12) as? UILabel {
-            tabLabel.textColor = UIColor.tabGrey
+            tabLabel.textColor = UIColor.tabGrey(mode)
         }
         if let tabIcon = inactiveTab.viewWithTag(13) as? UIImageView {
-            tabIcon.tintColor = UIColor.tabGrey
+            tabIcon.tintColor = UIColor.tabGrey(mode)
         }
     }
 }

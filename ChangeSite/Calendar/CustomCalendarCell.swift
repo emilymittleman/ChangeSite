@@ -34,7 +34,7 @@ class CustomCalendarCell: FSCalendarCell {
         
         let selectionLayer = CAShapeLayer()
         selectionLayer.fillColor = UIColor.clear.cgColor
-        selectionLayer.strokeColor = UIColor.black.cgColor
+        selectionLayer.strokeColor = UIColor.charcoal(traitCollection.userInterfaceStyle).cgColor
         selectionLayer.actions = ["hidden": NSNull()]
         self.contentView.layer.insertSublayer(selectionLayer, below: self.titleLabel!.layer)
         self.selectionLayer = selectionLayer

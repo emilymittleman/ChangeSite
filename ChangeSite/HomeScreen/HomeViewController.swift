@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FSCalendar
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
     var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
@@ -26,15 +27,15 @@ class HomeViewController: UIViewController {
     var totalSeconds:Int = 0
     var percent:Double = 0.5
     
+    @IBOutlet weak var calendar: FSCalendar!
+    
     @IBOutlet weak var nextChangeLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     
-    @IBOutlet weak var newSiteButtonOutline: UIImageView!
     @IBOutlet weak var newSiteButton: UIButton!
     @IBAction func newSitePressed(_ sender: Any) {
         // reset the start date & end date
         newSiteButton.isHidden = true
-        newSiteButtonOutline.isHidden = true
         newSiteButton.isEnabled = false
         showNewStartDate()
     }
@@ -53,7 +54,6 @@ class HomeViewController: UIViewController {
         
         // show the "New site started" button & hide the rest of start date objects
         newSiteButton.isHidden = false
-        newSiteButtonOutline.isHidden = false
         newSiteButton.isEnabled = true
         hideNewStartDate()
         
@@ -73,7 +73,6 @@ class HomeViewController: UIViewController {
     @IBAction func cancelButtonPressed(_ sender: Any) {
         // show the "New site started" button & hide the rest of start date objects
         newSiteButton.isHidden = false
-        newSiteButtonOutline.isHidden = false
         newSiteButton.isEnabled = true
         hideNewStartDate()
     }
@@ -88,6 +87,28 @@ class HomeViewController: UIViewController {
         
         // if this view has ever loaded, then newUser = false
         UserDefaults.standard.set(false, forKey: "newUser")
+        
+        calendar.frame = CGRect(x:15, y: 64, width:self.view.bounds.size.width-30, height:300)
+        calendar.register(CustomCalendarCell.self, forCellReuseIdentifier: "cell")
+        // Calender actions
+        calendar.allowsSelection = false
+        calendar.today = Date()
+        calendar.swipeToChooseGesture.isEnabled = false // Swipe-To-Choose
+        calendar.scrollEnabled = false
+        calendar.scope = .week
+        
+        // Calendar UI
+        let mode = traitCollection.userInterfaceStyle
+        calendar.appearance.headerDateFormat = ""
+        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        calendar.backgroundColor = UIColor.background(mode)
+        calendar.appearance.todayColor = UIColor.lightBlue
+        calendar.appearance.weekdayTextColor = UIColor.lightBlue
+        calendar.appearance.titleDefaultColor = UIColor.charcoal(mode)
+        calendar.appearance.titleTodayColor = UIColor.background(mode)
+        
+        calendar.appearance.weekdayFont = UIFont(name: "Rubik-Regular", size: 15)
+        calendar.appearance.titleFont = UIFont(name: "Rubik-Regular", size: 17)
         
         // Special case: If user turned off notifications, need to reset reminders
         /* notificationManager.notificationsEnabled { enabled in
@@ -152,8 +173,8 @@ class HomeViewController: UIViewController {
         cancelButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
         
         nextChangeLabel.textColor = UIColor.charcoal(mode)
-        endDateLabel.textColor = UIColor.charcoal
-        newSiteButton.titleLabel?.textColor = UIColor.charcoal
+        endDateLabel.textColor = UIColor.charcoal(mode)
+        newSiteButton.titleLabel?.textColor = UIColor.charcoal(mode)
         chooseStartDateLabel.textColor = UIColor.charcoal
         saveButton.titleLabel?.textColor = UIColor.charcoal
         cancelButton.titleLabel?.textColor = UIColor.charcoal
@@ -161,6 +182,9 @@ class HomeViewController: UIViewController {
         chooseStartDateLabel.backgroundColor = UIColor.lightBlue
         saveButton.titleLabel?.backgroundColor = UIColor.lightBlue
         cancelButton.titleLabel?.backgroundColor = UIColor.lightBlue
+        
+        newSiteButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
+        newSiteButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
     }
     
     private func updateDates(interval: Double) {
@@ -192,8 +216,9 @@ class HomeViewController: UIViewController {
             if(days==1) {
                 endDateLabel.text = String(days) + " Day Left"
             }
-            endDateLabel.textColor = UIColor.charcoal
+            endDateLabel.textColor = UIColor.charcoal(traitCollection.userInterfaceStyle)
         }
+        calendar.reloadData()
     }
     
     @objc func onTimerFires() {
@@ -241,6 +266,43 @@ class HomeViewController: UIViewController {
         let abbrevs = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
         return abbrevs[index-1] + " " + String(Calendar.current.component(.day, from: date)) */
         return date.dayOfWeek() ?? ""
+    }
+    
+    // MARK: - FSCalendarDataSource
+    
+    func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
+        let cell = calendar.dequeueReusableCell(withIdentifier: "cell", for: date, at: position)
+        return cell
+    }
+    
+    func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
+        self.configure(cell: cell, for: date, at: position)
+    }
+    
+    // MARK: - FSCalendarDelegate
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        self.calendar.frame.size.height = bounds.height
+        // self.eventLabel.frame.origin.y = calendar.frame.maxY + 10
+    }
+    
+    // MARK: - Private functions
+    
+    private func configure(cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
+        let cell = (cell as! CustomCalendarCell)
+        // Configure symbols for change days and overdue days
+        if position == .current {
+            if formatSiteDate(pumpSite.getEndDate()) == formatSiteDate(date) {
+                cell.selectionLayer.isHidden = false
+                cell.isSelected = true
+            } else {
+                cell.selectionLayer.isHidden = true
+                cell.isSelected = false
+            }
+        } else {
+            cell.selectionLayer.isHidden = true
+            cell.isSelected = false
+        }
     }
     
     

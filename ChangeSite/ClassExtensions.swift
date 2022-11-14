@@ -23,6 +23,14 @@ extension UIColor {
         return UIColor.systemBackground.resolvedColor(with: UITraitCollection.init(userInterfaceStyle: .light))
     }
     
+    // Light mode -> white, Dark mode -> charcoal
+    class func tabBarTint(_ mode: UIUserInterfaceStyle) -> UIColor {
+        if mode == .dark {
+            return UIColor(red: 80/255.0, green: 80/255.0, blue: 80/255.0, alpha: 1.0)
+        }
+        return .clear
+    }
+    
     // Dark mode returns white
     class func charcoal(_ mode: UIUserInterfaceStyle) -> UIColor {
         if mode == .dark {
@@ -40,15 +48,34 @@ extension UIColor {
     }
     
     class var purpleBlue: UIColor {
+        return purpleBlue(.light)
+    }
+    class func purpleBlue(_ mode: UIUserInterfaceStyle) -> UIColor {
+        if mode == .dark {
+            return lightGreen
+        }
         return UIColor(red: 92/255.0, green: 109/255.0, blue: 255/255.0, alpha: 1.0)
     }
     
-    class var tabGrey: UIColor {
+    class var lightGreen: UIColor {
+        return UIColor.rgb(fromHex: 0x92FFD8)
+    }
+    
+    class func tabGrey(_ mode: UIUserInterfaceStyle) -> UIColor {
+        if mode == .dark {
+            return background(.light)
+        }
         return UIColor(red: 92/255.0, green: 97/255.0, blue: 113/255.0, alpha: 1.0)
+    }
+    class var tabGrey: UIColor {
+        return tabGrey(.light)
     }
     
     // Used as background in calendar for overdue dates
-    class var transparentRed: UIColor {
+    class func transparentRed(_ mode: UIUserInterfaceStyle) -> UIColor {
+        if mode == .dark {
+            return UIColor(red: 255/255.0, green: 0, blue: 0, alpha: 0.4)
+        }
         return UIColor.rgb(fromHex: 0xFFCCCC)
     }
 

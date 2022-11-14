@@ -75,35 +75,4 @@ class SiteDatesProvider {
             AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         }
     }
-    
-    /*private weak var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?
-    
-    init(with managedObjectContext: NSManagedObjectContext,
-         fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?) {
-        self.managedObjectContext = managedObjectContext
-        self.fetchedResultsControllerDelegate = fetchedResultsControllerDelegate
-    }
-    
-    /**
-     A fetched results controller for the SiteDates entity, sorted by date.
-     */
-    lazy var fetchedResultsController: NSFetchedResultsController<SiteDates> = {
-        let fetchRequest: NSFetchRequest<SiteDates> = SiteDates.fetchRequest()
-        // sorts in reverse order, so that most recent pump sites come first
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(SiteDates.startDate), ascending: false)]
-        
-        let controller = NSFetchedResultsController(
-            fetchRequest: fetchRequest, managedObjectContext: managedObjectContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil)
-        controller.delegate = fetchedResultsControllerDelegate
-        
-        do {
-            try controller.performFetch()
-        } catch {
-            print("Fetch failed")
-        }
-        
-        return controller
-    }()*/
 }
