@@ -44,6 +44,7 @@ class PumpSite : Codable {
         self.overdue = self.endDate < Date()
     }
     
+    // need to update CoreData with new expiredDate too
     func setDaysBtwn(daysBtwn: Int) {
         self.daysBtwn = daysBtwn
         // reset endDate

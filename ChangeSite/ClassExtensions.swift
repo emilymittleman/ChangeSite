@@ -9,9 +9,13 @@
 import Foundation
 import UIKit
 
+public func formatSiteDate(_ date: Date) -> Date {
+    return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date) ?? date
+}
+
 extension UIColor {
     
-    // Dark mode returns charcoal
+    // Light mode -> white, Dark mode -> charcoal
     class func background(_ mode: UIUserInterfaceStyle) -> UIColor {
         if mode == .dark {
             return charcoal
@@ -43,13 +47,9 @@ extension UIColor {
         return UIColor(red: 92/255.0, green: 97/255.0, blue: 113/255.0, alpha: 1.0)
     }
     
-    class var teal: UIColor {
-        return UIColor(red: 0, green: 204/255.0, blue: 204/255.0, alpha: 1.0)
-    }
-    
-    class var customGreen: UIColor {
-        let darkGreen = 0x008110
-        return UIColor.rgb(fromHex: darkGreen)
+    // Used as background in calendar for overdue dates
+    class var transparentRed: UIColor {
+        return UIColor.rgb(fromHex: 0xFFCCCC)
     }
 
     class func rgb(fromHex: Int) -> UIColor {

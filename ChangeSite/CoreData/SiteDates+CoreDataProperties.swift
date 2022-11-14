@@ -17,55 +17,53 @@ extension SiteDates {
         return NSFetchRequest<SiteDates>(entityName: "SiteDates")
     }
 
-    // for each date, ONLY store day,month,year
+    // for each date, ONLY store day,month,year,hour=12,minute=0,seconds=0
     @NSManaged public var startDate: Date?
     @NSManaged public var endDate: Date?
     @NSManaged public var expiredDate: Date?
-
+    @NSManaged public var daysOverdue: Int32
 }
 
 public extension SiteDates {
     
-    internal class func createOrUpdate(pumpSite: PumpSite, endDate: Date, with stack: CoreDataStack) {
-        incomingStartDate = 
+    internal class func createOrUpdate(pumpSite: PumpSite, endDate: Date?, with stack: CoreDataStack) {
+        var incomingStartDate = pumpSite.getStartDate()
+        incomingStartDate = formatSiteDate(incomingStartDate)
         
+        var currentSiteDates: SiteDates? // Entity name
+        let fetchRequest: NSFetchRequest<SiteDates> = SiteDates.fetchRequest()
+        let startDatePredicate = NSPredicate(format: "%K == %@", #keyPath(SiteDates.startDate), incomingStartDate as NSDate)
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startDatePredicate])
         
-        let newsItemID = item.id
-        var currentNewsPost: NewsPosts? // Entity name
-        let newsPostFetch: NSFetchRequest<NewsPosts> = NewsPosts.fetchRequest()
-        if let newsItemID = newsItemID {
-            let newsItemIDPredicate = NSPredicate(format: "%K == %i", #keyPath(NewsPosts.postID), newsItemID)
-            newsPostFetch.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [newsItemIDPredicate])
-        }
         do {
-            let results = try stack.managedContext.fetch(newsPostFetch)
+            let results = try stack.managedContext.fetch(fetchRequest)
             if results.isEmpty {
-                // News post not found, create a new.
-                currentNewsPost = NewsPosts(context: stack.managedContext)
-                if let postID = newsItemID {
-                    currentNewsPost?.postID = Int32(postID)
-                }
+                // startDate not found, create a new one
+                currentSiteDates = SiteDates(context: stack.managedContext)
+                currentSiteDates?.startDate = incomingStartDate
             } else {
-                // News post found, use it.
-                currentNewsPost = results.first
+                // startDate found, use it
+                currentSiteDates = results.first
             }
-            currentNewsPost?.update(pumpSite: pumpSite, endDate: endDate)
+            currentSiteDates?.update(pumpSite: pumpSite, endDate: endDate)
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
     }
     
-    internal func endedCurrentSite(pumpSite: PumpSite, endDate: Date) {
-        self.endDate = endDate
-        self.expiredDate = pumpSite.getEndDate()
+    // need to guarantee that nextStartDate can't be earlier than original startDate
+    internal func update(pumpSite: PumpSite, endDate: Date?) {
+        self.endDate = endDate == nil ? nil : formatSiteDate(endDate!)
+        self.expiredDate = formatSiteDate(pumpSite.getEndDate())
+        self.daysOverdue = 0
+        if pumpSite.isOverdue() {
+            // find days btwn expire date & change date (or today if not changed yet, so endDate==nil)
+            let numberOfDays = Calendar.current.dateComponents([.day], from: pumpSite.getEndDate(), to: endDate ?? Date()).day ?? 0
+            self.daysOverdue = Int32(numberOfDays)
+        }
+        print("endDate: \(String(describing: self.endDate)), expired: \(String(describing: self.expiredDate)), daysOver: \(self.daysOverdue)")
     }
     
-    // maybe pass in a PumpSite object instead
-    // need to guarantee that nextStartDate can't be earlier than original startDate
-    internal func update(pumpSite: PumpSite, endDate: Date) {
-        self.endDate = nextStartDate
-        self.expiredDate = pumpSite.getEndDate()
-    }
 }
 
 extension SiteDates : Identifiable {

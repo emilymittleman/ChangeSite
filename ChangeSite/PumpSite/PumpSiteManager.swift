@@ -39,6 +39,7 @@ class PumpSiteManager {
         let minutesQuarter = Int(floor(Double(minutes)/15.0) * 15) % 60
         let startingDate = Calendar.current.date(bySettingHour: hours, minute: minutesQuarter, second: 0, of: date)!
         
+        
         self.pumpSite = PumpSite(startDate: startingDate, daysBtwn: 4)
         
         self.saveToStorage()

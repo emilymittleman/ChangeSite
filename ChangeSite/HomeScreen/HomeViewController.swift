@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
     var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
     var notificationManager = NotificationManager.shared
+    var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
+    var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
     
     // var timer: Timer
     var firstTimeLeft = 0
@@ -42,8 +44,12 @@ class HomeViewController: UIViewController {
     @IBAction func saveButtonPressed(_ sender: Any) {
         // save the current date from datepicker
         // TODO: ensure that new startdate is not earlier than original startdate (can't go back in time)
+        SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: startDatePicker.date, with: coreDataStack)
+        
         self.pumpSite.setStartDate(startDate: startDatePicker.date)
         PumpSiteManager.shared.saveToStorage(pumpSite: self.pumpSite)
+        SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: nil, with: coreDataStack)
+        coreDataStack.saveContext()
         
         // show the "New site started" button & hide the rest of start date objects
         newSiteButton.isHidden = false
@@ -103,10 +109,34 @@ class HomeViewController: UIViewController {
         self.updateUI()
         
         self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
+        updateDatabase()
         let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
         timeLeft = abs(Int(interval))
         updateDates(interval: interval)
         hideNewStartDate()
+    }
+    
+    private func updateDatabase() {
+        // if daysBtwn has changed, update CoreData expiredDate & daysOverdue accordingly
+        // if current site is overdue AND coredata.overdue != current overdue days, update CoreData
+        guard let currentSite = siteDatesProvider.getCurrentSite() else {
+            print("Database error: could not retrieve current site")
+            return
+        }
+        
+        // check daysOverdue (daysOverdue & expiredDate will be updated if daysBtwn changed)
+        if pumpSite.isOverdue() {
+            let daysOver = Calendar.current.dateComponents([.day], from: pumpSite.getEndDate(), to: Date()).day ?? 0
+            if daysOver != currentSite.daysOverdue {
+                SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: nil, with: coreDataStack)
+            }
+        }
+        // if not overdue, still check if daysBtwn changed so expiredDate needs to be updated
+        else {
+            if formatSiteDate(pumpSite.getEndDate()) != currentSite.expiredDate {
+                SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: nil, with: coreDataStack)
+            }
+        }
     }
     
     private func updateUI() {

@@ -58,7 +58,7 @@ class CircularProgressBar: UIView {
     public var wholeCircleAnimationDuration: Double = PROGRESS_ANIMATION_DURATION
     
     public var lineBackgroundColor: UIColor = .gray
-    public var lineColor: UIColor = UIColor.teal
+    public var lineColor: UIColor = UIColor.blue
     public var lineFinishColor: UIColor = .red
     
     

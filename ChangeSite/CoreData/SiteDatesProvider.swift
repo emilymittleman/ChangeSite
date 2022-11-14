@@ -31,6 +31,51 @@ class SiteDatesProvider {
         }
     }
     
+    public func getCurrentSite() -> SiteDates? {
+        if siteDates.count == 0 {
+            fetchData()
+            if siteDates.count == 0 { return nil }
+        }
+        return siteDates[0]
+    }
+    
+    public func getChangeDates() -> Set<Date?> {
+        return Set(siteDates.map { $0.startDate })
+    }
+    
+    public func getOverdueDates() -> Set<Date?> {
+        let overdueSites = siteDates.filter{ $0.daysOverdue > 0 }
+        var overdueDates = Set<Date?>()
+        
+        for site in overdueSites {
+            var date = site.expiredDate
+            var end = site.endDate
+            if date == nil { continue } //this will skip current session overdue
+            
+            // set endDate to current day if site is current session
+            if end == nil && isCurrentSite(site) {
+                end = formatSiteDate(Date())
+            }
+            
+            while date! < end! {
+                date = Calendar.current.date(byAdding: .day, value: 1, to: date!)
+                overdueDates.insert(date!)
+            }
+        }
+        return overdueDates
+    }
+    
+    private func isCurrentSite(_ site: SiteDates) -> Bool {
+        return site.startDate == self.siteDates[0].startDate
+    }
+    
+    public func deleteAllEntries() {
+        for siteDate in siteDates {
+            AppDelegate.sharedAppDelegate.coreDataStack.managedContext.delete(siteDate)
+            AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
+        }
+    }
+    
     /*private weak var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?
     
     init(with managedObjectContext: NSManagedObjectContext,

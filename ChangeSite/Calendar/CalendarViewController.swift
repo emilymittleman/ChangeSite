@@ -21,8 +21,9 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     fileprivate weak var calendar: FSCalendar!
     
-    // var siteDates = [SiteDates]()
     var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
+    var changedSiteDates: Set<Date?> = Set()
+    var overdueDates: Set<Date?> = Set()
     
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
@@ -45,8 +46,9 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.swipeToChooseGesture.isEnabled = true // Swipe-To-Choose
         
         // Calendar UI
+        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
         calendar.backgroundColor = UIColor.white
-        calendar.appearance.todayColor = UIColor.lightBlue
+        calendar.appearance.todayColor = UIColor.purpleBlue
         calendar.appearance.weekdayTextColor = UIColor.lightBlue
         calendar.appearance.titleDefaultColor = UIColor.charcoal
         
@@ -58,28 +60,18 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.siteDatesProvider.fetchData() // optimize so only refreshes when there are updates
+        self.overdueDates = siteDatesProvider.getOverdueDates()
+        self.changedSiteDates = siteDatesProvider.getChangeDates()
         
         let siteDates = siteDatesProvider.siteDates
         print(siteDates)
-        
-        //updateUIRanges()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "FSCalendar"
-    }
-    
-    func updateUIRanges() {
-        print(calendar.visibleCells())
     }
     
     // MARK: - FSCalendarDataSource
-    
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        print("page changing!")
-        updateUIRanges()
-    }
     
     func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
         let cell = calendar.dequeueReusableCell(withIdentifier: "cell", for: date, at: position)
@@ -99,60 +91,27 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     // MARK: - Private functions
     
-    private func configureVisibleCells() {
-        calendar.visibleCells().forEach { (cell) in
-            let date = calendar.date(for: cell)
-            let position = calendar.monthPosition(for: cell)
-            self.configure(cell: cell, for: date!, at: position)
-        }
-    }
-    
     private func configure(cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
         let cell = (cell as! CustomCalendarCell)
-        // Custom today circle
-        if cell.dateIsToday {
-            cell.shapeLayer.isHidden = false
-        }
-        // Configure selection layer
+        // Configure symbols for change days and overdue days
         if position == .current {
-            
-            var selectionType = SelectionType.none
-            
-            let siteDates = siteDatesProvider.siteDates
-            // print(siteDates)
-            // siteDates[1].
-            
-            if calendar.selectedDates.contains(date) {
-                let previousDate = self.gregorian.date(byAdding: .day, value: -1, to: date)!
-                let nextDate = self.gregorian.date(byAdding: .day, value: 1, to: date)!
-                if calendar.selectedDates.contains(date) {
-                    if calendar.selectedDates.contains(previousDate) && calendar.selectedDates.contains(nextDate) {
-                        selectionType = .middle
-                    }
-                    else if calendar.selectedDates.contains(previousDate) && calendar.selectedDates.contains(date) {
-                        selectionType = .rightBorder
-                    }
-                    else if calendar.selectedDates.contains(nextDate) {
-                        selectionType = .leftBorder
-                    }
-                    else {
-                        selectionType = .single
-                    }
-                }
+            if overdueDates.contains(date) {
+                cell.backgroundColor = UIColor.transparentRed
+            } else {
+                cell.backgroundColor = UIColor.clear
             }
-            else {
-                selectionType = .none
-            }
-            if selectionType == .none {
+            
+            if changedSiteDates.contains(date) {
+                cell.selectionLayer.isHidden = false
+                cell.isSelected = true
+            } else {
                 cell.selectionLayer.isHidden = true
-                return
+                cell.isSelected = false
             }
-            cell.selectionLayer.isHidden = false
-            cell.selectionType = selectionType
-            
         } else {
-            //cell.circleImageView.isHidden = true
+            cell.backgroundColor = UIColor.clear
             cell.selectionLayer.isHidden = true
+            cell.isSelected = false
         }
     }
 
