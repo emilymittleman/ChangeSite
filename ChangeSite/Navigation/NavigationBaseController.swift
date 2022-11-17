@@ -38,7 +38,6 @@ class NavigationMenuBaseController: UITabBarController {
         self.customTabBar.clipsToBounds = true
         self.customTabBar.itemTapped = self.changeTab
         self.customTabBar.addTopBorder(with: UIColor.lightGray, andWidth: 1)
-        
         self.view.addSubview(customTabBar)
         
         // Add positioning constraints to place the nav menu right where the tab bar should be

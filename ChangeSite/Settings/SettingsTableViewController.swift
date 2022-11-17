@@ -26,6 +26,8 @@ class SettingsTableViewController: UITableViewController {
         PumpSiteManager.shared.mutateNotification(newPumpSite: self.pumpSite)
     }
     
+    @IBOutlet weak var newSiteCell: UITableViewCell!
+    @IBOutlet weak var daysBtwnCell: UITableViewCell!
     @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var cell2: UITableViewCell!
     @IBOutlet weak var cell3: UITableViewCell!
@@ -42,6 +44,7 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         stepper.autorepeat = true
+        self.updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +69,22 @@ class SettingsTableViewController: UITableViewController {
         daysBtwn.text = String(pumpSite.getDaysBtwn())
         stepper.value = Double(pumpSite.getDaysBtwn())
         setReminderNotificationText()
+    }
+    
+    private func updateUI() {
+        // Background color
+        let mode = traitCollection.userInterfaceStyle
+        view.backgroundColor = UIColor.background(mode)
+        let cells: [UITableViewCell] = [newSiteCell, daysBtwnCell, cell1, cell2, cell3, cell4, cell5]
+        for cell in cells {
+            cell.backgroundColor = UIColor.background(mode)
+            for subview in cell.contentView.subviews {
+                if let label = subview as? UILabel {
+                    label.textColor = UIColor.charcoal(mode)
+                    label.font = UIFont(name: "Rubik-Regular", size: 17)
+                }
+            }
+        }
     }
     
     func setStartDateLabel() {
@@ -114,11 +133,23 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
+    // Swift
+    @IBAction func unwindToContainerVC(_ segue: UIStoryboardSegue) {
+        
+    }
+
     class func viewController() -> SettingsTableViewController {
         return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsTableViewController") as! SettingsTableViewController
     }
     
     // MARK: - Table view data source
+    
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.backgroundColor = UIColor.background(traitCollection.userInterfaceStyle)
+        return cell
+    } */
     
     /*
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -131,52 +162,6 @@ class SettingsTableViewController: UITableViewController {
         return 0
     }
  */
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
     

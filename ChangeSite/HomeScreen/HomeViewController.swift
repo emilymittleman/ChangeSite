@@ -81,34 +81,15 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     @IBAction func startDatePickerChanged(_ sender: Any) {
     }
     
-    // MARK: ------- Setup -------
+    // MARK: --- Setup ---
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // if this view has ever loaded, then newUser = false
         UserDefaults.standard.set(false, forKey: "newUser")
         
-        calendar.frame = CGRect(x:15, y: 64, width:self.view.bounds.size.width-30, height:300)
-        calendar.register(CustomCalendarCell.self, forCellReuseIdentifier: "cell")
-        // Calender actions
-        calendar.allowsSelection = false
-        calendar.today = Date()
-        calendar.swipeToChooseGesture.isEnabled = false // Swipe-To-Choose
-        calendar.scrollEnabled = false
-        calendar.scope = .week
-        
-        // Calendar UI
-        let mode = traitCollection.userInterfaceStyle
-        calendar.appearance.headerDateFormat = ""
-        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
-        calendar.backgroundColor = UIColor.background(mode)
-        calendar.appearance.todayColor = UIColor.lightBlue
-        calendar.appearance.weekdayTextColor = UIColor.lightBlue
-        calendar.appearance.titleDefaultColor = UIColor.charcoal(mode)
-        calendar.appearance.titleTodayColor = UIColor.background(mode)
-        
-        calendar.appearance.weekdayFont = UIFont(name: "Rubik-Regular", size: 15)
-        calendar.appearance.titleFont = UIFont(name: "Rubik-Regular", size: 17)
+        self.setupCalendar()
+        self.updateUI()
         
         // Special case: If user turned off notifications, need to reset reminders
         /* notificationManager.notificationsEnabled { enabled in
@@ -127,14 +108,60 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.updateUI()
-        
         self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         updateDatabase()
         let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
         timeLeft = abs(Int(interval))
         updateDates(interval: interval)
         hideNewStartDate()
+    }
+    
+    private func setupCalendar() {
+        calendar.frame = CGRect(x:15, y: 64, width:self.view.bounds.size.width-30, height:300)
+        calendar.register(CustomCalendarCell.self, forCellReuseIdentifier: "cell")
+        // Calender actions
+        calendar.allowsSelection = false
+        calendar.today = Date()
+        calendar.swipeToChooseGesture.isEnabled = false // Swipe-To-Choose
+        calendar.scrollEnabled = false
+        calendar.scope = .week
+        // Calendar UI
+        let mode = traitCollection.userInterfaceStyle
+        calendar.appearance.headerDateFormat = ""
+        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        calendar.backgroundColor = UIColor.background(mode)
+        calendar.appearance.todayColor = UIColor.lightBlue
+        calendar.appearance.weekdayTextColor = UIColor.lightBlue
+        calendar.appearance.titleDefaultColor = UIColor.charcoal(mode)
+        calendar.appearance.titleTodayColor = UIColor.background(mode)
+        calendar.appearance.weekdayFont = UIFont(name: "Rubik-Regular", size: 15)
+        calendar.appearance.titleFont = UIFont(name: "Rubik-Regular", size: 17)
+    }
+    
+    private func updateUI() {
+        // deal with light and dark mode
+        let mode = traitCollection.userInterfaceStyle
+        view.backgroundColor = UIColor.background(mode)
+        
+        nextChangeLabel.font = UIFont(name: "Rubik-Regular", size: 25)
+        endDateLabel.font = UIFont(name: "Rubik-Bold", size: 40)
+        newSiteButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
+        chooseStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 19)
+        saveButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
+        cancelButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
+        
+        nextChangeLabel.textColor = UIColor.charcoal(mode)
+        endDateLabel.textColor = UIColor.charcoal(mode)
+        chooseStartDateLabel.textColor = UIColor.charcoal
+        saveButton.titleLabel?.textColor = UIColor.charcoal
+        cancelButton.titleLabel?.textColor = UIColor.charcoal
+        
+        chooseStartDateLabel.backgroundColor = UIColor.lightBlue
+        saveButton.titleLabel?.backgroundColor = UIColor.lightBlue
+        cancelButton.titleLabel?.backgroundColor = UIColor.lightBlue
+        
+        newSiteButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
+        newSiteButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
     }
     
     private func updateDatabase() {
@@ -158,33 +185,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
                 SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: nil, with: coreDataStack)
             }
         }
-    }
-    
-    private func updateUI() {
-        // deal with light and dark mode
-        let mode = traitCollection.userInterfaceStyle
-        view.backgroundColor = UIColor.background(mode)
-        
-        nextChangeLabel.font = UIFont(name: "Rubik-Regular", size: 25)
-        endDateLabel.font = UIFont(name: "Rubik-Bold", size: 40)
-        newSiteButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
-        chooseStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 19)
-        saveButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
-        cancelButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
-        
-        nextChangeLabel.textColor = UIColor.charcoal(mode)
-        endDateLabel.textColor = UIColor.charcoal(mode)
-        newSiteButton.titleLabel?.textColor = UIColor.charcoal(mode)
-        chooseStartDateLabel.textColor = UIColor.charcoal
-        saveButton.titleLabel?.textColor = UIColor.charcoal
-        cancelButton.titleLabel?.textColor = UIColor.charcoal
-        
-        chooseStartDateLabel.backgroundColor = UIColor.lightBlue
-        saveButton.titleLabel?.backgroundColor = UIColor.lightBlue
-        cancelButton.titleLabel?.backgroundColor = UIColor.lightBlue
-        
-        newSiteButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
-        newSiteButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
     }
     
     private func updateDates(interval: Double) {
@@ -286,7 +286,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         // self.eventLabel.frame.origin.y = calendar.frame.maxY + 10
     }
     
-    // MARK: - Private functions
+    // MARK: - Calendar Private functions
     
     private func configure(cell: FSCalendarCell, for date: Date, at position: FSCalendarMonthPosition) {
         let cell = (cell as! CustomCalendarCell)

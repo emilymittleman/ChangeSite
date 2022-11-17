@@ -67,8 +67,8 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         self.overdueDates = siteDatesProvider.getOverdueDates()
         self.changedSiteDates = siteDatesProvider.getChangeDates()
         
-        let siteDates = siteDatesProvider.siteDates
-        print(siteDates)
+        // let siteDates = siteDatesProvider.siteDates
+        // print(siteDates)
     }
     
     override func viewDidLoad() {

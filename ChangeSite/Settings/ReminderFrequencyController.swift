@@ -14,11 +14,32 @@ class ReminderFrequencyController: UIViewController {
     var notificationManager = NotificationManager.shared
     var reminderNotification: ReminderNotification = ReminderNotification(type: .dayOf) //default holder, because value gets set from segue
     
+    @IBOutlet weak var reminderFrequencyLabel: UILabel!
+    
     @IBOutlet weak var soundLabel: UILabel!
     @IBOutlet weak var soundSwitch: UISwitch!
     
     @IBOutlet weak var remindMeLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBOutlet weak var saveButton: UIButton!
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            self.reminderNotification.frequency = .none
+        case 1:
+            self.reminderNotification.frequency = .single
+        case 2:
+            self.reminderNotification.frequency = .repeating
+        default:
+            break
+        }
+        self.reminderNotification.soundOn = soundSwitch.isOn
+        self.reminderNotification.repeatingFrequency = getRepeatingFromDatePicker()
+        ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: self.reminderNotification)
+        performSegue(withIdentifier: "unwindReminderToSettings", sender: self)
+    }
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
@@ -42,71 +63,85 @@ class ReminderFrequencyController: UIViewController {
             soundSwitch.isHidden = true
             remindMeLabel.isHidden = true
             datePicker.isHidden = true
-            // update reminderNotification
-            self.reminderNotification.frequency = .none
         case 1:
             // single - show sound
             soundLabel.isHidden = false
             soundSwitch.isHidden = false
             remindMeLabel.isHidden = true
             datePicker.isHidden = true
-            // update reminderNotification
-            self.reminderNotification.frequency = .single
         case 2:
             // repeating - show sound & datePicker
             soundLabel.isHidden = false
             soundSwitch.isHidden = false
             remindMeLabel.isHidden = false
             datePicker.isHidden = false
-            // update reminderNotification
-            self.reminderNotification.frequency = .repeating
         default:
             break
         }
-        
-        ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: self.reminderNotification)
+        saveButton.isHidden = false
     }
     
     @IBAction func switchChanged(_ sender: Any) {
         soundSwitch.setOn(soundSwitch.isOn, animated: true)
-        self.reminderNotification.soundOn = soundSwitch.isOn
         
-        ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: self.reminderNotification)
+        saveButton.isHidden = false
     }
     
     @IBAction func dateChanged(_ sender: Any) {
+        datePicker.date = getRepeatingFromDatePicker()
+        
+        saveButton.isHidden = false
+    }
+    
+    private func getRepeatingFromDatePicker() -> Date {
         let date = datePicker.date
         let currentDate = Date()
-        let calendar = Calendar.current
-        let hours = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
+        let hours = Calendar.current.component(.hour, from: date)
+        let minutes = Calendar.current.component(.minute, from: date)
         let repeatingFrequency = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: currentDate)!
-        datePicker.date = repeatingFrequency
-        
-        self.reminderNotification.repeatingFrequency = repeatingFrequency
-        
-        ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: self.reminderNotification)
+        return repeatingFrequency
     }
     
     // -------------- SET UP --------------
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //soundLabel.font = UIFont(name: "Helectiva", size: soundLabel.font.pointSize)
-        //soundLabel.font = UIFont(name: "DINAlternate-Bold", size: soundLabel.font.pointSize)
+        self.updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
-        
         loadSetUp()
-        
-        view.backgroundColor = UIColor.systemBackground
     }
     
-    func loadSetUp() {
+    private func updateUI() {
+        // Background color
+        let mode = traitCollection.userInterfaceStyle
+        view.backgroundColor = UIColor.background(mode)
+        // Label fonts
+        reminderFrequencyLabel.font = UIFont(name: "Rubik-Medium", size: 30)
+        soundLabel.font = UIFont(name: "Rubik-Medium", size: 26)
+        remindMeLabel.font = UIFont(name: "Rubik-Medium", size: 26)
+        saveButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
+        // Label colors
+        reminderFrequencyLabel.textColor = UIColor.charcoal(mode)
+        soundLabel.textColor = UIColor.charcoal(mode)
+        remindMeLabel.textColor = UIColor.charcoal(mode)
+        saveButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
+        saveButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
+        
+        // Add underline to label
+        let border = UIView()
+        border.backgroundColor = UIColor.lightBlue
+        border.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+        border.frame = CGRect(x: 0, y: reminderFrequencyLabel.frame.size.height-2, width: reminderFrequencyLabel.frame.size.width, height: 2)
+        reminderFrequencyLabel.addSubview(border)
+    }
+    
+    private func loadSetUp() {
         // reminder frequency
         switch self.reminderNotification.frequency {
         case .none:
@@ -135,6 +170,8 @@ class ReminderFrequencyController: UIViewController {
         soundSwitch.setOn(self.reminderNotification.soundOn, animated: false)
         // frequency
         datePicker.date = self.reminderNotification.repeatingFrequency
+        // save button
+        saveButton.isHidden = true
     }
     
     // task-notification
