@@ -15,7 +15,7 @@ class PumpSiteManager {
     
     private init() {
         // Set up pumpSite if it exists in storage, otherwise set up default values
-        self.retrieveFromStorage()
+        self.pumpSite = self.retrieveFromStorage()
     }
     
     func retrieveFromStorage() -> PumpSite {

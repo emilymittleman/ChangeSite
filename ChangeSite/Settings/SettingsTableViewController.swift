@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     
+    var settingsViewModel: SettingsViewModel!
+    
     var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
     var notificationManager = NotificationManager.shared

@@ -35,8 +35,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     @IBOutlet weak var newSiteButton: UIButton!
     @IBAction func newSitePressed(_ sender: Any) {
         // reset the start date & end date
-        newSiteButton.isHidden = true
-        newSiteButton.isEnabled = false
         showNewStartDate()
     }
     
@@ -53,8 +51,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         coreDataStack.saveContext()
         
         // show the "New site started" button & hide the rest of start date objects
-        newSiteButton.isHidden = false
-        newSiteButton.isEnabled = true
         hideNewStartDate()
         
         // turn the timer off
@@ -72,8 +68,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     @IBOutlet weak var cancelButton: UIButton!
     @IBAction func cancelButtonPressed(_ sender: Any) {
         // show the "New site started" button & hide the rest of start date objects
-        newSiteButton.isHidden = false
-        newSiteButton.isEnabled = true
         hideNewStartDate()
     }
     
@@ -86,7 +80,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         super.viewDidLoad()
         
         // if this view has ever loaded, then newUser = false
-        UserDefaults.standard.set(false, forKey: "newUser")
+        // UserDefaults.standard.set(false, forKey: "newUser")
         
         self.setupCalendar()
         self.updateUI()
@@ -238,6 +232,9 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         cancelButton.isEnabled = false
         saveButton.isEnabled = false
         startDatePicker.isEnabled = false
+        // show New site button
+        newSiteButton.isHidden = false
+        newSiteButton.isEnabled = true
     }
     
     func showNewStartDate() {
@@ -250,6 +247,9 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         cancelButton.isEnabled = true
         saveButton.isEnabled = true
         startDatePicker.isEnabled = true
+        // hide New site button
+        newSiteButton.isHidden = true
+        newSiteButton.isEnabled = false
         
         let date = Date()
         let calendar = Calendar.current

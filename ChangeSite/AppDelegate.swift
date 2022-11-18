@@ -27,6 +27,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //registerForPushNotifications(application: application)
+        UserDefaults.standard.set(true, forKey: "newUser") //testing purposes only
+        
+        UserDefaults.standard.register(defaults: ["newUser" : true]) //set default value for newUsers
+        let newUser = UserDefaults.standard.bool(forKey: "newUser")
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewControllerID = newUser ? "LaunchScreen" : "navigationMenuBaseController"
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: viewControllerID)
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
         return true
     }
 
@@ -38,14 +49,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        // UserDefaults.standard.set(true, forKey: "newUser") //testing purposes only
         let newUser = UserDefaults.standard.bool(forKey: "newUser")
         if !newUser {
             UserDefaults.standard.set(try? PropertyListEncoder().encode(PumpSiteManager.shared.pumpSite), forKey: "pumpSite")
             UserDefaults.standard.set(try? PropertyListEncoder().encode(ReminderNotificationsManager.shared.reminderNotifications), forKey: "reminderNotifications")
             AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         } else {
-            UserDefaults.standard.removeObject(forKey: "pumpSite")
-            UserDefaults.standard.removeObject(forKey: "reminderNotification")
+            //UserDefaults.standard.removeObject(forKey: "pumpSite")
+            //UserDefaults.standard.removeObject(forKey: "reminderNotification")
         }
     }
 

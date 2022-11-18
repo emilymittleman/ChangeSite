@@ -42,7 +42,6 @@
 		5DCD32AA230023AD00BC2E07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DCD32A8230023AD00BC2E07 /* LaunchScreen.storyboard */; };
 		5DCD32B5230023AE00BC2E07 /* ChangeSiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD32B4230023AE00BC2E07 /* ChangeSiteTests.swift */; };
 		5DCD32C0230023AE00BC2E07 /* ChangeSiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD32BF230023AE00BC2E07 /* ChangeSiteUITests.swift */; };
-		5DE8D52F23BFC45E0044808A /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8D52E23BFC45E0044808A /* CircularProgressBar.swift */; };
 		5DE8D53223BFCE550044808A /* circularProgressBar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5DE8D53023BFCE550044808A /* circularProgressBar.xcdatamodeld */; };
 		5DF50C4B292012EF00E3695C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C4A292012EF00E3695C /* CoreDataStack.swift */; };
 		5DF50C4E2920163200E3695C /* PumpSite.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C4C2920163200E3695C /* PumpSite.xcdatamodeld */; };
@@ -50,6 +49,8 @@
 		5DF50C522920175D00E3695C /* SiteDates+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C502920175D00E3695C /* SiteDates+CoreDataProperties.swift */; };
 		5DF50C5429202AD500E3695C /* CustomCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5329202AD500E3695C /* CustomCalendarCell.swift */; };
 		5DF50C5629203E7000E3695C /* SiteDatesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5529203E7000E3695C /* SiteDatesProvider.swift */; };
+		5DF50C5B2926BABC00E3695C /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5A2926BABC00E3695C /* SetupViewController.swift */; };
+		5DF50C60292720E200E3695C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5F292720E200E3695C /* SettingsViewModel.swift */; };
 		6A9B1D20C188259F216AD60B /* Pods_ChangeSite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */; };
 		AA7D7A8B310AF1E171640778 /* Pods_ChangeSite_ChangeSiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5235BCE46BFFD0E6673471 /* Pods_ChangeSite_ChangeSiteUITests.framework */; };
 		E7CCA52E36F500A1D5A8A3B7 /* Pods_ChangeSiteNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7F2F2D496B9C6DBC2CD4FB /* Pods_ChangeSiteNotificationService.framework */; };
@@ -139,7 +140,6 @@
 		5DCD32BB230023AE00BC2E07 /* ChangeSiteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChangeSiteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DCD32BF230023AE00BC2E07 /* ChangeSiteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeSiteUITests.swift; sourceTree = "<group>"; };
 		5DCD32C1230023AE00BC2E07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5DE8D52E23BFC45E0044808A /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		5DE8D53123BFCE550044808A /* circularProgressBar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = circularProgressBar.xcdatamodel; sourceTree = "<group>"; };
 		5DF50C4A292012EF00E3695C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		5DF50C4D2920163200E3695C /* PumpSite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PumpSite.xcdatamodel; sourceTree = "<group>"; };
@@ -147,6 +147,8 @@
 		5DF50C502920175D00E3695C /* SiteDates+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SiteDates+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5DF50C5329202AD500E3695C /* CustomCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalendarCell.swift; sourceTree = "<group>"; };
 		5DF50C5529203E7000E3695C /* SiteDatesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteDatesProvider.swift; sourceTree = "<group>"; };
+		5DF50C5A2926BABC00E3695C /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		5DF50C5F292720E200E3695C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		6016E7C231B920940EFABFA4 /* Pods-ChangeSite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite.release.xcconfig"; path = "Target Support Files/Pods-ChangeSite/Pods-ChangeSite.release.xcconfig"; sourceTree = "<group>"; };
 		65E15DDE77717047C2C892E2 /* Pods-ChangeSite-ChangeSiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite-ChangeSiteUITests.release.xcconfig"; path = "Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		835EC653B7795330AAB47568 /* Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -243,7 +245,6 @@
 			isa = PBXGroup;
 			children = (
 				5D7868822300984B00A54436 /* HomeViewController.swift */,
-				5DE8D52E23BFC45E0044808A /* CircularProgressBar.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -254,10 +255,6 @@
 				5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */,
 				5DB8911823003FE80000BFC6 /* StartDateController.swift */,
 				5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */,
-				5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */,
-				5DB5C33826C6E98D00877646 /* ReminderCell.swift */,
-				5DB5C33426C6E6F200877646 /* StartDateCell.swift */,
-				5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -334,11 +331,12 @@
 				5DCD329F230023AB00BC2E07 /* AppDelegate.swift */,
 				5D09CDFC23026991006E914F /* ClassExtensions.swift */,
 				5DCD32A3230023AB00BC2E07 /* Main.storyboard */,
-				5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */,
 				5D6D2701291E036000BEC655 /* Notifications */,
 				5DAE572C251A1B01006151A2 /* PumpSite */,
+				5DF50C5C29271E4A00E3695C /* SettingsV2 */,
 				5D30E267252D4AED00DB49CA /* Settings */,
 				5D6D2706291F682000BEC655 /* Navigation */,
+				5DF50C592926BA3000E3695C /* NewUser */,
 				5D30E266252D4AB100DB49CA /* HomeScreen */,
 				5DF50C452920048800E3695C /* Calendar */,
 				5DCD32A6230023AD00BC2E07 /* Assets.xcassets */,
@@ -388,6 +386,27 @@
 				5DF50C5529203E7000E3695C /* SiteDatesProvider.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		5DF50C592926BA3000E3695C /* NewUser */ = {
+			isa = PBXGroup;
+			children = (
+				5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */,
+				5DF50C5A2926BABC00E3695C /* SetupViewController.swift */,
+			);
+			path = NewUser;
+			sourceTree = "<group>";
+		};
+		5DF50C5C29271E4A00E3695C /* SettingsV2 */ = {
+			isa = PBXGroup;
+			children = (
+				5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */,
+				5DB5C33826C6E98D00877646 /* ReminderCell.swift */,
+				5DB5C33426C6E6F200877646 /* StartDateCell.swift */,
+				5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */,
+				5DF50C5F292720E200E3695C /* SettingsViewModel.swift */,
+			);
+			path = SettingsV2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -700,10 +719,10 @@
 				5DB8911923003FE80000BFC6 /* StartDateController.swift in Sources */,
 				5DB5C33326C6E44C00877646 /* SettingsTableVC.swift in Sources */,
 				5D6D2703291E042500BEC655 /* NotificationManager.swift in Sources */,
+				5DF50C5B2926BABC00E3695C /* SetupViewController.swift in Sources */,
 				5DCD32A2230023AB00BC2E07 /* LaunchViewController.swift in Sources */,
 				5D30E271252D4BD300DB49CA /* ReminderNotification.swift in Sources */,
 				5DF50C4E2920163200E3695C /* PumpSite.xcdatamodeld in Sources */,
-				5DE8D52F23BFC45E0044808A /* CircularProgressBar.swift in Sources */,
 				5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
 				5D13E7B927A4F96D007CC645 /* NotificationService.swift in Sources */,
@@ -714,6 +733,7 @@
 				5D6D270C291F6A5B00BEC655 /* TabNavigationMenu.swift in Sources */,
 				5DB5C33526C6E6F200877646 /* StartDateCell.swift in Sources */,
 				5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */,
+				5DF50C60292720E200E3695C /* SettingsViewModel.swift in Sources */,
 				5DB8911B2300401E0000BFC6 /* ReminderFrequencyController.swift in Sources */,
 				5D6D2705291F672300BEC655 /* CalendarViewController.swift in Sources */,
 				5DB5C33926C6E98D00877646 /* ReminderCell.swift in Sources */,
