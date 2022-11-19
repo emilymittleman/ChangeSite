@@ -9,10 +9,10 @@
 import UIKit
 import FSCalendar
 
-class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+class HomeViewController: UIViewController, InjectsPumpData, FSCalendarDataSource, FSCalendarDelegate {
     
-    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
-    var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
+    var pumpSiteManager: PumpSiteManager!
+    var reminderNotifications: [ReminderNotification]!
     var notificationManager = NotificationManager.shared
     var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
     var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
@@ -43,11 +43,10 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     @IBAction func saveButtonPressed(_ sender: Any) {
         // save the current date from datepicker
         // TODO: ensure that new startdate is not earlier than original startdate (can't go back in time)
-        SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: startDatePicker.date, with: coreDataStack)
+        SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: startDatePicker.date, with: coreDataStack)
+        pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
         
-        self.pumpSite.setStartDate(startDate: startDatePicker.date)
-        PumpSiteManager.shared.saveToStorage(pumpSite: self.pumpSite)
-        SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: nil, with: coreDataStack)
+        SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
         coreDataStack.saveContext()
         
         // show the "New site started" button & hide the rest of start date objects
@@ -57,11 +56,11 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         timer?.invalidate()
         timer = nil
         
-        let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
+        let interval = pumpSiteManager.getEndDate().timeIntervalSince(Date())
         updateDates(interval: interval)
         
         // reset timer
-        timeLeft = abs(Int(self.pumpSite.getEndDate().timeIntervalSince(Date())))
+        timeLeft = abs(Int(pumpSiteManager.getEndDate().timeIntervalSince(Date())))
         timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
     }
     
@@ -102,9 +101,9 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
+        pumpSiteManager.retrieveFromStorage()
         updateDatabase()
-        let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
+        let interval = pumpSiteManager.getEndDate().timeIntervalSince(Date())
         timeLeft = abs(Int(interval))
         updateDates(interval: interval)
         hideNewStartDate()
@@ -167,16 +166,16 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         }
         
         // check daysOverdue (daysOverdue & expiredDate will be updated if daysBtwn changed)
-        if pumpSite.isOverdue() {
-            let daysOver = Calendar.current.dateComponents([.day], from: pumpSite.getEndDate(), to: Date()).day ?? 0
+        if pumpSiteManager.isOverdue() {
+            let daysOver = Calendar.current.dateComponents([.day], from: pumpSiteManager.getEndDate(), to: Date()).day ?? 0
             if daysOver != currentSite.daysOverdue {
-                SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: nil, with: coreDataStack)
+                SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
             }
         }
         // if not overdue, still check if daysBtwn changed so expiredDate needs to be updated
         else {
-            if formatSiteDate(pumpSite.getEndDate()) != currentSite.expiredDate {
-                SiteDates.createOrUpdate(pumpSite: pumpSite, endDate: nil, with: coreDataStack)
+            if formatSiteDate(pumpSiteManager.getEndDate()) != currentSite.expiredDate {
+                SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
             }
         }
     }
@@ -186,9 +185,9 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         timeLeft = abs(Int(interval))
         var days: Int
         
-        let month = Calendar.current.component(.month, from: self.pumpSite.getEndDate())
+        let month = Calendar.current.component(.month, from: pumpSiteManager.getEndDate())
         if month == Calendar.current.component(.month, from: Date()) {
-            let siteDay = Calendar.current.component(.day, from: self.pumpSite.getEndDate())
+            let siteDay = Calendar.current.component(.day, from: pumpSiteManager.getEndDate())
             let currentDay = Calendar.current.component(.day, from: Date())
             days = abs(siteDay - currentDay)
         }
@@ -197,15 +196,15 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         }
         
         // update labels
-        if(pumpSite.isOverdue()) {
-            nextChangeLabel.text = "Change was due " + getDateAbbr(date: self.pumpSite.getEndDate())
+        if(pumpSiteManager.isOverdue()) {
+            nextChangeLabel.text = "Change was due " + getDateAbbr(date: pumpSiteManager.getEndDate())
             endDateLabel.text = String(days) + " DAYS LATE"
             if(days==1) {
                 endDateLabel.text = String(days) + " DAY LATE"
             }
             endDateLabel.textColor = .red
         } else {
-            nextChangeLabel.text = "Next change is due " + getDateAbbr(date: self.pumpSite.getEndDate())
+            nextChangeLabel.text = "Next change is due " + getDateAbbr(date: pumpSiteManager.getEndDate())
             endDateLabel.text = String(days) + " Days Left"
             if(days==1) {
                 endDateLabel.text = String(days) + " Day Left"
@@ -216,7 +215,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     }
     
     @objc func onTimerFires() {
-        let interval = self.pumpSite.getEndDate().timeIntervalSince(Date())
+        let interval = pumpSiteManager.getEndDate().timeIntervalSince(Date())
         timeLeft = abs(Int(interval))
         updateDates(interval: interval)
     }
@@ -292,7 +291,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         let cell = (cell as! CustomCalendarCell)
         // Configure symbols for change days and overdue days
         if position == .current {
-            if formatSiteDate(pumpSite.getEndDate()) == formatSiteDate(date) {
+            if formatSiteDate(pumpSiteManager.getEndDate()) == formatSiteDate(date) {
                 cell.selectionLayer.isHidden = false
                 cell.isSelected = true
             } else {
@@ -314,8 +313,11 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         // Pass the selected object to the new view controller.
     }
     
-    class func viewController() -> HomeViewController {
-        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+    class func viewController(pumpSiteManager: PumpSiteManager, reminders: [ReminderNotification]) -> HomeViewController {
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        vc.pumpSiteManager = pumpSiteManager
+        vc.reminderNotifications = reminders
+        return vc
     }
     
 

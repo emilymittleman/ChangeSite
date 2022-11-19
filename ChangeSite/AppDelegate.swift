@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     var window: UIWindow?
+    let pumpSiteManager = PumpSiteManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //registerForPushNotifications(application: application)
@@ -34,8 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewControllerID = newUser ? "LaunchScreen" : "navigationMenuBaseController"
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: viewControllerID)
+        var initialViewController: UIViewController = UIViewController()
+        
+        if newUser, let vc = storyboard.instantiateViewController(withIdentifier: "LaunchScreen") as? LaunchViewController {
+                vc.pumpSiteManager = pumpSiteManager
+                initialViewController = vc
+        }
+        else if !newUser, let vc = storyboard.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController {
+                vc.pumpSiteManager = pumpSiteManager
+                initialViewController = vc
+        }
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         return true
@@ -52,7 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // UserDefaults.standard.set(true, forKey: "newUser") //testing purposes only
         let newUser = UserDefaults.standard.bool(forKey: "newUser")
         if !newUser {
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(PumpSiteManager.shared.pumpSite), forKey: "pumpSite")
+            let pumpSite = PumpSite(startDate: pumpSiteManager.getStartDate(), daysBtwn: pumpSiteManager.getDaysBtwn())
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: "pumpSite")
             UserDefaults.standard.set(try? PropertyListEncoder().encode(ReminderNotificationsManager.shared.reminderNotifications), forKey: "reminderNotifications")
             AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         } else {

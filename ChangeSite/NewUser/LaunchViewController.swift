@@ -9,7 +9,9 @@
 // WELCOME PAGE
 import UIKit
 
-class LaunchViewController: UIViewController {
+class LaunchViewController: UIViewController, InjectsPumpData {
+    
+    var pumpSiteManager: PumpSiteManager!
     
     @IBOutlet weak var welcomeLabel: UILabel!
     
@@ -35,5 +37,14 @@ class LaunchViewController: UIViewController {
         welcomeLabel.textColor = UIColor.charcoal(mode)
         beginButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
         beginButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
+    }
+    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nextViewController = segue.destination as? SetupViewController {
+            nextViewController.pumpSiteManager = pumpSiteManager
+        }
     }
 }

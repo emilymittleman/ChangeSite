@@ -26,8 +26,8 @@ extension SiteDates {
 
 public extension SiteDates {
     
-    internal class func createOrUpdate(pumpSite: PumpSite, endDate: Date?, with stack: CoreDataStack) {
-        var incomingStartDate = pumpSite.getStartDate()
+    internal class func createOrUpdate(pumpSiteManager: PumpSiteManager, endDate: Date?, with stack: CoreDataStack) {
+        var incomingStartDate = pumpSiteManager.getStartDate()
         incomingStartDate = formatSiteDate(incomingStartDate)
         
         var currentSiteDates: SiteDates? // Entity name
@@ -45,20 +45,20 @@ public extension SiteDates {
                 // startDate found, use it
                 currentSiteDates = results.first
             }
-            currentSiteDates?.update(pumpSite: pumpSite, endDate: endDate)
+            currentSiteDates?.update(pumpSiteManager: pumpSiteManager, endDate: endDate)
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
     }
     
     // need to guarantee that nextStartDate can't be earlier than original startDate
-    internal func update(pumpSite: PumpSite, endDate: Date?) {
+    internal func update(pumpSiteManager: PumpSiteManager, endDate: Date?) {
         self.endDate = endDate == nil ? nil : formatSiteDate(endDate!)
-        self.expiredDate = formatSiteDate(pumpSite.getEndDate())
+        self.expiredDate = formatSiteDate(pumpSiteManager.getEndDate())
         self.daysOverdue = 0
-        if pumpSite.isOverdue() {
+        if pumpSiteManager.isOverdue() {
             // find days btwn expire date & change date (or today if not changed yet, so endDate==nil)
-            let numberOfDays = Calendar.current.dateComponents([.day], from: pumpSite.getEndDate(), to: endDate ?? Date()).day ?? 0
+            let numberOfDays = Calendar.current.dateComponents([.day], from: pumpSiteManager.getEndDate(), to: endDate ?? Date()).day ?? 0
             self.daysOverdue = Int32(numberOfDays)
         }
         print("endDate: \(String(describing: self.endDate)), expired: \(String(describing: self.expiredDate)), daysOver: \(self.daysOverdue)")

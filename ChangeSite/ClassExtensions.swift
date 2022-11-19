@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol InjectsPumpData {
+    var pumpSiteManager: PumpSiteManager! { get set }
+}
+
 public func formatSiteDate(_ date: Date) -> Date {
     return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date) ?? date
 }

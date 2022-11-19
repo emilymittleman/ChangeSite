@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 class PumpSiteManager {
-    static let shared: PumpSiteManager = PumpSiteManager()
-    var pumpSite: PumpSite!;
     
-    private init() {
+    private var pumpSite: PumpSite!;
+    
+    init() {
         // Set up pumpSite if it exists in storage, otherwise set up default values
-        self.pumpSite = self.retrieveFromStorage()
+        self.retrieveFromStorage()
     }
     
-    func retrieveFromStorage() -> PumpSite {
+    func retrieveFromStorage() {
         // Not sure which conditional works for testing if "reminder" is nil:
         //if (UserDefaults.standard.object(forKey: "reminder") != nil)
         if let pumpSiteData = UserDefaults.standard.object(forKey: "pumpSite") {
@@ -26,8 +26,6 @@ class PumpSiteManager {
                 self.pumpSite = pumpSite
             }
         } else { self.setDefaultValues() }
-        
-        return self.pumpSite
     }
     
     // Initialize array to the 5 default reminder notification types that came with the app
@@ -45,12 +43,27 @@ class PumpSiteManager {
         self.saveToStorage()
     }
     
-    // Update a certain notification in UserDefaults & self
-    func mutateNotification(newPumpSite: PumpSite) {
-        self.pumpSite.setStartDate(startDate: newPumpSite.getStartDate())
-        self.pumpSite.setDaysBtwn(daysBtwn: newPumpSite.getDaysBtwn())
-        
-        self.saveToStorage()
+    // MARK: GETTERS
+    
+    func getStartDate() -> Date { return self.pumpSite.getStartDate() }
+    func getEndDate() -> Date { return self.pumpSite.getEndDate() }
+    func getDaysBtwn() -> Int { return self.pumpSite.getDaysBtwn() }
+    func isOverdue() -> Bool { return self.pumpSite.isOverdue() }
+    
+    // MARK: Mutators, Setters, and Updaters
+    
+    public func updatePumpSite(daysBtwnChanges: Int) {
+        if daysBtwnChanges >= 1 {
+            self.pumpSite.setDaysBtwn(daysBtwn: daysBtwnChanges)
+            self.saveToStorage()
+        }
+    }
+    
+    public func updatePumpSite(startDate: Date) {
+        if startDate > pumpSite.getStartDate() {
+            self.pumpSite.setStartDate(startDate: startDate)
+            self.saveToStorage()
+        }
     }
     
     func saveToStorage(pumpSite: PumpSite) {
@@ -61,5 +74,13 @@ class PumpSiteManager {
     func saveToStorage() {
         self.saveToStorage(pumpSite: self.pumpSite)
     }
+    
+    // Update a certain notification in UserDefaults & self
+    /*func mutateNotification(newPumpSite: PumpSite) {
+        self.pumpSite.setStartDate(startDate: newPumpSite.getStartDate())
+        self.pumpSite.setDaysBtwn(daysBtwn: newPumpSite.getDaysBtwn())
+        
+        self.saveToStorage()
+    }*/
     
 }

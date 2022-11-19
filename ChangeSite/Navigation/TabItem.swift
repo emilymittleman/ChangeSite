@@ -9,20 +9,21 @@
 import Foundation
 import UIKit
 
-enum TabItem: String, CaseIterable {
-    case home = "home"
-    case calendar = "calendar"
-    case settings = "settings"
+//enum TabItem: CaseIterable {
+enum TabItem {
+    case home(pumpSiteManager: PumpSiteManager, remindersManager: ReminderNotificationsManager)
+    case calendar(pumpSiteManager: PumpSiteManager)
+    case settings(pumpSiteManager: PumpSiteManager, remindersManager: ReminderNotificationsManager)
     
     var viewController: UIViewController {
         switch self {
-        case .home:
-            return HomeViewController.viewController()
-        case .calendar:
-            return CalendarViewController() // TODO: implement CalendarVC
-        case .settings:
+        case .home(let pumpSiteManager, let remindersManager):
+            return HomeViewController.viewController(pumpSiteManager: pumpSiteManager, reminders: remindersManager.reminderNotifications)
+        case .calendar(let pumpSiteManager):
+            return CalendarViewController.viewController(pumpSiteManager: pumpSiteManager)
+        case .settings(let pumpSiteManager, let remindersManager):
             let navController = UINavigationController()
-            let settingsVC = SettingsTableViewController.viewController()
+            let settingsVC = SettingsTableViewController.viewController(pumpSiteManager: pumpSiteManager, reminders: remindersManager.reminderNotifications)
             navController.viewControllers = [settingsVC]
             return navController
         }
@@ -31,15 +32,22 @@ enum TabItem: String, CaseIterable {
     var icon: UIImage {
         switch self {
         case .home:
-            return UIImage(named: "Home")! //TODO: add icons
+            return UIImage(named: "Home")!
         case .calendar:
             return UIImage(named: "Calendar")!
-            //return UIImage(named: "Rectangle")!
         case .settings:
             return UIImage(named: "Settings")!
         }
     }
+    
     var displayTitle: String {
-        return self.rawValue.capitalized(with: nil)
+        switch self {
+        case .home:
+            return "Home"
+        case .calendar:
+            return "Calendar"
+        case .settings:
+            return "Settings"
+        }
     }
 }

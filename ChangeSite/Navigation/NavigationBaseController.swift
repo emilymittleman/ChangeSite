@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-class NavigationMenuBaseController: UITabBarController {
+class NavigationMenuBaseController: UITabBarController, InjectsPumpData {
+    
+    var pumpSiteManager: PumpSiteManager!
     
     var customTabBar: TabNavigationMenu!
     var tabBarHeight: CGFloat = 83.0
@@ -20,7 +22,12 @@ class NavigationMenuBaseController: UITabBarController {
     }
     
     private func loadTabBar() {
-        let tabItems: [TabItem] = [.home, .calendar, .settings]
+        let remindersManager = ReminderNotificationsManager.shared
+        let tabItems: [TabItem] = [
+            .home(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager),
+            .calendar(pumpSiteManager: pumpSiteManager),
+            .settings(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager)
+        ]
         self.setupCustomTabBar(tabItems) { (controllers) in
             self.viewControllers = controllers
         }

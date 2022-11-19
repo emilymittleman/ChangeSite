@@ -253,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */,
+				5DF50C5F292720E200E3695C /* SettingsViewModel.swift */,
 				5DB8911823003FE80000BFC6 /* StartDateController.swift */,
 				5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */,
 			);
@@ -404,7 +405,6 @@
 				5DB5C33826C6E98D00877646 /* ReminderCell.swift */,
 				5DB5C33426C6E6F200877646 /* StartDateCell.swift */,
 				5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */,
-				5DF50C5F292720E200E3695C /* SettingsViewModel.swift */,
 			);
 			path = SettingsV2;
 			sourceTree = "<group>";

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SetupViewController: UIViewController {
+class SetupViewController: UIViewController, InjectsPumpData {
     
-    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
+    var pumpSiteManager: PumpSiteManager!
     
     @IBOutlet weak var setStartDateLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
@@ -26,26 +26,25 @@ class SetupViewController: UIViewController {
     
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
-        self.pumpSite.setStartDate(startDate: startDatePicker.date)
-        self.pumpSite.setDaysBtwn(daysBtwn: Int(stepper.value))
-        PumpSiteManager.shared.mutateNotification(newPumpSite: self.pumpSite)
+        pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
+        pumpSiteManager.updatePumpSite(daysBtwnChanges: Int(stepper.value))
         
         UserDefaults.standard.set(false, forKey: "newUser")
         
-        let navigationBaseController = self.storyboard?.instantiateViewController(withIdentifier: "navigationMenuBaseController")
-        let appDelegate = UIApplication.shared.delegate
-        appDelegate?.window??.rootViewController = navigationBaseController
-        appDelegate?.window??.makeKeyAndVisible()
+        if let navigationBaseController = self.storyboard?.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController {
+            navigationBaseController.pumpSiteManager = self.pumpSiteManager
+            let appDelegate = UIApplication.shared.delegate
+            appDelegate?.window??.rootViewController = navigationBaseController
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         self.updateUI()
-        startDatePicker.setDate(self.pumpSite.getStartDate(), animated: true)
-        daysBtwn.text = String(pumpSite.getDaysBtwn())
-        stepper.value = Double(pumpSite.getDaysBtwn())
+        startDatePicker.setDate(pumpSiteManager.getStartDate(), animated: true)
+        daysBtwn.text = String(pumpSiteManager.getDaysBtwn())
+        stepper.value = Double(pumpSiteManager.getDaysBtwn())
     }
     
     private func updateUI() {
@@ -76,16 +75,5 @@ class SetupViewController: UIViewController {
         border.frame = CGRect(x: 0, y: label.frame.size.height-2, width: label.frame.size.width, height: 2)
         label.addSubview(border)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

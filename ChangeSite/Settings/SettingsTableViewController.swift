@@ -8,12 +8,11 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, InjectsPumpData {
+    
+    var pumpSiteManager: PumpSiteManager!
     
     var settingsViewModel: SettingsViewModel!
-    
-    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
-    var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
     var notificationManager = NotificationManager.shared
     
     @IBOutlet weak var startDate: UILabel!
@@ -23,9 +22,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var stepper: UIStepper!
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         daysBtwn.text = Int(sender.value).description
-        
-        self.pumpSite.setDaysBtwn(daysBtwn: Int(sender.value))
-        PumpSiteManager.shared.mutateNotification(newPumpSite: self.pumpSite)
+        settingsViewModel.updatePumpSite(daysBtwnChanges: Int(sender.value))
     }
     
     @IBOutlet weak var newSiteCell: UITableViewCell!
@@ -44,16 +41,12 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         stepper.autorepeat = true
         self.updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
-        self.reminderNotifications = ReminderNotificationsManager.shared.retrieveFromStorage()
         
         // Special case: If user turned off notifications while app was running, need to reset reminders
         /*if !notificationManager.notificationsEnabled() {
@@ -66,10 +59,11 @@ class SettingsTableViewController: UITableViewController {
             }
         }*/
         
+        settingsViewModel.retrieveDataFromStorage()
         // ----- Update the view with reminder data (startDate, daysBtwn, & reminderNotifications) -----
-        setStartDateLabel()
-        daysBtwn.text = String(pumpSite.getDaysBtwn())
-        stepper.value = Double(pumpSite.getDaysBtwn())
+        startDate.text = settingsViewModel.formattedStartDate()
+        daysBtwn.text = settingsViewModel.pumpSiteDaysBtwnString()
+        stepper.value = settingsViewModel.pumpSiteDaysBtwn()
         setReminderNotificationText()
     }
     
@@ -89,59 +83,39 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func setStartDateLabel() {
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        
-        let strDate = dateFormatter.string(from: self.pumpSite.getStartDate())
-        startDate.text = strDate
-    }
-    
     func setReminderNotificationText() {
-        occurrence0.text = reminderNotifications[0].frequency.rawValue
-        occurrence1.text = reminderNotifications[1].frequency.rawValue
-        occurrence2.text = reminderNotifications[2].frequency.rawValue
-        occurrence3.text = reminderNotifications[3].frequency.rawValue
-        occurrence4.text = reminderNotifications[4].frequency.rawValue
+        let reminderLabels = [occurrence0, occurrence1, occurrence2, occurrence3, occurrence4]
+        let reminderFrequencyStrings = settingsViewModel.reminderFrequencyStrings()
+        for (reminderLabel, frequencyString) in zip(reminderLabels, reminderFrequencyStrings) {
+            reminderLabel?.text = frequencyString
+        }
     }
     
     // NAVIGATION -- figure out a way to send which segue was pressed so you know which reminderNotification to change
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        if let nextViewController = segue.destination as? ReminderFrequencyController {
+        if let nextViewController = segue.destination as? StartDateController {
+            nextViewController.pumpSiteManager = settingsViewModel.pumpSiteManager
+        }
+        else if let nextViewController = segue.destination as? ReminderFrequencyController,
+            let index = tableView.indexPathForSelectedRow?.row {
             // Will only actually be prompted first time user opens app
             /*if !NotificationManager.shared.notificationsEnabled() {
                 NotificationManager.shared.requestAuthorization { _ in
                 }
             }*/
-            if (segue.identifier == "segue1") {
-                nextViewController.reminderNotification = reminderNotifications[0]
-            }
-            else if (segue.identifier == "segue2") {
-                nextViewController.reminderNotification = reminderNotifications[1]
-            }
-            else if (segue.identifier == "segue3") {
-                nextViewController.reminderNotification = reminderNotifications[2]
-            }
-            else if (segue.identifier == "segue4") {
-                nextViewController.reminderNotification = reminderNotifications[3]
-            }
-            else {
-                nextViewController.reminderNotification = reminderNotifications[4]
-            }
+            nextViewController.reminderNotification = settingsViewModel.reminderAtIndex(index)!
         }
     }
     
     // Swift
     @IBAction func unwindToContainerVC(_ segue: UIStoryboardSegue) {
-        
     }
 
-    class func viewController() -> SettingsTableViewController {
-        return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsTableViewController") as! SettingsTableViewController
+    class func viewController(pumpSiteManager: PumpSiteManager, reminders: [ReminderNotification]) -> SettingsTableViewController {
+        let settingsViewModel = SettingsViewModel(pumpSiteManager: pumpSiteManager, reminders: reminders)
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsTableViewController") as! SettingsTableViewController
+        vc.settingsViewModel = settingsViewModel
+        return vc
     }
     
     // MARK: - Table view data source

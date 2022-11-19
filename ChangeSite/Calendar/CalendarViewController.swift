@@ -10,7 +10,9 @@ import UIKit
 import FSCalendar
 import CoreData
 
-class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+class CalendarViewController: UIViewController, InjectsPumpData, FSCalendarDataSource, FSCalendarDelegate {
+    
+    var pumpSiteManager: PumpSiteManager!
     
     fileprivate let gregorian = Calendar(identifier: .gregorian)
     fileprivate let formatter: DateFormatter = {
@@ -117,6 +119,12 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
             cell.selectionLayer.isHidden = true
             cell.isSelected = false
         }
+    }
+    
+    class func viewController(pumpSiteManager: PumpSiteManager) -> CalendarViewController {
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CalendarViewController") as! CalendarViewController
+        vc.pumpSiteManager = pumpSiteManager
+        return vc
     }
 
     /*

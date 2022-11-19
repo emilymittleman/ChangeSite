@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsTableVC: UITableViewController {
     
-    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
+    /*var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var reminderNotifications: [ReminderNotification] = ReminderNotificationsManager.shared.reminderNotifications
 
     override func viewDidLoad() {
@@ -76,7 +76,7 @@ class SettingsTableVC: UITableViewController {
             return cell
         }
     }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -122,5 +122,27 @@ class SettingsTableVC: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    
+    /*
+    enum SettingsSection: Int {
+        case General, Reminders, Count
+
+        static var count = {
+            return SettingsSection.Count.rawValue
+        }
+
+        static let sectionTitles = [General: "",
+                                  Reminders: "Reminder Notifications"]
+
+        func sectionTitle() -> String {
+            if let sectionTitle = SettingsSection.sectionTitles[self] {
+                return sectionTitle
+            } else {
+                return ""
+            }
+        }
+    }*/
 
 }

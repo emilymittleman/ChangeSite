@@ -10,7 +10,6 @@ import UIKit
 
 class ReminderFrequencyController: UIViewController {
     
-    var pumpSite: PumpSite = PumpSiteManager.shared.pumpSite
     var notificationManager = NotificationManager.shared
     var reminderNotification: ReminderNotification = ReminderNotification(type: .dayOf) //default holder, because value gets set from segue
     
@@ -113,7 +112,6 @@ class ReminderFrequencyController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.pumpSite = PumpSiteManager.shared.retrieveFromStorage()
         loadSetUp()
     }
     
