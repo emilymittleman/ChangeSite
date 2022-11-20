@@ -11,13 +11,10 @@ import UIKit
 
 class RemindersManager {
     
-    // private var reminders: [Reminder]!;
-    // private var reminderIndices = [ReminderType:Int]()
     private var reminders = [ReminderType:Reminder]()
     
     init() {
         self.retrieveFromStorage()
-        // self.initializeMap()
     }
     
     func retrieveFromStorage() {
@@ -29,24 +26,12 @@ class RemindersManager {
         }
     }
     
-    /*private func initializeMap() {
-        for reminder in reminders {
-            reminders[reminder.type] = reminder
-        }
-    }*/
-    
     // Initialize array to the 5 default reminder notification types that came with the app
     private func setDefaultValues() {
         for type in ReminderType.allCases {
             self.reminders[type] = Reminder(type: type)
         }
         self.saveToStorage()
-        /*let oneDayBefore = Reminder(type: .oneDayBefore)
-        let dayOf = Reminder(type: .dayOf)
-        let oneDayAfter = Reminder(type: .oneDayAfter)
-        let twoDaysAfter = Reminder(type: .twoDaysAfter)
-        let threeDaysAfter = Reminder(type: .extendedDaysAfter)
-        self.reminders = [oneDayBefore, dayOf, oneDayAfter, twoDaysAfter, threeDaysAfter]*/
     }
     
     // MARK: GETTERS
@@ -71,19 +56,6 @@ class RemindersManager {
         reminders[type]!.repeatingFrequency = repeatingFrequency
         self.saveToStorage()
     }
-    
-    // Update a certain notification in UserDefaults & self
-    /*func mutateNotification(newReminderNotif: Reminder) {
-        for reminder in self.reminders {
-            if reminder.type == newReminderNotif.type {
-                reminder.frequency = newReminderNotif.frequency
-                reminder.soundOn = newReminderNotif.soundOn
-                reminder.repeatingFrequency = newReminderNotif.repeatingFrequency
-            }
-        }
-        
-        self.saveToStorage()
-    }*/
     
     func saveToStorage() {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(reminders), forKey: UserDefaults.Keys.reminders.rawValue)
