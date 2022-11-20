@@ -11,6 +11,7 @@ import UIKit
 class SetupViewController: UIViewController, InjectsPumpData {
     
     var pumpSiteManager: PumpSiteManager!
+    var remindersManager: RemindersManager!
     
     @IBOutlet weak var setStartDateLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
@@ -33,6 +34,7 @@ class SetupViewController: UIViewController, InjectsPumpData {
         
         if let navigationBaseController = self.storyboard?.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController {
             navigationBaseController.pumpSiteManager = self.pumpSiteManager
+            navigationBaseController.remindersManager = self.remindersManager
             let appDelegate = UIApplication.shared.delegate
             appDelegate?.window??.rootViewController = navigationBaseController
         }

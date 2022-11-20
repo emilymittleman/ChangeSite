@@ -25,25 +25,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let pumpSiteManager = PumpSiteManager()
+    let remindersManager = RemindersManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        //registerForPushNotifications(application: application)
-        UserDefaults.standard.set(true, forKey: "newUser") //testing purposes only
+        // registerForPushNotifications(application: application)
+        // UserDefaults.standard.set(true, forKey: UserDefaults.Keys.newUser.rawValue) //testing purposes only
         
-        UserDefaults.standard.register(defaults: ["newUser" : true]) //set default value for newUsers
-        let newUser = UserDefaults.standard.bool(forKey: "newUser")
+        UserDefaults.standard.register(defaults: [UserDefaults.Keys.newUser.rawValue : true])
+        let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewController: UIViewController = UIViewController()
         
         if newUser, let vc = storyboard.instantiateViewController(withIdentifier: "LaunchScreen") as? LaunchViewController {
-                vc.pumpSiteManager = pumpSiteManager
-                initialViewController = vc
+            vc.pumpSiteManager = pumpSiteManager
+            vc.remindersManager = remindersManager
+            initialViewController = vc
         }
         else if !newUser, let vc = storyboard.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController {
-                vc.pumpSiteManager = pumpSiteManager
-                initialViewController = vc
+            vc.pumpSiteManager = pumpSiteManager
+            vc.remindersManager = remindersManager
+            initialViewController = vc
         }
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
@@ -58,16 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        // UserDefaults.standard.set(true, forKey: "newUser") //testing purposes only
-        let newUser = UserDefaults.standard.bool(forKey: "newUser")
+        let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
         if !newUser {
-            let pumpSite = PumpSite(startDate: pumpSiteManager.getStartDate(), daysBtwn: pumpSiteManager.getDaysBtwn())
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: "pumpSite")
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(ReminderNotificationsManager.shared.reminderNotifications), forKey: "reminderNotifications")
+            pumpSiteManager.saveToStorage()
+            remindersManager.saveToStorage()
             AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         } else {
-            //UserDefaults.standard.removeObject(forKey: "pumpSite")
-            //UserDefaults.standard.removeObject(forKey: "reminderNotification")
+            UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.pumpSite.rawValue)
+            UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.reminders.rawValue)
         }
     }
 
@@ -85,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // Remote notifications
-    /*func registerForPushNotifications(application: UIApplication) {
+    func registerForPushNotifications(application: UIApplication) {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
             print("Permission granted: \(granted)")
@@ -113,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register: \(error)")
         // set a flag and try to register again in the future
-    }*/
+    }
 }
 
 

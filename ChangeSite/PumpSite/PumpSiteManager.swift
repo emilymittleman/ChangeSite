@@ -14,21 +14,19 @@ class PumpSiteManager {
     private var pumpSite: PumpSite!;
     
     init() {
-        // Set up pumpSite if it exists in storage, otherwise set up default values
         self.retrieveFromStorage()
     }
     
     func retrieveFromStorage() {
-        // Not sure which conditional works for testing if "reminder" is nil:
-        //if (UserDefaults.standard.object(forKey: "reminder") != nil)
-        if let pumpSiteData = UserDefaults.standard.object(forKey: "pumpSite") {
-            if let pumpSite = try? PropertyListDecoder().decode(PumpSite.self, from: pumpSiteData as! Data) {
+        if let pumpSiteData = UserDefaults.standard.object(forKey: UserDefaults.Keys.pumpSite.rawValue),
+           let pumpSite = try? PropertyListDecoder().decode(PumpSite.self, from: pumpSiteData as! Data) {
                 self.pumpSite = pumpSite
-            }
-        } else { self.setDefaultValues() }
+        } else {
+            self.setDefaultValues()
+        }
     }
     
-    // Initialize array to the 5 default reminder notification types that came with the app
+    // Initialize pumpSite start date to current date & daysBtwn to 4
     private func setDefaultValues() {
         let date = Date()
         let calendar = Calendar.current
@@ -36,10 +34,7 @@ class PumpSiteManager {
         let minutes = calendar.component(.minute, from: date)
         let minutesQuarter = Int(floor(Double(minutes)/15.0) * 15) % 60
         let startingDate = Calendar.current.date(bySettingHour: hours, minute: minutesQuarter, second: 0, of: date)!
-        
-        
         self.pumpSite = PumpSite(startDate: startingDate, daysBtwn: 4)
-        
         self.saveToStorage()
     }
     
@@ -67,7 +62,7 @@ class PumpSiteManager {
     }
     
     func saveToStorage(pumpSite: PumpSite) {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: "pumpSite")
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: UserDefaults.Keys.pumpSite.rawValue)
     }
     
     // Overloaded saveToStorage() in order to store self.pumpSite in UserDefaults

@@ -12,6 +12,7 @@ import UIKit
 class LaunchViewController: UIViewController, InjectsPumpData {
     
     var pumpSiteManager: PumpSiteManager!
+    var remindersManager: RemindersManager!
     
     @IBOutlet weak var welcomeLabel: UILabel!
     
@@ -43,8 +44,9 @@ class LaunchViewController: UIViewController, InjectsPumpData {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nextViewController = segue.destination as? SetupViewController {
-            nextViewController.pumpSiteManager = pumpSiteManager
+        if let vc = segue.destination as? SetupViewController {
+            vc.pumpSiteManager = pumpSiteManager
+            vc.remindersManager = remindersManager
         }
     }
 }

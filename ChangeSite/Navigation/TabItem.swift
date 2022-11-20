@@ -9,21 +9,20 @@
 import Foundation
 import UIKit
 
-//enum TabItem: CaseIterable {
 enum TabItem {
-    case home(pumpSiteManager: PumpSiteManager, remindersManager: ReminderNotificationsManager)
+    case home(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager)
     case calendar(pumpSiteManager: PumpSiteManager)
-    case settings(pumpSiteManager: PumpSiteManager, remindersManager: ReminderNotificationsManager)
+    case settings(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager)
     
     var viewController: UIViewController {
         switch self {
         case .home(let pumpSiteManager, let remindersManager):
-            return HomeViewController.viewController(pumpSiteManager: pumpSiteManager, reminders: remindersManager.reminderNotifications)
+            return HomeViewController.viewController(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager)
         case .calendar(let pumpSiteManager):
             return CalendarViewController.viewController(pumpSiteManager: pumpSiteManager)
         case .settings(let pumpSiteManager, let remindersManager):
             let navController = UINavigationController()
-            let settingsVC = SettingsTableViewController.viewController(pumpSiteManager: pumpSiteManager, reminders: remindersManager.reminderNotifications)
+            let settingsVC = SettingsTableViewController.viewController(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager)
             navController.viewControllers = [settingsVC]
             return navController
         }

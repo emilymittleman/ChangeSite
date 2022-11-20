@@ -9,7 +9,7 @@
 import Foundation
 import ARKit
 
-enum ReminderType: Int, Codable {
+enum ReminderType: Int, Codable, CaseIterable {
     case oneDayBefore = -1, dayOf, oneDayAfter, twoDaysAfter, extendedDaysAfter
 }
 
@@ -17,9 +17,8 @@ enum ReminderFrequency: String, Codable {
     case none, single, repeating
 }
 
-class ReminderNotification: Codable {
+class Reminder: Codable {
     var type: ReminderType        // "oneDayBefore", "dayOf", "oneDayAfter", etc.
-    // TODO: refactor occurrence as enum
     var frequency: ReminderFrequency  // "none", "single", "repeating"
     var soundOn: Bool       // true, false
     var repeatingFrequency: Date     // Date object: 5 minutes

@@ -11,7 +11,8 @@ import UIKit
 class ReminderFrequencyController: UIViewController {
     
     var notificationManager = NotificationManager.shared
-    var reminderNotification: ReminderNotification = ReminderNotification(type: .dayOf) //default holder, because value gets set from segue
+    var reminderType: ReminderType!
+    var remindersManager: RemindersManager!
     
     @IBOutlet weak var reminderFrequencyLabel: UILabel!
     
@@ -26,17 +27,17 @@ class ReminderFrequencyController: UIViewController {
         switch segmentedControl.selectedSegmentIndex
         {
         case 0:
-            self.reminderNotification.frequency = .none
+            remindersManager.updateReminder(type: reminderType, frequency: .none)
         case 1:
-            self.reminderNotification.frequency = .single
+            remindersManager.updateReminder(type: reminderType, frequency: .single)
         case 2:
-            self.reminderNotification.frequency = .repeating
+            remindersManager.updateReminder(type: reminderType, frequency: .repeating)
         default:
             break
         }
-        self.reminderNotification.soundOn = soundSwitch.isOn
-        self.reminderNotification.repeatingFrequency = getRepeatingFromDatePicker()
-        ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: self.reminderNotification)
+        
+        remindersManager.updateReminder(type: reminderType, soundOn: soundSwitch.isOn)
+        remindersManager.updateReminder(type: reminderType, repeatingFrequency: getRepeatingFromDatePicker())
         performSegue(withIdentifier: "unwindReminderToSettings", sender: self)
     }
     
@@ -141,7 +142,7 @@ class ReminderFrequencyController: UIViewController {
     
     private func loadSetUp() {
         // reminder frequency
-        switch self.reminderNotification.frequency {
+        switch remindersManager.getFrequency(type: reminderType) {
         case .none:
             segmentedControl.selectedSegmentIndex = 0
             // sounds & frequency
@@ -165,9 +166,9 @@ class ReminderFrequencyController: UIViewController {
             datePicker.isHidden = false
         }
         // sound
-        soundSwitch.setOn(self.reminderNotification.soundOn, animated: false)
+        soundSwitch.setOn(remindersManager.getSoundOn(type: reminderType), animated: false)
         // frequency
-        datePicker.date = self.reminderNotification.repeatingFrequency
+        datePicker.date = remindersManager.getRepeatingFrequency(type: reminderType)
         // save button
         saveButton.isHidden = true
     }

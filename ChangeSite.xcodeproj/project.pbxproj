@@ -12,10 +12,10 @@
 		5D13E7B027A4F732007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E7AF27A4F732007CC645 /* NotificationService.swift */; };
 		5D13E7B427A4F732007CC645 /* ChangeSiteNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5D13E7B927A4F96D007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E7AF27A4F732007CC645 /* NotificationService.swift */; };
-		5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */; };
+		5D1B011524C04C2000EE9633 /* RemindersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011424C04C2000EE9633 /* RemindersManager.swift */; };
 		5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011624C0635200EE9633 /* PumpSiteManager.swift */; };
 		5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E26B252D4BB500DB49CA /* PumpSite.swift */; };
-		5D30E271252D4BD300DB49CA /* ReminderNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E270252D4BD300DB49CA /* ReminderNotification.swift */; };
+		5D30E271252D4BD300DB49CA /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E270252D4BD300DB49CA /* Reminder.swift */; };
 		5D6D2703291E042500BEC655 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2702291E042500BEC655 /* NotificationManager.swift */; };
 		5D6D2705291F672300BEC655 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2704291F672300BEC655 /* CalendarViewController.swift */; };
 		5D6D2708291F684A00BEC655 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2707291F684A00BEC655 /* TabItem.swift */; };
@@ -103,11 +103,11 @@
 		5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChangeSiteNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D13E7AF27A4F732007CC645 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5D13E7B127A4F732007CC645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotificationsManager.swift; sourceTree = "<group>"; };
+		5D1B011424C04C2000EE9633 /* RemindersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersManager.swift; sourceTree = "<group>"; };
 		5D1B011624C0635200EE9633 /* PumpSiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteManager.swift; sourceTree = "<group>"; };
 		5D30E25F252D4A3000DB49CA /* diabetes-dribbble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "diabetes-dribbble.png"; path = "../../../../diabetes-dribbble.png"; sourceTree = "<group>"; };
 		5D30E26B252D4BB500DB49CA /* PumpSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSite.swift; sourceTree = "<group>"; };
-		5D30E270252D4BD300DB49CA /* ReminderNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderNotification.swift; sourceTree = "<group>"; };
+		5D30E270252D4BD300DB49CA /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		5D6D2702291E042500BEC655 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		5D6D2704291F672300BEC655 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		5D6D2707291F684A00BEC655 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
@@ -295,8 +295,8 @@
 			children = (
 				5D30E26B252D4BB500DB49CA /* PumpSite.swift */,
 				5D1B011624C0635200EE9633 /* PumpSiteManager.swift */,
-				5D30E270252D4BD300DB49CA /* ReminderNotification.swift */,
-				5D1B011424C04C2000EE9633 /* ReminderNotificationsManager.swift */,
+				5D30E270252D4BD300DB49CA /* Reminder.swift */,
+				5D1B011424C04C2000EE9633 /* RemindersManager.swift */,
 			);
 			path = PumpSite;
 			sourceTree = "<group>";
@@ -721,7 +721,7 @@
 				5D6D2703291E042500BEC655 /* NotificationManager.swift in Sources */,
 				5DF50C5B2926BABC00E3695C /* SetupViewController.swift in Sources */,
 				5DCD32A2230023AB00BC2E07 /* LaunchViewController.swift in Sources */,
-				5D30E271252D4BD300DB49CA /* ReminderNotification.swift in Sources */,
+				5D30E271252D4BD300DB49CA /* Reminder.swift in Sources */,
 				5DF50C4E2920163200E3695C /* PumpSite.xcdatamodeld in Sources */,
 				5D30E26C252D4BB500DB49CA /* PumpSite.swift in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
@@ -729,7 +729,7 @@
 				5D7868832300984B00A54436 /* HomeViewController.swift in Sources */,
 				5DF50C5629203E7000E3695C /* SiteDatesProvider.swift in Sources */,
 				5D6D2708291F684A00BEC655 /* TabItem.swift in Sources */,
-				5D1B011524C04C2000EE9633 /* ReminderNotificationsManager.swift in Sources */,
+				5D1B011524C04C2000EE9633 /* RemindersManager.swift in Sources */,
 				5D6D270C291F6A5B00BEC655 /* TabNavigationMenu.swift in Sources */,
 				5DB5C33526C6E6F200877646 /* StartDateCell.swift in Sources */,
 				5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */,

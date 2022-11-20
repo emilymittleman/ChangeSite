@@ -11,16 +11,16 @@ import Foundation
 class SettingsViewModel {
     
     let pumpSiteManager: PumpSiteManager
-    let reminders: [ReminderNotification]
+    let remindersManager: RemindersManager
     
-    init(pumpSiteManager: PumpSiteManager, reminders: [ReminderNotification]) {
+    init(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager) {
         self.pumpSiteManager = pumpSiteManager
-        self.reminders = reminders
+        self.remindersManager = remindersManager
     }
     
     public func retrieveDataFromStorage() {
         pumpSiteManager.retrieveFromStorage()
-        // retrieve reminders
+        remindersManager.retrieveFromStorage()
     }
     
     // MARK: Mutators
@@ -43,7 +43,7 @@ class SettingsViewModel {
     }
     
     public func reminderFrequencyStrings() -> [String] {
-        return self.reminders.map { $0.frequency.rawValue }
+        return ReminderType.allCases.map { remindersManager.getFrequency(type: $0).rawValue }
     }
     
     public func pumpSiteDaysBtwn() -> Double {
@@ -56,13 +56,13 @@ class SettingsViewModel {
     
     // MARK: Dependency injectors
     
-    public func reminderAtIndex(_ index: Int) -> ReminderNotification? {
-        if index >= 0 && index < self.reminders.count {
-            return self.reminders[index]
+    public func reminderTypeAtIndex(_ index: Int) -> ReminderType? {
+        let types = ReminderType.allCases
+        if index >= 0 && index < types.count {
+            return types[index]
         }
         return nil
     }
     
     
 }
-

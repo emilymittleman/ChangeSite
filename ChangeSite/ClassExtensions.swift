@@ -9,6 +9,14 @@
 import Foundation
 import UIKit
 
+// MARK: Storage
+
+extension UserDefaults {
+    enum Keys : String {
+        case pumpSite, reminders, newUser
+    }
+}
+
 protocol InjectsPumpData {
     var pumpSiteManager: PumpSiteManager! { get set }
 }

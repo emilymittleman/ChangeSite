@@ -50,17 +50,17 @@ class NotificationManager: ObservableObject {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
-    func removeScheduledNotification(reminder: ReminderNotification) {
+    func removeScheduledNotification(reminder: Reminder) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [reminder.id])
     }
     
-    func scheduleNotifications(reminders: [ReminderNotification], pumpExiredDate: Date) {
+    func scheduleNotifications(reminders: [Reminder], pumpExiredDate: Date) {
         for reminder in reminders {
             scheduleNotification(reminder: reminder, pumpExiredDate: pumpExiredDate)
         }
     }
     
-    func scheduleNotification(reminder: ReminderNotification, pumpExiredDate: Date) {
+    func scheduleNotification(reminder: Reminder, pumpExiredDate: Date) {
         // TODO: figure out repeating notifications (maybe make loop to add a bunch of new triggerDates each 5 min after triggerDate extending up to 24 hours) https://codecrew.codewithchris.com/t/repeating-notifications/17441/2
         if reminder.frequency == ReminderFrequency.none { return }
         

@@ -12,7 +12,7 @@ import FSCalendar
 class HomeViewController: UIViewController, InjectsPumpData, FSCalendarDataSource, FSCalendarDelegate {
     
     var pumpSiteManager: PumpSiteManager!
-    var reminderNotifications: [ReminderNotification]!
+    var remindersManager: RemindersManager!
     var notificationManager = NotificationManager.shared
     var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
     var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
@@ -313,10 +313,10 @@ class HomeViewController: UIViewController, InjectsPumpData, FSCalendarDataSourc
         // Pass the selected object to the new view controller.
     }
     
-    class func viewController(pumpSiteManager: PumpSiteManager, reminders: [ReminderNotification]) -> HomeViewController {
+    class func viewController(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager) -> HomeViewController {
         let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         vc.pumpSiteManager = pumpSiteManager
-        vc.reminderNotifications = reminders
+        vc.remindersManager = remindersManager
         return vc
     }
     
