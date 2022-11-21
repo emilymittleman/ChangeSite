@@ -57,20 +57,17 @@ class ReminderFrequencyController: UIViewController {
         
         switch segmentedControl.selectedSegmentIndex
         {
-        case 0:
-            // none
+        case 0: // none
             soundLabel.isHidden = true
             soundSwitch.isHidden = true
             remindMeLabel.isHidden = true
             datePicker.isHidden = true
-        case 1:
-            // single - show sound
+        case 1: // single - show sound
             soundLabel.isHidden = false
             soundSwitch.isHidden = false
             remindMeLabel.isHidden = true
             datePicker.isHidden = true
-        case 2:
-            // repeating - show sound & datePicker
+        case 2: // repeating - show sound & datePicker
             soundLabel.isHidden = false
             soundSwitch.isHidden = false
             remindMeLabel.isHidden = false
@@ -174,14 +171,13 @@ class ReminderFrequencyController: UIViewController {
     }
     
     // task-notification
-    /*override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let reminderNotification = self.reminderNotification,
-           notificationManager.notificationsEnabled() {
-            notificationManager.removeScheduledNotification(reminder: reminderNotification)
-            notificationManager.scheduleNotification(reminder: reminderNotification, pumpExiredDate: pumpSite.getEndDate())
+        if notificationManager.notificationsEnabled() {
+            notificationManager.removeScheduledNotification(reminderType: reminderType)
+            notificationManager.scheduleNotification(reminderType: reminderType)
         }
-    }*/
+    }
 
     /*
     // MARK: - Navigation

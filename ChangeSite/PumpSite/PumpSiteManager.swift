@@ -10,8 +10,11 @@ import Foundation
 import UIKit
 
 class PumpSiteManager {
-    
     private var pumpSite: PumpSite!;
+    var startDate: Date { get { return pumpSite.startDate } }
+    var daysBtwn: Int { get { return pumpSite.daysBtwn } }
+    var endDate: Date { get { return pumpSite.endDate } }
+    var overdue: Bool { get { return pumpSite.overdue } }
     
     init() {
         self.retrieveFromStorage()
@@ -28,22 +31,13 @@ class PumpSiteManager {
     
     // Initialize pumpSite start date to current date & daysBtwn to 4
     private func setDefaultValues() {
-        let date = Date()
-        let calendar = Calendar.current
-        let hours = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        let minutesQuarter = Int(floor(Double(minutes)/15.0) * 15) % 60
-        let startingDate = Calendar.current.date(bySettingHour: hours, minute: minutesQuarter, second: 0, of: date)!
+        // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
+        let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
+        let date = newUser ? Date(timeIntervalSince1970: 0) : Date()
+        let startingDate = formatDate(date)
         self.pumpSite = PumpSite(startDate: startingDate, daysBtwn: 4)
         self.saveToStorage()
     }
-    
-    // MARK: GETTERS
-    
-    func getStartDate() -> Date { return self.pumpSite.getStartDate() }
-    func getEndDate() -> Date { return self.pumpSite.getEndDate() }
-    func getDaysBtwn() -> Int { return self.pumpSite.getDaysBtwn() }
-    func isOverdue() -> Bool { return self.pumpSite.isOverdue() }
     
     // MARK: Mutators, Setters, and Updaters
     
@@ -55,27 +49,49 @@ class PumpSiteManager {
     }
     
     public func updatePumpSite(startDate: Date) {
-        if startDate > pumpSite.getStartDate() {
+        if startDate > pumpSite.startDate {
             self.pumpSite.setStartDate(startDate: startDate)
             self.saveToStorage()
         }
     }
     
-    func saveToStorage(pumpSite: PumpSite) {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: UserDefaults.Keys.pumpSite.rawValue)
-    }
-    
     // Overloaded saveToStorage() in order to store self.pumpSite in UserDefaults
     func saveToStorage() {
-        self.saveToStorage(pumpSite: self.pumpSite)
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: UserDefaults.Keys.pumpSite.rawValue)
+    }
+}
+
+fileprivate class PumpSite: Codable {
+    private(set) var startDate: Date
+    private(set) var daysBtwn: Int
+    private(set) var endDate: Date
+    var overdue: Bool {
+        get {
+            return self.endDate < Date()
+        }
     }
     
-    // Update a certain notification in UserDefaults & self
-    /*func mutateNotification(newPumpSite: PumpSite) {
-        self.pumpSite.setStartDate(startDate: newPumpSite.getStartDate())
-        self.pumpSite.setDaysBtwn(daysBtwn: newPumpSite.getDaysBtwn())
-        
-        self.saveToStorage()
-    }*/
+    init(startDate: Date, daysBtwn: Int) {
+        self.startDate = startDate
+        self.daysBtwn = daysBtwn
+        self.endDate = startDate
+        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.kSecondsPerDay))
+    }
     
+    // MARK: SETTERS
+    func setStartDate(startDate: Date) {
+        self.startDate = startDate
+        // reset endDate
+        self.endDate = startDate
+        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.kSecondsPerDay))
+    }
+    
+    // need to update CoreData with new expiredDate too
+    func setDaysBtwn(daysBtwn: Int) {
+        self.daysBtwn = daysBtwn
+        // reset endDate
+        self.endDate = startDate
+        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.kSecondsPerDay))
+    }
 }
+

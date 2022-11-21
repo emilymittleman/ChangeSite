@@ -46,7 +46,6 @@ class SiteDatesProvider {
     public func getOverdueDates() -> Set<Date?> {
         let overdueSites = siteDates.filter{ $0.daysOverdue > 0 }
         var overdueDates = Set<Date?>()
-        
         for site in overdueSites {
             var date = site.expiredDate
             var end = site.endDate
@@ -54,7 +53,7 @@ class SiteDatesProvider {
             
             // set endDate to current day if site is current session
             if end == nil && isCurrentSite(site) {
-                end = formatSiteDate(Date())
+                end = formatDate(Date())
             }
             
             while date! < end! {

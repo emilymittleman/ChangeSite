@@ -11,18 +11,31 @@ import UIKit
 
 // MARK: Storage
 
+enum AppConstants {
+    static let kSecondsPerDay = 60 * 60 * 24
+}
+
 extension UserDefaults {
     enum Keys : String {
         case pumpSite, reminders, newUser
     }
 }
 
-protocol InjectsPumpData {
-    var pumpSiteManager: PumpSiteManager! { get set }
+public func daysBetweenDates(from date1: Date, to date2: Date) -> Int {
+    let dateFrom = Calendar.current.startOfDay(for: date1)
+    let dateTo = Calendar.current.startOfDay(for: date2)
+    return abs(Calendar.current.dateComponents([.day], from: dateFrom, to: dateTo).day ?? 0)
 }
 
-public func formatSiteDate(_ date: Date) -> Date {
+public func formatCoreDataDate(_ date: Date) -> Date {
     return Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date) ?? date
+}
+
+public func formatDate(_ date: Date) -> Date {
+    let hours = Calendar.current.component(.hour, from: date)
+    let minutes = Calendar.current.component(.minute, from: date)
+    let minutesHalf = Int(floor(Double(minutes)/30.0) * 30) % 60
+    return Calendar.current.date(bySettingHour: hours, minute: minutesHalf, second: 0, of: date)!
 }
 
 extension UIColor {
@@ -89,6 +102,10 @@ extension UIColor {
             return UIColor(red: 255/255.0, green: 0, blue: 0, alpha: 0.4)
         }
         return UIColor.rgb(fromHex: 0xFFCCCC)
+    }
+    
+    class var paleRed: UIColor {
+        return UIColor.rgb(fromHex: 0xF55C5C)
     }
 
     class func rgb(fromHex: Int) -> UIColor {

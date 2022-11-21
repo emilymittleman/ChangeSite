@@ -9,7 +9,7 @@
 // WELCOME PAGE
 import UIKit
 
-class LaunchViewController: UIViewController, InjectsPumpData {
+class LaunchViewController: UIViewController {
     
     var pumpSiteManager: PumpSiteManager!
     var remindersManager: RemindersManager!

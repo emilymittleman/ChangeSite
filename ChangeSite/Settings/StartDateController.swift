@@ -8,10 +8,11 @@
 
 import UIKit
 
-class StartDateController: UIViewController, InjectsPumpData {
+class StartDateController: UIViewController {
     
     // define reminder & saveReminder at the top of each class to use throughout (get it from UserDefaults)
     var pumpSiteManager: PumpSiteManager!
+    var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
     
     @IBOutlet weak var setStartDateLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
@@ -21,7 +22,15 @@ class StartDateController: UIViewController, InjectsPumpData {
     
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        SiteDates.createOrUpdate(pumpSiteManager: self.pumpSiteManager, endDate: startDatePicker.date, with: coreDataStack)
+        NotificationManager.shared.removeAllNotifications()
+        
         self.pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
+        SiteDates.createOrUpdate(pumpSiteManager: self.pumpSiteManager, endDate: nil, with: coreDataStack)
+        coreDataStack.saveContext()
+        NotificationManager.shared.scheduleNotifications(reminderTypes: ReminderType.allCases)
+        
         performSegue(withIdentifier: "unwindStartDateToSettings", sender: self)
     }
     
@@ -36,7 +45,8 @@ class StartDateController: UIViewController, InjectsPumpData {
         // restrict range of startDatePicker so earliest date is current startDate
         
         pumpSiteManager.retrieveFromStorage()
-        startDatePicker.setDate(pumpSiteManager.getStartDate(), animated: true)
+        startDatePicker.setDate(pumpSiteManager.startDate, animated: true)
+        startDatePicker.minimumDate = formatDate(pumpSiteManager.startDate)
         saveButton.isHidden = true
     }
     

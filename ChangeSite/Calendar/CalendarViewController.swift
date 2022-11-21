@@ -10,7 +10,7 @@ import UIKit
 import FSCalendar
 import CoreData
 
-class CalendarViewController: UIViewController, InjectsPumpData, FSCalendarDataSource, FSCalendarDelegate {
+class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
     var pumpSiteManager: PumpSiteManager!
     
@@ -68,9 +68,7 @@ class CalendarViewController: UIViewController, InjectsPumpData, FSCalendarDataS
         self.siteDatesProvider.fetchData() // optimize so only refreshes when there are updates
         self.overdueDates = siteDatesProvider.getOverdueDates()
         self.changedSiteDates = siteDatesProvider.getChangeDates()
-        
-        // let siteDates = siteDatesProvider.siteDates
-        // print(siteDates)
+        calendar.reloadData()
     }
     
     override func viewDidLoad() {
@@ -106,7 +104,6 @@ class CalendarViewController: UIViewController, InjectsPumpData, FSCalendarDataS
             } else {
                 cell.backgroundColor = UIColor.clear
             }
-            
             if changedSiteDates.contains(date) {
                 cell.selectionLayer.isHidden = false
                 cell.isSelected = true
@@ -119,6 +116,10 @@ class CalendarViewController: UIViewController, InjectsPumpData, FSCalendarDataS
             cell.selectionLayer.isHidden = true
             cell.isSelected = false
         }
+    }
+    
+    private func isDate(_ date1: Date, inSameDayAs date2: Date) -> Bool {
+        return Calendar.current.startOfDay(for: date1) == Calendar.current.startOfDay(for: date2)
     }
     
     class func viewController(pumpSiteManager: PumpSiteManager) -> CalendarViewController {

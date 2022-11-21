@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetupViewController: UIViewController, InjectsPumpData {
+class SetupViewController: UIViewController {
     
     var pumpSiteManager: PumpSiteManager!
     var remindersManager: RemindersManager!
@@ -29,6 +29,9 @@ class SetupViewController: UIViewController, InjectsPumpData {
     @IBAction func saveButtonPressed(_ sender: Any) {
         pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
         pumpSiteManager.updatePumpSite(daysBtwnChanges: Int(stepper.value))
+        // Save to CoreData
+        SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: AppDelegate.sharedAppDelegate.coreDataStack)
+        AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         
         UserDefaults.standard.set(false, forKey: "newUser")
         
@@ -44,9 +47,10 @@ class SetupViewController: UIViewController, InjectsPumpData {
         super.viewDidLoad()
 
         self.updateUI()
-        startDatePicker.setDate(pumpSiteManager.getStartDate(), animated: true)
-        daysBtwn.text = String(pumpSiteManager.getDaysBtwn())
-        stepper.value = Double(pumpSiteManager.getDaysBtwn())
+        let pickerDate = formatDate(Date())
+        startDatePicker.setDate(pickerDate, animated: true)
+        daysBtwn.text = String(pumpSiteManager.daysBtwn)
+        stepper.value = Double(pumpSiteManager.daysBtwn)
     }
     
     private func updateUI() {

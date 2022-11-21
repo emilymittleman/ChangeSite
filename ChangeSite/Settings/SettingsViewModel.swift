@@ -39,7 +39,7 @@ class SettingsViewModel {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.short
         dateFormatter.timeStyle = DateFormatter.Style.short
-        return dateFormatter.string(from: self.pumpSiteManager.getStartDate())
+        return dateFormatter.string(from: self.pumpSiteManager.startDate)
     }
     
     public func reminderFrequencyStrings() -> [String] {
@@ -47,11 +47,11 @@ class SettingsViewModel {
     }
     
     public func pumpSiteDaysBtwn() -> Double {
-        return Double(self.pumpSiteManager.getDaysBtwn())
+        return Double(self.pumpSiteManager.daysBtwn)
     }
     
     public func pumpSiteDaysBtwnString() -> String {
-        return String(self.pumpSiteManager.getDaysBtwn())
+        return String(self.pumpSiteManager.daysBtwn)
     }
     
     // MARK: Dependency injectors

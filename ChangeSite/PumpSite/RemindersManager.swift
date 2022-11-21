@@ -39,6 +39,7 @@ class RemindersManager {
     func getFrequency(type: ReminderType) -> ReminderFrequency { return reminders[type]!.frequency }
     func getSoundOn(type: ReminderType) -> Bool { return reminders[type]!.soundOn }
     func getRepeatingFrequency(type: ReminderType) -> Date { return reminders[type]!.repeatingFrequency }
+    func getID(type: ReminderType) -> String { return reminders[type]!.id }
     
     // MARK: Mutators, Setters, and Updaters
     

@@ -17,7 +17,7 @@ extension SiteDates {
         return NSFetchRequest<SiteDates>(entityName: "SiteDates")
     }
 
-    // for each date, ONLY store day,month,year,hour=12,minute=0,seconds=0
+    // for each date, ONLY store day,month,year,hour=0,minute=0,seconds=0
     @NSManaged public var startDate: Date?
     @NSManaged public var endDate: Date?
     @NSManaged public var expiredDate: Date?
@@ -27,8 +27,8 @@ extension SiteDates {
 public extension SiteDates {
     
     internal class func createOrUpdate(pumpSiteManager: PumpSiteManager, endDate: Date?, with stack: CoreDataStack) {
-        var incomingStartDate = pumpSiteManager.getStartDate()
-        incomingStartDate = formatSiteDate(incomingStartDate)
+        var incomingStartDate = pumpSiteManager.startDate
+        incomingStartDate = formatCoreDataDate(incomingStartDate)
         
         var currentSiteDates: SiteDates? // Entity name
         let fetchRequest: NSFetchRequest<SiteDates> = SiteDates.fetchRequest()
@@ -53,15 +53,15 @@ public extension SiteDates {
     
     // need to guarantee that nextStartDate can't be earlier than original startDate
     internal func update(pumpSiteManager: PumpSiteManager, endDate: Date?) {
-        self.endDate = endDate == nil ? nil : formatSiteDate(endDate!)
-        self.expiredDate = formatSiteDate(pumpSiteManager.getEndDate())
+        self.endDate = endDate == nil ? nil : formatCoreDataDate(endDate!)
+        self.expiredDate = formatCoreDataDate(pumpSiteManager.endDate)
         self.daysOverdue = 0
-        if pumpSiteManager.isOverdue() {
+        if pumpSiteManager.overdue {
             // find days btwn expire date & change date (or today if not changed yet, so endDate==nil)
-            let numberOfDays = Calendar.current.dateComponents([.day], from: pumpSiteManager.getEndDate(), to: endDate ?? Date()).day ?? 0
+            let numberOfDays = Calendar.current.dateComponents([.day], from: pumpSiteManager.endDate, to: endDate ?? Date()).day ?? 0
             self.daysOverdue = Int32(numberOfDays)
         }
-        print("endDate: \(String(describing: self.endDate)), expired: \(String(describing: self.expiredDate)), daysOver: \(self.daysOverdue)")
+        // print("endDate: \(String(describing: self.endDate)), expired: \(String(describing: self.expiredDate)), daysOver: \(self.daysOverdue)")
     }
     
 }

@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="tXC-ax-6Bs">
-                                <rect key="frame" x="16" y="206" width="344" height="226"/>
+                                <rect key="frame" x="15" y="206" width="344" height="226"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="startDatePickerChanged:" destination="CGv-vA-GDz" eventType="valueChanged" id="A8B-j1-qAQ"/>
@@ -378,7 +378,7 @@
                                 </connections>
                             </switch>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="15" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIN-nL-cmZ">
-                                <rect key="frame" x="15" y="384" width="344" height="162"/>
+                                <rect key="frame" x="14" y="384" width="345" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="dateChanged:" destination="qAZ-wS-KA3" eventType="valueChanged" id="PbG-q8-ILm"/>
@@ -446,7 +446,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="uQP-Pl-U4f">
-                                <rect key="frame" x="15" y="199" width="344" height="226"/>
+                                <rect key="frame" x="14" y="199" width="345" height="226"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="startDatePickerChanged:" destination="Ioj-6E-9QU" eventType="valueChanged" id="2f1-NT-UUd"/>
@@ -668,7 +668,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-1r-9UE">
-                                <rect key="frame" x="-5" y="587" width="373" height="216"/>
+                                <rect key="frame" x="-6" y="587" width="369" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
@@ -725,7 +725,7 @@
                         <outlet property="calendar" destination="RNP-op-krW" id="r9R-U8-ygY"/>
                         <outlet property="cancelButton" destination="lyo-9l-dcm" id="8i9-MV-YER"/>
                         <outlet property="chooseStartDateLabel" destination="rvs-et-bcU" id="7Md-6f-dv6"/>
-                        <outlet property="endDateLabel" destination="RjX-Sj-xcS" id="U33-NN-tTR"/>
+                        <outlet property="countdownLabel" destination="RjX-Sj-xcS" id="U33-NN-tTR"/>
                         <outlet property="newSiteButton" destination="PGx-7p-4tu" id="E3m-7H-VTC"/>
                         <outlet property="nextChangeLabel" destination="e3h-2D-Mt9" id="3Gp-Cv-RBu"/>
                         <outlet property="saveButton" destination="Xoy-gX-KIB" id="Ftw-ob-MUO"/>
@@ -792,6 +792,10 @@
                                     <segue destination="CGv-vA-GDz" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="HaS-J0-Rpw"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LogoCircle" translatesAutoresizingMaskIntoConstraints="NO" id="ies-Yr-Xs8">
+                                <rect key="frame" x="16" y="47" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mbc-bM-vN0"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -811,7 +815,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grD-ko-eM9" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="396" y="808"/>
+            <point key="canvasLocation" x="396" y="807.63546798029563"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="6uj-iX-hVh">
@@ -859,6 +863,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ButtonOutline" width="343" height="117"/>
+        <image name="LogoCircle" width="230.33332824707031" height="230.33332824707031"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

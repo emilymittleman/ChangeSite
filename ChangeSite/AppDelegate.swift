@@ -24,19 +24,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     var window: UIWindow?
-    let pumpSiteManager = PumpSiteManager()
-    let remindersManager = RemindersManager()
+    var pumpSiteManager: PumpSiteManager?
+    var remindersManager: RemindersManager?
+    var notificationManager: NotificationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // UserDefaults.standard.set(true, forKey: UserDefaults.Keys.newUser.rawValue) //testing purposes only
-        
+        UserDefaults.standard.set(true, forKey: UserDefaults.Keys.newUser.rawValue) //testing purposes only
         UserDefaults.standard.register(defaults: [UserDefaults.Keys.newUser.rawValue : true])
-        let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
-        
+        configureUserNotifications()
+        // Initialize data managers
+        pumpSiteManager = PumpSiteManager()
+        remindersManager = RemindersManager()
+        NotificationManager.setup(NotificationManager.Config(pumpSiteManager: pumpSiteManager!, remindersManager: remindersManager!))
+        presentInitialView()
+        return true
+    }
+    
+    private func configureUserNotifications() {
+        UNUserNotificationCenter.current().delegate = self
+    }
+    
+    private func presentInitialView() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewController: UIViewController = UIViewController()
-        
+        let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
         if newUser, let vc = storyboard.instantiateViewController(withIdentifier: "LaunchScreen") as? LaunchViewController {
             vc.pumpSiteManager = pumpSiteManager
             vc.remindersManager = remindersManager
@@ -49,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
-        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -62,8 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
         if !newUser {
-            pumpSiteManager.saveToStorage()
-            remindersManager.saveToStorage()
+            pumpSiteManager?.saveToStorage()
+            remindersManager?.saveToStorage()
             AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         } else {
             UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.pumpSite.rawValue)
@@ -77,12 +88,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        //NotificationManager.shared.fetchNotificationSettings()
+        NotificationManager.shared.fetchNotificationSettings()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 }
+
+// MARK: - UNUserNotificationCenterDelegate
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+        if #available(iOS 14.0, *) {
+            completionHandler(.banner)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+}
+
 
 

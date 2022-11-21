@@ -9,10 +9,29 @@
 import Foundation
 import UserNotifications
 import CoreLocation
+import UIKit
 
 class NotificationManager: ObservableObject {
     static let shared = NotificationManager()
+    struct Config {
+        var pumpSiteManager: PumpSiteManager
+        var remindersManager: RemindersManager
+    }
+    private static var config: Config?
+    private let pumpSiteManager: PumpSiteManager
+    private let remindersManager: RemindersManager
     @Published var settings: UNNotificationSettings?
+    
+    class func setup(_ config: Config) {
+        NotificationManager.config = config
+    }
+    private init() {
+        guard let config = NotificationManager.config else {
+            fatalError("Error - you must call setup before accessing NotificationManager.shared")
+        }
+        pumpSiteManager = config.pumpSiteManager
+        remindersManager = config.remindersManager
+    }
     
     func requestAuthorization(completion: @escaping  (Bool) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
@@ -38,6 +57,7 @@ class NotificationManager: ObservableObject {
     }
     
     // Async version is for HomeScreen, since this is the only place settings might not be loaded yet
+    // might not need this since fetchNotificationSettings is in appDelegate now; test later
     func notificationsEnabled(completion: @escaping (Bool) -> () ) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             completion(settings.authorizationStatus == UNAuthorizationStatus.authorized)
@@ -50,58 +70,65 @@ class NotificationManager: ObservableObject {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
-    func removeScheduledNotification(reminder: Reminder) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [reminder.id])
+    func removeScheduledNotification(reminderType: ReminderType) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [remindersManager.getID(type: reminderType)])
     }
     
-    func scheduleNotifications(reminders: [Reminder], pumpExiredDate: Date) {
-        for reminder in reminders {
-            scheduleNotification(reminder: reminder, pumpExiredDate: pumpExiredDate)
+    func scheduleNotifications(reminderTypes: [ReminderType]) {
+        for type in reminderTypes {
+            scheduleNotification(reminderType: type)
         }
     }
     
-    func scheduleNotification(reminder: Reminder, pumpExiredDate: Date) {
+    func scheduleNotification(reminderType: ReminderType) {
         // TODO: figure out repeating notifications (maybe make loop to add a bunch of new triggerDates each 5 min after triggerDate extending up to 24 hours) https://codecrew.codewithchris.com/t/repeating-notifications/17441/2
-        if reminder.frequency == ReminderFrequency.none { return }
+        let frequency = remindersManager.getFrequency(type: reminderType)
+        if frequency == .none { return }
         
-        let content = UNMutableNotificationContent()
-        content.title = "Change Your Pump Site"
-        content.sound = reminder.soundOn ? UNNotificationSound.default : nil
+        let content = getNotificationContent(reminderType: reminderType, soundOn: remindersManager.getSoundOn(type: reminderType))
         
-        let daysBtwnReminderAndExpire = reminder.type.rawValue
-        
-        switch reminder.type {
-        case .oneDayBefore:
-            content.title = "Change Your Pump Site Soon"
-            content.body = "Pump site will expire tomorrow!"
-        case .dayOf:
-            content.body = "Pump site expired, change it now!"
-        case .oneDayAfter:
-            content.body = "Pump site expired 1 day ago, change it now!"
-        case .twoDaysAfter:
-            content.body = "Pump site expired 2 days ago, change it now!"
-        case .extendedDaysAfter:
-            content.body = "Pump site expired 3 days ago, change it now!" //figure out
-        }
-        //content.body = "Pump site expired \(daysBtwnReminderAndExpire) days ago, change it now!"
-        
-        var triggerDate = pumpExiredDate
-        triggerDate.addTimeInterval(TimeInterval(daysBtwnReminderAndExpire * 60 * 60 * 24))
-        
-        /*let trigger = UNCalendarNotificationTrigger(
-            dateMatching: Calendar.current.dateComponents([.minute, .hour, .day, .month, .year], from: triggerDate),
-            repeats: false)*/
+        // (Test commented out):
+        //      var triggerDate = Date()
+        //      triggerDate.addTimeInterval(TimeInterval(15 + (reminderType.rawValue * 10))) //5, 15, 25, 35
+        var triggerDate = pumpSiteManager.endDate
+        triggerDate.addTimeInterval(TimeInterval(reminderType.rawValue * AppConstants.kSecondsPerDay))
+        let timeInterval = triggerDate.timeIntervalSinceNow
         let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: 10,
+            timeInterval: timeInterval,
             repeats: false)
-        
-        let request = UNNotificationRequest(identifier: reminder.id,
+        /*let df = DateFormatter()
+         df.dateStyle = .full
+         df.timeStyle = .full
+         print(df.string(from: triggerDate))*/
+        let request = UNNotificationRequest(identifier: remindersManager.getID(type: reminderType),
                                             content: content,
                                             trigger: trigger)
         
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error { print(error) }
         }
+    }
+    
+    private func getNotificationContent(reminderType: ReminderType, soundOn: Bool) -> UNMutableNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.badge = reminderType.rawValue as NSNumber
+        content.sound = soundOn ? UNNotificationSound.default : nil
+        content.title = "Change your pump site!"
+        switch reminderType {
+        case .oneDayBefore:
+            content.title = "Upcoming pump site change"
+            content.body = "Pump site will expire tomorrow!"
+        case .dayOf:
+            content.body = "Pump site expired today, replace it now"
+        case .oneDayAfter:
+            content.body = "Pump site expired 1 day ago, replace it now"
+        case .twoDaysAfter:
+            content.body = "Pump site expired 2 days ago, replace it now"
+        case .extendedDaysAfter:
+            content.body = "Pump site expired 3 days ago, replace it now" //figure out with repeating
+        }
+        return content
+        
     }
 }
 

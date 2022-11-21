@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NavigationMenuBaseController: UITabBarController, InjectsPumpData {
+class NavigationMenuBaseController: UITabBarController {
     
     var pumpSiteManager: PumpSiteManager!
     var remindersManager: RemindersManager!
