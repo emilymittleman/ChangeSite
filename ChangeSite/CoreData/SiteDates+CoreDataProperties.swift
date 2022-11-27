@@ -58,10 +58,9 @@ public extension SiteDates {
         self.daysOverdue = 0
         if pumpSiteManager.overdue {
             // find days btwn expire date & change date (or today if not changed yet, so endDate==nil)
-            let numberOfDays = Calendar.current.dateComponents([.day], from: pumpSiteManager.endDate, to: endDate ?? Date()).day ?? 0
-            self.daysOverdue = Int32(numberOfDays)
+            let numberOfDays = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: endDate ?? Date())
+            self.daysOverdue = numberOfDays < 0 ? 0 : Int32(numberOfDays)
         }
-        // print("endDate: \(String(describing: self.endDate)), expired: \(String(describing: self.expiredDate)), daysOver: \(self.daysOverdue)")
     }
     
 }

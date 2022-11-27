@@ -131,7 +131,9 @@ class HomeViewModel {
     }
     
     private func getDateAbbr(date: Date) -> String {
-        return date.dayOfWeek() ?? ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: date).capitalized
     }
     
     

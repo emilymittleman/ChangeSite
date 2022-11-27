@@ -12,6 +12,9 @@ class SettingsViewModel {
     
     let pumpSiteManager: PumpSiteManager
     let remindersManager: RemindersManager
+    var notificationManager = NotificationManager.shared
+    var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
+    var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
     
     init(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager) {
         self.pumpSiteManager = pumpSiteManager
@@ -27,10 +30,11 @@ class SettingsViewModel {
     
     public func updatePumpSite(daysBtwnChanges: Int) {
         self.pumpSiteManager.updatePumpSite(daysBtwnChanges: daysBtwnChanges)
-    }
-    
-    public func updatePumpSite(startDate: Date) {
-        self.pumpSiteManager.updatePumpSite(startDate: startDate)
+        SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
+        coreDataStack.saveContext()
+        // Reschedule notifications
+        notificationManager.removeAllNotifications()
+        notificationManager.scheduleNotifications(reminderTypes: ReminderType.allCases)
     }
     
     // MARK: Strings

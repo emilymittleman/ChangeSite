@@ -9,22 +9,30 @@
 import Foundation
 import UIKit
 
-// MARK: Storage
-
 enum AppConstants {
-    static let kSecondsPerDay = 60 * 60 * 24
+    static let secondsPerDay = 60 * 60 * 24
 }
 
+// MARK: Storage
+
 extension UserDefaults {
-    enum Keys : String {
+    enum Keys: String {
         case pumpSite, reminders, newUser
     }
 }
+
+// MARK: Public helper functions
 
 public func daysBetweenDates(from date1: Date, to date2: Date) -> Int {
     let dateFrom = Calendar.current.startOfDay(for: date1)
     let dateTo = Calendar.current.startOfDay(for: date2)
     return abs(Calendar.current.dateComponents([.day], from: dateFrom, to: dateTo).day ?? 0)
+}
+
+public func signedDaysBetweenDates(from date1: Date, to date2: Date) -> Int {
+    let dateFrom = Calendar.current.startOfDay(for: date1)
+    let dateTo = Calendar.current.startOfDay(for: date2)
+    return Calendar.current.dateComponents([.day], from: dateFrom, to: dateTo).day ?? 0
 }
 
 public func formatCoreDataDate(_ date: Date) -> Date {
@@ -37,6 +45,8 @@ public func formatDate(_ date: Date) -> Date {
     let minutesHalf = Int(floor(Double(minutes)/30.0) * 30) % 60
     return Calendar.current.date(bySettingHour: hours, minute: minutesHalf, second: 0, of: date)!
 }
+
+// MARK: Colors
 
 extension UIColor {
     
@@ -115,30 +125,5 @@ extension UIColor {
         let alpha = CGFloat(1.0)
 
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-    }
-}
-
-extension Date {
-    func offsetFrom(date : Date) -> String {
-        let dayHourMinuteSecond: Set<Calendar.Component> = [.day, .hour, .minute, .second]
-        let difference = NSCalendar.current.dateComponents(dayHourMinuteSecond, from: date, to: self);
-
-        let seconds = "\(difference.second ?? 0)s"
-        let minutes = "\(difference.minute ?? 0)m" + " " + seconds
-        let hours = "\(difference.hour ?? 0)h" + " " + minutes
-        let days = "\(difference.day ?? 0)d" + " " + hours
-
-        if let day = difference.day, day          > 0 { return days }
-        if let hour = difference.hour, hour       > 0 { return hours }
-        if let minute = difference.minute, minute > 0 { return minutes }
-        if let second = difference.second, second > 0 { return seconds }
-        return ""
-    }
-    
-    func dayOfWeek() -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: self).capitalized
-        // or use capitalized(with: locale) if you want
     }
 }

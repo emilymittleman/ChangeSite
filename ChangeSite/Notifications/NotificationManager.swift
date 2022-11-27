@@ -91,8 +91,9 @@ class NotificationManager: ObservableObject {
         //      var triggerDate = Date()
         //      triggerDate.addTimeInterval(TimeInterval(15 + (reminderType.rawValue * 10))) //5, 15, 25, 35
         var triggerDate = pumpSiteManager.endDate
-        triggerDate.addTimeInterval(TimeInterval(reminderType.rawValue * AppConstants.kSecondsPerDay))
+        triggerDate.addTimeInterval(TimeInterval(reminderType.rawValue * AppConstants.secondsPerDay))
         let timeInterval = triggerDate.timeIntervalSinceNow
+        if timeInterval <= 0 { return }
         let trigger = UNTimeIntervalNotificationTrigger(
             timeInterval: timeInterval,
             repeats: false)

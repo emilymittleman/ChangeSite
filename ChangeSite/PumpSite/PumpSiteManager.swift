@@ -20,7 +20,7 @@ class PumpSiteManager {
         self.retrieveFromStorage()
     }
     
-    func retrieveFromStorage() {
+    public func retrieveFromStorage() {
         if let pumpSiteData = UserDefaults.standard.object(forKey: UserDefaults.Keys.pumpSite.rawValue),
            let pumpSite = try? PropertyListDecoder().decode(PumpSite.self, from: pumpSiteData as! Data) {
                 self.pumpSite = pumpSite
@@ -29,7 +29,6 @@ class PumpSiteManager {
         }
     }
     
-    // Initialize pumpSite start date to current date & daysBtwn to 4
     private func setDefaultValues() {
         // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
         let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
@@ -55,7 +54,6 @@ class PumpSiteManager {
         }
     }
     
-    // Overloaded saveToStorage() in order to store self.pumpSite in UserDefaults
     func saveToStorage() {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: UserDefaults.Keys.pumpSite.rawValue)
     }
@@ -75,7 +73,7 @@ fileprivate class PumpSite: Codable {
         self.startDate = startDate
         self.daysBtwn = daysBtwn
         self.endDate = startDate
-        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.kSecondsPerDay))
+        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
     }
     
     // MARK: SETTERS
@@ -83,7 +81,7 @@ fileprivate class PumpSite: Codable {
         self.startDate = startDate
         // reset endDate
         self.endDate = startDate
-        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.kSecondsPerDay))
+        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
     }
     
     // need to update CoreData with new expiredDate too
@@ -91,7 +89,7 @@ fileprivate class PumpSite: Codable {
         self.daysBtwn = daysBtwn
         // reset endDate
         self.endDate = startDate
-        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.kSecondsPerDay))
+        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
     }
 }
 

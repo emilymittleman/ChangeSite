@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var notificationManager: NotificationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UserDefaults.standard.set(true, forKey: UserDefaults.Keys.newUser.rawValue) //testing purposes only
+        // UserDefaults.standard.set(true, forKey: UserDefaults.Keys.newUser.rawValue) //testing purposes only
         UserDefaults.standard.register(defaults: [UserDefaults.Keys.newUser.rawValue : true])
         configureUserNotifications()
         // Initialize data managers

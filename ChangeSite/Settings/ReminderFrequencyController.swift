@@ -24,8 +24,7 @@ class ReminderFrequencyController: UIViewController {
     
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
-        switch segmentedControl.selectedSegmentIndex
-        {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
             remindersManager.updateReminder(type: reminderType, frequency: .none)
         case 1:
@@ -38,6 +37,11 @@ class ReminderFrequencyController: UIViewController {
         
         remindersManager.updateReminder(type: reminderType, soundOn: soundSwitch.isOn)
         remindersManager.updateReminder(type: reminderType, repeatingFrequency: getRepeatingFromDatePicker())
+        
+        if notificationManager.notificationsEnabled() {
+            notificationManager.removeScheduledNotification(reminderType: reminderType)
+            notificationManager.scheduleNotification(reminderType: reminderType)
+        }
         performSegue(withIdentifier: "unwindReminderToSettings", sender: self)
     }
     
@@ -47,13 +51,13 @@ class ReminderFrequencyController: UIViewController {
         // TODO: If user tapped "Don't Allow" notifications but try to turn them on, prompt them to allow notifications in settings
         // guarantee that this is the only possibility if notifications are not enabled and they try changing a reminder
         // task-n
-        /*if !notificationManager.notificationsEnabled() {
-            // add a custom alert with this completion handler
-            if let settingsURL = URL(string: UIApplication.openSettingsURLString){
-               UIApplication.shared.open(settingsURL)
-            }
+        if !notificationManager.notificationsEnabled() {
+            segmentedControl.selectedSegmentIndex = 0
+            let alertController = configureNotificationsAlertPopup()
+            self.present(alertController, animated: true, completion: nil)
             // after returning to app, refresh notificationManager.fetchNotificationSettings() so that settings reload
-        }*/
+            return
+        }
         
         switch segmentedControl.selectedSegmentIndex
         {
@@ -99,6 +103,21 @@ class ReminderFrequencyController: UIViewController {
         return repeatingFrequency
     }
     
+    private func configureNotificationsAlertPopup() -> UIAlertController {
+        let alertController = UIAlertController(title: "Enable Notifications",
+                                                message: "In order to set up reminders, please go to settings to enable notifications.",
+                                                preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action: UIAlertAction!) in }
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (action: UIAlertAction!) in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        return alertController
+    }
+    
     // -------------- SET UP --------------
     
     override func viewDidLoad() {
@@ -110,6 +129,7 @@ class ReminderFrequencyController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        notificationManager.fetchNotificationSettings()
         loadSetUp()
     }
     
@@ -168,15 +188,6 @@ class ReminderFrequencyController: UIViewController {
         datePicker.date = remindersManager.getRepeatingFrequency(type: reminderType)
         // save button
         saveButton.isHidden = true
-    }
-    
-    // task-notification
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if notificationManager.notificationsEnabled() {
-            notificationManager.removeScheduledNotification(reminderType: reminderType)
-            notificationManager.scheduleNotification(reminderType: reminderType)
-        }
     }
 
     /*

@@ -49,11 +49,11 @@ class SiteDatesProvider {
         for site in overdueSites {
             var date = site.expiredDate
             var end = site.endDate
-            if date == nil { continue } //this will skip current session overdue
+            if date == nil { continue } //should never be nil
             
             // set endDate to current day if site is current session
             if end == nil && isCurrentSite(site) {
-                end = formatDate(Date())
+                end = formatCoreDataDate(Date())
             }
             
             while date! < end! {
@@ -71,7 +71,7 @@ class SiteDatesProvider {
     public func deleteAllEntries() {
         for siteDate in siteDates {
             AppDelegate.sharedAppDelegate.coreDataStack.managedContext.delete(siteDate)
-            AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         }
+        AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
     }
 }
