@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 class PumpSiteManager {
     private var pumpSite: PumpSite!;
@@ -42,8 +41,7 @@ class PumpSiteManager {
         self.saveToStorage()
     }
     
-    // MARK: Mutators, Setters, and Updaters
-    
+    // MARK: Mutators
     public func updatePumpSite(daysBtwnChanges: Int) {
         if daysBtwnChanges >= 1 {
             self.pumpSite.setDaysBtwn(daysBtwn: daysBtwnChanges)
@@ -72,17 +70,14 @@ fileprivate class PumpSite: Codable {
         self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
     }
     
-    // MARK: SETTERS
     func setStartDate(startDate: Date) {
         self.startDate = startDate
-        // reset endDate
         self.endDate = startDate
         self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
     }
     
     func setDaysBtwn(daysBtwn: Int) {
         self.daysBtwn = daysBtwn
-        // reset endDate
         self.endDate = startDate
         self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
     }
