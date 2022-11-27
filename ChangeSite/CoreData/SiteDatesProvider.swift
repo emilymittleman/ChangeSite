@@ -52,8 +52,10 @@ class SiteDatesProvider {
             if date == nil { continue } //should never be nil
             
             // set endDate to current day if site is current session
-            if end == nil && isCurrentSite(site) {
-                end = formatCoreDataDate(Date())
+            if end == nil {
+                if isCurrentSite(site) {
+                    end = formatCoreDataDate(Date())
+                } else { continue }
             }
             
             while date! < end! {

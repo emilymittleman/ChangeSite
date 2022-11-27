@@ -18,6 +18,7 @@ class NotificationManager: ObservableObject {
         var remindersManager: RemindersManager
     }
     private static var config: Config?
+    
     private let pumpSiteManager: PumpSiteManager
     private let remindersManager: RemindersManager
     @Published var settings: UNNotificationSettings?
@@ -81,36 +82,35 @@ class NotificationManager: ObservableObject {
     }
     
     func scheduleNotification(reminderType: ReminderType) {
-        // TODO: figure out repeating notifications (maybe make loop to add a bunch of new triggerDates each 5 min after triggerDate extending up to 24 hours) https://codecrew.codewithchris.com/t/repeating-notifications/17441/2
+        // TODO: repeating notifications (max 64)
         let frequency = remindersManager.getFrequency(type: reminderType)
         if frequency == .none { return }
-        
-        let content = getNotificationContent(reminderType: reminderType, soundOn: remindersManager.getSoundOn(type: reminderType))
         
         // (Test commented out):
         //      var triggerDate = Date()
         //      triggerDate.addTimeInterval(TimeInterval(15 + (reminderType.rawValue * 10))) //5, 15, 25, 35
-        var triggerDate = pumpSiteManager.endDate
-        triggerDate.addTimeInterval(TimeInterval(reminderType.rawValue * AppConstants.secondsPerDay))
-        let timeInterval = triggerDate.timeIntervalSinceNow
+        let timeInterval = timeUntilNotificationFire(reminderType: reminderType)
         if timeInterval <= 0 { return }
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: timeInterval,
-            repeats: false)
-        /*let df = DateFormatter()
-         df.dateStyle = .full
-         df.timeStyle = .full
-         print(df.string(from: triggerDate))*/
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        
+        let content = notificationContent(reminderType: reminderType, soundOn: remindersManager.getSoundOn(type: reminderType))
         let request = UNNotificationRequest(identifier: remindersManager.getID(type: reminderType),
                                             content: content,
                                             trigger: trigger)
-        
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error { print(error) }
         }
     }
     
-    private func getNotificationContent(reminderType: ReminderType, soundOn: Bool) -> UNMutableNotificationContent {
+    // MARK: Private
+    
+    private func timeUntilNotificationFire(reminderType: ReminderType) -> TimeInterval {
+        var triggerDate = pumpSiteManager.endDate
+        triggerDate.addTimeInterval(TimeInterval(reminderType.rawValue * AppConstants.secondsPerDay))
+        return triggerDate.timeIntervalSinceNow
+    }
+    
+    private func notificationContent(reminderType: ReminderType, soundOn: Bool) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.badge = reminderType.rawValue as NSNumber
         content.sound = soundOn ? UNNotificationSound.default : nil

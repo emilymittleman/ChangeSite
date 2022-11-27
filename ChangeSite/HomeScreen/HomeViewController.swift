@@ -13,8 +13,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     
     var viewModel: HomeViewModel!
     var notificationManager = NotificationManager.shared
-    var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
-    var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
     
     var timer:Timer?
         
@@ -85,7 +83,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.retrieveDataFromStorage()
         viewModel.updateCoreData()
         updateTimeLeftLabels()
         hideNewStartDate()

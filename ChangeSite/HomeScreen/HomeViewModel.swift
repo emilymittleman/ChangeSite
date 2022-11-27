@@ -17,15 +17,9 @@ class HomeViewModel {
     var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
     var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
     
-    
     init(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager) {
         self.pumpSiteManager = pumpSiteManager
         self.remindersManager = remindersManager
-    }
-    
-    public func retrieveDataFromStorage() {
-        pumpSiteManager.retrieveFromStorage()
-        remindersManager.retrieveFromStorage()
     }
     
     // MARK: Getters
@@ -59,28 +53,16 @@ class HomeViewModel {
     }
     
     public func updateCoreData() {
-        // if daysBtwn has changed, update CoreData expiredDate & daysOverdue accordingly
         // if current site is overdue AND coredata.overdue != current overdue days, update CoreData
         guard let currentSite = siteDatesProvider.getCurrentSite() else {
             print("Database error: could not retrieve current site")
             return
         }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        
         // check daysOverdue (daysOverdue & expiredDate will be updated if daysBtwn changed)
         if pumpSiteManager.overdue {
-            let daysOver = Calendar.current.dateComponents([.day], from: pumpSiteManager.endDate, to: Date()).day ?? 0
+            let daysOver = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: Date())
             if daysOver != currentSite.daysOverdue {
-                SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
-            }
-        }
-        
-        // if not overdue, still check if daysBtwn changed so expiredDate needs to be updated
-        else {
-            if formatDate(pumpSiteManager.endDate) != currentSite.expiredDate {
                 SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
             }
         }

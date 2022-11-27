@@ -21,11 +21,6 @@ class SettingsViewModel {
         self.remindersManager = remindersManager
     }
     
-    public func retrieveDataFromStorage() {
-        pumpSiteManager.retrieveFromStorage()
-        remindersManager.retrieveFromStorage()
-    }
-    
     // MARK: Mutators
     
     public func updatePumpSite(daysBtwnChanges: Int) {

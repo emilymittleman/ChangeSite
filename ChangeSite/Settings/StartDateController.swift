@@ -10,7 +10,6 @@ import UIKit
 
 class StartDateController: UIViewController {
     
-    // define reminder & saveReminder at the top of each class to use throughout (get it from UserDefaults)
     var pumpSiteManager: PumpSiteManager!
     var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
     
@@ -44,7 +43,6 @@ class StartDateController: UIViewController {
         super.viewWillAppear(animated)
         // restrict range of startDatePicker so earliest date is current startDate
         
-        pumpSiteManager.retrieveFromStorage()
         startDatePicker.setDate(pumpSiteManager.startDate, animated: true)
         startDatePicker.minimumDate = formatDate(pumpSiteManager.startDate)
         saveButton.isHidden = true

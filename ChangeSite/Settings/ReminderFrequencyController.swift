@@ -24,17 +24,8 @@ class ReminderFrequencyController: UIViewController {
     
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            remindersManager.updateReminder(type: reminderType, frequency: .none)
-        case 1:
-            remindersManager.updateReminder(type: reminderType, frequency: .single)
-        case 2:
-            remindersManager.updateReminder(type: reminderType, frequency: .repeating)
-        default:
-            break
-        }
-        
+        let frequency = reminderFrequencyFromIndex(segmentedControl.selectedSegmentIndex)
+        remindersManager.updateReminder(type: reminderType, frequency: frequency)
         remindersManager.updateReminder(type: reminderType, soundOn: soundSwitch.isOn)
         remindersManager.updateReminder(type: reminderType, repeatingFrequency: getRepeatingFromDatePicker())
         
@@ -48,9 +39,6 @@ class ReminderFrequencyController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBAction func indexChanged(_ sender: Any) {
-        // TODO: If user tapped "Don't Allow" notifications but try to turn them on, prompt them to allow notifications in settings
-        // guarantee that this is the only possibility if notifications are not enabled and they try changing a reminder
-        // task-n
         if !notificationManager.notificationsEnabled() {
             segmentedControl.selectedSegmentIndex = 0
             let alertController = configureNotificationsAlertPopup()
@@ -59,26 +47,9 @@ class ReminderFrequencyController: UIViewController {
             return
         }
         
-        switch segmentedControl.selectedSegmentIndex
-        {
-        case 0: // none
-            soundLabel.isHidden = true
-            soundSwitch.isHidden = true
-            remindMeLabel.isHidden = true
-            datePicker.isHidden = true
-        case 1: // single - show sound
-            soundLabel.isHidden = false
-            soundSwitch.isHidden = false
-            remindMeLabel.isHidden = true
-            datePicker.isHidden = true
-        case 2: // repeating - show sound & datePicker
-            soundLabel.isHidden = false
-            soundSwitch.isHidden = false
-            remindMeLabel.isHidden = false
-            datePicker.isHidden = false
-        default:
-            break
-        }
+        let frequency = reminderFrequencyFromIndex(segmentedControl.selectedSegmentIndex)
+        hideViewsForReminderFrequency(frequency)
+        
         saveButton.isHidden = false
     }
     
@@ -92,30 +63,6 @@ class ReminderFrequencyController: UIViewController {
         datePicker.date = getRepeatingFromDatePicker()
         
         saveButton.isHidden = false
-    }
-    
-    private func getRepeatingFromDatePicker() -> Date {
-        let date = datePicker.date
-        let currentDate = Date()
-        let hours = Calendar.current.component(.hour, from: date)
-        let minutes = Calendar.current.component(.minute, from: date)
-        let repeatingFrequency = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: currentDate)!
-        return repeatingFrequency
-    }
-    
-    private func configureNotificationsAlertPopup() -> UIAlertController {
-        let alertController = UIAlertController(title: "Enable Notifications",
-                                                message: "In order to set up reminders, please go to settings to enable notifications.",
-                                                preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action: UIAlertAction!) in }
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (action: UIAlertAction!) in
-            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(settingsURL)
-            }
-        }
-        alertController.addAction(cancelAction)
-        alertController.addAction(settingsAction)
-        return alertController
     }
     
     // -------------- SET UP --------------
@@ -132,6 +79,8 @@ class ReminderFrequencyController: UIViewController {
         notificationManager.fetchNotificationSettings()
         loadSetUp()
     }
+    
+    // MARK: Private helper functions
     
     private func updateUI() {
         // Background color
@@ -162,26 +111,12 @@ class ReminderFrequencyController: UIViewController {
         switch remindersManager.getFrequency(type: reminderType) {
         case .none:
             segmentedControl.selectedSegmentIndex = 0
-            // sounds & frequency
-            soundLabel.isHidden = true
-            soundSwitch.isHidden = true
-            remindMeLabel.isHidden = true
-            datePicker.isHidden = true
         case .single:
             segmentedControl.selectedSegmentIndex = 1
-            // sounds & frequency
-            soundLabel.isHidden = false
-            soundSwitch.isHidden = false
-            remindMeLabel.isHidden = true
-            datePicker.isHidden = true
         case .repeating:
             segmentedControl.selectedSegmentIndex = 2
-            // sounds & frequency
-            soundLabel.isHidden = false
-            soundSwitch.isHidden = false
-            remindMeLabel.isHidden = false
-            datePicker.isHidden = false
         }
+        hideViewsForReminderFrequency(remindersManager.getFrequency(type: reminderType))
         // sound
         soundSwitch.setOn(remindersManager.getSoundOn(type: reminderType), animated: false)
         // frequency
@@ -189,15 +124,55 @@ class ReminderFrequencyController: UIViewController {
         // save button
         saveButton.isHidden = true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func hideViewsForReminderFrequency(_ frequency: ReminderFrequency) {
+        switch frequency {
+        case .none:
+            soundLabel.isHidden = true
+            soundSwitch.isHidden = true
+            remindMeLabel.isHidden = true
+            datePicker.isHidden = true
+        case .single:
+            soundLabel.isHidden = false
+            soundSwitch.isHidden = false
+            remindMeLabel.isHidden = true
+            datePicker.isHidden = true
+        case .repeating:
+            soundLabel.isHidden = false
+            soundSwitch.isHidden = false
+            remindMeLabel.isHidden = false
+            datePicker.isHidden = false
+        }
     }
-    */
+    
+    private func reminderFrequencyFromIndex(_ index: Int) -> ReminderFrequency {
+        if index == 1 { return .single }
+        if index == 2 { return .repeating }
+        return .none
+    }
+    
+    private func getRepeatingFromDatePicker() -> Date {
+        let date = datePicker.date
+        let currentDate = Date()
+        let hours = Calendar.current.component(.hour, from: date)
+        let minutes = Calendar.current.component(.minute, from: date)
+        let repeatingFrequency = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: currentDate)!
+        return repeatingFrequency
+    }
+    
+    private func configureNotificationsAlertPopup() -> UIAlertController {
+        let alertController = UIAlertController(title: "Enable Notifications",
+                                                message: "In order to set up reminders, please go to settings to enable notifications.",
+                                                preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action: UIAlertAction!) in }
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (action: UIAlertAction!) in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        return alertController
+    }
 
 }

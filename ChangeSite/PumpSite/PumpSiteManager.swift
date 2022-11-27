@@ -20,13 +20,17 @@ class PumpSiteManager {
         self.retrieveFromStorage()
     }
     
-    public func retrieveFromStorage() {
+    private func retrieveFromStorage() {
         if let pumpSiteData = UserDefaults.standard.object(forKey: UserDefaults.Keys.pumpSite.rawValue),
            let pumpSite = try? PropertyListDecoder().decode(PumpSite.self, from: pumpSiteData as! Data) {
                 self.pumpSite = pumpSite
         } else {
             self.setDefaultValues()
         }
+    }
+    
+    private func saveToStorage() {
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: UserDefaults.Keys.pumpSite.rawValue)
     }
     
     private func setDefaultValues() {
@@ -53,21 +57,13 @@ class PumpSiteManager {
             self.saveToStorage()
         }
     }
-    
-    func saveToStorage() {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: UserDefaults.Keys.pumpSite.rawValue)
-    }
 }
 
 fileprivate class PumpSite: Codable {
     private(set) var startDate: Date
     private(set) var daysBtwn: Int
     private(set) var endDate: Date
-    var overdue: Bool {
-        get {
-            return self.endDate < Date()
-        }
-    }
+    var overdue: Bool { get { return self.endDate < Date() } }
     
     init(startDate: Date, daysBtwn: Int) {
         self.startDate = startDate
@@ -84,7 +80,6 @@ fileprivate class PumpSite: Codable {
         self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
     }
     
-    // need to update CoreData with new expiredDate too
     func setDaysBtwn(daysBtwn: Int) {
         self.daysBtwn = daysBtwn
         // reset endDate

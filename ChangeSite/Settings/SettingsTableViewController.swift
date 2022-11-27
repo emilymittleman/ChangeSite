@@ -58,7 +58,6 @@ class SettingsTableViewController: UITableViewController {
             }
         }*/
         
-        viewModel.retrieveDataFromStorage()
         // ----- Update the view with reminder data (startDate, daysBtwn, & reminders) -----
         startDate.text = viewModel.formattedStartDate()
         daysBtwn.text = viewModel.pumpSiteDaysBtwnString()
@@ -99,8 +98,7 @@ class SettingsTableViewController: UITableViewController {
             let index = tableView.indexPathForSelectedRow?.row {
             // Will only actually be prompted first time user opens app
             if !NotificationManager.shared.notificationsEnabled() {
-                NotificationManager.shared.requestAuthorization { _ in
-                }
+                NotificationManager.shared.requestAuthorization { _ in }
             }
             nextViewController.reminderType = viewModel.reminderTypeAtIndex(index)!
             nextViewController.remindersManager = viewModel.remindersManager

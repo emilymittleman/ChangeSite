@@ -73,8 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
         if !newUser {
-            pumpSiteManager?.saveToStorage()
-            remindersManager?.saveToStorage()
             AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         } else {
             UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.pumpSite.rawValue)

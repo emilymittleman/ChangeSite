@@ -18,9 +18,9 @@ enum ReminderFrequency: String, Codable {
 }
 
 class Reminder: Codable {
-    var type: ReminderType        // "oneDayBefore", "dayOf", "oneDayAfter", etc.
+    var type: ReminderType           // "oneDayBefore", "dayOf", "oneDayAfter", etc.
     var frequency: ReminderFrequency  // "none", "single", "repeating"
-    var soundOn: Bool       // true, false
+    var soundOn: Bool
     var repeatingFrequency: Date     // Date object: 5 minutes
     var id = UUID().uuidString
     

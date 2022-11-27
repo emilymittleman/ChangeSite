@@ -17,13 +17,17 @@ class RemindersManager {
         self.retrieveFromStorage()
     }
     
-    func retrieveFromStorage() {
+    private func retrieveFromStorage() {
         if let remindersData = UserDefaults.standard.object(forKey: UserDefaults.Keys.reminders.rawValue),
            let reminders = try? PropertyListDecoder().decode([ReminderType:Reminder].self, from: remindersData as! Data) {
                 self.reminders = reminders
         } else {
             self.setDefaultValues()
         }
+    }
+    
+    private func saveToStorage() {
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(reminders), forKey: UserDefaults.Keys.reminders.rawValue)
     }
     
     // Initialize array to the 5 default reminder notification types that came with the app
@@ -57,9 +61,4 @@ class RemindersManager {
         reminders[type]!.repeatingFrequency = repeatingFrequency
         self.saveToStorage()
     }
-    
-    func saveToStorage() {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(reminders), forKey: UserDefaults.Keys.reminders.rawValue)
-    }
-    
 }
