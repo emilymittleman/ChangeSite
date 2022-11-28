@@ -70,16 +70,15 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.scrollDirection = .horizontal
     }
     
-    private func setupLegendView() {
-        //legendView = LegendView(frame: CGRect(x: 0, y: 64, width:self.view.bounds.size.width, height:height))
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.siteDatesProvider.fetchData() // optimize so only refreshes when there are updates
         self.overdueDates = siteDatesProvider.getOverdueDates()
         self.changedSiteDates = siteDatesProvider.getChangeDates()
         calendar.reloadData()
+        for site in siteDatesProvider.siteDates {
+            print(site)
+        }
     }
     
     override func viewDidLoad() {

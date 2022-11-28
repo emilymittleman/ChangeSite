@@ -63,6 +63,13 @@ public extension SiteDates {
         }
     }
     
+    internal class func testing_addEntry(startDate: Date, expiredDate: Date, daysOverdue: Int, with stack: CoreDataStack) {
+        let newSite = SiteDates(context: stack.managedContext)
+        newSite.startDate = startDate
+        newSite.expiredDate = expiredDate
+        newSite.endDate = Date(timeInterval: TimeInterval(daysOverdue * AppConstants.secondsPerDay), since: expiredDate)
+        newSite.daysOverdue = Int32(daysOverdue)
+    }
 }
 
 extension SiteDates : Identifiable {

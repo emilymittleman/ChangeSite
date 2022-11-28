@@ -28,12 +28,24 @@ class SetupViewController: UIViewController {
     
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
-        pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
-        pumpSiteManager.updatePumpSite(daysBtwnChanges: Int(stepper.value))
-        // Save to CoreData
-        siteDatesProvider.deleteAllEntries()
-        SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: AppDelegate.sharedAppDelegate.coreDataStack)
-        AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
+        let testing = false
+        if testing {
+            let components = DateComponents(calendar: .current, timeZone: .current, era: nil, year: 2022, month: 11, day: 26, hour: 16)
+            let startDate = Calendar.current.date(from: components)!
+            pumpSiteManager.updatePumpSite(startDate: startDate)
+            pumpSiteManager.updatePumpSite(daysBtwnChanges: 3)
+            // Save to CoreData
+            siteDatesProvider.deleteAllEntries()
+            addTestEntries()
+        } else {
+            pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
+            pumpSiteManager.updatePumpSite(daysBtwnChanges: Int(stepper.value))
+            // Save to CoreData
+            siteDatesProvider.deleteAllEntries()
+            
+            SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: AppDelegate.sharedAppDelegate.coreDataStack)
+            AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
+        }
         
         UserDefaults.standard.set(false, forKey: "newUser")
         
@@ -83,5 +95,47 @@ class SetupViewController: UIViewController {
         border.frame = CGRect(x: 0, y: label.frame.size.height-2, width: label.frame.size.width, height: 2)
         label.addSubview(border)
     }
+    
+    private func addTestEntries() {
+        let siteData = makeTestSiteData()
+        
+        // let gregorian = Calendar(identifier: .gregorian)
+        for datum in siteData {
+            SiteDates.testing_addEntry(startDate: formatCoreDataDate(datum.startDate),
+                                       expiredDate: formatCoreDataDate(datum.expiredDate),
+                                       daysOverdue: datum.daysOverdue,
+                                       with: AppDelegate.sharedAppDelegate.coreDataStack)
+        }
+        AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
+    }
+    
+    private func makeTestSiteData() -> [TestSiteData] {
+        let daysBetween = 3
+        let daysOver = [0, 0, 1, 0, 0, 3, 0, 0,
+                        0, 0, 0, 1, 0, 0, 3, 0, 0]
+        let components = DateComponents(calendar: .current, timeZone: .current, era: nil, year: 2022, month: 10, day: 1, hour: 16)
+        var startDate = Calendar.current.date(from: components)!
+        
+        var siteData: [TestSiteData] = []
+        for over in daysOver {
+            let testData = TestSiteData(startDate: startDate, daysBetween: daysBetween, daysOverdue: over)
+            siteData.append(testData)
+            startDate.addTimeInterval(TimeInterval( AppConstants.secondsPerDay * (daysBetween + over) ))
+        }
+        return siteData
+    }
+}
 
+struct TestSiteData {
+    var startDate: Date
+    var expiredDate: Date
+    var daysOverdue: Int
+    var description: String
+    
+    init(startDate: Date, daysBetween: Int, daysOverdue: Int) {
+        self.startDate = startDate
+        self.expiredDate = startDate.addingTimeInterval(TimeInterval(daysBetween * AppConstants.secondsPerDay))
+        self.daysOverdue = daysOverdue
+        self.description = "Start: \(startDate), Expire: \(expiredDate), DaysOver: \(daysOverdue)"
+    }
 }

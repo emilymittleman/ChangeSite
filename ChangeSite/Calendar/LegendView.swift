@@ -41,6 +41,7 @@ class LegendView: UIView {
     
     func setUIAppearance(with mode: UIUserInterfaceStyle) {
         self.backgroundColor = UIColor.background(mode)
+        contentView.backgroundColor = UIColor.background(mode)
         todayIcon.tintColor = UIColor.lightBlue
         changeDateIcon.tintColor = UIColor.charcoal(mode)
         overdueIcon.tintColor = UIColor.transparentRed(mode)
