@@ -22,6 +22,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }()
     
     fileprivate weak var calendar: FSCalendar!
+    fileprivate weak var legendView: LegendView!
     
     var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
     var changedSiteDates: Set<Date?> = Set()
@@ -39,6 +40,12 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.delegate = self
         self.view.addSubview(calendar)
         self.calendar = calendar
+        
+        //setupLegendView()
+        let legendView = LegendView(frame: CGRect(x: 0, y: 575, width:self.view.bounds.size.width, height:height/2))
+        legendView.setUIAppearance(with: mode)
+        self.view.addSubview(legendView)
+        self.legendView = legendView
         
         calendar.register(CustomCalendarCell.self, forCellReuseIdentifier: "cell")
         
@@ -61,6 +68,10 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.appearance.headerTitleFont = UIFont(name: "Rubik-Regular", size: 20)
         
         calendar.scrollDirection = .horizontal
+    }
+    
+    private func setupLegendView() {
+        //legendView = LegendView(frame: CGRect(x: 0, y: 64, width:self.view.bounds.size.width, height:height))
     }
     
     override func viewWillAppear(_ animated: Bool) {

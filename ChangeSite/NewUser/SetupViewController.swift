@@ -12,6 +12,7 @@ class SetupViewController: UIViewController {
     
     var pumpSiteManager: PumpSiteManager!
     var remindersManager: RemindersManager!
+    var siteDatesProvider = SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext)
     
     @IBOutlet weak var setStartDateLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
@@ -30,6 +31,7 @@ class SetupViewController: UIViewController {
         pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
         pumpSiteManager.updatePumpSite(daysBtwnChanges: Int(stepper.value))
         // Save to CoreData
+        siteDatesProvider.deleteAllEntries()
         SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: AppDelegate.sharedAppDelegate.coreDataStack)
         AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         

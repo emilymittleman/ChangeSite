@@ -39,7 +39,7 @@ class HomeViewModel {
     // MARK: Mutators
     
     public func endPumpSite(endDate: Date) {
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        // UIApplication.shared.applicationIconBadgeNumber = 0
         SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: endDate, with: coreDataStack)
         coreDataStack.saveContext()
         notificationManager.removeAllNotifications()

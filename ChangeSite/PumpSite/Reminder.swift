@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ARKit
 
 enum ReminderType: Int, Codable, CaseIterable {
     case oneDayBefore = -1, dayOf, oneDayAfter, twoDaysAfter, extendedDaysAfter
