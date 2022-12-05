@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     var viewModel: HomeViewModel!
     var notificationManager = NotificationManager.shared
     
-    var timer:Timer?
+    var timer: Timer?
         
     @IBOutlet weak var calendar: FSCalendar!
     
@@ -213,6 +213,13 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     
     
     // MARK: - Navigation
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // TODO: Make sure this gets called when user closes app
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
+        timer = nil
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
