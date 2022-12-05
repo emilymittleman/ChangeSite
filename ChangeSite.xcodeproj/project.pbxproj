@@ -36,6 +36,7 @@
 		5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */; };
 		5DB8911923003FE80000BFC6 /* StartDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911823003FE80000BFC6 /* StartDateController.swift */; };
 		5DB8911B2300401E0000BFC6 /* ReminderFrequencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */; };
+		5DC601FF293E4FC70029DBF5 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC601FE293E4FC70029DBF5 /* Dynamic.swift */; };
 		5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD329F230023AB00BC2E07 /* AppDelegate.swift */; };
 		5DCD32A2230023AB00BC2E07 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */; };
 		5DCD32A5230023AB00BC2E07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DCD32A3230023AB00BC2E07 /* Main.storyboard */; };
@@ -127,6 +128,7 @@
 		5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		5DB8911823003FE80000BFC6 /* StartDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateController.swift; sourceTree = "<group>"; };
 		5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFrequencyController.swift; sourceTree = "<group>"; };
+		5DC601FE293E4FC70029DBF5 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		5DCD329C230023AB00BC2E07 /* ChangeSite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChangeSite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DCD329F230023AB00BC2E07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				5D6D270F291F94AE00BEC655 /* Fonts */,
 				5DF50C4C2920163200E3695C /* PumpSite.xcdatamodeld */,
 				5DF50C5C29271E4A00E3695C /* SettingsV2 */,
+				5DC601FE293E4FC70029DBF5 /* Dynamic.swift */,
 			);
 			path = ChangeSite;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				5DF50C4E2920163200E3695C /* PumpSite.xcdatamodeld in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
 				5D13E7B927A4F96D007CC645 /* NotificationService.swift in Sources */,
+				5DC601FF293E4FC70029DBF5 /* Dynamic.swift in Sources */,
 				5D7868832300984B00A54436 /* HomeViewController.swift in Sources */,
 				5DF50C5629203E7000E3695C /* SiteDatesProvider.swift in Sources */,
 				5D6D2708291F684A00BEC655 /* TabItem.swift in Sources */,
