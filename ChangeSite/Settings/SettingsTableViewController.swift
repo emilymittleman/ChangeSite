@@ -39,7 +39,6 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        stepper.autorepeat = true
         stepper.minimumValue = 1
         self.updateUI()
     }

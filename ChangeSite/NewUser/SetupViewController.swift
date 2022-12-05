@@ -23,7 +23,7 @@ class SetupViewController: UIViewController {
     @IBOutlet weak var daysBtwn: UILabel!
     @IBOutlet weak var stepper: UIStepper!
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        daysBtwn.text = Int(sender.value).description //make sure can't go negative
+        daysBtwn.text = Int(sender.value).description
     }
     
     @IBOutlet weak var saveButton: UIButton!
@@ -65,6 +65,7 @@ class SetupViewController: UIViewController {
         startDatePicker.setDate(pickerDate, animated: true)
         daysBtwn.text = String(pumpSiteManager.daysBtwn)
         stepper.value = Double(pumpSiteManager.daysBtwn)
+        stepper.minimumValue = 1
     }
     
     private func updateUI() {
@@ -95,6 +96,8 @@ class SetupViewController: UIViewController {
         border.frame = CGRect(x: 0, y: label.frame.size.height-2, width: label.frame.size.width, height: 2)
         label.addSubview(border)
     }
+    
+    // MARK: Testing
     
     private func addTestEntries() {
         let siteData = makeTestSiteData()
