@@ -36,9 +36,20 @@ class SettingsViewModel {
     
     public func formattedStartDate() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        dateFormatter.timeStyle = DateFormatter.Style.short
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
         return dateFormatter.string(from: self.pumpSiteManager.startDate)
+    }
+    
+    public func defaultChangeTime() -> String {
+        if let defaultChangeTimeData = UserDefaults.standard.object(forKey: UserDefaults.Keys.defaultChangeTime.rawValue),
+           let defaultChangeTime = defaultChangeTimeData as? Date {
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+            formatter.dateStyle = .none
+            return formatter.string(from: defaultChangeTime)
+        }
+        return "Off"
     }
     
     public func reminderFrequencyStrings() -> [String] {

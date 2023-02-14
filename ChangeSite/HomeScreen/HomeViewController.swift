@@ -169,7 +169,13 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         // hide New site button
         newSiteButton.isHidden = true
         
-        let pickerDate = formatDate(Date())
+        var pickerDate = formatDate(Date())
+        if let changeTime = UserDefaults.standard.object(forKey: UserDefaults.Keys.defaultChangeTime.rawValue) as? Date {
+            let hours = Calendar.current.component(.hour, from: changeTime)
+            let minutes = Calendar.current.component(.minute, from: changeTime)
+            pickerDate = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: pickerDate) ?? pickerDate
+        }
+        
         startDatePicker.setDate(pickerDate, animated: true)
         startDatePicker.minimumDate = formatDate(viewModel.pumpSiteStartDate())
     }

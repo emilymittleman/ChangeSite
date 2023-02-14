@@ -14,8 +14,8 @@ class SettingsTableViewController: UITableViewController {
     var notificationManager = NotificationManager.shared
     
     @IBOutlet weak var startDate: UILabel!
-    
     @IBOutlet weak var daysBtwn: UILabel!
+    @IBOutlet weak var defaultChangeTime: UILabel!
     
     @IBOutlet weak var stepper: UIStepper!
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -25,6 +25,7 @@ class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var newSiteCell: UITableViewCell!
     @IBOutlet weak var daysBtwnCell: UITableViewCell!
+    @IBOutlet weak var defaultChangeTimeCell: UITableViewCell!
     @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var cell2: UITableViewCell!
     @IBOutlet weak var cell3: UITableViewCell!
@@ -60,6 +61,7 @@ class SettingsTableViewController: UITableViewController {
         // ----- Update the view with reminder data (startDate, daysBtwn, & reminders) -----
         startDate.text = viewModel.formattedStartDate()
         daysBtwn.text = viewModel.pumpSiteDaysBtwnString()
+        defaultChangeTime.text = viewModel.defaultChangeTime()
         stepper.value = viewModel.pumpSiteDaysBtwn()
         setReminderFrequencyText()
     }
@@ -68,7 +70,7 @@ class SettingsTableViewController: UITableViewController {
         // Background color
         let mode = traitCollection.userInterfaceStyle
         view.backgroundColor = UIColor.background(mode)
-        let cells: [UITableViewCell] = [newSiteCell, daysBtwnCell, cell1, cell2, cell3, cell4, cell5]
+        let cells: [UITableViewCell] = [newSiteCell, daysBtwnCell, defaultChangeTimeCell, cell1, cell2, cell3, cell4, cell5]
         for cell in cells {
             cell.backgroundColor = UIColor.background(mode)
             for subview in cell.contentView.subviews {
@@ -91,6 +93,9 @@ class SettingsTableViewController: UITableViewController {
     // NAVIGATION
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextViewController = segue.destination as? StartDateController {
+            nextViewController.pumpSiteManager = viewModel.pumpSiteManager
+        }
+        else if let nextViewController = segue.destination as? DefaultChangeTimeController {
             nextViewController.pumpSiteManager = viewModel.pumpSiteManager
         }
         else if let nextViewController = segue.destination as? ReminderFrequencyController,

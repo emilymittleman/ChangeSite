@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="tXC-ax-6Bs">
-                                <rect key="frame" x="14" y="206" width="344" height="226"/>
+                                <rect key="frame" x="12" y="206" width="345" height="226"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="startDatePickerChanged:" destination="CGv-vA-GDz" eventType="valueChanged" id="A8B-j1-qAQ"/>
@@ -179,12 +179,39 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="mFO-5E-227" userLabel="Default Change Cell">
+                                        <rect key="frame" x="0.0" y="137.33333587646484" width="375" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mFO-5E-227" id="3FP-y6-tSO">
+                                            <rect key="frame" x="0.0" y="0.0" width="344.66666666666669" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default change time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApE-CR-t7D">
+                                                    <rect key="frame" x="16" y="0.0" width="195" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="17"/>
+                                                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Off" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJE-ua-k5g">
+                                                    <rect key="frame" x="219" y="8" width="117" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
+                                                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="kAn-ep-kPN" kind="show" id="noV-t2-r7H"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="REMINDER NOTIFICATIONS" id="gkZ-AR-x8c">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="8qe-Cm-SCr">
-                                        <rect key="frame" x="0.0" y="215.33333587646484" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="259.00000381469727" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8qe-Cm-SCr" id="kc0-C7-GY2">
                                             <rect key="frame" x="0.0" y="0.0" width="344.66666666666669" height="43.666667938232422"/>
@@ -211,7 +238,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="we8-6t-CbA">
-                                        <rect key="frame" x="0.0" y="259.00000381469727" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="302.66667175292969" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="we8-6t-CbA" id="fMP-Lb-SXw">
                                             <rect key="frame" x="0.0" y="0.0" width="344.66666666666669" height="43.666667938232422"/>
@@ -238,7 +265,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="zco-gi-vxM">
-                                        <rect key="frame" x="0.0" y="302.66667175292969" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="346.33333969116211" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zco-gi-vxM" id="R4i-qy-4SQ">
                                             <rect key="frame" x="0.0" y="0.0" width="344.66666666666669" height="43.666667938232422"/>
@@ -265,7 +292,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="ixd-RV-fZN">
-                                        <rect key="frame" x="0.0" y="346.33333969116211" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="390.00000762939453" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ixd-RV-fZN" id="djt-MU-CJB">
                                             <rect key="frame" x="0.0" y="0.0" width="344.66666666666669" height="43.666667938232422"/>
@@ -292,7 +319,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="sfx-oB-19X">
-                                        <rect key="frame" x="0.0" y="390.00000762939453" width="375" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="433.66667556762695" width="375" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sfx-oB-19X" id="JCj-QG-HtB">
                                             <rect key="frame" x="0.0" y="0.0" width="344.66666666666669" height="43.666667938232422"/>
@@ -334,6 +361,8 @@
                         <outlet property="cell5" destination="sfx-oB-19X" id="9p3-DB-mm4"/>
                         <outlet property="daysBtwn" destination="txO-iM-3xk" id="KOw-Ie-KMy"/>
                         <outlet property="daysBtwnCell" destination="dL1-Rv-R3E" id="TuL-aJ-55v"/>
+                        <outlet property="defaultChangeTime" destination="fJE-ua-k5g" id="MyQ-JM-UoV"/>
+                        <outlet property="defaultChangeTimeCell" destination="mFO-5E-227" id="dEc-sQ-MD5"/>
                         <outlet property="newSiteCell" destination="FJw-D6-eNa" id="1LV-Mr-0Co"/>
                         <outlet property="occurrence0" destination="McM-gd-Nsc" id="YlO-Ef-Ynm"/>
                         <outlet property="occurrence1" destination="SIA-uJ-bjt" id="LaI-k8-gcK"/>
@@ -346,7 +375,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x8Q-an-WWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3276" y="1573"/>
+            <point key="canvasLocation" x="3276" y="1572.4137931034484"/>
         </scene>
         <!--Reminder Frequency Controller-->
         <scene sceneID="PJO-dt-b2b">
@@ -378,7 +407,7 @@
                                 </connections>
                             </switch>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="15" style="wheels" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIN-nL-cmZ">
-                                <rect key="frame" x="13" y="384" width="345" height="162"/>
+                                <rect key="frame" x="12" y="384" width="345" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="dateChanged:" destination="qAZ-wS-KA3" eventType="valueChanged" id="PbG-q8-ILm"/>
@@ -446,7 +475,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="uQP-Pl-U4f">
-                                <rect key="frame" x="13" y="199" width="345" height="226"/>
+                                <rect key="frame" x="12" y="199" width="345" height="226"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="startDatePickerChanged:" destination="Ioj-6E-9QU" eventType="valueChanged" id="2f1-NT-UUd"/>
@@ -488,6 +517,60 @@
                 <exit id="CBW-sc-XG1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4309.6000000000004" y="1072.9064039408868"/>
+        </scene>
+        <!--Default Change Time Controller-->
+        <scene sceneID="usy-pg-ihc">
+            <objects>
+                <viewController id="kAn-ep-kPN" customClass="DefaultChangeTimeController" customModule="ChangeSite" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vkz-km-iIq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="703"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="jgm-S3-P1G">
+                                <rect key="frame" x="16" y="196" width="343" height="226"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="startDatePickerChanged:" destination="Ioj-6E-9QU" eventType="valueChanged" id="xEA-G2-sdj"/>
+                                    <action selector="timeickerChanged:" destination="kAn-ep-kPN" eventType="valueChanged" id="96I-vP-Ibl"/>
+                                </connections>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xyM-2K-ULS">
+                                <rect key="frame" x="38" y="480" width="299" height="101"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="30"/>
+                                <color key="tintColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Save" backgroundImage="ButtonOutline">
+                                    <color key="titleColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="newSitePressed:" destination="vIe-eI-SVQ" eventType="touchUpInside" id="56i-u1-rin"/>
+                                    <action selector="saveButtonPressed:" destination="kAn-ep-kPN" eventType="touchUpInside" id="QAd-Qw-pwP"/>
+                                    <action selector="saveButtonPressed:" destination="Ioj-6E-9QU" eventType="touchUpInside" id="fJp-PW-wRh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set default change time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tC-cK-FQw">
+                                <rect key="frame" x="16" y="108" width="343" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gcq-Lw-Nox"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jAk-jb-Goo"/>
+                    <connections>
+                        <outlet property="saveButton" destination="xyM-2K-ULS" id="vhq-27-hjB"/>
+                        <outlet property="setDefaultChangeTimeLabel" destination="8tC-cK-FQw" id="60A-Bd-ffI"/>
+                        <outlet property="timePicker" destination="jgm-S3-P1G" id="BmK-Fm-UlK"/>
+                        <segue destination="XrM-jp-fkj" kind="unwind" identifier="unwindDefaultChangeTimeToSettings" unwindAction="unwindToContainerVC:" id="JWe-jI-ODZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EWR-z9-BTx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="XrM-jp-fkj" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5105" y="1073"/>
         </scene>
         <!--Settings TableVC-->
         <scene sceneID="7R4-zM-NGN">
@@ -668,7 +751,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-1r-9UE">
-                                <rect key="frame" x="-7" y="587" width="369" height="216"/>
+                                <rect key="frame" x="-8" y="587" width="369" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>

@@ -55,6 +55,11 @@ class PumpSiteManager {
             self.saveToStorage()
         }
     }
+    
+    public func updatePumpSite(changeTime: Date) {
+        self.pumpSite.setChangeTime(changeTime: changeTime)
+        self.saveToStorage()
+    }
 }
 
 fileprivate class PumpSite: Codable {
@@ -80,6 +85,12 @@ fileprivate class PumpSite: Codable {
         self.daysBtwn = daysBtwn
         self.endDate = startDate
         self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
+    }
+    
+    func setChangeTime(changeTime: Date) {
+        let hours = Calendar.current.component(.hour, from: changeTime)
+        let minutes = Calendar.current.component(.minute, from: changeTime)
+        self.endDate = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: self.endDate)!
     }
 }
 
