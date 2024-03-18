@@ -8,17 +8,24 @@
 
 import Foundation
 import UIKit
+import SwiftUI
+
+public extension Bundle {
+  var appGroupID: String {
+    "group.com.EmilyMittleman.ChangeSite"
+  }
+}
 
 enum AppConstants {
-    static let secondsPerDay = 60 * 60 * 24
+  static let secondsPerDay = 60 * 60 * 24
 }
 
 // MARK: Storage
 
 extension UserDefaults {
-    enum Keys: String {
-        case pumpSite, reminders, newUser
-    }
+  enum Keys: String {
+    case pumpSite, reminders, newUser
+  }
 }
 
 // MARK: Public helper functions
@@ -46,7 +53,29 @@ public func formatDate(_ date: Date) -> Date {
     return Calendar.current.date(bySettingHour: hours, minute: minutesHalf, second: 0, of: date)!
 }
 
+// MARK: Date
+
+extension Date {
+  func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+    return calendar.dateComponents(Set(components), from: self)
+  }
+
+  func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+    return calendar.component(component, from: self)
+  }
+}
+
 // MARK: Colors
+
+extension View {
+  @inlinable public func foregroundColor(_ color: UIColor) -> some View {
+    return foregroundColor(Color(color))
+  }
+
+  @inlinable public func background(_ color: UIColor) -> some View {
+    return background(Color(color))
+  }
+}
 
 extension UIColor {
     
@@ -57,7 +86,11 @@ extension UIColor {
         }
         return UIColor.systemBackground.resolvedColor(with: UITraitCollection.init(userInterfaceStyle: .light))
     }
-    
+
+    class func background(_ mode: ColorScheme) -> UIColor {
+        return background(mode == .light ? UIUserInterfaceStyle.light : UIUserInterfaceStyle.dark)
+    }
+
     // Light mode -> white, Dark mode -> charcoal
     class func tabBarTint(_ mode: UIUserInterfaceStyle) -> UIColor {
         if mode == .dark {
@@ -65,17 +98,23 @@ extension UIColor {
         }
         return .clear
     }
-    
+
+    class func tabBarTint(_ mode: ColorScheme) -> UIColor {
+      return tabBarTint(mode == .light ? UIUserInterfaceStyle.light : UIUserInterfaceStyle.dark)
+    }
+
     // Dark mode returns white
     class func charcoal(_ mode: UIUserInterfaceStyle) -> UIColor {
         if mode == .dark {
-            return background(.light)
+            return background(UIUserInterfaceStyle.light)
         }
         return UIColor(red: 63/255.0, green: 63/255.0, blue: 63/255.0, alpha: 1.0)
     }
-    
+    class func charcoal(_ mode: ColorScheme) -> UIColor {
+      return charcoal(mode == .light ? UIUserInterfaceStyle.light : UIUserInterfaceStyle.dark)
+    }
     class var charcoal: UIColor {
-        return charcoal(.light)
+        return charcoal(UIUserInterfaceStyle.light)
     }
     
     class var lightBlue: UIColor {
@@ -83,19 +122,20 @@ extension UIColor {
     }
     
     class var purpleBlue: UIColor {
-        return purpleBlue(.light)
+        return purpleBlue(UIUserInterfaceStyle.light)
     }
+
     class func purpleBlue(_ mode: UIUserInterfaceStyle) -> UIColor {
         if mode == .dark {
             return lightGreen
         }
         return UIColor(red: 92/255.0, green: 109/255.0, blue: 255/255.0, alpha: 1.0)
     }
-    
+
     class var lightGreen: UIColor {
         return UIColor.rgb(fromHex: 0x92FFD8)
     }
-    
+
     class func tabGrey(_ mode: UIUserInterfaceStyle) -> UIColor {
         if mode == .dark {
             return background(.light)
