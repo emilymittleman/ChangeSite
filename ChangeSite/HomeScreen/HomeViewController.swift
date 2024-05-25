@@ -169,7 +169,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
         // hide New site button
         newSiteButton.isHidden = true
         
-        let pickerDate = formatDate(Date())
+        let pickerDate = formatDate(.now)
         startDatePicker.setDate(pickerDate, animated: true)
         startDatePicker.minimumDate = formatDate(viewModel.pumpSiteStartDate())
     }

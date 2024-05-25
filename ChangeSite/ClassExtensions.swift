@@ -138,7 +138,7 @@ extension UIColor {
 
     class func tabGrey(_ mode: UIUserInterfaceStyle) -> UIColor {
         if mode == .dark {
-            return background(.light)
+            return background(UIUserInterfaceStyle.light)
         }
         return UIColor(red: 92/255.0, green: 97/255.0, blue: 113/255.0, alpha: 1.0)
     }

@@ -61,7 +61,7 @@ class SetupViewController: UIViewController {
         super.viewDidLoad()
 
         self.updateUI()
-        let pickerDate = formatDate(Date())
+        let pickerDate = formatDate(.now)
         startDatePicker.setDate(pickerDate, animated: true)
         daysBtwn.text = String(pumpSiteManager.daysBtwn)
         stepper.value = Double(pumpSiteManager.daysBtwn)

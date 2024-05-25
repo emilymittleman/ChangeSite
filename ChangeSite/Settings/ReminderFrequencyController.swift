@@ -153,10 +153,9 @@ class ReminderFrequencyController: UIViewController {
     
     private func getRepeatingFromDatePicker() -> Date {
         let date = datePicker.date
-        let currentDate = Date()
         let hours = Calendar.current.component(.hour, from: date)
         let minutes = Calendar.current.component(.minute, from: date)
-        let repeatingFrequency = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: currentDate)!
+        let repeatingFrequency = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: .now)!
         return repeatingFrequency
     }
     

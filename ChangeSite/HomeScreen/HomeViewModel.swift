@@ -61,7 +61,7 @@ class HomeViewModel {
         
         // check daysOverdue (daysOverdue & expiredDate will be updated if daysBtwn changed)
         if pumpSiteManager.overdue {
-            let daysOver = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: Date())
+          let daysOver = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: .now)
             if daysOver != currentSite.daysOverdue {
                 SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
             }
@@ -75,7 +75,7 @@ class HomeViewModel {
     }
     
     public func getCountdownText() -> String {
-      return ChangeSite.getCountdownText(pumpSiteManager)
+      return ChangeSite.getCountdownText(pumpSiteManager.getPumpSite())
     }
     
 }

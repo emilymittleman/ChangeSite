@@ -24,20 +24,19 @@ import WidgetKit
 //}
 
 struct CountdownLabel: View {
-  var pumpSiteManager: PumpSiteManager
+  var pumpSite: PumpSite
   @Environment(\.colorScheme) var scheme: ColorScheme
 
   var body: some View {
     VStack(alignment: .center) {
-      Text(getCountdownText(pumpSiteManager))
+      Text(getCountdownText(pumpSite))
         .cs(font: CSFont(fontSize: 20, lineHeight: 20))
-        .foregroundColor(pumpSiteManager.overdue ? UIColor.paleRed : UIColor.charcoal(scheme))
+        .foregroundColor(pumpSite.overdue ? UIColor.paleRed : UIColor.charcoal(scheme))
     }
   }
 }
 
 struct NewSiteStartedButton: View {
-  var pumpSiteManager: PumpSiteManager
   @Environment(\.colorScheme) var scheme: ColorScheme
 
   var body: some View {
@@ -58,30 +57,29 @@ struct NewSiteStartedButton: View {
 
 struct ChangeSiteWidgetView: View {
   var entry: ChangeSiteTimelineProvider.Entry
-  var pumpSiteManager: PumpSiteManager
+  var pumpSite: PumpSite
   @Environment(\.colorScheme) var scheme: ColorScheme
 
   init(entry: ChangeSiteTimelineProvider.Entry) {
     self.entry = entry
-    self.pumpSiteManager = PumpSiteManager(
-      startDate: entry.startDate, daysBtwn: entry.daysBtwn
-    )
+    self.pumpSite = entry.pumpSite
   }
 
   var body: some View {
     VStack(alignment: .center) {
-      CalendarSingleLineView(pumpSiteManager: pumpSiteManager)
+      CalendarSingleLineView(pumpSite: pumpSite)
       Spacer()
       //NextChangeLabel(endDate: pumpSiteManager.endDate)
-      CountdownLabel(pumpSiteManager: pumpSiteManager)
+      CountdownLabel(pumpSite: pumpSite)
       Spacer()
-      NewSiteStartedButton(pumpSiteManager: pumpSiteManager)
+      NewSiteStartedButton()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .environment(\.colorScheme, .dark)
     .containerBackground(for: .widget) {
       Color(UIColor.background(ColorScheme.dark))
     }
+    //.widgetBackground()
   }
 }
 

@@ -54,7 +54,7 @@ class SiteDatesProvider {
             // set endDate to current day if site is current session
             if end == nil {
                 if isCurrentSite(site) {
-                    end = formatCoreDataDate(Date())
+                  end = formatCoreDataDate(.now)
                 } else { continue }
             }
             

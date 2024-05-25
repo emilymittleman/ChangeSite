@@ -9,18 +9,15 @@
 import WidgetKit
 import SwiftUI
 
-public let defaultPumpSiteManager = PumpSiteManager(startDate: .now, daysBtwn: 3)
-public let defaultPumpSiteEntry = PumpSiteEntry(date: .now, startDate: .now, daysBtwn: 3)
+public let defaultPumpSiteEntry = PumpSiteEntry(date: .now, pumpSite: PumpSite())
 
 public struct PumpSiteEntry: TimelineEntry {
   public let date: Date // The date for WidgetKit to render a widget
-  public let startDate: Date
-  public let daysBtwn: Int
+  public let pumpSite: PumpSite
 
-  public init(date: Date, startDate: Date, daysBtwn: Int) {
+  public init(date: Date, pumpSite: PumpSite) {
     self.date = date
-    self.startDate = startDate
-    self.daysBtwn = daysBtwn
+    self.pumpSite = pumpSite
   }
 }
 
@@ -34,17 +31,11 @@ struct ChangeSiteWidget: Widget {
 
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: kind, provider: ChangeSiteTimelineProvider()) { entry in
-      if #available(iOS 17.0, *) {
-        ChangeSiteWidgetView(entry: entry)
-        //.containerBackground(.fill.tertiary, for: .widget)
-      } else {
-        ChangeSiteWidgetView(entry: entry)
-//          .padding()
-//          .background()
-      }
+      ChangeSiteWidgetView(entry: entry)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    .configurationDisplayName("My Widget")
-    .description("This is an example widget.")
+    .configurationDisplayName("Pump Site Countdown")
+    .description("Display time until next pump site change")
   }
 }
 

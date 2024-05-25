@@ -27,7 +27,12 @@ class Reminder: Codable {
         case type, frequency, soundOn, repeatingFrequency, id
     }
     
-    init(type: ReminderType, frequency: ReminderFrequency = .none, soundOn: Bool = false, repeatingFrequency: Date = Calendar.current.date(bySettingHour:0, minute:5, second:0, of:Date())!) {
+  init(
+    type: ReminderType,
+    frequency: ReminderFrequency = .none, 
+    soundOn: Bool = false,
+    repeatingFrequency: Date = Calendar.current.date(bySettingHour:0, minute:5, second:0, of:.now)!
+  ) {
         self.type = type
         self.frequency = frequency
         self.soundOn = soundOn

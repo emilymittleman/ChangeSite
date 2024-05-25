@@ -21,22 +21,20 @@ public func getNextChangeText(_ pumpSiteManager: PumpSiteManager) -> String {
 }
 
 public func getWeekday(from date: Date) -> String {
-  if Calendar.current.isDate(date, inSameDayAs: Date()) {
+  if Calendar.current.isDate(date, inSameDayAs: .now) {
     return "today"
   }
   return dateFormatter("EEEE").string(from: date).capitalized
 }
 
-//public func getDay(from date: Date) 
-
-public func getCountdownText(_ pumpSiteManager: PumpSiteManager) -> String {
-  let days = daysBetweenDates(from: Date(), to: pumpSiteManager.endDate)
-  let diff = Calendar.current.dateComponents([.hour, .minute], from: Date(), to: pumpSiteManager.endDate)
+public func getCountdownText(_ pumpSite: PumpSite) -> String {
+  let days = daysBetweenDates(from: .now, to: pumpSite.endDate)
+  let diff = Calendar.current.dateComponents([.hour, .minute], from: .now, to: pumpSite.endDate)
   let hours = abs(diff.hour ?? 0)
   let minutes = abs(diff.minute ?? 0)
 
   return makeCountdownText(
-    isOverdue: pumpSiteManager.overdue,
+    isOverdue: pumpSite.overdue,
     time: days == 0 ? hours == 0 ? minutes : hours : days,
     timeUnit: days == 0
       ? hours == 0

@@ -16,9 +16,10 @@ struct SiteStartedIntent: AppIntent {
   static var description = IntentDescription("Starts a new pump site.")
 
   private static let storage = UserDefaultsAccessHelper.sharedInstance
+  private static let pumpSiteManager = PumpSiteManager()
 
   func perform() async throws -> some IntentResult {
-    PumpSiteManager().updatePumpSite(startDate: Date())
+    SiteStartedIntent.pumpSiteManager.updatePumpSite(startDate: .now)
     return .result()
   }
 }

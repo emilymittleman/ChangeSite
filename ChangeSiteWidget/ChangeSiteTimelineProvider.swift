@@ -11,32 +11,32 @@ import WidgetKit
 import SwiftUI
 
 struct ChangeSiteTimelineProvider: TimelineProvider {
+  
+  var pumpSiteManager = PumpSiteManager()
+
   func placeholder(in context: Context) -> PumpSiteEntry {
-    PumpSiteEntry(date: .now, startDate: .now, daysBtwn: 3)
+    PumpSiteEntry(date: .now, pumpSite: PumpSite())
   }
 
   func getSnapshot(in context: Context, completion: @escaping (PumpSiteEntry) -> ()) {
-    let entry = PumpSiteEntry(date: .now, startDate: .now, daysBtwn: 3)
+    let entry = PumpSiteEntry(date: .now, pumpSite: PumpSite())
     completion(entry)
 
     if context.isPreview {
       completion(entry)
     } else {
-      Self.getPumpSiteEntry() { pumpSiteEntry in
-        completion(pumpSiteEntry)
-      }
+      completion(self.getPumpSiteEntry())
     }
   }
 
   func getTimeline(in context: Context, completion: @escaping (Timeline<PumpSiteEntry>) -> Void) {
-    Self.getPumpSiteEntry() { pumpSiteEntry in
-      let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
-      let timeline = Timeline(entries: [pumpSiteEntry], policy: .after(nextUpdateDate))
-      completion(timeline)
-    }
+    let pumpSiteEntry = self.getPumpSiteEntry()
+    let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: .now)!
+    let timeline = Timeline(entries: [pumpSiteEntry], policy: .after(nextUpdateDate))
+    completion(timeline)
   }
 
-  static func getPumpSiteEntry(completion: @escaping (PumpSiteEntry) -> Void) {
-    completion(PumpSiteEntry(date: .now, startDate: .now, daysBtwn: 3))
+  func getPumpSiteEntry() -> PumpSiteEntry {
+    return PumpSiteEntry(date: .now, pumpSite: pumpSiteManager.getPumpSite())
   }
 }

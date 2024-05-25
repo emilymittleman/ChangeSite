@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19EFC8BC63B68EC11112C606 /* Pods_ChangeSiteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE62457D2B85E1F42E5E36A /* Pods_ChangeSiteTests.framework */; };
+		5D007C382C0296630022F713 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C372C0296630022F713 /* View+Extensions.swift */; };
+		5D007C3A2C0298400022F713 /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C392C0298400022F713 /* PumpSite.swift */; };
+		5D007C3B2C0298400022F713 /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C392C0298400022F713 /* PumpSite.swift */; };
 		5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09CDFC23026991006E914F /* ClassExtensions.swift */; };
 		5D13E7B027A4F732007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E7AF27A4F732007CC645 /* NotificationService.swift */; };
 		5D13E7B427A4F732007CC645 /* ChangeSiteNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -50,7 +52,6 @@
 		5DF50C5B2926BABC00E3695C /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5A2926BABC00E3695C /* SetupViewController.swift */; };
 		5DF50C60292720E200E3695C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5F292720E200E3695C /* SettingsViewModel.swift */; };
 		6A9B1D20C188259F216AD60B /* Pods_ChangeSite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */; };
-		AA7D7A8B310AF1E171640778 /* Pods_ChangeSite_ChangeSiteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5235BCE46BFFD0E6673471 /* Pods_ChangeSite_ChangeSiteUITests.framework */; };
 		CB26A47A2B68DA9900AC03F4 /* CalendarSingleLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB26A4782B68DA9900AC03F4 /* CalendarSingleLineView.swift */; };
 		CB48F3612B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB48F3602B832AB00047A6E5 /* SiteStartedIntent.swift */; };
 		CB48F3622B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB48F3602B832AB00047A6E5 /* SiteStartedIntent.swift */; };
@@ -82,20 +83,6 @@
 			remoteGlobalIDString = 5D13E7AC27A4F732007CC645;
 			remoteInfo = ChangeSiteNotificationService;
 		};
-		5DCD32B1230023AD00BC2E07 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5DCD3294230023AB00BC2E07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5DCD329B230023AB00BC2E07;
-			remoteInfo = ChangeSite2;
-		};
-		5DCD32BC230023AE00BC2E07 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5DCD3294230023AB00BC2E07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5DCD329B230023AB00BC2E07;
-			remoteInfo = ChangeSite2;
-		};
 		CBDCC1FC2B60CE2A00BD995B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DCD3294230023AB00BC2E07 /* Project object */;
@@ -121,9 +108,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3AE62457D2B85E1F42E5E36A /* Pods_ChangeSiteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChangeSiteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E8B4F1851151FED90DFDFBA /* Pods-ChangeSiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSiteTests.release.xcconfig"; path = "Target Support Files/Pods-ChangeSiteTests/Pods-ChangeSiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChangeSite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D007C372C0296630022F713 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		5D007C392C0298400022F713 /* PumpSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSite.swift; sourceTree = "<group>"; };
 		5D09CDFC23026991006E914F /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		5D13E7A827A4ECC5007CC645 /* ChangeSite.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChangeSite.entitlements; sourceTree = "<group>"; };
 		5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChangeSiteNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,8 +148,6 @@
 		5DCD32A6230023AD00BC2E07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DCD32A9230023AD00BC2E07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DCD32AB230023AD00BC2E07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5DCD32B0230023AD00BC2E07 /* ChangeSiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChangeSiteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5DCD32BB230023AE00BC2E07 /* ChangeSiteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChangeSiteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF50C4A292012EF00E3695C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		5DF50C4D2920163200E3695C /* PumpSite.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PumpSite.xcdatamodel; sourceTree = "<group>"; };
 		5DF50C4F2920175D00E3695C /* SiteDates+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SiteDates+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -192,7 +178,6 @@
 		CBDCC20E2B60EF8300BD995B /* PumpSiteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteUtils.swift; sourceTree = "<group>"; };
 		CBE4FF862BA7C71600C04AF4 /* UserDefaultsAccessHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccessHelper.swift; sourceTree = "<group>"; };
 		FC11795DA6EAFA1253235116 /* Pods-ChangeSiteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSiteTests.debug.xcconfig"; path = "Target Support Files/Pods-ChangeSiteTests/Pods-ChangeSiteTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FE5235BCE46BFFD0E6673471 /* Pods_ChangeSite_ChangeSiteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChangeSite_ChangeSiteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,22 +194,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A9B1D20C188259F216AD60B /* Pods_ChangeSite.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5DCD32AD230023AD00BC2E07 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				19EFC8BC63B68EC11112C606 /* Pods_ChangeSiteTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5DCD32B8230023AE00BC2E07 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA7D7A8B310AF1E171640778 /* Pods_ChangeSite_ChangeSiteUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */,
-				FE5235BCE46BFFD0E6673471 /* Pods_ChangeSite_ChangeSiteUITests.framework */,
 				CB7F2F2D496B9C6DBC2CD4FB /* Pods_ChangeSiteNotificationService.framework */,
-				3AE62457D2B85E1F42E5E36A /* Pods_ChangeSiteTests.framework */,
 				CBDCC1F02B60CE2800BD995B /* WidgetKit.framework */,
 				CBDCC1F22B60CE2800BD995B /* SwiftUI.framework */,
 			);
@@ -334,6 +301,7 @@
 				5D30E270252D4BD300DB49CA /* Reminder.swift */,
 				5D1B011424C04C2000EE9633 /* RemindersManager.swift */,
 				CBDCC20E2B60EF8300BD995B /* PumpSiteUtils.swift */,
+				5D007C392C0298400022F713 /* PumpSite.swift */,
 			);
 			path = PumpSite;
 			sourceTree = "<group>";
@@ -354,8 +322,6 @@
 			isa = PBXGroup;
 			children = (
 				5DCD329C230023AB00BC2E07 /* ChangeSite.app */,
-				5DCD32B0230023AD00BC2E07 /* ChangeSiteTests.xctest */,
-				5DCD32BB230023AE00BC2E07 /* ChangeSiteUITests.xctest */,
 				5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */,
 				CBDCC1EF2B60CE2800BD995B /* ChangeSiteWidgetExtension.appex */,
 			);
@@ -447,7 +413,6 @@
 				CBDCC2022B60CF9900BD995B /* ChangeSiteTimelineProvider.swift */,
 				CBDCC1F52B60CE2800BD995B /* ChangeSiteWidgetBundle.swift */,
 				CBDCC1F72B60CE2800BD995B /* ChangeSiteWidget.swift */,
-				CB26A4782B68DA9900AC03F4 /* CalendarSingleLineView.swift */,
 				CBDCC1F92B60CE2A00BD995B /* Assets.xcassets */,
 				CBDCC1FB2B60CE2A00BD995B /* Info.plist */,
 			);
@@ -457,7 +422,9 @@
 		CBDCC2042B60D59A00BD995B /* ChangeSiteWidgetUI */ = {
 			isa = PBXGroup;
 			children = (
+				CB26A4782B68DA9900AC03F4 /* CalendarSingleLineView.swift */,
 				CBDCC2052B60D5E300BD995B /* ChangeSiteWidgetView.swift */,
+				5D007C372C0296630022F713 /* View+Extensions.swift */,
 			);
 			path = ChangeSiteWidgetUI;
 			sourceTree = "<group>";
@@ -513,45 +480,6 @@
 			productReference = 5DCD329C230023AB00BC2E07 /* ChangeSite.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5DCD32AF230023AD00BC2E07 /* ChangeSiteTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5DCD32C7230023AE00BC2E07 /* Build configuration list for PBXNativeTarget "ChangeSiteTests" */;
-			buildPhases = (
-				60ACEC62963DD69FA7DA4851 /* [CP] Check Pods Manifest.lock */,
-				5DCD32AC230023AD00BC2E07 /* Sources */,
-				5DCD32AD230023AD00BC2E07 /* Frameworks */,
-				5DCD32AE230023AD00BC2E07 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5DCD32B2230023AD00BC2E07 /* PBXTargetDependency */,
-			);
-			name = ChangeSiteTests;
-			productName = ChangeSite2Tests;
-			productReference = 5DCD32B0230023AD00BC2E07 /* ChangeSiteTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		5DCD32BA230023AE00BC2E07 /* ChangeSiteUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5DCD32CA230023AE00BC2E07 /* Build configuration list for PBXNativeTarget "ChangeSiteUITests" */;
-			buildPhases = (
-				ACE783C8B283C8C2A830B5C9 /* [CP] Check Pods Manifest.lock */,
-				5DCD32B7230023AE00BC2E07 /* Sources */,
-				5DCD32B8230023AE00BC2E07 /* Frameworks */,
-				5DCD32B9230023AE00BC2E07 /* Resources */,
-				C1E30567C893AC67F41195A6 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5DCD32BD230023AE00BC2E07 /* PBXTargetDependency */,
-			);
-			name = ChangeSiteUITests;
-			productName = ChangeSite2UITests;
-			productReference = 5DCD32BB230023AE00BC2E07 /* ChangeSiteUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		CBDCC1EE2B60CE2800BD995B /* ChangeSiteWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CBDCC2012B60CE2A00BD995B /* Build configuration list for PBXNativeTarget "ChangeSiteWidgetExtension" */;
@@ -585,14 +513,6 @@
 					5DCD329B230023AB00BC2E07 = {
 						CreatedOnToolsVersion = 10.3;
 					};
-					5DCD32AF230023AD00BC2E07 = {
-						CreatedOnToolsVersion = 10.3;
-						TestTargetID = 5DCD329B230023AB00BC2E07;
-					};
-					5DCD32BA230023AE00BC2E07 = {
-						CreatedOnToolsVersion = 10.3;
-						TestTargetID = 5DCD329B230023AB00BC2E07;
-					};
 					CBDCC1EE2B60CE2800BD995B = {
 						CreatedOnToolsVersion = 15.1;
 					};
@@ -612,8 +532,6 @@
 			projectRoot = "";
 			targets = (
 				5DCD329B230023AB00BC2E07 /* ChangeSite */,
-				5DCD32AF230023AD00BC2E07 /* ChangeSiteTests */,
-				5DCD32BA230023AE00BC2E07 /* ChangeSiteUITests */,
 				5D13E7AC27A4F732007CC645 /* ChangeSiteNotificationService */,
 				CBDCC1EE2B60CE2800BD995B /* ChangeSiteWidgetExtension */,
 			);
@@ -644,20 +562,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5DCD32AE230023AD00BC2E07 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5DCD32B9230023AE00BC2E07 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CBDCC1ED2B60CE2800BD995B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -670,28 +574,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		60ACEC62963DD69FA7DA4851 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChangeSiteTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7184754363E6E22E643996BF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -731,28 +613,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ACE783C8B283C8C2A830B5C9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChangeSite-ChangeSiteUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B9357C944015577D5BE6CEA7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -773,23 +633,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C1E30567C893AC67F41195A6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -817,6 +660,7 @@
 				5D30E271252D4BD300DB49CA /* Reminder.swift in Sources */,
 				CB48F3612B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */,
 				5DF50C4E2920163200E3695C /* PumpSite.xcdatamodeld in Sources */,
+				5D007C3A2C0298400022F713 /* PumpSite.swift in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
 				5D13E7B927A4F96D007CC645 /* NotificationService.swift in Sources */,
 				CBE4FF872BA7C71600C04AF4 /* UserDefaultsAccessHelper.swift in Sources */,
@@ -844,20 +688,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5DCD32AC230023AD00BC2E07 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5DCD32B7230023AE00BC2E07 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CBDCC1EB2B60CE2800BD995B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -865,6 +695,7 @@
 				CBDCC2032B60CF9900BD995B /* ChangeSiteTimelineProvider.swift in Sources */,
 				CB26A47A2B68DA9900AC03F4 /* CalendarSingleLineView.swift in Sources */,
 				CBDCC1F82B60CE2800BD995B /* ChangeSiteWidget.swift in Sources */,
+				5D007C3B2C0298400022F713 /* PumpSite.swift in Sources */,
 				CBDCC2112B60EFC000BD995B /* PumpSiteManager.swift in Sources */,
 				CB48F3622B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */,
 				CBDCC20A2B60E48C00BD995B /* CSFont.swift in Sources */,
@@ -872,6 +703,7 @@
 				CBDCC1F62B60CE2800BD995B /* ChangeSiteWidgetBundle.swift in Sources */,
 				CBDCC2102B60EF8300BD995B /* PumpSiteUtils.swift in Sources */,
 				CBDCC20D2B60EB9000BD995B /* ClassExtensions.swift in Sources */,
+				5D007C382C0296630022F713 /* View+Extensions.swift in Sources */,
 				CBDCC2062B60D5E300BD995B /* ChangeSiteWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -883,16 +715,6 @@
 			isa = PBXTargetDependency;
 			target = 5D13E7AC27A4F732007CC645 /* ChangeSiteNotificationService */;
 			targetProxy = 5D13E7B227A4F732007CC645 /* PBXContainerItemProxy */;
-		};
-		5DCD32B2230023AD00BC2E07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5DCD329B230023AB00BC2E07 /* ChangeSite */;
-			targetProxy = 5DCD32B1230023AD00BC2E07 /* PBXContainerItemProxy */;
-		};
-		5DCD32BD230023AE00BC2E07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5DCD329B230023AB00BC2E07 /* ChangeSite */;
-			targetProxy = 5DCD32BC230023AE00BC2E07 /* PBXContainerItemProxy */;
 		};
 		CBDCC1FD2B60CE2A00BD995B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1105,7 +927,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
 				INFOPLIST_FILE = "$(SRCROOT)/ChangeSite/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1127,7 +949,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
 				INFOPLIST_FILE = "$(SRCROOT)/ChangeSite/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1136,88 +958,6 @@
 				PRODUCT_NAME = ChangeSite;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		5DCD32C8230023AE00BC2E07 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC11795DA6EAFA1253235116 /* Pods-ChangeSiteTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ChangeSiteTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSiteTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChangeSite.app/ChangeSite";
-			};
-			name = Debug;
-		};
-		5DCD32C9230023AE00BC2E07 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E8B4F1851151FED90DFDFBA /* Pods-ChangeSiteTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ChangeSiteTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSiteTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChangeSite.app/ChangeSite";
-			};
-			name = Release;
-		};
-		5DCD32CB230023AE00BC2E07 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 835EC653B7795330AAB47568 /* Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ChangeSite2UITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite2UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ChangeSite2;
-			};
-			name = Debug;
-		};
-		5DCD32CC230023AE00BC2E07 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65E15DDE77717047C2C892E2 /* Pods-ChangeSite-ChangeSiteUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ChangeSite2UITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite2UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ChangeSite2;
 			};
 			name = Release;
 		};
@@ -1237,7 +977,7 @@
 				INFOPLIST_FILE = ChangeSiteWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ChangeSiteWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Emily Mittleman. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1271,7 +1011,7 @@
 				INFOPLIST_FILE = ChangeSiteWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ChangeSiteWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Emily Mittleman. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1314,24 +1054,6 @@
 			buildConfigurations = (
 				5DCD32C5230023AE00BC2E07 /* Debug */,
 				5DCD32C6230023AE00BC2E07 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5DCD32C7230023AE00BC2E07 /* Build configuration list for PBXNativeTarget "ChangeSiteTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5DCD32C8230023AE00BC2E07 /* Debug */,
-				5DCD32C9230023AE00BC2E07 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5DCD32CA230023AE00BC2E07 /* Build configuration list for PBXNativeTarget "ChangeSiteUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5DCD32CB230023AE00BC2E07 /* Debug */,
-				5DCD32CC230023AE00BC2E07 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

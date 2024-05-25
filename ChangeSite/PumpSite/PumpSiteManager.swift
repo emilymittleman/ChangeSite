@@ -26,6 +26,10 @@ public class PumpSiteManager {
     self.pumpSite = PumpSite(startDate: startDate, daysBtwn: daysBtwn)
     self.saveToStorage()
   }
+  
+  public func getPumpSite() -> PumpSite {
+    return PumpSite(startDate: startDate, daysBtwn: daysBtwn)
+  }
 
   private func retrieveFromStorage() {
     if let pumpSiteData = storage.retrieveValue(UserDefaults.Keys.pumpSite.rawValue),
@@ -41,11 +45,7 @@ public class PumpSiteManager {
   }
 
   private func setDefaultValues() {
-    // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
-    let newUser = (storage.retrieveValue(UserDefaults.Keys.newUser.rawValue) as? Bool) ?? true
-    let date = newUser ? Date(timeIntervalSince1970: 0) : Date()
-    let startingDate = formatDate(date)
-    self.pumpSite = PumpSite(startDate: startingDate, daysBtwn: 4)
+    self.pumpSite = PumpSite(startDate: .now, daysBtwn: 4)
     self.saveToStorage()
   }
 
@@ -58,36 +58,12 @@ public class PumpSiteManager {
   }
     
   public func updatePumpSite(startDate: Date) {
-    if startDate > pumpSite.startDate {
+    // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
+    //let newUser = (storage.retrieveValue(UserDefaults.Keys.newUser.rawValue) as? Bool) ?? true
+    let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
+    if newUser || startDate > pumpSite.startDate {
       self.pumpSite.setStartDate(startDate: startDate)
       self.saveToStorage()
     }
   }
 }
-
-class PumpSite: Codable {
-  private(set) var startDate: Date
-  private(set) var daysBtwn: Int
-  private(set) var endDate: Date
-  var overdue: Bool { get { return self.endDate < Date() } }
-
-  init(startDate: Date, daysBtwn: Int) {
-    self.startDate = startDate
-    self.daysBtwn = daysBtwn
-    self.endDate = startDate
-    self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
-  }
-
-  func setStartDate(startDate: Date) {
-    self.startDate = startDate
-    self.endDate = startDate
-    self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
-  }
-
-  func setDaysBtwn(daysBtwn: Int) {
-    self.daysBtwn = daysBtwn
-    self.endDate = startDate
-    self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
-  }
-}
-

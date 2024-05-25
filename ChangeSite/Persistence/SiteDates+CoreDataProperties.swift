@@ -58,7 +58,7 @@ public extension SiteDates {
         self.daysOverdue = 0
         if pumpSiteManager.overdue {
             // find days btwn expire date & change date (or today if not changed yet, so endDate==nil)
-            let numberOfDays = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: endDate ?? Date())
+          let numberOfDays = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: endDate ?? .now)
             self.daysOverdue = numberOfDays < 0 ? 0 : Int32(numberOfDays)
         }
     }

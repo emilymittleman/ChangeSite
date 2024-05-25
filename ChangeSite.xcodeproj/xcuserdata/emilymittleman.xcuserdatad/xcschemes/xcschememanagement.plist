@@ -17,6 +17,11 @@
 		<key>ChangeSiteNotificationService.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
+		<key>ChangeSiteWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
 		<key>PayloadModification copy.xcscheme_^#shared#^_</key>

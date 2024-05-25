@@ -87,7 +87,7 @@ class NotificationManager: ObservableObject {
         if frequency == .none { return }
         
         // (Test commented out):
-        //      var triggerDate = Date()
+        //      var triggerDate = Date.now
         //      triggerDate.addTimeInterval(TimeInterval(15 + (reminderType.rawValue * 10))) //5, 15, 25, 35
         let timeInterval = timeUntilNotificationFire(reminderType: reminderType)
         if timeInterval <= 0 { return }

@@ -9,6 +9,36 @@
 import SwiftUI
 import WidgetKit
 
+struct CalendarSingleLineView: View {
+  let pumpSite: PumpSite
+  var calendarCells: [CalendarCellView]
+  @Environment(\.colorScheme) var scheme: ColorScheme
+  
+  init(pumpSite: PumpSite) {
+    self.pumpSite = pumpSite
+    self.calendarCells = []
+    for i in 0...4 {
+      let date = Calendar.current.date(byAdding: .day, value: i, to: pumpSite.startDate) ?? .now
+      self.calendarCells.append(CalendarCellView(
+        date: date,
+        fillBackground: Date.now.get(.day) == date.get(.day),
+        outline: i==0 || date.get(.day) == pumpSite.endDate.get(.day)
+      ))
+    }
+  }
+  
+  var body: some View {
+    HStack(alignment: .center) {
+      Spacer(minLength: 0)
+      ForEach(calendarCells.indices, id: \.self) { i in
+        calendarCells[i]
+          .padding(2)
+        Spacer(minLength: 0)
+      }
+    }
+  }
+}
+
 struct CalendarCellView: View {
   var date: Date
   var fillBackground: Bool = false
@@ -38,44 +68,14 @@ struct CalendarCellView: View {
   }
 }
 
-struct CalendarSingleLineView: View {
-  let pumpSiteManager: PumpSiteManager
-  var calendarCells: [CalendarCellView]
-  @Environment(\.colorScheme) var scheme: ColorScheme
-
-  init(pumpSiteManager: PumpSiteManager) {
-    self.pumpSiteManager = pumpSiteManager
-    self.calendarCells = []
-    for i in 0...4 {
-      let date = Calendar.current.date(byAdding: .day, value: i, to: pumpSiteManager.startDate) ?? Date()
-      self.calendarCells.append(CalendarCellView(
-        date: date,
-        fillBackground: Date().get(.day) == date.get(.day),
-        outline: i==0 || date.get(.day) == pumpSiteManager.endDate.get(.day)
-      ))
-    }
-  }
-
-  var body: some View {
-    HStack(alignment: .center) {
-      Spacer(minLength: 0)
-      ForEach(calendarCells.indices, id: \.self) { i in
-        calendarCells[i]
-          .padding(2)
-        Spacer(minLength: 0)
-      }
-    }
-  }
-}
-
 struct CalendarSingleLineView_Previews: PreviewProvider {
   static var previews: some View {
     Group {
-      CalendarSingleLineView(pumpSiteManager: defaultPumpSiteManager)
+      CalendarSingleLineView(pumpSite: PumpSite())
         .previewContext(WidgetPreviewContext(family: .systemSmall))
         .preferredColorScheme(.dark)
 
-      CalendarCellView(date: Date(), fillBackground: false, outline: true)
+      CalendarCellView(date: .now, fillBackground: false, outline: true)
         .previewContext(WidgetPreviewContext(family: .systemSmall))
         .previewDisplayName("Calendar Cell")
     }

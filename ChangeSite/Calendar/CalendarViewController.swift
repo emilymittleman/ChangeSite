@@ -51,7 +51,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         
         // Calender actions
         calendar.allowsSelection = false
-        calendar.today = Date()
+        calendar.today = .now
         calendar.swipeToChooseGesture.isEnabled = true // Swipe-To-Choose
         
         // Calendar UI

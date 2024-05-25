@@ -12,8 +12,6 @@ class UserDefaultsAccessHelper {
   static let sharedInstance = UserDefaultsAccessHelper()
   private var groupUserDefaults: UserDefaults?
 
-  private init() {}
-
   func setUp(withGroupID groupID: String) {
     if groupUserDefaults == nil {
       groupUserDefaults = UserDefaults(suiteName: groupID)
