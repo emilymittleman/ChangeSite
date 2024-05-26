@@ -11,7 +11,7 @@ import SwiftUI
 
 @main
 struct ChangeSiteWidgetBundle: WidgetBundle {
-    var body: some Widget {
-        ChangeSiteWidget()
-    }
+  var body: some Widget {
+    ChangeSiteWidget()
+  }
 }

@@ -13,7 +13,7 @@ struct CalendarSingleLineView: View {
   let pumpSite: PumpSite
   var calendarCells: [CalendarCellView]
   @Environment(\.colorScheme) var scheme: ColorScheme
-  
+
   init(pumpSite: PumpSite) {
     self.pumpSite = pumpSite
     self.calendarCells = []
@@ -26,7 +26,7 @@ struct CalendarSingleLineView: View {
       ))
     }
   }
-  
+
   var body: some View {
     HStack(alignment: .center) {
       Spacer(minLength: 0)

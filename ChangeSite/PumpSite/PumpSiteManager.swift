@@ -25,7 +25,7 @@ public class PumpSiteManager {
     self.pumpSite = PumpSite(startDate: startDate, daysBtwn: daysBtwn)
     self.saveToStorage()
   }
-  
+
   public func getPumpSite() -> PumpSite {
     return PumpSite(startDate: startDate, daysBtwn: daysBtwn)
   }
@@ -55,7 +55,7 @@ public class PumpSiteManager {
       self.saveToStorage()
     }
   }
-    
+
   public func updatePumpSite(startDate: Date) {
     // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
     if AppConfig.isNewUser() || startDate > pumpSite.startDate {

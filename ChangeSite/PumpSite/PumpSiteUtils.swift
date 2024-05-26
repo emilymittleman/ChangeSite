@@ -37,10 +37,10 @@ public func getCountdownText(_ pumpSite: PumpSite) -> String {
     isOverdue: pumpSite.overdue,
     time: days == 0 ? hours == 0 ? minutes : hours : days,
     timeUnit: days == 0
-      ? hours == 0
-        ? "Minute"
-        : "Hour"
-      : "Day"
+    ? hours == 0
+    ? "Minute"
+    : "Hour"
+    : "Day"
   )
 }
 

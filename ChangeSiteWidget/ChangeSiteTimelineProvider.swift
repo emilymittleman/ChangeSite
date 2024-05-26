@@ -11,7 +11,7 @@ import WidgetKit
 import SwiftUI
 
 struct ChangeSiteTimelineProvider: TimelineProvider {
-  
+
   var pumpSiteManager = PumpSiteManager()
 
   func placeholder(in context: Context) -> PumpSiteEntry {
