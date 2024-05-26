@@ -19,13 +19,15 @@ public struct CSFont: ViewModifier {
   public static let CaptionLabel = CSFont(fontSize: 12)
 
   public let fontSize: CGFloat
+  public let bold: Bool
 
-  public init(fontSize: CGFloat) {
+  public init(fontSize: CGFloat, bold: Bool = false) {
     self.fontSize = fontSize
+    self.bold = bold
   }
 
   var font: Font {
-    if let rubik = UIFont(name: "Rubik-Regular", size: fontSize) {
+    if let rubik = UIFont(name: bold ? "Rubik-Medium" : "Rubik-Regular", size: fontSize) {
       return Font(rubik)
     }
     return .system(size: fontSize)

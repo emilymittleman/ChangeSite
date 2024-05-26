@@ -28,9 +28,8 @@ struct ChangeSiteWidgetView: View {
       NewSiteStartedButton()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .environment(\.colorScheme, .dark)
     .containerBackground(for: .widget) {
-      Color(UIColor.background(ColorScheme.dark))
+      Color.custom.background
     }
     .padding(.horizontal, -2)
     .padding(.vertical, -2)
@@ -44,12 +43,11 @@ struct CountdownLabel: View {
 
   var body: some View {
     VStack(alignment: .center) {
-      //Text(getCountdownText(pumpSite))
-      Text("19 minutes late")
-        .cs(font: CSFont(fontSize: 20))
+      Text(getCountdownText(pumpSite))
+        .cs(font: CSFont(fontSize: 20, bold: true))
         .lineLimit(1)
         .minimumScaleFactor(0.5)
-        .foregroundColor(pumpSite.overdue ? UIColor.paleRed : UIColor.charcoal(scheme))
+        .foregroundColor(pumpSite.overdue ? Color.custom.redText : Color.custom.textPrimary)
     }
   }
 }
@@ -62,7 +60,7 @@ struct CountdownLabel: View {
 //    VStack(alignment: .center) {
 //      Text("Next change: " + getWeekday(from: endDate).capitalized)
 //        .cs(font: CSFont(fontSize: 11))
-//        .foregroundColor(UIColor.charcoal(scheme))
+//        .foregroundColor(Color.charcoal(scheme))
 //        .multilineTextAlignment(.center)
 //    }
 //  }
@@ -76,13 +74,13 @@ struct NewSiteStartedButton: View {
       //Text(entry.startDate, style: .time)
       Text("New Site")
         .cs(font: CSFont(fontSize: 12))
-        .foregroundColor(UIColor.lightBlue) //charcoal(scheme))
+        .foregroundColor(Color.custom.lightBlue)
         .padding(.horizontal, 8)
     }
     .tint(Color.clear)
     .background(
       RoundedRectangle(cornerRadius: 14)
-        .stroke(Color(UIColor.lightBlue), lineWidth: 1.5)
+        .stroke(Color(Color.custom.lightBlue), lineWidth: 1.5)
     )
   }
 }

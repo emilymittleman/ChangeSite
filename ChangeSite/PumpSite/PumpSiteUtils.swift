@@ -51,7 +51,6 @@ private func makeCountdownText(isOverdue: Bool, time: Int, timeUnit: String) -> 
   if time != 1 { text += "s" } //make timeUnit plural
   if isOverdue {
     text += " late"
-    text = text.capitalized
   } else {
     text += " left"
   }

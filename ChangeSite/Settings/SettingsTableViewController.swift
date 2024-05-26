@@ -67,13 +67,13 @@ class SettingsTableViewController: UITableViewController {
   private func updateUI() {
     // Background color
     let mode = traitCollection.userInterfaceStyle
-    view.backgroundColor = UIColor.background(mode)
+    view.backgroundColor = UIColor.custom.background
     let cells: [UITableViewCell] = [newSiteCell, daysBtwnCell, cell1, cell2, cell3, cell4, cell5]
     for cell in cells {
-      cell.backgroundColor = UIColor.background(mode)
+      cell.backgroundColor = UIColor.custom.background
       for subview in cell.contentView.subviews {
         if let label = subview as? UILabel {
-          label.textColor = UIColor.charcoal(mode)
+          label.textColor = UIColor.custom.textPrimary
           label.font = UIFont(name: "Rubik-Regular", size: 17)
         }
       }

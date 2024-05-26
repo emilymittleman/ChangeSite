@@ -8,6 +8,9 @@
 
 import AppIntents
 import Foundation
+import OSLog
+
+fileprivate let log = Logger()
 
 @available(iOS 16.0, *)
 struct SiteStartedIntent: AppIntent {
@@ -19,6 +22,7 @@ struct SiteStartedIntent: AppIntent {
   private static let pumpSiteManager = PumpSiteManager()
 
   func perform() async throws -> some IntentResult {
+    log.log("New site started")
     SiteStartedIntent.pumpSiteManager.updatePumpSite(startDate: .now)
     return .result()
   }

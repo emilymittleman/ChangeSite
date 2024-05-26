@@ -12,7 +12,6 @@ import WidgetKit
 struct CalendarSingleLineView: View {
   let pumpSite: PumpSite
   var calendarCells: [CalendarCellView]
-  @Environment(\.colorScheme) var scheme: ColorScheme
 
   init(pumpSite: PumpSite) {
     self.pumpSite = pumpSite
@@ -43,25 +42,24 @@ struct CalendarCellView: View {
   var date: Date
   var fillBackground: Bool = false
   var outline: Bool = false
-  @Environment(\.colorScheme) var scheme: ColorScheme
 
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
       Text(dateFormatter("EEE").string(from: date).capitalized.prefix(3))
         .cs(font: CSFont(fontSize: 10))
         .allowsTightening(true)
-        .foregroundColor(UIColor.lightBlue)
+        .foregroundColor(Color.custom.lightBlue)
         .lineLimit(1)
         .padding(.bottom, 2)
 
       ZStack {
         Circle()
-          .stroke(outline ? Color(UIColor.charcoal(scheme)) : Color.clear, lineWidth: 1)
-          .fill(fillBackground ? Color(UIColor.lightBlue) : Color.clear)
+          .stroke(outline ? Color.custom.textPrimary : Color.clear, lineWidth: 1)
+          .fill(fillBackground ? Color.custom.lightBlue : Color.clear)
 
         Text(dateFormatter("d").string(from: date))
           .cs(font: CSFont(fontSize: 10)) // 12
-          .foregroundColor(fillBackground ? UIColor.charcoal : UIColor.charcoal(scheme))
+          .foregroundColor(fillBackground ? Color.custom.background : Color.custom.textPrimary)
       }
       .frame(width: 18, height: 18) //20, 20
     }
@@ -81,7 +79,7 @@ struct CalendarSingleLineView_Previews: PreviewProvider {
     }
     .environment(\.colorScheme, .dark)
     .containerBackground(for: .widget) {
-      Color(UIColor.charcoal)
+      Color(Color.custom.background)
     }
   }
 }

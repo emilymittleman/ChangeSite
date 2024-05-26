@@ -70,18 +70,18 @@ class TabNavigationMenu: UIView {
 
     itemTitleLabel.text = item.displayTitle
     itemTitleLabel.font = UIFont(name: "Rubik-Light", size: 12)
-    itemTitleLabel.textColor = UIColor.tabGrey(mode)
+    itemTitleLabel.textColor = UIColor.custom.textPrimary
     itemTitleLabel.textAlignment = .center
     itemTitleLabel.translatesAutoresizingMaskIntoConstraints = false
     itemTitleLabel.clipsToBounds = true
 
     itemIconView.image = item.icon.withRenderingMode(.alwaysTemplate)
-    itemIconView.tintColor = UIColor.tabGrey(mode)
+    itemIconView.tintColor = UIColor.custom.textPrimary
     itemIconView.contentMode = .scaleAspectFill // added to stop stretching
     itemIconView.translatesAutoresizingMaskIntoConstraints = false
     itemIconView.clipsToBounds = true
 
-    tabBarItem.layer.backgroundColor = UIColor.tabBarTint(mode).cgColor
+    tabBarItem.layer.backgroundColor = UIColor.custom.tabBarTint.cgColor
     tabBarItem.addSubview(itemIconView)
     tabBarItem.addSubview(itemTitleLabel)
     tabBarItem.translatesAutoresizingMaskIntoConstraints = false
@@ -114,10 +114,10 @@ class TabNavigationMenu: UIView {
     let tabToActivate = self.subviews[tab]
 
     if let tabLabel = tabToActivate.viewWithTag(12) as? UILabel {
-      tabLabel.textColor = UIColor.purpleBlue(mode)
+      tabLabel.textColor = UIColor.custom.textTertiary
     }
     if let tabIcon = tabToActivate.viewWithTag(13) as? UIImageView {
-      tabIcon.tintColor = UIColor.purpleBlue(mode)
+      tabIcon.tintColor = UIColor.custom.textTertiary
     }
 
     self.itemTapped?(tab)
@@ -129,10 +129,10 @@ class TabNavigationMenu: UIView {
     let inactiveTab = self.subviews[tab]
 
     if let tabLabel = inactiveTab.viewWithTag(12) as? UILabel {
-      tabLabel.textColor = UIColor.tabGrey(mode)
+      tabLabel.textColor = UIColor.custom.textPrimary
     }
     if let tabIcon = inactiveTab.viewWithTag(13) as? UIImageView {
-      tabIcon.tintColor = UIColor.tabGrey(mode)
+      tabIcon.tintColor = UIColor.custom.textPrimary
     }
   }
 }

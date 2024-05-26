@@ -30,13 +30,13 @@ class LaunchViewController: UIViewController {
   private func updateUI() {
     // Background color
     let mode = traitCollection.userInterfaceStyle
-    view.backgroundColor = UIColor.background(mode)
+    view.backgroundColor = UIColor.custom.background
     // Label fonts
     welcomeLabel.font = UIFont(name: "Rubik-Medium", size: 45)
     beginButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
     // Label colors
-    welcomeLabel.textColor = UIColor.charcoal(mode)
-    beginButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
+    welcomeLabel.textColor = UIColor.custom.textPrimary
+    beginButton.setTitleColor(UIColor.custom.textPrimary, for: .normal)
     beginButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
   }
 

@@ -71,17 +71,17 @@ class SetupViewController: UIViewController {
   private func updateUI() {
     // Background color
     let mode = traitCollection.userInterfaceStyle
-    view.backgroundColor = UIColor.background(mode)
+    view.backgroundColor = UIColor.custom.background
     // Label fonts
     setStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 30)
     daysBtwnLabel.font = UIFont(name: "Rubik-Medium", size: 25)
     daysBtwn.font = UIFont(name: "Rubik-Regular", size: 25)
     saveButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
     // Label colors
-    setStartDateLabel.textColor = UIColor.charcoal(mode)
-    daysBtwnLabel.textColor = UIColor.charcoal(mode)
-    daysBtwn.textColor = UIColor.charcoal(mode)
-    saveButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
+    setStartDateLabel.textColor = UIColor.custom.textPrimary
+    daysBtwnLabel.textColor = UIColor.custom.textPrimary
+    daysBtwn.textColor = UIColor.custom.textPrimary
+    saveButton.setTitleColor(UIColor.custom.textPrimary, for: .normal)
     saveButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
 
     // Add underline to Set start date label
@@ -91,7 +91,7 @@ class SetupViewController: UIViewController {
 
   private func addBottomBorderTo(_ label: UILabel) {
     let border = UIView()
-    border.backgroundColor = UIColor.lightBlue
+    border.backgroundColor = UIColor.custom.lightBlue
     border.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
     border.frame = CGRect(x: 0, y: label.frame.size.height-2, width: label.frame.size.width, height: 2)
     label.addSubview(border)

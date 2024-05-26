@@ -40,15 +40,15 @@ class LegendView: UIView {
   }
 
   func setUIAppearance(with mode: UIUserInterfaceStyle) {
-    self.backgroundColor = UIColor.background(mode)
-    contentView.backgroundColor = UIColor.background(mode)
-    todayIcon.tintColor = UIColor.lightBlue
-    changeDateIcon.tintColor = UIColor.charcoal(mode)
-    overdueIcon.tintColor = UIColor.transparentRed(mode)
+    self.backgroundColor = UIColor.custom.background
+    contentView.backgroundColor = UIColor.custom.background
+    todayIcon.tintColor = UIColor.custom.lightBlue
+    changeDateIcon.tintColor = UIColor.custom.textPrimary
+    overdueIcon.tintColor = UIColor.custom.redHighlight
 
     let labels: [UILabel] = [todayLabel, changeDateLabel, overdueLabel]
     for label in labels {
-      label.textColor = UIColor.charcoal(mode)
+      label.textColor = UIColor.custom.textPrimary
       label.font = UIFont(name: "Rubik-Regular", size: 17)
     }
   }

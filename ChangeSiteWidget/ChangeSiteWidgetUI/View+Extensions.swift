@@ -11,7 +11,7 @@ import SwiftUI
 
 extension View {
   func widgetBackground() -> some View {
-    let backgroundColor = Color(UIColor.background(ColorScheme.dark))
+    let backgroundColor = Color.custom.background
     if #available(iOS 17.0, macOS 14.0, watchOS 10.0, *) {
       return containerBackground(for: .widget) {
         backgroundColor

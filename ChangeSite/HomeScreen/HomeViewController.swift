@@ -8,6 +8,7 @@
 
 import UIKit
 import FSCalendar
+import SwiftUI
 
 class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
 
@@ -103,11 +104,11 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     let mode = traitCollection.userInterfaceStyle
     calendar.appearance.headerDateFormat = ""
     calendar.appearance.headerMinimumDissolvedAlpha = 0.0
-    calendar.backgroundColor = UIColor.background(mode)
-    calendar.appearance.todayColor = UIColor.lightBlue
-    calendar.appearance.weekdayTextColor = UIColor.lightBlue
-    calendar.appearance.titleDefaultColor = UIColor.charcoal(mode)
-    calendar.appearance.titleTodayColor = UIColor.background(mode)
+    calendar.backgroundColor = UIColor.custom.background
+    calendar.appearance.todayColor = UIColor.custom.lightBlue
+    calendar.appearance.weekdayTextColor = UIColor.custom.lightBlue
+    calendar.appearance.titleDefaultColor = UIColor.custom.textPrimary
+    calendar.appearance.titleTodayColor = UIColor.custom.background
     calendar.appearance.weekdayFont = UIFont(name: "Rubik-Regular", size: 15)
     calendar.appearance.titleFont = UIFont(name: "Rubik-Regular", size: 17)
   }
@@ -115,33 +116,33 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
   private func updateUI() {
     // deal with light and dark mode
     let mode = traitCollection.userInterfaceStyle
-    view.backgroundColor = UIColor.background(mode)
+    view.backgroundColor = UIColor.custom.background
 
     nextChangeLabel.font = UIFont(name: "Rubik-Regular", size: 25)
-    countdownLabel.font = UIFont(name: "Rubik-Bold", size: 40)
+    countdownLabel.font = UIFont(name: "Rubik-Medium", size: 40)
     newSiteButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
     chooseStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 19)
     saveButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
     cancelButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
 
-    nextChangeLabel.textColor = UIColor.charcoal(mode)
-    countdownLabel.textColor = UIColor.charcoal(mode)
-    chooseStartDateLabel.textColor = UIColor.charcoal
-    saveButton.titleLabel?.textColor = UIColor.charcoal
-    cancelButton.titleLabel?.textColor = UIColor.charcoal
+    nextChangeLabel.textColor = UIColor.custom.textPrimary
+    countdownLabel.textColor = UIColor.custom.textPrimary
+    chooseStartDateLabel.textColor = UIColor.custom.background
+    saveButton.titleLabel?.textColor = UIColor.custom.background
+    cancelButton.titleLabel?.textColor = UIColor.custom.background
 
-    chooseStartDateLabel.backgroundColor = UIColor.lightBlue
-    saveButton.titleLabel?.backgroundColor = UIColor.lightBlue
-    cancelButton.titleLabel?.backgroundColor = UIColor.lightBlue
+    chooseStartDateLabel.backgroundColor = UIColor.custom.lightBlue
+    saveButton.titleLabel?.backgroundColor = UIColor.custom.lightBlue
+    cancelButton.titleLabel?.backgroundColor = UIColor.custom.lightBlue
 
-    newSiteButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
+    newSiteButton.setTitleColor(UIColor.custom.textPrimary, for: .normal)
     newSiteButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
   }
 
   private func updateTimeLeftLabels() {
     nextChangeLabel.text = viewModel.getNextChangeText()
     countdownLabel.text = viewModel.getCountdownText()
-    countdownLabel.textColor = viewModel.pumpSiteIsOverdue() ? UIColor.paleRed : UIColor.charcoal(traitCollection.userInterfaceStyle)
+    countdownLabel.textColor = viewModel.pumpSiteIsOverdue() ? UIColor.custom.redText : UIColor.custom.textPrimary
 
     calendar.reloadData()
   }
@@ -171,7 +172,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
 
     let pickerDate = formatDate(.now)
     startDatePicker.setDate(pickerDate, animated: true)
-    startDatePicker.minimumDate = formatDate(viewModel.pumpSiteStartDate())
+    //startDatePicker.minimumDate = formatDate(viewModel.pumpSiteStartDate())
   }
 
   // MARK: - FSCalendarDataSource
