@@ -20,14 +20,6 @@ enum AppConstants {
   static let secondsPerDay = 60 * 60 * 24
 }
 
-// MARK: Storage
-
-extension UserDefaults {
-  enum Keys: String {
-    case pumpSite, reminders, newUser
-  }
-}
-
 // MARK: Public helper functions
 
 public func daysBetweenDates(from date1: Date, to date2: Date) -> Int {

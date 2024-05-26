@@ -9,18 +9,6 @@
 import WidgetKit
 import SwiftUI
 
-public let defaultPumpSiteEntry = PumpSiteEntry(date: .now, pumpSite: PumpSite())
-
-public struct PumpSiteEntry: TimelineEntry {
-  public let date: Date // The date for WidgetKit to render a widget
-  public let pumpSite: PumpSite
-
-  public init(date: Date, pumpSite: PumpSite) {
-    self.date = date
-    self.pumpSite = pumpSite
-  }
-}
-
 struct ChangeSiteWidget: Widget {
   let kind: String = "ChangeSiteWidget"
 

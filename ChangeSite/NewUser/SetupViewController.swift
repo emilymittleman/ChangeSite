@@ -47,7 +47,7 @@ class SetupViewController: UIViewController {
             AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         }
         
-        UserDefaults.standard.set(false, forKey: "newUser")
+        AppConfig.setUserIsNotNew()
         
         if let navigationBaseController = self.storyboard?.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController {
             navigationBaseController.pumpSiteManager = self.pumpSiteManager

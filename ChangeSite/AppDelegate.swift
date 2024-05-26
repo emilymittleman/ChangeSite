@@ -30,9 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var notificationManager: NotificationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // UserDefaults.standard.set(true, forKey: UserDefaults.Keys.newUser.rawValue) //testing purposes only
-        UserDefaults.standard.register(defaults: [UserDefaults.Keys.newUser.rawValue : true])
-        configureUserNotifications()
+        // UserDefaultsAccessHelper.sharedInstance.storeValue(true, forKey: StorageKey.newUser) //testing purposes only
+        UserDefaultsAccessHelper.sharedInstance.setUp(withGroupID: Bundle.main.appGroupID)
+        UNUserNotificationCenter.current().delegate = self
         // Initialize data managers
         pumpSiteManager = PumpSiteManager()
         remindersManager = RemindersManager()
@@ -40,16 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         presentInitialView()
         return true
     }
-    
-    private func configureUserNotifications() {
-        UNUserNotificationCenter.current().delegate = self
-    }
-    
+
     private func presentInitialView() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewController: UIViewController = UIViewController()
-        let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
+        let newUser = AppConfig.isNewUser()
         if newUser, let vc = storyboard.instantiateViewController(withIdentifier: "LaunchScreen") as? LaunchViewController {
             vc.pumpSiteManager = pumpSiteManager
             vc.remindersManager = remindersManager
@@ -73,12 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
-        if !newUser {
+        if !AppConfig.isNewUser() {
             AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
         } else {
-            UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.pumpSite.rawValue)
-            UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.reminders.rawValue)
+            UserDefaultsAccessHelper.sharedInstance.deleteValue(withKey: StorageKey.pumpSite)
+            UserDefaultsAccessHelper.sharedInstance.deleteValue(withKey: StorageKey.reminders)
         }
     }
 

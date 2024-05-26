@@ -8,6 +8,10 @@
 
 import Foundation
 
+public enum StorageKey: String {
+  case newUser, pumpSite, reminders
+}
+
 class UserDefaultsAccessHelper {
   static let sharedInstance = UserDefaultsAccessHelper()
   private var groupUserDefaults: UserDefaults?
@@ -18,35 +22,35 @@ class UserDefaultsAccessHelper {
     }
   }
 
-  func storeValue(_ value: Any?, withIdentifier identifier: String) {
+  func storeValue(_ value: Any?, forKey key: StorageKey) {
     guard let groupUserDefaults else {
       assertionFailure("You must set up a Group ID before attempting any shared UserDefaults operations!")
       return
     }
-    groupUserDefaults.set(value, forKey: identifier)
+    groupUserDefaults.set(value, forKey: key.rawValue)
   }
 
-  func retrieveValue(_ identifier: String) -> Any? {
-    return groupUserDefaults?.object(forKey: identifier)
+  func retrieveValue(_ key: StorageKey) -> Any? {
+    return groupUserDefaults?.object(forKey: key.rawValue)
   }
 
-  func retrieveValue(_ identifier: String, withDefault defaultValue: Any) -> Any {
-    guard let result = groupUserDefaults?.object(forKey: identifier) else {
+  func retrieveValue(_ key: StorageKey, withDefault defaultValue: Any) -> Any {
+    guard let result = groupUserDefaults?.object(forKey: key.rawValue) else {
       return defaultValue
     }
     return result
   }
 
-  func retrieveArray(_ identifier: String) -> [Any]? {
-    return groupUserDefaults?.array(forKey: identifier)
+  func retrieveArray(_ key: StorageKey) -> [Any]? {
+    return groupUserDefaults?.array(forKey: key.rawValue)
   }
 
-  func deleteValue(withIdentifier identifier: String) {
+  func deleteValue(withKey key: StorageKey) {
     guard let groupUserDefaults else {
       assertionFailure("You must set up a Group ID before attempting any shared UserDefaults operations!")
       return
     }
-    groupUserDefaults.removeObject(forKey: identifier)
+    groupUserDefaults.removeObject(forKey: key.rawValue)
   }
 }
 

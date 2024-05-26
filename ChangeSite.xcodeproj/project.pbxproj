@@ -10,6 +10,9 @@
 		5D007C382C0296630022F713 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C372C0296630022F713 /* View+Extensions.swift */; };
 		5D007C3A2C0298400022F713 /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C392C0298400022F713 /* PumpSite.swift */; };
 		5D007C3B2C0298400022F713 /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C392C0298400022F713 /* PumpSite.swift */; };
+		5D007C3D2C02AB960022F713 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C3C2C02AB960022F713 /* AppConfig.swift */; };
+		5D007C3E2C02AB960022F713 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C3C2C02AB960022F713 /* AppConfig.swift */; };
+		5D007C402C02B11A0022F713 /* PumpSiteEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C3F2C02B11A0022F713 /* PumpSiteEntry.swift */; };
 		5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09CDFC23026991006E914F /* ClassExtensions.swift */; };
 		5D13E7B027A4F732007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E7AF27A4F732007CC645 /* NotificationService.swift */; };
 		5D13E7B427A4F732007CC645 /* ChangeSiteNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -112,6 +115,8 @@
 		5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChangeSite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D007C372C0296630022F713 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		5D007C392C0298400022F713 /* PumpSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSite.swift; sourceTree = "<group>"; };
+		5D007C3C2C02AB960022F713 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		5D007C3F2C02B11A0022F713 /* PumpSiteEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteEntry.swift; sourceTree = "<group>"; };
 		5D09CDFC23026991006E914F /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		5D13E7A827A4ECC5007CC645 /* ChangeSite.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChangeSite.entitlements; sourceTree = "<group>"; };
 		5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChangeSiteNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -373,6 +378,7 @@
 				5DF50C4A292012EF00E3695C /* CoreDataStack.swift */,
 				5DF50C5529203E7000E3695C /* SiteDatesProvider.swift */,
 				CBE4FF862BA7C71600C04AF4 /* UserDefaultsAccessHelper.swift */,
+				5D007C3C2C02AB960022F713 /* AppConfig.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -413,6 +419,7 @@
 				CBDCC2022B60CF9900BD995B /* ChangeSiteTimelineProvider.swift */,
 				CBDCC1F52B60CE2800BD995B /* ChangeSiteWidgetBundle.swift */,
 				CBDCC1F72B60CE2800BD995B /* ChangeSiteWidget.swift */,
+				5D007C3F2C02B11A0022F713 /* PumpSiteEntry.swift */,
 				CBDCC1F92B60CE2A00BD995B /* Assets.xcassets */,
 				CBDCC1FB2B60CE2A00BD995B /* Info.plist */,
 			);
@@ -659,6 +666,7 @@
 				5DCD32A2230023AB00BC2E07 /* LaunchViewController.swift in Sources */,
 				5D30E271252D4BD300DB49CA /* Reminder.swift in Sources */,
 				CB48F3612B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */,
+				5D007C3D2C02AB960022F713 /* AppConfig.swift in Sources */,
 				5DF50C4E2920163200E3695C /* PumpSite.xcdatamodeld in Sources */,
 				5D007C3A2C0298400022F713 /* PumpSite.swift in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
@@ -695,11 +703,13 @@
 				CBDCC2032B60CF9900BD995B /* ChangeSiteTimelineProvider.swift in Sources */,
 				CB26A47A2B68DA9900AC03F4 /* CalendarSingleLineView.swift in Sources */,
 				CBDCC1F82B60CE2800BD995B /* ChangeSiteWidget.swift in Sources */,
+				5D007C3E2C02AB960022F713 /* AppConfig.swift in Sources */,
 				5D007C3B2C0298400022F713 /* PumpSite.swift in Sources */,
 				CBDCC2112B60EFC000BD995B /* PumpSiteManager.swift in Sources */,
 				CB48F3622B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */,
 				CBDCC20A2B60E48C00BD995B /* CSFont.swift in Sources */,
 				CBE4FF882BA7C71600C04AF4 /* UserDefaultsAccessHelper.swift in Sources */,
+				5D007C402C02B11A0022F713 /* PumpSiteEntry.swift in Sources */,
 				CBDCC1F62B60CE2800BD995B /* ChangeSiteWidgetBundle.swift in Sources */,
 				CBDCC2102B60EF8300BD995B /* PumpSiteUtils.swift in Sources */,
 				CBDCC20D2B60EB9000BD995B /* ClassExtensions.swift in Sources */,

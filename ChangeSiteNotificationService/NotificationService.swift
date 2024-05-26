@@ -24,9 +24,9 @@ class NotificationService: UNNotificationServiceExtension {
             bestAttemptContent.title = "\(bestAttemptContent.title)"
             
             let data = bestAttemptContent.userInfo as NSDictionary
-            let pref = UserDefaults.init(suiteName: "group.com.EmilyMittleman.ChangeSite")
-            pref?.set(data, forKey: "NOTIF_DATA")
-            pref?.synchronize()
+//            let pref = UserDefaults.init(suiteName: "group.com.EmilyMittleman.ChangeSite")
+//            pref?.set(data, forKey: "NOTIF_DATA")
+//            pref?.synchronize()
             
             contentHandler(bestAttemptContent)
         }

@@ -22,7 +22,6 @@ public class PumpSiteManager {
   }
 
   public init(startDate: Date, daysBtwn: Int) {
-    self.storage.setUp(withGroupID: Bundle.main.appGroupID)
     self.pumpSite = PumpSite(startDate: startDate, daysBtwn: daysBtwn)
     self.saveToStorage()
   }
@@ -32,7 +31,7 @@ public class PumpSiteManager {
   }
 
   private func retrieveFromStorage() {
-    if let pumpSiteData = storage.retrieveValue(UserDefaults.Keys.pumpSite.rawValue),
+    if let pumpSiteData = storage.retrieveValue(StorageKey.pumpSite),
        let pumpSite = try? PropertyListDecoder().decode(PumpSite.self, from: pumpSiteData as! Data) {
       self.pumpSite = pumpSite
     } else {
@@ -41,7 +40,7 @@ public class PumpSiteManager {
   }
 
   private func saveToStorage() {
-    storage.storeValue(try? PropertyListEncoder().encode(pumpSite), withIdentifier: UserDefaults.Keys.pumpSite.rawValue)
+    storage.storeValue(try? PropertyListEncoder().encode(pumpSite), forKey: StorageKey.pumpSite)
   }
 
   private func setDefaultValues() {
@@ -59,9 +58,7 @@ public class PumpSiteManager {
     
   public func updatePumpSite(startDate: Date) {
     // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
-    //let newUser = (storage.retrieveValue(UserDefaults.Keys.newUser.rawValue) as? Bool) ?? true
-    let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
-    if newUser || startDate > pumpSite.startDate {
+    if AppConfig.isNewUser() || startDate > pumpSite.startDate {
       self.pumpSite.setStartDate(startDate: startDate)
       self.saveToStorage()
     }
