@@ -26,7 +26,7 @@ import WidgetKit
 struct CountdownLabel: View {
   var pumpSite: PumpSite
   @Environment(\.colorScheme) var scheme: ColorScheme
-  
+
   var body: some View {
     VStack(alignment: .center) {
       Text(getCountdownText(pumpSite))
@@ -38,7 +38,7 @@ struct CountdownLabel: View {
 
 struct NewSiteStartedButton: View {
   @Environment(\.colorScheme) var scheme: ColorScheme
-  
+
   var body: some View {
     Button(intent: SiteStartedIntent()) {
       //Text(entry.startDate, style: .time)
@@ -59,12 +59,12 @@ struct ChangeSiteWidgetView: View {
   var entry: ChangeSiteTimelineProvider.Entry
   var pumpSite: PumpSite
   @Environment(\.colorScheme) var scheme: ColorScheme
-  
+
   init(entry: ChangeSiteTimelineProvider.Entry) {
     self.entry = entry
     self.pumpSite = entry.pumpSite
   }
-  
+
   var body: some View {
     VStack(alignment: .center) {
       CalendarSingleLineView(pumpSite: pumpSite)

@@ -117,6 +117,8 @@
 		5D007C392C0298400022F713 /* PumpSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSite.swift; sourceTree = "<group>"; };
 		5D007C3C2C02AB960022F713 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		5D007C3F2C02B11A0022F713 /* PumpSiteEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteEntry.swift; sourceTree = "<group>"; };
+		5D007C412C02C3920022F713 /* ChangeSiteNotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChangeSiteNotificationService.entitlements; sourceTree = "<group>"; };
+		5D007C422C02C39E0022F713 /* ChangeSiteWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChangeSiteWidgetExtension.entitlements; sourceTree = "<group>"; };
 		5D09CDFC23026991006E914F /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		5D13E7A827A4ECC5007CC645 /* ChangeSite.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChangeSite.entitlements; sourceTree = "<group>"; };
 		5D13E7AD27A4F732007CC645 /* ChangeSiteNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChangeSiteNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +245,7 @@
 		5D13E7AE27A4F732007CC645 /* ChangeSiteNotificationService */ = {
 			isa = PBXGroup;
 			children = (
+				5D007C412C02C3920022F713 /* ChangeSiteNotificationService.entitlements */,
 				5D13E7AF27A4F732007CC645 /* NotificationService.swift */,
 				5D13E7B127A4F732007CC645 /* Info.plist */,
 			);
@@ -414,6 +417,7 @@
 		CBDCC1F42B60CE2800BD995B /* ChangeSiteWidget */ = {
 			isa = PBXGroup;
 			children = (
+				5D007C422C02C39E0022F713 /* ChangeSiteWidgetExtension.entitlements */,
 				CBDCC2072B60E45600BD995B /* CSDesign */,
 				CBDCC2042B60D59A00BD995B /* ChangeSiteWidgetUI */,
 				CBDCC2022B60CF9900BD995B /* ChangeSiteTimelineProvider.swift */,
@@ -758,6 +762,7 @@
 			baseConfigurationReference = 9D96E3CE6F3D250135CF65BD /* Pods-ChangeSiteNotificationService.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = ChangeSiteNotificationService/ChangeSiteNotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
@@ -775,9 +780,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite.ChangeSiteNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -786,6 +794,7 @@
 			baseConfigurationReference = C00B9596C1FEB5AC50F1652D /* Pods-ChangeSiteNotificationService.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = ChangeSiteNotificationService/ChangeSiteNotificationService.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
@@ -803,9 +812,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite.ChangeSiteNotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -944,8 +956,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite;
 				PRODUCT_NAME = ChangeSite;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -966,8 +981,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite;
 				PRODUCT_NAME = ChangeSite;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -978,6 +996,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = ChangeSiteWidget/ChangeSiteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
@@ -998,10 +1017,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite.ChangeSiteWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1012,6 +1034,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = ChangeSiteWidget/ChangeSiteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
@@ -1032,9 +1055,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSite.ChangeSiteWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
