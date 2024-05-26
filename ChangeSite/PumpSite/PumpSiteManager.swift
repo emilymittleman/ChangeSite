@@ -44,7 +44,7 @@ public class PumpSiteManager {
   }
 
   private func setDefaultValues() {
-    self.pumpSite = PumpSite(startDate: .now, daysBtwn: 4)
+    self.pumpSite = PumpSite(startDate: .now, daysBtwn: 3)
     self.saveToStorage()
   }
 

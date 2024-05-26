@@ -28,10 +28,8 @@ public struct CSFont: ViewModifier {
   }
 
   var font: Font {
-    if #available(iOS 14.0, *) {
-      if let rubik = UIFont(name: "Rubik-Regular", size: fontSize) {
-        return Font(rubik)
-      }
+    if let rubik = UIFont(name: "Rubik-Regular", size: fontSize) {
+      return Font(rubik)
     }
     return .system(size: fontSize)
   }
