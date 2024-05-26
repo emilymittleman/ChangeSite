@@ -48,7 +48,7 @@ struct CalendarCellView: View {
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
       Text(dateFormatter("EEE").string(from: date).capitalized.prefix(3))
-        .cs(font: CSFont(fontSize: 10, lineHeight: 10))
+        .cs(font: CSFont(fontSize: 10))
         .allowsTightening(true)
         .foregroundColor(UIColor.lightBlue)
         .lineLimit(1)

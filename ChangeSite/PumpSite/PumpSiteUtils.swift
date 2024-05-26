@@ -38,9 +38,9 @@ public func getCountdownText(_ pumpSite: PumpSite) -> String {
     time: days == 0 ? hours == 0 ? minutes : hours : days,
     timeUnit: days == 0
     ? hours == 0
-    ? "Minute"
-    : "Hour"
-    : "Day"
+    ? "minute"
+    : "hour"
+    : "day"
   )
 }
 
@@ -50,10 +50,10 @@ private func makeCountdownText(isOverdue: Bool, time: Int, timeUnit: String) -> 
   var text = String(time) + " " + timeUnit
   if time != 1 { text += "s" } //make timeUnit plural
   if isOverdue {
-    text += " Late"
+    text += " late"
     text = text.capitalized
   } else {
-    text += " Left"
+    text += " left"
   }
   return text
 }
