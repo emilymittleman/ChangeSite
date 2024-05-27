@@ -52,7 +52,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     // Calender actions
     calendar.allowsSelection = false
     calendar.today = .now
-    calendar.swipeToChooseGesture.isEnabled = true // Swipe-To-Choose
+    calendar.swipeToChooseGesture.isEnabled = true
 
     // Calendar UI
     calendar.appearance.headerMinimumDissolvedAlpha = 0.0
@@ -76,9 +76,9 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     self.overdueDates = siteDatesProvider.getOverdueDates()
     self.changedSiteDates = siteDatesProvider.getChangeDates()
     calendar.reloadData()
-    for site in siteDatesProvider.siteDates {
-      print(site)
-    }
+//    for site in siteDatesProvider.siteDates {
+//      print(site)
+//    }
   }
 
   override func viewDidLoad() {

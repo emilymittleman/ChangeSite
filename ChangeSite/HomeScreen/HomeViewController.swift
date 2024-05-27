@@ -9,9 +9,6 @@
 import UIKit
 import FSCalendar
 import SwiftUI
-import OSLog
-
-fileprivate let logger = Logger()
 
 class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
 
@@ -20,40 +17,16 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
 
   var timer: Timer?
 
-  @IBOutlet weak var calendar: FSCalendar!
+  let calendar = FSCalendar()
 
   @IBOutlet weak var nextChangeLabel: UILabel!
   @IBOutlet weak var countdownLabel: UILabel!
 
+  let startDatePickerView = StartDatePickerBottomSheet()
+
   @IBOutlet weak var newSiteButton: UIButton!
   @IBAction func newSitePressed(_ sender: Any) {
-    // reset the start date & end date
-    showNewStartDate()
-  }
-
-  @IBOutlet weak var chooseStartDateLabel: UILabel!
-  @IBOutlet weak var saveButton: UIButton!
-  @IBAction func saveButtonPressed(_ sender: Any) {
-    // save the current date from datepicker
-    // TODO: ensure that new startdate is not earlier than original startdate (can't go back in time)
-    viewModel.endPumpSite(endDate: startDatePicker.date)
-    viewModel.startNewPumpSite(startDate: startDatePicker.date)
-
-    // show the "New site started" button & hide the rest of start date objects
-    hideNewStartDate()
-
-    restartTimer()
-    refreshScreen()
-  }
-
-  @IBOutlet weak var cancelButton: UIButton!
-  @IBAction func cancelButtonPressed(_ sender: Any) {
-    // show the "New site started" button & hide the rest of start date objects
-    hideNewStartDate()
-  }
-
-  @IBOutlet weak var startDatePicker: UIDatePicker!
-  @IBAction func startDatePickerChanged(_ sender: Any) {
+    startDatePickerView.showInView(self.view)
   }
 
   // MARK: --- Setup ---
@@ -76,6 +49,9 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
       object: nil
     )
 
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleUserTap(_:)))
+    self.view.addGestureRecognizer(tapGesture)
+
     // Special case: If user turned off notifications, need to reset reminders
     /* notificationManager.notificationsEnabled { enabled in
      if enabled { [weak self] in
@@ -92,22 +68,29 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    logger.log("viewWillAppear")
+    print("viewWillAppear")
     viewModel.updateCoreData()
     refreshScreen()
-    hideNewStartDate()
     restartTimer()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
+    print("viewWillDisappear")
     timer?.invalidate()
     timer = nil
+    if (view.subviews.contains(startDatePickerView)) {
+      startDatePickerView.dismiss()
+    }
   }
 
   @objc private func didEnterBackground() {
     timer?.invalidate()
     timer = nil
+  }
+
+  @objc private func handleUserTap(_ gesture: UITapGestureRecognizer) {
+    startDatePickerView.dismiss()
   }
 
   private func restartTimer() {
@@ -123,6 +106,8 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
   }
 
   private func setupCalendar() {
+    calendar.dataSource = self
+    calendar.delegate = self
     calendar.frame = CGRect(x:15, y: 64, width:self.view.bounds.size.width-30, height:300)
     calendar.register(CustomCalendarCell.self, forCellReuseIdentifier: "cell")
     // Calender actions
@@ -141,63 +126,43 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     calendar.appearance.titleTodayColor = UIColor.custom.background
     calendar.appearance.weekdayFont = UIFont(name: "Rubik-Regular", size: 15)
     calendar.appearance.titleFont = UIFont(name: "Rubik-Regular", size: 17)
+
+    view.addSubview(calendar)
   }
 
   private func setupUI() {
     view.backgroundColor = UIColor.custom.background
 
     nextChangeLabel.font = UIFont(name: "Rubik-Regular", size: 25)
-    countdownLabel.font = UIFont(name: "Rubik-Medium", size: 40)
-    newSiteButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
-    chooseStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 19)
-    saveButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
-    cancelButton.titleLabel?.font = UIFont(name: "Rubik-Medium", size: 17)
-
     nextChangeLabel.textColor = UIColor.custom.textPrimary
+
+    countdownLabel.font = UIFont(name: "Rubik-Medium", size: 40)
     countdownLabel.textColor = UIColor.custom.textPrimary
-    chooseStartDateLabel.textColor = UIColor.custom.background
-    saveButton.titleLabel?.textColor = UIColor.custom.background
-    cancelButton.titleLabel?.textColor = UIColor.custom.background
 
-    chooseStartDateLabel.backgroundColor = UIColor.custom.lightBlue
-    saveButton.titleLabel?.backgroundColor = UIColor.custom.lightBlue
-    cancelButton.titleLabel?.backgroundColor = UIColor.custom.lightBlue
-
+    newSiteButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
     newSiteButton.setTitleColor(UIColor.custom.textPrimary, for: .normal)
     newSiteButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
+
+    // Start date picker view
+    startDatePickerView.onCancel = {
+      self.newSiteButton.isHidden = false
+      self.startDatePickerView.dismiss()
+    }
+    startDatePickerView.onSave = { selectedDate in
+      self.viewModel.endPumpSite(endDate: selectedDate)
+      self.viewModel.startNewPumpSite(startDate: selectedDate)
+      self.restartTimer()
+      self.refreshScreen()
+      self.newSiteButton.isHidden = false
+      self.startDatePickerView.dismiss()
+    }
   }
 
   @objc private func refreshScreen() {
-    logger.log("refreshScreen")
     nextChangeLabel.text = viewModel.getNextChangeText()
     countdownLabel.text = viewModel.getCountdownText()
     countdownLabel.textColor = viewModel.pumpSiteIsOverdue() ? UIColor.custom.redText : UIColor.custom.textPrimary
     calendar.reloadData()
-  }
-
-  func hideNewStartDate() {
-    // hide all buttons
-    chooseStartDateLabel.isHidden = true
-    saveButton.isHidden = true
-    cancelButton.isHidden = true
-    startDatePicker.isHidden = true
-    // show New site button
-    newSiteButton.isHidden = false
-  }
-
-  func showNewStartDate() {
-    // show all buttons
-    chooseStartDateLabel.isHidden = false
-    saveButton.isHidden = false
-    cancelButton.isHidden = false
-    startDatePicker.isHidden = false
-    // hide New site button
-    newSiteButton.isHidden = true
-
-    let pickerDate = formatDate(.now)
-    startDatePicker.setDate(pickerDate, animated: true)
-    // TODO: Commented out for testing
-    //startDatePicker.minimumDate = formatDate(viewModel.pumpSiteStartDate())
   }
 
   // MARK: - FSCalendarDataSource
@@ -215,7 +180,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
 
   func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
     self.calendar.frame.size.height = bounds.height
-    // self.eventLabel.frame.origin.y = calendar.frame.maxY + 10
   }
 
   // MARK: - Calendar Private functions

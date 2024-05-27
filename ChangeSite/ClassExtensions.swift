@@ -18,6 +18,7 @@ public extension Bundle {
 
 enum AppConstants {
   static let secondsPerDay = 60 * 60 * 24
+  static let tabBarHeight: CGFloat = 83.0
 }
 
 // MARK: Public helper functions
@@ -56,32 +57,3 @@ extension Date {
     return calendar.component(component, from: self)
   }
 }
-
-// MARK: Colors
-
-extension View {
-  @inlinable public func foregroundColor(_ color: UIColor) -> some View {
-    return foregroundColor(Color(color))
-  }
-
-  @inlinable public func background(_ color: UIColor) -> some View {
-    return background(Color(color))
-  }
-}
-
-
-//  class func tabGrey(_ mode: UIUserInterfaceStyle) -> UIColor {
-//    if mode == .dark {
-//      return background(UIUserInterfaceStyle.light)
-//    }
-//    return UIColor(red: 92/255.0, green: 97/255.0, blue: 113/255.0, alpha: 1.0)
-//  }
-//  class func rgb(fromHex: Int) -> UIColor {
-//    let red =   CGFloat((fromHex & 0xFF0000) >> 16) / 0xFF
-//    let green = CGFloat((fromHex & 0x00FF00) >> 8) / 0xFF
-//    let blue =  CGFloat(fromHex & 0x0000FF) / 0xFF
-//    let alpha = CGFloat(1.0)
-//
-//    return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-//  }
-//}

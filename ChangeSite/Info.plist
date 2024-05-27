@@ -26,8 +26,6 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Rubik-Black.ttf</string>
-		<string>Rubik-Bold.ttf</string>
 		<string>Rubik-Light.ttf</string>
 		<string>Rubik-Medium.ttf</string>
 		<string>Rubik-Regular.ttf</string>

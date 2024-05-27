@@ -26,9 +26,7 @@
 		5D6D270A291F699A00BEC655 /* NavigationBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2709291F699A00BEC655 /* NavigationBaseController.swift */; };
 		5D6D270C291F6A5B00BEC655 /* TabNavigationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D270B291F6A5B00BEC655 /* TabNavigationMenu.swift */; };
 		5D6D271C291F957400BEC655 /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2712291F957200BEC655 /* Rubik-Light.ttf */; };
-		5D6D271F291F957400BEC655 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2715291F957300BEC655 /* Rubik-Bold.ttf */; };
 		5D6D2721291F957400BEC655 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2717291F957300BEC655 /* Rubik-Regular.ttf */; };
-		5D6D2722291F957400BEC655 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2718291F957300BEC655 /* Rubik-Black.ttf */; };
 		5D6D2723291F957400BEC655 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2719291F957400BEC655 /* Rubik-Medium.ttf */; };
 		5D7868832300984B00A54436 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7868822300984B00A54436 /* HomeViewController.swift */; };
 		5D8DF10A293436CF00FB2A48 /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8DF109293436CF00FB2A48 /* LegendView.swift */; };
@@ -39,6 +37,7 @@
 		5DA3E8992C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89A2C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89B2C03EB1E003DDAB6 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2719291F957400BEC655 /* Rubik-Medium.ttf */; };
+		5DA3E89D2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */; };
 		5DB5C33326C6E44C00877646 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */; };
 		5DB5C33526C6E6F200877646 /* StartDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33426C6E6F200877646 /* StartDateCell.swift */; };
 		5DB5C33726C6E94F00877646 /* DaysBtwnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */; };
@@ -138,9 +137,7 @@
 		5D6D2709291F699A00BEC655 /* NavigationBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBaseController.swift; sourceTree = "<group>"; };
 		5D6D270B291F6A5B00BEC655 /* TabNavigationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationMenu.swift; sourceTree = "<group>"; };
 		5D6D2712291F957200BEC655 /* Rubik-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Light.ttf"; sourceTree = "<group>"; };
-		5D6D2715291F957300BEC655 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		5D6D2717291F957300BEC655 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
-		5D6D2718291F957300BEC655 /* Rubik-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Black.ttf"; sourceTree = "<group>"; };
 		5D6D2719291F957400BEC655 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		5D7868822300984B00A54436 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5D8DF109293436CF00FB2A48 /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
@@ -148,6 +145,7 @@
 		5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		5DA3E8982C02DF74003DDAB6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDatePickerBottomSheet.swift; sourceTree = "<group>"; };
 		5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
 		5DB5C33426C6E6F200877646 /* StartDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateCell.swift; sourceTree = "<group>"; };
 		5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysBtwnCell.swift; sourceTree = "<group>"; };
@@ -264,6 +262,7 @@
 			children = (
 				5D7868822300984B00A54436 /* HomeViewController.swift */,
 				5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */,
+				5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -300,8 +299,6 @@
 		5D6D270F291F94AE00BEC655 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				5D6D2718291F957300BEC655 /* Rubik-Black.ttf */,
-				5D6D2715291F957300BEC655 /* Rubik-Bold.ttf */,
 				5D6D2712291F957200BEC655 /* Rubik-Light.ttf */,
 				5D6D2719291F957400BEC655 /* Rubik-Medium.ttf */,
 				5D6D2717291F957300BEC655 /* Rubik-Regular.ttf */,
@@ -582,11 +579,9 @@
 				5DCD32AA230023AD00BC2E07 /* LaunchScreen.storyboard in Resources */,
 				5DCD32A7230023AD00BC2E07 /* Images.xcassets in Resources */,
 				5D6D2723291F957400BEC655 /* Rubik-Medium.ttf in Resources */,
-				5D6D2722291F957400BEC655 /* Rubik-Black.ttf in Resources */,
 				5D6D2721291F957400BEC655 /* Rubik-Regular.ttf in Resources */,
 				5D6D271C291F957400BEC655 /* Rubik-Light.ttf in Resources */,
 				5DCD32A5230023AB00BC2E07 /* Main.storyboard in Resources */,
-				5D6D271F291F957400BEC655 /* Rubik-Bold.ttf in Resources */,
 				5D8DF10C29343B0900FB2A48 /* LegendView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -699,6 +694,7 @@
 				5D7868832300984B00A54436 /* HomeViewController.swift in Sources */,
 				5DF50C5629203E7000E3695C /* SiteDatesProvider.swift in Sources */,
 				5D6D2708291F684A00BEC655 /* TabItem.swift in Sources */,
+				5DA3E89D2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift in Sources */,
 				5D8DF10A293436CF00FB2A48 /* LegendView.swift in Sources */,
 				5D1B011524C04C2000EE9633 /* RemindersManager.swift in Sources */,
 				5D6D270C291F6A5B00BEC655 /* TabNavigationMenu.swift in Sources */,

@@ -15,7 +15,6 @@ class NavigationMenuBaseController: UITabBarController {
   var remindersManager: RemindersManager!
 
   var customTabBar: TabNavigationMenu!
-  var tabBarHeight: CGFloat = 83.0
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,7 +38,7 @@ class NavigationMenuBaseController: UITabBarController {
     let frame = CGRect(x: tabBar.frame.origin.x,
                        y: tabBar.frame.origin.x,
                        width: tabBar.frame.width,
-                       height: tabBarHeight)
+                       height: AppConstants.tabBarHeight)
     self.customTabBar = TabNavigationMenu(menuItems: items, frame: frame)
     self.customTabBar.translatesAutoresizingMaskIntoConstraints = false
     self.customTabBar.clipsToBounds = true
@@ -52,7 +51,7 @@ class NavigationMenuBaseController: UITabBarController {
       self.customTabBar.leadingAnchor.constraint(equalTo: tabBar.leadingAnchor),
       self.customTabBar.trailingAnchor.constraint(equalTo: tabBar.trailingAnchor),
       self.customTabBar.widthAnchor.constraint(equalToConstant: tabBar.frame.width),
-      self.customTabBar.heightAnchor.constraint(equalToConstant: tabBarHeight), // Fixed height for nav menu
+      self.customTabBar.heightAnchor.constraint(equalToConstant: AppConstants.tabBarHeight), // Fixed height for nav menu
       self.customTabBar.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor)
     ])
 
