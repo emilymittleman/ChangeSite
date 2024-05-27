@@ -8,59 +8,38 @@
 
 import Foundation
 
+let defaultStartDate = Date.now
+let defaultDaysBtwn = 3
+
 public class PumpSiteManager {
-  private var pumpSite: PumpSite!;
   private let storage = UserDefaultsAccessHelper.sharedInstance
-  public var startDate: Date { get { return pumpSite.startDate } }
-  public var daysBtwn: Int { get { return pumpSite.daysBtwn } }
-  public var endDate: Date { get { return pumpSite.endDate } }
-  public var overdue: Bool { get { return pumpSite.overdue } }
-
-  public init() {
-    self.storage.setUp(withGroupID: Bundle.main.appGroupID)
-    self.retrieveFromStorage()
+  private(set) var startDate: Date {
+    get { storage.retrieveValue(StorageKey.startDate) as? Date ?? defaultStartDate }
+    set { storage.storeValue(formatDate(newValue) as NSDate, forKey: StorageKey.startDate) }
   }
-
-  public init(startDate: Date, daysBtwn: Int) {
-    self.pumpSite = PumpSite(startDate: startDate, daysBtwn: daysBtwn)
-    self.saveToStorage()
+  private(set) var daysBtwn: Int {
+    get { storage.retrieveValue(StorageKey.daysBetween) as? Int ?? defaultDaysBtwn }
+    set { storage.storeValue(newValue as NSInteger, forKey: StorageKey.daysBetween) }
   }
+  public var endDate: Date { get { Date(timeInterval: TimeInterval(daysBtwn * AppConstants.secondsPerDay), since: self.startDate) } }
+  public var overdue: Bool { get { self.endDate < .now } }
 
   public func getPumpSite() -> PumpSite {
     return PumpSite(startDate: startDate, daysBtwn: daysBtwn)
   }
 
-  private func retrieveFromStorage() {
-    if let pumpSiteData = storage.retrieveValue(StorageKey.pumpSite),
-       let pumpSite = try? PropertyListDecoder().decode(PumpSite.self, from: pumpSiteData as! Data) {
-      self.pumpSite = pumpSite
-    } else {
-      self.setDefaultValues()
-    }
-  }
-
-  private func saveToStorage() {
-    storage.storeValue(try? PropertyListEncoder().encode(pumpSite), forKey: StorageKey.pumpSite)
-  }
-
-  private func setDefaultValues() {
-    self.pumpSite = PumpSite(startDate: .now, daysBtwn: 3)
-    self.saveToStorage()
-  }
-
   // MARK: Mutators
+
   public func updatePumpSite(daysBtwnChanges: Int) {
     if daysBtwnChanges >= 1 {
-      self.pumpSite.setDaysBtwn(daysBtwn: daysBtwnChanges)
-      self.saveToStorage()
+      self.daysBtwn = daysBtwnChanges
     }
   }
 
   public func updatePumpSite(startDate: Date) {
     // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
-    if AppConfig.isNewUser() || startDate > pumpSite.startDate {
-      self.pumpSite.setStartDate(startDate: startDate)
-      self.saveToStorage()
+    if AppConfig.isNewUser() || startDate > self.startDate || true {
+      self.startDate = startDate
     }
   }
 }

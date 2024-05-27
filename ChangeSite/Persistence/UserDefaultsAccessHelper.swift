@@ -9,7 +9,7 @@
 import Foundation
 
 public enum StorageKey: String {
-  case newUser, pumpSite, reminders
+  case newUser, startDate, daysBetween, reminders
 }
 
 class UserDefaultsAccessHelper {

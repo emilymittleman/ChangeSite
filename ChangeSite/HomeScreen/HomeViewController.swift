@@ -9,6 +9,9 @@
 import UIKit
 import FSCalendar
 import SwiftUI
+import OSLog
+
+fileprivate let logger = Logger()
 
 class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
 
@@ -39,15 +42,8 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     // show the "New site started" button & hide the rest of start date objects
     hideNewStartDate()
 
-    // turn the timer off
-    timer?.invalidate()
-    timer = nil
-
-    updateTimeLeftLabels()
-    calendar.reloadData()
-
-    // reset timer
-    timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
+    restartTimer()
+    refreshScreen()
   }
 
   @IBOutlet weak var cancelButton: UIButton!
@@ -65,7 +61,20 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     super.viewDidLoad()
 
     self.setupCalendar()
-    self.updateUI()
+    self.setupUI()
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(refreshScreen),
+      name: UIApplication.didBecomeActiveNotification,
+      object: nil
+    )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(didEnterBackground),
+      name: UIApplication.didEnterBackgroundNotification,
+      object: nil
+    )
 
     // Special case: If user turned off notifications, need to reset reminders
     /* notificationManager.notificationsEnabled { enabled in
@@ -83,12 +92,34 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-
+    logger.log("viewWillAppear")
     viewModel.updateCoreData()
-    updateTimeLeftLabels()
+    refreshScreen()
     hideNewStartDate()
-    calendar.reloadData()
+    restartTimer()
+  }
 
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    timer?.invalidate()
+    timer = nil
+  }
+
+  @objc private func didEnterBackground() {
+    timer?.invalidate()
+    timer = nil
+  }
+
+  private func restartTimer() {
+    timer?.invalidate()
+    timer = nil
+    timer = Timer.scheduledTimer(
+      timeInterval: 60.0,
+      target: self,
+      selector: #selector(refreshScreen),
+      userInfo: nil,
+      repeats: true
+    )
   }
 
   private func setupCalendar() {
@@ -101,7 +132,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     calendar.scrollEnabled = false
     calendar.scope = .week
     // Calendar UI
-    let mode = traitCollection.userInterfaceStyle
     calendar.appearance.headerDateFormat = ""
     calendar.appearance.headerMinimumDissolvedAlpha = 0.0
     calendar.backgroundColor = UIColor.custom.background
@@ -113,9 +143,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     calendar.appearance.titleFont = UIFont(name: "Rubik-Regular", size: 17)
   }
 
-  private func updateUI() {
-    // deal with light and dark mode
-    let mode = traitCollection.userInterfaceStyle
+  private func setupUI() {
     view.backgroundColor = UIColor.custom.background
 
     nextChangeLabel.font = UIFont(name: "Rubik-Regular", size: 25)
@@ -139,16 +167,12 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
     newSiteButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
   }
 
-  private func updateTimeLeftLabels() {
+  @objc private func refreshScreen() {
+    logger.log("refreshScreen")
     nextChangeLabel.text = viewModel.getNextChangeText()
     countdownLabel.text = viewModel.getCountdownText()
     countdownLabel.textColor = viewModel.pumpSiteIsOverdue() ? UIColor.custom.redText : UIColor.custom.textPrimary
-
     calendar.reloadData()
-  }
-
-  @objc func onTimerFires() {
-    updateTimeLeftLabels()
   }
 
   func hideNewStartDate() {
@@ -172,6 +196,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
 
     let pickerDate = formatDate(.now)
     startDatePicker.setDate(pickerDate, animated: true)
+    // TODO: Commented out for testing
     //startDatePicker.minimumDate = formatDate(viewModel.pumpSiteStartDate())
   }
 
@@ -213,19 +238,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
   }
 
   // MARK: - Navigation
-
-  override func viewWillDisappear(_ animated: Bool) {
-    // TODO: Make sure this gets called when user closes app
-    super.viewWillDisappear(animated)
-    timer?.invalidate()
-    timer = nil
-  }
-
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // Get the new view controller using segue.destination.
-    // Pass the selected object to the new view controller.
-  }
 
   class func viewController(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager) -> HomeViewController {
     let viewModel = HomeViewModel(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager)

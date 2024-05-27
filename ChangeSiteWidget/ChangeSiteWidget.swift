@@ -13,8 +13,7 @@ struct ChangeSiteWidget: Widget {
   let kind: String = "ChangeSiteWidget"
 
   init() {
-    let groupId = Bundle.main.appGroupID
-    UserDefaultsAccessHelper.sharedInstance.setUp(withGroupID: groupId)
+    UserDefaultsAccessHelper.sharedInstance.setUp(withGroupID: Bundle.main.appGroupID)
   }
 
   var body: some WidgetConfiguration {

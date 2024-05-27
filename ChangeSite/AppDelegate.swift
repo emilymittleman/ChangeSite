@@ -72,7 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if !AppConfig.isNewUser() {
       AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
     } else {
-      UserDefaultsAccessHelper.sharedInstance.deleteValue(withKey: StorageKey.pumpSite)
+      UserDefaultsAccessHelper.sharedInstance.deleteValue(withKey: StorageKey.startDate)
+      UserDefaultsAccessHelper.sharedInstance.deleteValue(withKey: StorageKey.daysBetween)
       UserDefaultsAccessHelper.sharedInstance.deleteValue(withKey: StorageKey.reminders)
     }
   }
