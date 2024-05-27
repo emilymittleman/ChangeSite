@@ -66,7 +66,6 @@ class SettingsTableViewController: UITableViewController {
 
   private func updateUI() {
     // Background color
-    let mode = traitCollection.userInterfaceStyle
     view.backgroundColor = UIColor.custom.background
     let cells: [UITableViewCell] = [newSiteCell, daysBtwnCell, cell1, cell2, cell3, cell4, cell5]
     for cell in cells {
@@ -120,7 +119,7 @@ class SettingsTableViewController: UITableViewController {
   /*
    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-   cell.backgroundColor = UIColor.background(traitCollection.userInterfaceStyle)
+   cell.backgroundColor = UIColor.custom.background
    return cell
    } */
 

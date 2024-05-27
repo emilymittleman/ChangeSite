@@ -70,7 +70,6 @@ class SetupViewController: UIViewController {
 
   private func updateUI() {
     // Background color
-    let mode = traitCollection.userInterfaceStyle
     view.backgroundColor = UIColor.custom.background
     // Label fonts
     setStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 30)

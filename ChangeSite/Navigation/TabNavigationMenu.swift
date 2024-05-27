@@ -57,8 +57,6 @@ class TabNavigationMenu: UIView {
   }
 
   func createTabItem(item: TabItem) -> UIView {
-    let mode = traitCollection.userInterfaceStyle
-
     let tabBarItem = UIView(frame: CGRect.zero)
     let itemTitleLabel = UILabel(frame: CGRect.zero)
     let itemIconView = UIImageView(frame: CGRect.zero)
@@ -110,7 +108,6 @@ class TabNavigationMenu: UIView {
   }
 
   func activateTab(tab: Int) {
-    let mode = traitCollection.userInterfaceStyle
     let tabToActivate = self.subviews[tab]
 
     if let tabLabel = tabToActivate.viewWithTag(12) as? UILabel {
@@ -125,7 +122,6 @@ class TabNavigationMenu: UIView {
   }
 
   func deactivateTab(tab: Int) {
-    let mode = traitCollection.userInterfaceStyle
     let inactiveTab = self.subviews[tab]
 
     if let tabLabel = inactiveTab.viewWithTag(12) as? UILabel {

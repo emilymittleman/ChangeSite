@@ -23,13 +23,11 @@ class LaunchViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
     self.updateUI()
   }
 
   private func updateUI() {
     // Background color
-    let mode = traitCollection.userInterfaceStyle
     view.backgroundColor = UIColor.custom.background
     // Label fonts
     welcomeLabel.font = UIFont(name: "Rubik-Medium", size: 45)

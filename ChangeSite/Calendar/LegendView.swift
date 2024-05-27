@@ -34,13 +34,7 @@ class LegendView: UIView {
     let nib = UINib(nibName: "LegendView", bundle: nil)
     nib.instantiate(withOwner: self)
     contentView.frame = bounds
-    setUIAppearance(with: .light)
-    setConstraints()
-    addSubview(contentView)
-  }
 
-  func setUIAppearance(with mode: UIUserInterfaceStyle) {
-    self.backgroundColor = UIColor.custom.background
     contentView.backgroundColor = UIColor.custom.background
     todayIcon.tintColor = UIColor.custom.lightBlue
     changeDateIcon.tintColor = UIColor.custom.textPrimary
@@ -51,6 +45,9 @@ class LegendView: UIView {
       label.textColor = UIColor.custom.textPrimary
       label.font = UIFont(name: "Rubik-Regular", size: 17)
     }
+
+    setConstraints()
+    addSubview(contentView)
   }
 
   private func setConstraints() {

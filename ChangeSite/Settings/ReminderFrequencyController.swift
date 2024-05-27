@@ -84,7 +84,6 @@ class ReminderFrequencyController: UIViewController {
 
   private func updateUI() {
     // Background color
-    let mode = traitCollection.userInterfaceStyle
     view.backgroundColor = UIColor.custom.background
     // Label fonts
     reminderFrequencyLabel.font = UIFont(name: "Rubik-Medium", size: 30)

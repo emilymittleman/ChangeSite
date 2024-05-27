@@ -16,7 +16,7 @@ class StartDateController: UIViewController {
   @IBOutlet weak var setStartDateLabel: UILabel!
   @IBOutlet weak var startDatePicker: UIDatePicker!
   @IBAction func startDatePickerChanged(_ sender: Any) {
-    saveButton.isHidden = false
+    saveButton.isHidden = startDatePicker.date <= pumpSiteManager.startDate
   }
 
   @IBOutlet weak var saveButton: UIButton!
@@ -35,27 +35,23 @@ class StartDateController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
     self.updateUI()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    // restrict range of startDatePicker so earliest date is current startDate
-
     startDatePicker.setDate(pumpSiteManager.startDate, animated: true)
     startDatePicker.minimumDate = formatDate(pumpSiteManager.startDate)
     saveButton.isHidden = true
   }
 
   private func updateUI() {
-    // Background color
-    let mode = traitCollection.userInterfaceStyle
     view.backgroundColor = UIColor.custom.background
-    // Label fonts and colors
+    // Title
     setStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 30)
-    saveButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
     setStartDateLabel.textColor = UIColor.custom.textPrimary
+    // Save button
+    saveButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
     saveButton.setTitleColor(UIColor.custom.textPrimary, for: .normal)
     saveButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
 
@@ -66,15 +62,5 @@ class StartDateController: UIViewController {
     border.frame = CGRect(x: 0, y: setStartDateLabel.frame.size.height-2, width: setStartDateLabel.frame.size.width, height: 2)
     setStartDateLabel.addSubview(border)
   }
-
-  /*
-   // MARK: - Navigation
-
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destination.
-   // Pass the selected object to the new view controller.
-   }
-   */
 
 }

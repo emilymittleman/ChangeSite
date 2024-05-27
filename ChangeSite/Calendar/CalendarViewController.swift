@@ -30,7 +30,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
 
   override func loadView() {
     let view = UIView(frame: UIScreen.main.bounds)
-    let mode = traitCollection.userInterfaceStyle
     view.backgroundColor = UIColor.custom.background
     self.view = view
 
@@ -41,11 +40,9 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     self.view.addSubview(calendar)
     self.calendar = calendar
 
-    //setupLegendView()
     let legendView = LegendView(frame: CGRect(x: 0, y: 575, width:self.view.bounds.size.width, height:height/2))
-    legendView.setUIAppearance(with: mode)
-    self.view.addSubview(legendView)
     self.legendView = legendView
+    self.view.addSubview(legendView)
 
     calendar.register(CustomCalendarCell.self, forCellReuseIdentifier: "cell")
 
