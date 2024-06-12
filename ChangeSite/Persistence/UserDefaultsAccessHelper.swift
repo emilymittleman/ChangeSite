@@ -52,5 +52,15 @@ class UserDefaultsAccessHelper {
     }
     groupUserDefaults.removeObject(forKey: key.rawValue)
   }
+
+  #if DEBUG
+  func clearAllData() {
+    let dictionary = groupUserDefaults?.dictionaryRepresentation()
+    dictionary?.keys.forEach { key in
+      groupUserDefaults?.removeObject(forKey: key)
+    }
+    groupUserDefaults?.synchronize()
+  }
+  #endif
 }
 
