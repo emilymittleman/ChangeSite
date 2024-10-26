@@ -13,6 +13,9 @@ enum TabItem {
   case home(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager)
   case calendar(pumpSiteManager: PumpSiteManager)
   case settings(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager)
+  #if DEBUG
+  case debug(pumpSiteManager: PumpSiteManager, remindersManager: RemindersManager)
+  #endif
 
   var viewController: UIViewController {
     switch self {
@@ -25,17 +28,25 @@ enum TabItem {
       let settingsVC = SettingsTableViewController.viewController(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager)
       navController.viewControllers = [settingsVC]
       return navController
+    #if DEBUG
+    case .debug(let pumpSiteManager, let remindersManager):
+      return DebugViewController()
+    #endif
     }
   }
   
   var icon: UIImage {
     switch self {
     case .home:
-      return UIImage(named: "Home")!
+      return UIImage(named: "Home") ?? UIImage(resource: .home)
     case .calendar:
-      return UIImage(named: "Calendar")!
+      return UIImage(named: "Calendar") ?? UIImage(resource: .calendar)
     case .settings:
-      return UIImage(named: "Settings")!
+      return UIImage(named: "Settings") ?? UIImage(resource: .settings)
+    #if DEBUG
+    case .debug:
+      return UIImage(named: "Code") ?? UIImage(resource: .logoCircle)
+    #endif
     }
   }
 
@@ -47,6 +58,10 @@ enum TabItem {
       return "Calendar"
     case .settings:
       return "Settings"
+    #if DEBUG
+    case .debug:
+      return "Debug"
+    #endif
     }
   }
 }

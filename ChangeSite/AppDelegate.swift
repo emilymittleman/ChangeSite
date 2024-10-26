@@ -32,9 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // UserDefaultsAccessHelper.sharedInstance.storeValue(true, forKey: StorageKey.newUser) //testing purposes only
     UserDefaultsAccessHelper.sharedInstance.setUp(withGroupID: Bundle.main.appGroupID)
-    // Clear all data
-//    UserDefaultsAccessHelper.sharedInstance.clearAllData()
-//    SiteDatesProvider(with: AppDelegate.sharedAppDelegate.coreDataStack.managedContext).deleteAllEntries()
 
     UNUserNotificationCenter.current().delegate = self
     // Initialize data managers

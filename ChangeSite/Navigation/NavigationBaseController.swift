@@ -22,11 +22,14 @@ class NavigationMenuBaseController: UITabBarController {
   }
 
   private func loadTabBar() {
-    let tabItems: [TabItem] = [
+    var tabItems: [TabItem] = [
       .home(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager),
       .calendar(pumpSiteManager: pumpSiteManager),
       .settings(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager)
     ]
+#if DEBUG
+    tabItems.append(TabItem.debug(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager))
+#endif
     self.setupCustomTabBar(tabItems) { (controllers) in
       self.viewControllers = controllers
     }
