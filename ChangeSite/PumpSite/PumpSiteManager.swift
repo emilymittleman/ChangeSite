@@ -8,89 +8,46 @@
 
 import Foundation
 
-class PumpSiteManager {
-    private var pumpSite: PumpSite!;
-    var startDate: Date { get { return pumpSite.startDate } }
-    var daysBtwn: Int { get { return pumpSite.daysBtwn } }
-    var endDate: Date { get { return pumpSite.endDate } }
-    var overdue: Bool { get { return pumpSite.overdue } }
-    
-    init() {
-        self.retrieveFromStorage()
-    }
-    
-    private func retrieveFromStorage() {
-        if let pumpSiteData = UserDefaults.standard.object(forKey: UserDefaults.Keys.pumpSite.rawValue),
-           let pumpSite = try? PropertyListDecoder().decode(PumpSite.self, from: pumpSiteData as! Data) {
-                self.pumpSite = pumpSite
-        } else {
-            self.setDefaultValues()
-        }
-    }
-    
-    private func saveToStorage() {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(pumpSite), forKey: UserDefaults.Keys.pumpSite.rawValue)
-    }
-    
-    private func setDefaultValues() {
-        // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
-        let newUser = UserDefaults.standard.bool(forKey: UserDefaults.Keys.newUser.rawValue)
-        let date = newUser ? Date(timeIntervalSince1970: 0) : Date()
-        let startingDate = formatDate(date)
-        self.pumpSite = PumpSite(startDate: startingDate, daysBtwn: 4)
-        self.saveToStorage()
-    }
-    
-    // MARK: Mutators
-    public func updatePumpSite(daysBtwnChanges: Int) {
-        if daysBtwnChanges >= 1 {
-            self.pumpSite.setDaysBtwn(daysBtwn: daysBtwnChanges)
-            self.saveToStorage()
-        }
-    }
-    
-    public func updatePumpSite(startDate: Date) {
-        if startDate > pumpSite.startDate {
-            self.pumpSite.setStartDate(startDate: startDate)
-            self.saveToStorage()
-        }
-    }
-    
-    public func updatePumpSite(changeTime: Date) {
-        self.pumpSite.setChangeTime(changeTime: changeTime)
-        self.saveToStorage()
-    }
-}
+let defaultStartDate = Date.now
+let defaultDaysBtwn = 3
 
-fileprivate class PumpSite: Codable {
-    private(set) var startDate: Date
-    private(set) var daysBtwn: Int
-    private(set) var endDate: Date
-    var overdue: Bool { get { return self.endDate < Date() } }
-    
-    init(startDate: Date, daysBtwn: Int) {
-        self.startDate = startDate
-        self.daysBtwn = daysBtwn
-        self.endDate = startDate
-        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
-    }
-    
-    func setStartDate(startDate: Date) {
-        self.startDate = startDate
-        self.endDate = startDate
-        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
-    }
-    
-    func setDaysBtwn(daysBtwn: Int) {
-        self.daysBtwn = daysBtwn
-        self.endDate = startDate
-        self.endDate.addTimeInterval(TimeInterval(daysBtwn * AppConstants.secondsPerDay))
-    }
-    
-    func setChangeTime(changeTime: Date) {
-        let hours = Calendar.current.component(.hour, from: changeTime)
-        let minutes = Calendar.current.component(.minute, from: changeTime)
-        self.endDate = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: self.endDate)!
-    }
-}
+public class PumpSiteManager {
+  private let storage = UserDefaultsAccessHelper.sharedInstance
+  private(set) var startDate: Date {
+    get { storage.retrieveValue(StorageKey.startDate) as? Date ?? defaultStartDate }
+    set { storage.storeValue(formatDate(newValue) as NSDate, forKey: StorageKey.startDate) }
+  }
+  private(set) var daysBtwn: Int {
+    get { storage.retrieveValue(StorageKey.daysBetween) as? Int ?? defaultDaysBtwn }
+    set { storage.storeValue(newValue as NSInteger, forKey: StorageKey.daysBetween) }
+  }
+  public var endDate: Date { get { Date(timeInterval: TimeInterval(daysBtwn * AppConstants.secondsPerDay), since: self.startDate) } }
+  public var overdue: Bool { get { self.endDate < .now } }
 
+  public func getPumpSite() -> PumpSite {
+    return PumpSite(startDate: startDate, daysBtwn: daysBtwn)
+  }
+
+  // MARK: Mutators
+
+  public func updatePumpSite(daysBtwnChanges: Int) {
+    if daysBtwnChanges >= 1 {
+      self.daysBtwn = daysBtwnChanges
+    }
+  }
+
+  public func updatePumpSite(startDate: Date) {
+    // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
+    if AppConfig.isNewUser() || startDate > self.startDate || true {
+      self.startDate = startDate
+    }
+  }
+
+  public func updatePumpSite(changeTime: Date) {
+    let hours = Calendar.current.component(.hour, from: changeTime)
+    let minutes = Calendar.current.component(.minute, from: changeTime)
+    if let newStartDate = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: self.endDate) {
+      self.startDate = newStartDate
+    }
+  }
+}

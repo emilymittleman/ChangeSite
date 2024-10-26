@@ -10,26 +10,26 @@ import UIKit
 
 class DaysBtwnCell: UITableViewCell {
 
-    @IBOutlet weak var daysBtwn: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
-    @IBAction func stepperChanged(_ sender: Any) {
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-        stepper.autorepeat = true
-    }
+  @IBOutlet weak var daysBtwn: UILabel!
+  @IBOutlet weak var stepper: UIStepper!
+  @IBAction func stepperChanged(_ sender: Any) {
+  }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    // Initialization code
 
-        // Configure the view for the selected state
-    }
+    stepper.autorepeat = true
+  }
+
+  override func setSelected(_ selected: Bool, animated: Bool) {
+    super.setSelected(selected, animated: animated)
+
+    // Configure the view for the selected state
+  }
 
 }
 
 protocol DaysBtwnCellDelegate {
-    func stepperWasChanged()
+  func stepperWasChanged()
 }
