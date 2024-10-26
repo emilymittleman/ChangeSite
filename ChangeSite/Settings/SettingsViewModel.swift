@@ -43,11 +43,11 @@ class SettingsViewModel {
 
   public func defaultChangeTime() -> String {
     if let defaultChangeTimeData = UserDefaults.standard.object(forKey: UserDefaults.Keys.defaultChangeTime.rawValue),
-        let defaultChangeTime = defaultChangeTimeData as? Date {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .none
-        return formatter.string(from: defaultChangeTime)
+       let defaultChangeTime = defaultChangeTimeData as? Date {
+      let formatter = DateFormatter()
+      formatter.timeStyle = .short
+      formatter.dateStyle = .none
+      return formatter.string(from: defaultChangeTime)
     }
     return "Off"
   }
