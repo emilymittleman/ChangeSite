@@ -22,6 +22,28 @@ class UserDefaultsAccessHelper {
     }
   }
 
+  // MARK: Setters
+
+  func set(_ value: String?, forKey key: StorageKey) {
+    storeValue(value, forKey: key)
+  }
+
+  func set(_ value: Bool?, forKey key: StorageKey) {
+    storeValue(value, forKey: key)
+  }
+
+  func set(_ value: Int?, forKey key: StorageKey) {
+    storeValue(value, forKey: key)
+  }
+
+  func set(_ value: Date?, forKey key: StorageKey) {
+    storeValue(value, forKey: key)
+  }
+
+  func setUserFinishedSetup() {
+    storeValue(false, forKey: .newUser)
+  }
+
   func storeValue(_ value: Any?, forKey key: StorageKey) {
     guard let groupUserDefaults else {
       assertionFailure("You must set up a Group ID before attempting any shared UserDefaults operations!")
@@ -30,19 +52,30 @@ class UserDefaultsAccessHelper {
     groupUserDefaults.set(value, forKey: key.rawValue)
   }
 
+  // MARK: Getters
+
+  func string(for key: StorageKey) -> String? {
+    return retrieveValue(key) as? String
+  }
+
+  func bool(for key: StorageKey) -> Bool? {
+    return retrieveValue(key) as? Bool
+  }
+
+  func int(for key: StorageKey) -> Int? {
+    return retrieveValue(key) as? Int
+  }
+
+  func date(for key: StorageKey) -> Date? {
+    return retrieveValue(key) as? Date
+  }
+
+  func isNewUser() -> Bool {
+    bool(for: .newUser) ?? true
+  }
+
   func retrieveValue(_ key: StorageKey) -> Any? {
     return groupUserDefaults?.object(forKey: key.rawValue)
-  }
-
-  func retrieveValue(_ key: StorageKey, withDefault defaultValue: Any) -> Any {
-    guard let result = groupUserDefaults?.object(forKey: key.rawValue) else {
-      return defaultValue
-    }
-    return result
-  }
-
-  func retrieveArray(_ key: StorageKey) -> [Any]? {
-    return groupUserDefaults?.array(forKey: key.rawValue)
   }
 
   func deleteValue(withKey key: StorageKey) {

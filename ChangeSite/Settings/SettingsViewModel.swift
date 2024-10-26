@@ -42,8 +42,7 @@ class SettingsViewModel {
   }
 
   public func defaultChangeTime() -> String {
-    if let defaultChangeTimeData = UserDefaults.standard.object(forKey: UserDefaults.Keys.defaultChangeTime.rawValue),
-       let defaultChangeTime = defaultChangeTimeData as? Date {
+    if let defaultChangeTime = UserDefaultsAccessHelper.sharedInstance.date(for: .defaultChangeTime) {
       let formatter = DateFormatter()
       formatter.timeStyle = .short
       formatter.dateStyle = .none

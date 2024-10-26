@@ -10,8 +10,6 @@
 		5D007C382C0296630022F713 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C372C0296630022F713 /* View+Extensions.swift */; };
 		5D007C3A2C0298400022F713 /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C392C0298400022F713 /* PumpSite.swift */; };
 		5D007C3B2C0298400022F713 /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C392C0298400022F713 /* PumpSite.swift */; };
-		5D007C3D2C02AB960022F713 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C3C2C02AB960022F713 /* AppConfig.swift */; };
-		5D007C3E2C02AB960022F713 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C3C2C02AB960022F713 /* AppConfig.swift */; };
 		5D007C402C02B11A0022F713 /* PumpSiteEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C3F2C02B11A0022F713 /* PumpSiteEntry.swift */; };
 		5D09CDFD23026991006E914F /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D09CDFC23026991006E914F /* ClassExtensions.swift */; };
 		5D13E7B027A4F732007CC645 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13E7AF27A4F732007CC645 /* NotificationService.swift */; };
@@ -33,13 +31,13 @@
 		5D8DF10A293436CF00FB2A48 /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8DF109293436CF00FB2A48 /* LegendView.swift */; };
 		5D8DF10C29343B0900FB2A48 /* LegendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8DF10B29343B0900FB2A48 /* LegendView.xib */; };
 		5D9A0703292AF8F700B90AEE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */; };
-		5DAEB1F3299B461400A21251 /* DefaultChangeTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */; };
 		5DA3E8952C02DDAE003DDAB6 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */; };
 		5DA3E8962C02DDAE003DDAB6 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */; };
 		5DA3E8992C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89A2C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89B2C03EB1E003DDAB6 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2719291F957400BEC655 /* Rubik-Medium.ttf */; };
 		5DA3E89D2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */; };
+		5DAEB1F3299B461400A21251 /* DefaultChangeTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */; };
 		5DB5C33326C6E44C00877646 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */; };
 		5DB5C33526C6E6F200877646 /* StartDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33426C6E6F200877646 /* StartDateCell.swift */; };
 		5DB5C33726C6E94F00877646 /* DaysBtwnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */; };
@@ -121,7 +119,6 @@
 		5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChangeSite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D007C372C0296630022F713 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		5D007C392C0298400022F713 /* PumpSite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSite.swift; sourceTree = "<group>"; };
-		5D007C3C2C02AB960022F713 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		5D007C3F2C02B11A0022F713 /* PumpSiteEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteEntry.swift; sourceTree = "<group>"; };
 		5D007C412C02C3920022F713 /* ChangeSiteNotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChangeSiteNotificationService.entitlements; sourceTree = "<group>"; };
 		5D007C422C02C39E0022F713 /* ChangeSiteWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChangeSiteWidgetExtension.entitlements; sourceTree = "<group>"; };
@@ -146,10 +143,10 @@
 		5D8DF109293436CF00FB2A48 /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
 		5D8DF10B29343B0900FB2A48 /* LegendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegendView.xib; sourceTree = "<group>"; };
 		5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeTimeController.swift; sourceTree = "<group>"; };
 		5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		5DA3E8982C02DF74003DDAB6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDatePickerBottomSheet.swift; sourceTree = "<group>"; };
+		5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeTimeController.swift; sourceTree = "<group>"; };
 		5DB5C33226C6E44C00877646 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
 		5DB5C33426C6E6F200877646 /* StartDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateCell.swift; sourceTree = "<group>"; };
 		5DB5C33626C6E94F00877646 /* DaysBtwnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysBtwnCell.swift; sourceTree = "<group>"; };
@@ -409,7 +406,6 @@
 				5DF50C4A292012EF00E3695C /* CoreDataStack.swift */,
 				5DF50C5529203E7000E3695C /* SiteDatesProvider.swift */,
 				CBE4FF862BA7C71600C04AF4 /* UserDefaultsAccessHelper.swift */,
-				5D007C3C2C02AB960022F713 /* AppConfig.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -699,7 +695,6 @@
 				5DCD32A2230023AB00BC2E07 /* LaunchViewController.swift in Sources */,
 				5D30E271252D4BD300DB49CA /* Reminder.swift in Sources */,
 				CB48F3612B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */,
-				5D007C3D2C02AB960022F713 /* AppConfig.swift in Sources */,
 				5DF50C4E2920163200E3695C /* PumpSite.xcdatamodeld in Sources */,
 				5D007C3A2C0298400022F713 /* PumpSite.swift in Sources */,
 				5DCD32A0230023AB00BC2E07 /* AppDelegate.swift in Sources */,
@@ -740,7 +735,6 @@
 				CBDCC2032B60CF9900BD995B /* ChangeSiteTimelineProvider.swift in Sources */,
 				CB26A47A2B68DA9900AC03F4 /* CalendarSingleLineView.swift in Sources */,
 				CBDCC1F82B60CE2800BD995B /* ChangeSiteWidget.swift in Sources */,
-				5D007C3E2C02AB960022F713 /* AppConfig.swift in Sources */,
 				5D007C3B2C0298400022F713 /* PumpSite.swift in Sources */,
 				CBDCC2112B60EFC000BD995B /* PumpSiteManager.swift in Sources */,
 				CB48F3622B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */,

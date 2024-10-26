@@ -23,7 +23,7 @@ class DefaultChangeTimeController: UIViewController {
   @IBOutlet weak var saveButton: UIButton!
   @IBAction func saveButtonPressed(_ sender: Any) {
     // UIApplication.shared.applicationIconBadgeNumber = 0
-    UserDefaults.standard.set(timePicker.date, forKey: UserDefaults.Keys.defaultChangeTime.rawValue)
+    UserDefaultsAccessHelper.sharedInstance.set(timePicker.date, forKey: .defaultChangeTime)
 
     self.pumpSiteManager.updatePumpSite(changeTime: timePicker.date)
     SiteDates.createOrUpdate(pumpSiteManager: self.pumpSiteManager, endDate: nil, with: coreDataStack)
@@ -42,26 +42,23 @@ class DefaultChangeTimeController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    // restrict range of startDatePicker so earliest date is current startDate
-
     timePicker.setDate(Date(), animated: true)
     saveButton.isHidden = true
   }
 
   private func updateUI() {
-    // Background color
-    let mode = traitCollection.userInterfaceStyle
-    view.backgroundColor = UIColor.background(mode)
-    // Label fonts and colors
+    view.backgroundColor = UIColor.custom.background
+    // Title
     setDefaultChangeTimeLabel.font = UIFont(name: "Rubik-Medium", size: 28)
+    setDefaultChangeTimeLabel.textColor = UIColor.custom.textPrimary
+    // Save button
     saveButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
-    setDefaultChangeTimeLabel.textColor = UIColor.charcoal(mode)
-    saveButton.setTitleColor(UIColor.charcoal(mode), for: .normal)
+    saveButton.setTitleColor(UIColor.custom.textPrimary, for: .normal)
     saveButton.setBackgroundImage(UIImage(named: "ButtonOutline"), for: .normal)
 
     // Add underline to label
     let border = UIView()
-    border.backgroundColor = UIColor.lightBlue
+    border.backgroundColor = UIColor.custom.lightBlue
     border.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
     border.frame = CGRect(x: 0, y: setDefaultChangeTimeLabel.frame.size.height-2, width: setDefaultChangeTimeLabel.frame.size.width, height: 2)
     setDefaultChangeTimeLabel.addSubview(border)

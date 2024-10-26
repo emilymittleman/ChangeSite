@@ -14,12 +14,12 @@ let defaultDaysBtwn = 3
 public class PumpSiteManager {
   private let storage = UserDefaultsAccessHelper.sharedInstance
   private(set) var startDate: Date {
-    get { storage.retrieveValue(StorageKey.startDate) as? Date ?? defaultStartDate }
-    set { storage.storeValue(formatDate(newValue) as NSDate, forKey: StorageKey.startDate) }
+    get { storage.date(for: .startDate) ?? defaultStartDate }
+    set { storage.set(formatDate(newValue), forKey: .startDate) }
   }
   private(set) var daysBtwn: Int {
-    get { storage.retrieveValue(StorageKey.daysBetween) as? Int ?? defaultDaysBtwn }
-    set { storage.storeValue(newValue as NSInteger, forKey: StorageKey.daysBetween) }
+    get { storage.int(for: .daysBetween) ?? defaultDaysBtwn }
+    set { storage.set(newValue, forKey: .daysBetween) }
   }
   public var endDate: Date { get { Date(timeInterval: TimeInterval(daysBtwn * AppConstants.secondsPerDay), since: self.startDate) } }
   public var overdue: Bool { get { self.endDate < .now } }
@@ -38,7 +38,7 @@ public class PumpSiteManager {
 
   public func updatePumpSite(startDate: Date) {
     // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
-    if AppConfig.isNewUser() || startDate > self.startDate || true {
+    if storage.isNewUser() || startDate > self.startDate || true {
       self.startDate = startDate
     }
   }
