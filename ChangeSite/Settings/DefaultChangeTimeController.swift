@@ -1,37 +1,38 @@
 //
-//  StartDateController.swift
-//  ChangeSite2
+//  DefaultChangeTimeController.swift
+//  ChangeSite
 //
-//  Created by Emily Mittleman on 8/11/19.
-//  Copyright © 2019 Emily Mittleman. All rights reserved.
+//  Created by Emily Mittleman on 2/13/23.
+//  Copyright © 2023 Emily Mittleman. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class StartDateController: UIViewController {
+class DefaultChangeTimeController: UIViewController {
 
   var pumpSiteManager: PumpSiteManager!
   var coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
 
-  @IBOutlet weak var setStartDateLabel: UILabel!
-  @IBOutlet weak var startDatePicker: UIDatePicker!
-  @IBAction func startDatePickerChanged(_ sender: Any) {
-    saveButton.isHidden = startDatePicker.date <= pumpSiteManager.startDate
+  @IBOutlet weak var setDefaultChangeTimeLabel: UILabel!
+  @IBOutlet weak var timePicker: UIDatePicker!
+  @IBAction func timeickerChanged(_ sender: Any) {
+    saveButton.isHidden = false
   }
 
   @IBOutlet weak var saveButton: UIButton!
   @IBAction func saveButtonPressed(_ sender: Any) {
     // UIApplication.shared.applicationIconBadgeNumber = 0
-    SiteDates.createOrUpdate(pumpSiteManager: self.pumpSiteManager, endDate: startDatePicker.date, with: coreDataStack)
+    UserDefaultsAccessHelper.sharedInstance.set(timePicker.date, forKey: .defaultChangeTime)
 
-    self.pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
+    self.pumpSiteManager.updatePumpSite(changeTime: timePicker.date)
     SiteDates.createOrUpdate(pumpSiteManager: self.pumpSiteManager, endDate: nil, with: coreDataStack)
     coreDataStack.saveContext()
     // reschedule notifications
     NotificationManager.shared.removeAllNotifications()
     NotificationManager.shared.scheduleNotifications(reminderTypes: ReminderType.allCases)
 
-    performSegue(withIdentifier: "unwindStartDateToSettings", sender: self)
+    performSegue(withIdentifier: "unwindDefaultChangeTimeToSettings", sender: self)
   }
 
   override func viewDidLoad() {
@@ -41,16 +42,15 @@ class StartDateController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    startDatePicker.setDate(pumpSiteManager.startDate, animated: true)
-    startDatePicker.minimumDate = formatDate(pumpSiteManager.startDate)
+    timePicker.setDate(Date(), animated: true)
     saveButton.isHidden = true
   }
 
   private func updateUI() {
     view.backgroundColor = UIColor.custom.background
     // Title
-    setStartDateLabel.font = UIFont(name: "Rubik-Medium", size: 30)
-    setStartDateLabel.textColor = UIColor.custom.textPrimary
+    setDefaultChangeTimeLabel.font = UIFont(name: "Rubik-Medium", size: 28)
+    setDefaultChangeTimeLabel.textColor = UIColor.custom.textPrimary
     // Save button
     saveButton.titleLabel?.font = UIFont(name: "Rubik-Regular", size: 30)
     saveButton.setTitleColor(UIColor.custom.textPrimary, for: .normal)
@@ -60,8 +60,8 @@ class StartDateController: UIViewController {
     let border = UIView()
     border.backgroundColor = UIColor.custom.lightBlue
     border.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-    border.frame = CGRect(x: 0, y: setStartDateLabel.frame.size.height-2, width: setStartDateLabel.frame.size.width, height: 2)
-    setStartDateLabel.addSubview(border)
+    border.frame = CGRect(x: 0, y: setDefaultChangeTimeLabel.frame.size.height-2, width: setDefaultChangeTimeLabel.frame.size.width, height: 2)
+    setDefaultChangeTimeLabel.addSubview(border)
   }
 
 }

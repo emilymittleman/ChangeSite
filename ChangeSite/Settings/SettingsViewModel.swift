@@ -41,6 +41,16 @@ class SettingsViewModel {
     return dateFormatter.string(from: self.pumpSiteManager.startDate)
   }
 
+  public func defaultChangeTime() -> String {
+    if let defaultChangeTime = UserDefaultsAccessHelper.sharedInstance.date(for: .defaultChangeTime) {
+      let formatter = DateFormatter()
+      formatter.timeStyle = .short
+      formatter.dateStyle = .none
+      return formatter.string(from: defaultChangeTime)
+    }
+    return "Off"
+  }
+
   public func reminderFrequencyStrings() -> [String] {
     return ReminderType.allCases.map { remindersManager.getFrequency(type: $0).rawValue }
   }
