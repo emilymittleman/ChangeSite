@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var notificationManager: NotificationManager?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // UserDefaultsAccessHelper.sharedInstance.storeValue(true, forKey: StorageKey.newUser) //testing purposes only
     UserDefaultsAccessHelper.sharedInstance.setUp(withGroupID: Bundle.main.appGroupID)
 
     UNUserNotificationCenter.current().delegate = self
@@ -46,13 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.main.bounds)
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var initialViewController: UIViewController = UIViewController()
-    let newUser = AppConfig.isNewUser()
-    if newUser, let vc = storyboard.instantiateViewController(withIdentifier: "LaunchScreen") as? LaunchViewController {
+    let isNewUser = UserDefaultsAccessHelper.sharedInstance.isNewUser()
+    if isNewUser, let vc = storyboard.instantiateViewController(withIdentifier: "LaunchScreen") as? LaunchViewController {
       vc.pumpSiteManager = pumpSiteManager
       vc.remindersManager = remindersManager
       initialViewController = vc
-    }
-    else if !newUser, let vc = storyboard.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController {
+    } else if let vc = storyboard.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController {
       vc.pumpSiteManager = pumpSiteManager
       vc.remindersManager = remindersManager
       initialViewController = vc
@@ -70,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidEnterBackground(_ application: UIApplication) {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    if !AppConfig.isNewUser() {
+    if !UserDefaultsAccessHelper.sharedInstance.isNewUser() {
       AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
     } else {
       UserDefaultsAccessHelper.sharedInstance.deleteValue(withKey: StorageKey.startDate)
