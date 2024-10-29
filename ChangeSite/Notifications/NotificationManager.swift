@@ -34,7 +34,7 @@ class NotificationManager: ObservableObject {
     remindersManager = config.remindersManager
   }
 
-  func requestAuthorization(completion: @escaping  (Bool) -> Void) {
+  func requestAuthorization(completion: @escaping (Bool) -> Void) {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
       print("Permission granted: \(granted)")
       self?.fetchNotificationSettings()
@@ -65,23 +65,27 @@ class NotificationManager: ObservableObject {
     }
   }
 
-  // Remove all pending and delivered notifications
-  func removeAllNotifications() {
-    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-  }
-
-  func removeScheduledNotification(reminderType: ReminderType) {
-    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [remindersManager.getID(type: reminderType)])
-  }
-
-  func scheduleNotifications(reminderTypes: [ReminderType]) {
-    for type in reminderTypes {
+  func rescheduleNotifications(_ types: [ReminderType] = ReminderType.allCases) {
+    for type in types {
+      removeNotification(type)
       scheduleNotification(reminderType: type)
     }
   }
 
-  func scheduleNotification(reminderType: ReminderType) {
+  // Remove all pending and delivered notifications
+//  func removeAllNotifications() {
+//    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+//    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+//  }
+
+  // MARK: Private
+
+  private func removeNotification(_ type: ReminderType) {
+    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [remindersManager.getID(type: type)])
+    UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [remindersManager.getID(type: type)])
+  }
+
+  private func scheduleNotification(reminderType: ReminderType) {
     // TODO: repeating notifications (max 64)
     let frequency = remindersManager.getFrequency(type: reminderType)
     if frequency == .none { return }
@@ -101,8 +105,6 @@ class NotificationManager: ObservableObject {
       if let error = error { print(error) }
     }
   }
-
-  // MARK: Private
 
   private func timeUntilNotificationFire(reminderType: ReminderType) -> TimeInterval {
     var triggerDate = pumpSiteManager.endDate

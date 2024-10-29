@@ -29,10 +29,7 @@ class ReminderFrequencyController: UIViewController {
     remindersManager.updateReminder(type: reminderType, soundOn: soundSwitch.isOn)
     remindersManager.updateReminder(type: reminderType, repeatingFrequency: getRepeatingFromDatePicker())
 
-    if notificationManager.notificationsEnabled() {
-      notificationManager.removeScheduledNotification(reminderType: reminderType)
-      notificationManager.scheduleNotification(reminderType: reminderType)
-    }
+    notificationManager.rescheduleNotifications([reminderType])
     performSegue(withIdentifier: "unwindReminderToSettings", sender: self)
   }
 

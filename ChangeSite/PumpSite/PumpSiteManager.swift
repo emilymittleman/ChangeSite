@@ -30,7 +30,7 @@ public class PumpSiteManager {
 
   // MARK: Mutators
 
-  public func updatePumpSite(daysBtwnChanges: Int) {
+  public func setDaysBtwnChanges(_ daysBtwnChanges: Int) {
     if daysBtwnChanges >= 1 {
       self.daysBtwn = daysBtwnChanges
     }
@@ -47,7 +47,7 @@ public class PumpSiteManager {
     }
   }
 
-  public func updatePumpSite(changeTime: Date) {
+  public func setDefaultChangeTimme(_ changeTime: Date) {
     let hours = Calendar.current.component(.hour, from: changeTime)
     let minutes = Calendar.current.component(.minute, from: changeTime)
     if let newStartDate = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: self.startDate) {

@@ -38,18 +38,15 @@ class HomeViewModel {
 
   // MARK: Mutators
 
-  public func endPumpSite(endDate: Date) {
-    // UIApplication.shared.applicationIconBadgeNumber = 0
-    SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: endDate, with: coreDataStack)
+  public func startNewPumpSite(changeDate: Date) {
+    // End current site
+    SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: changeDate, with: coreDataStack)
     coreDataStack.saveContext()
-    notificationManager.removeAllNotifications()
-  }
-
-  public func startNewPumpSite(startDate: Date) {
-    pumpSiteManager.updatePumpSite(startDate: startDate)
+    // Start new site
+    pumpSiteManager.updatePumpSite(startDate: changeDate)
     SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
     coreDataStack.saveContext()
-    notificationManager.scheduleNotifications(reminderTypes: ReminderType.allCases)
+    notificationManager.rescheduleNotifications()
   }
 
   public func updateCoreData() {

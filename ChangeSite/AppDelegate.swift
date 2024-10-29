@@ -85,6 +85,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NotificationManager.shared.fetchNotificationSettings()
     UIApplication.shared.applicationIconBadgeNumber = 0
+    // Special case: If user turned off notifications, need to reset reminders
+    /*if !notificationManager.notificationsEnabled() {
+     for reminderNotification in reminderNotifications {
+     if reminderNotification.frequency != .none {
+     reminderNotification.frequency = .none
+     ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
+     notificationManager.removeAllNotifications()
+     }
+     }
+     }*/
   }
 
   func applicationWillTerminate(_ application: UIApplication) {

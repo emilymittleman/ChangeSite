@@ -51,19 +51,6 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
 
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleUserTap(_:)))
     self.view.addGestureRecognizer(tapGesture)
-
-    // Special case: If user turned off notifications, need to reset reminders
-    /* notificationManager.notificationsEnabled { enabled in
-     if enabled { [weak self] in
-     for reminderNotification in self.reminderNotifications {
-     if reminderNotification.frequency != "none" {
-     reminderNotification.frequency = "none"
-     ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
-     notificationManager.removeAllNotifications()
-     }
-     }
-     }
-     } */
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -149,8 +136,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
       self.startDatePickerView.dismiss()
     }
     startDatePickerView.onSave = { selectedDate in
-      self.viewModel.endPumpSite(endDate: selectedDate)
-      self.viewModel.startNewPumpSite(startDate: selectedDate)
+      self.viewModel.startNewPumpSite(changeDate: selectedDate)
       self.restartTimer()
       self.refreshScreen()
       self.newSiteButton.isHidden = false

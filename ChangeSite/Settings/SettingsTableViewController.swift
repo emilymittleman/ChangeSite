@@ -47,17 +47,6 @@ class SettingsTableViewController: UITableViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
 
-    // Special case: If user turned off notifications while app was running, need to reset reminders
-    /*if !notificationManager.notificationsEnabled() {
-     for reminderNotification in reminderNotifications {
-     if reminderNotification.frequency != .none {
-     reminderNotification.frequency = .none
-     ReminderNotificationsManager.shared.mutateNotification(newReminderNotif: reminderNotification)
-     notificationManager.removeAllNotifications()
-     }
-     }
-     }*/
-
     // ----- Update the view with reminder data (startDate, daysBtwn, & reminders) -----
     startDate.text = viewModel.formattedStartDate()
     daysBtwn.text = viewModel.pumpSiteDaysBtwnString()
