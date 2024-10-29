@@ -37,8 +37,12 @@ public class PumpSiteManager {
   }
 
   public func updatePumpSite(startDate: Date) {
+    var isDebug = false
+    #if DEBUG
+    isDebug = true
+    #endif
     // Database compliance: allows new user with default pumpSite to set up startDate since newStartDate must be > oldStartDate
-    if storage.isNewUser() || startDate > self.startDate || true {
+    if storage.isNewUser() || startDate > self.startDate || isDebug {
       self.startDate = startDate
     }
   }
@@ -46,7 +50,7 @@ public class PumpSiteManager {
   public func updatePumpSite(changeTime: Date) {
     let hours = Calendar.current.component(.hour, from: changeTime)
     let minutes = Calendar.current.component(.minute, from: changeTime)
-    if let newStartDate = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: self.endDate) {
+    if let newStartDate = Calendar.current.date(bySettingHour: hours, minute: minutes, second: 0, of: self.startDate) {
       self.startDate = newStartDate
     }
   }
