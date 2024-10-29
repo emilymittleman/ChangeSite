@@ -28,8 +28,8 @@ public func getWeekday(from date: Date) -> String {
 }
 
 public func getCountdownText(_ pumpSite: PumpSite) -> String {
-  let days = daysBetweenDates(from: .now, to: pumpSite.endDate)
-  let diff = Calendar.current.dateComponents([.hour, .minute], from: .now, to: pumpSite.endDate)
+  let days = daysBetweenDates(from: .now, to: pumpSite.expiration)
+  let diff = Calendar.current.dateComponents([.hour, .minute], from: .now, to: pumpSite.expiration)
   let hours = abs(diff.hour ?? 0)
   let minutes = abs(diff.minute ?? 0)
 

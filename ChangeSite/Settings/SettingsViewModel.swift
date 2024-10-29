@@ -21,15 +21,6 @@ class SettingsViewModel {
     self.remindersManager = remindersManager
   }
 
-  // MARK: Mutators
-
-  public func updatePumpSite(daysBtwnChanges: Int) {
-    self.pumpSiteManager.setDaysBtwnChanges(daysBtwnChanges)
-    SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
-    coreDataStack.saveContext()
-    notificationManager.rescheduleNotifications()
-  }
-
   // MARK: Strings
 
   public func formattedStartDate() -> String {

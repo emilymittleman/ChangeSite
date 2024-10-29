@@ -20,7 +20,7 @@ class SettingsTableViewController: UITableViewController {
   @IBOutlet weak var stepper: UIStepper!
   @IBAction func stepperValueChanged(_ sender: UIStepper) {
     daysBtwn.text = Int(sender.value).description
-    viewModel.updatePumpSite(daysBtwnChanges: Int(sender.value))
+    viewModel.pumpSiteManager.setDaysBtwnChanges(Int(sender.value))
   }
 
   @IBOutlet weak var newSiteCell: UITableViewCell!

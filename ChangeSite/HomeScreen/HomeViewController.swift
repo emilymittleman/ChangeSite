@@ -136,7 +136,7 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
       self.startDatePickerView.dismiss()
     }
     startDatePickerView.onSave = { selectedDate in
-      self.viewModel.startNewPumpSite(changeDate: selectedDate)
+      self.viewModel.pumpSiteManager.changedSite(changeDate: selectedDate)
       self.restartTimer()
       self.refreshScreen()
       self.newSiteButton.isHidden = false

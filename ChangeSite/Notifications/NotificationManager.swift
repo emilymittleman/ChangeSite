@@ -61,24 +61,35 @@ class NotificationManager: ObservableObject {
   // might not need this since fetchNotificationSettings is in appDelegate now; test later
   func notificationsEnabled(completion: @escaping (Bool) -> () ) {
     UNUserNotificationCenter.current().getNotificationSettings { settings in
-      completion(settings.authorizationStatus == UNAuthorizationStatus.authorized)
+      completion(settings.authorizationStatus == .authorized)
     }
+  }
+
+  func notificationsEnabled() async -> Bool {
+    let settings = await UNUserNotificationCenter.current().notificationSettings()
+    return settings.authorizationStatus == .authorized
   }
 
   func rescheduleNotifications(_ types: [ReminderType] = ReminderType.allCases) {
-    for type in types {
-      removeNotification(type)
-      scheduleNotification(reminderType: type)
+    Task {
+      guard await notificationsEnabled() else {
+        removeAllNotifications()
+        return
+      }
+      for type in types {
+        removeNotification(type)
+        scheduleNotification(reminderType: type)
+      }
     }
   }
 
-  // Remove all pending and delivered notifications
-//  func removeAllNotifications() {
-//    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-//    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-//  }
-
   // MARK: Private
+
+  // Remove all pending and delivered notifications
+  private func removeAllNotifications() {
+    UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+  }
 
   private func removeNotification(_ type: ReminderType) {
     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [remindersManager.getID(type: type)])

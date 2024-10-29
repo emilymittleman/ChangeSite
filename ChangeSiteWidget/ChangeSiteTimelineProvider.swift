@@ -12,7 +12,7 @@ import SwiftUI
 
 struct ChangeSiteTimelineProvider: TimelineProvider {
 
-  var pumpSiteManager = PumpSiteManager()
+  let userDefaults = UserDefaultsAccessHelper.sharedInstance
 
   func placeholder(in context: Context) -> PumpSiteEntry {
     PumpSiteEntry(date: .now, pumpSite: PumpSite())
@@ -37,6 +37,6 @@ struct ChangeSiteTimelineProvider: TimelineProvider {
   }
 
   func getPumpSiteEntry() -> PumpSiteEntry {
-    return PumpSiteEntry(date: .now, pumpSite: pumpSiteManager.getPumpSite())
+    return PumpSiteEntry(date: .now, pumpSite: userDefaults.currentPumpSite() ?? PumpSite())
   }
 }

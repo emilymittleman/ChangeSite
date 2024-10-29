@@ -40,7 +40,6 @@ class ReminderFrequencyController: UIViewController {
       segmentedControl.selectedSegmentIndex = 0
       let alertController = configureNotificationsAlertPopup()
       self.present(alertController, animated: true, completion: nil)
-      // after returning to app, refresh notificationManager.fetchNotificationSettings() so that settings reload
       return
     }
 

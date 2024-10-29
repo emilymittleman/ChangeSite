@@ -39,14 +39,7 @@ class HomeViewModel {
   // MARK: Mutators
 
   public func startNewPumpSite(changeDate: Date) {
-    // End current site
-    SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: changeDate, with: coreDataStack)
-    coreDataStack.saveContext()
-    // Start new site
-    pumpSiteManager.updatePumpSite(startDate: changeDate)
-    SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
-    coreDataStack.saveContext()
-    notificationManager.rescheduleNotifications()
+    pumpSiteManager.changedSite(changeDate: changeDate)
   }
 
   public func updateCoreData() {
@@ -60,7 +53,7 @@ class HomeViewModel {
     if pumpSiteManager.overdue {
       let daysOver = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: .now)
       if daysOver != currentSite.daysOverdue {
-        SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
+        SiteDates.createOrUpdate(pumpSite: pumpSiteManager.getPumpSite(), endDate: nil, with: coreDataStack)
       }
     }
   }
