@@ -21,7 +21,6 @@ class StartDateController: UIViewController {
 
   @IBOutlet weak var saveButton: UIButton!
   @IBAction func saveButtonPressed(_ sender: Any) {
-    // UIApplication.shared.applicationIconBadgeNumber = 0
     pumpSiteManager.setStartDate(startDatePicker.date)
     performSegue(withIdentifier: "unwindStartDateToSettings", sender: self)
   }

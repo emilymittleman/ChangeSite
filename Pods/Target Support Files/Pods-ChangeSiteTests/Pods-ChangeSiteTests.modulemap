@@ -1,6 +1,0 @@
-framework module Pods_ChangeSiteTests {
-  umbrella header "Pods-ChangeSiteTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: Change ReminderType to 3 types: before, when it's due, and after
 enum ReminderType: Int, Codable, CaseIterable {
   case oneDayBefore = -1, dayOf, oneDayAfter, twoDaysAfter, extendedDaysAfter
 }
