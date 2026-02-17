@@ -14,6 +14,9 @@ struct ChangeSiteWidget: Widget {
 
   init() {
     UserDefaultsAccessHelper.sharedInstance.setUp(withGroupID: Bundle.main.appGroupID)
+    let pumpSiteManager = PumpSiteManager()
+    let remindersManager = RemindersManager()
+    NotificationManager.setup(NotificationManager.Config(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager))
   }
 
   var body: some WidgetConfiguration {

@@ -22,15 +22,7 @@ class StartDateController: UIViewController {
   @IBOutlet weak var saveButton: UIButton!
   @IBAction func saveButtonPressed(_ sender: Any) {
     // UIApplication.shared.applicationIconBadgeNumber = 0
-    SiteDates.createOrUpdate(pumpSiteManager: self.pumpSiteManager, endDate: startDatePicker.date, with: coreDataStack)
-
-    self.pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
-    SiteDates.createOrUpdate(pumpSiteManager: self.pumpSiteManager, endDate: nil, with: coreDataStack)
-    coreDataStack.saveContext()
-    // reschedule notifications
-    NotificationManager.shared.removeAllNotifications()
-    NotificationManager.shared.scheduleNotifications(reminderTypes: ReminderType.allCases)
-
+    pumpSiteManager.setStartDate(startDatePicker.date)
     performSegue(withIdentifier: "unwindStartDateToSettings", sender: self)
   }
 

@@ -55,23 +55,30 @@ class UserDefaultsAccessHelper {
   // MARK: Getters
 
   func string(for key: StorageKey) -> String? {
-    return retrieveValue(key) as? String
+    retrieveValue(key) as? String
   }
 
   func bool(for key: StorageKey) -> Bool? {
-    return retrieveValue(key) as? Bool
+    retrieveValue(key) as? Bool
   }
 
   func int(for key: StorageKey) -> Int? {
-    return retrieveValue(key) as? Int
+    retrieveValue(key) as? Int
   }
 
   func date(for key: StorageKey) -> Date? {
-    return retrieveValue(key) as? Date
+    retrieveValue(key) as? Date
   }
 
   func isNewUser() -> Bool {
     bool(for: .newUser) ?? true
+  }
+
+  func currentPumpSite() -> PumpSite? {
+    guard let startDate = date(for: .startDate), let daysBtwn = int(for: .daysBetween) else {
+      return nil
+    }
+    return PumpSite(startDate: startDate, daysBtwn: daysBtwn)
   }
 
   func retrieveValue(_ key: StorageKey) -> Any? {

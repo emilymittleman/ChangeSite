@@ -38,18 +38,8 @@ class HomeViewModel {
 
   // MARK: Mutators
 
-  public func endPumpSite(endDate: Date) {
-    // UIApplication.shared.applicationIconBadgeNumber = 0
-    SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: endDate, with: coreDataStack)
-    coreDataStack.saveContext()
-    notificationManager.removeAllNotifications()
-  }
-
-  public func startNewPumpSite(startDate: Date) {
-    pumpSiteManager.updatePumpSite(startDate: startDate)
-    SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
-    coreDataStack.saveContext()
-    notificationManager.scheduleNotifications(reminderTypes: ReminderType.allCases)
+  public func startNewPumpSite(changeDate: Date) {
+    pumpSiteManager.changedSite(changeDate: changeDate)
   }
 
   public func updateCoreData() {
@@ -63,7 +53,7 @@ class HomeViewModel {
     if pumpSiteManager.overdue {
       let daysOver = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: .now)
       if daysOver != currentSite.daysOverdue {
-        SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: coreDataStack)
+        SiteDates.createOrUpdate(pumpSite: pumpSiteManager.getPumpSite(), endDate: nil, with: coreDataStack)
       }
     }
   }

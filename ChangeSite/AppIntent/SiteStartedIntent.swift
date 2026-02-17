@@ -22,8 +22,8 @@ struct SiteStartedIntent: AppIntent {
   private static let pumpSiteManager = PumpSiteManager()
 
   func perform() async throws -> some IntentResult {
-    log.log("New site started")
-    SiteStartedIntent.pumpSiteManager.updatePumpSite(startDate: .now)
+    print("New site started")
+    SiteStartedIntent.pumpSiteManager.changedSite(changeDate: .now)
     return .result()
   }
 }

@@ -14,6 +14,12 @@ public extension Bundle {
   var appGroupID: String {
     "group.com.EmilyMittleman.ChangeSite"
   }
+  var isDebug: Bool {
+    #if DEBUG
+    return true
+    #endif
+    return false
+  }
 }
 
 enum AppConstants {

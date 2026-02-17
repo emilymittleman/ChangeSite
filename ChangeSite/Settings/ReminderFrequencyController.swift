@@ -29,10 +29,7 @@ class ReminderFrequencyController: UIViewController {
     remindersManager.updateReminder(type: reminderType, soundOn: soundSwitch.isOn)
     remindersManager.updateReminder(type: reminderType, repeatingFrequency: getRepeatingFromDatePicker())
 
-    if notificationManager.notificationsEnabled() {
-      notificationManager.removeScheduledNotification(reminderType: reminderType)
-      notificationManager.scheduleNotification(reminderType: reminderType)
-    }
+    notificationManager.rescheduleNotifications([reminderType])
     performSegue(withIdentifier: "unwindReminderToSettings", sender: self)
   }
 
@@ -43,7 +40,6 @@ class ReminderFrequencyController: UIViewController {
       segmentedControl.selectedSegmentIndex = 0
       let alertController = configureNotificationsAlertPopup()
       self.present(alertController, animated: true, completion: nil)
-      // after returning to app, refresh notificationManager.fetchNotificationSettings() so that settings reload
       return
     }
 

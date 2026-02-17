@@ -18,6 +18,9 @@
 		5D1B011524C04C2000EE9633 /* RemindersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011424C04C2000EE9633 /* RemindersManager.swift */; };
 		5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011624C0635200EE9633 /* PumpSiteManager.swift */; };
 		5D30E271252D4BD300DB49CA /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E270252D4BD300DB49CA /* Reminder.swift */; };
+		5D43A20B2CD0F8C200708D57 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2702291E042500BEC655 /* NotificationManager.swift */; };
+		5D43A20C2CD0F9AE00708D57 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D30E270252D4BD300DB49CA /* Reminder.swift */; };
+		5D43A20D2CD0FAD400708D57 /* RemindersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B011424C04C2000EE9633 /* RemindersManager.swift */; };
 		5D5CBC152C423E6C0034BC3D /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5CBC142C423E6C0034BC3D /* DebugViewController.swift */; };
 		5D6D2703291E042500BEC655 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2702291E042500BEC655 /* NotificationManager.swift */; };
 		5D6D2705291F672300BEC655 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6D2704291F672300BEC655 /* CalendarViewController.swift */; };
@@ -732,12 +735,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D43A20C2CD0F9AE00708D57 /* Reminder.swift in Sources */,
 				CBDCC2032B60CF9900BD995B /* ChangeSiteTimelineProvider.swift in Sources */,
 				CB26A47A2B68DA9900AC03F4 /* CalendarSingleLineView.swift in Sources */,
 				CBDCC1F82B60CE2800BD995B /* ChangeSiteWidget.swift in Sources */,
 				5D007C3B2C0298400022F713 /* PumpSite.swift in Sources */,
 				CBDCC2112B60EFC000BD995B /* PumpSiteManager.swift in Sources */,
 				CB48F3622B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */,
+				5D43A20D2CD0FAD400708D57 /* RemindersManager.swift in Sources */,
+				5D43A20B2CD0F8C200708D57 /* NotificationManager.swift in Sources */,
 				CBDCC20A2B60E48C00BD995B /* CSFont.swift in Sources */,
 				CBE4FF882BA7C71600C04AF4 /* UserDefaultsAccessHelper.swift in Sources */,
 				5DA3E8962C02DDAE003DDAB6 /* AppColor.swift in Sources */,
@@ -1049,7 +1055,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) BUILDING_FOR_EXTENSION";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1087,6 +1093,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BUILDING_FOR_EXTENSION;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

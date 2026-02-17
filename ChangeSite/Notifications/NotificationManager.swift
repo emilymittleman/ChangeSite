@@ -34,7 +34,7 @@ class NotificationManager: ObservableObject {
     remindersManager = config.remindersManager
   }
 
-  func requestAuthorization(completion: @escaping  (Bool) -> Void) {
+  func requestAuthorization(completion: @escaping (Bool) -> Void) {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
       print("Permission granted: \(granted)")
       self?.fetchNotificationSettings()
@@ -61,27 +61,42 @@ class NotificationManager: ObservableObject {
   // might not need this since fetchNotificationSettings is in appDelegate now; test later
   func notificationsEnabled(completion: @escaping (Bool) -> () ) {
     UNUserNotificationCenter.current().getNotificationSettings { settings in
-      completion(settings.authorizationStatus == UNAuthorizationStatus.authorized)
+      completion(settings.authorizationStatus == .authorized)
     }
   }
 
+  func notificationsEnabled() async -> Bool {
+    let settings = await UNUserNotificationCenter.current().notificationSettings()
+    return settings.authorizationStatus == .authorized
+  }
+
+  func rescheduleNotifications(_ types: [ReminderType] = ReminderType.allCases) {
+    Task {
+      guard await notificationsEnabled() else {
+        removeAllNotifications()
+        return
+      }
+      for type in types {
+        removeNotification(type)
+        scheduleNotification(reminderType: type)
+      }
+    }
+  }
+
+  // MARK: Private
+
   // Remove all pending and delivered notifications
-  func removeAllNotifications() {
+  private func removeAllNotifications() {
     UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     UNUserNotificationCenter.current().removeAllDeliveredNotifications()
   }
 
-  func removeScheduledNotification(reminderType: ReminderType) {
-    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [remindersManager.getID(type: reminderType)])
+  private func removeNotification(_ type: ReminderType) {
+    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [remindersManager.getID(type: type)])
+    UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [remindersManager.getID(type: type)])
   }
 
-  func scheduleNotifications(reminderTypes: [ReminderType]) {
-    for type in reminderTypes {
-      scheduleNotification(reminderType: type)
-    }
-  }
-
-  func scheduleNotification(reminderType: ReminderType) {
+  private func scheduleNotification(reminderType: ReminderType) {
     // TODO: repeating notifications (max 64)
     let frequency = remindersManager.getFrequency(type: reminderType)
     if frequency == .none { return }
@@ -101,8 +116,6 @@ class NotificationManager: ObservableObject {
       if let error = error { print(error) }
     }
   }
-
-  // MARK: Private
 
   private func timeUntilNotificationFire(reminderType: ReminderType) -> TimeInterval {
     var triggerDate = pumpSiteManager.endDate

@@ -23,15 +23,7 @@ class DefaultChangeTimeController: UIViewController {
   @IBOutlet weak var saveButton: UIButton!
   @IBAction func saveButtonPressed(_ sender: Any) {
     // UIApplication.shared.applicationIconBadgeNumber = 0
-    UserDefaultsAccessHelper.sharedInstance.set(timePicker.date, forKey: .defaultChangeTime)
-
-    self.pumpSiteManager.updatePumpSite(changeTime: timePicker.date)
-    SiteDates.createOrUpdate(pumpSiteManager: self.pumpSiteManager, endDate: nil, with: coreDataStack)
-    coreDataStack.saveContext()
-    // reschedule notifications
-    NotificationManager.shared.removeAllNotifications()
-    NotificationManager.shared.scheduleNotifications(reminderTypes: ReminderType.allCases)
-
+    pumpSiteManager.setDefaultChangeTimme(timePicker.date)
     performSegue(withIdentifier: "unwindDefaultChangeTimeToSettings", sender: self)
   }
 

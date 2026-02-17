@@ -26,9 +26,8 @@ extension SiteDates {
 
 public extension SiteDates {
 
-  internal class func createOrUpdate(pumpSiteManager: PumpSiteManager, endDate: Date?, with stack: CoreDataStack) {
-    var incomingStartDate = pumpSiteManager.startDate
-    incomingStartDate = formatCoreDataDate(incomingStartDate)
+  internal class func createOrUpdate(pumpSite: PumpSite, endDate: Date?, with stack: CoreDataStack) {
+    let incomingStartDate = formatCoreDataDate(pumpSite.startDate)
 
     var currentSiteDates: SiteDates? // Entity name
     let fetchRequest: NSFetchRequest<SiteDates> = SiteDates.fetchRequest()
@@ -45,20 +44,20 @@ public extension SiteDates {
         // startDate found, use it
         currentSiteDates = results.first
       }
-      currentSiteDates?.update(pumpSiteManager: pumpSiteManager, endDate: endDate)
+      currentSiteDates?.update(pumpSite: pumpSite, endDate: endDate)
     } catch let error as NSError {
       print("Fetch error: \(error) description: \(error.userInfo)")
     }
   }
 
   // need to guarantee that nextStartDate can't be earlier than original startDate
-  internal func update(pumpSiteManager: PumpSiteManager, endDate: Date?) {
+  internal func update(pumpSite: PumpSite, endDate: Date?) {
     self.endDate = endDate == nil ? nil : formatCoreDataDate(endDate!)
-    self.expiredDate = formatCoreDataDate(pumpSiteManager.endDate)
+    self.expiredDate = formatCoreDataDate(pumpSite.expiration)
     self.daysOverdue = 0
-    if pumpSiteManager.overdue {
+    if pumpSite.overdue {
       // find days btwn expire date & change date (or today if not changed yet, so endDate==nil)
-      let numberOfDays = signedDaysBetweenDates(from: pumpSiteManager.endDate, to: endDate ?? .now)
+      let numberOfDays = signedDaysBetweenDates(from: pumpSite.expiration, to: endDate ?? .now)
       self.daysOverdue = numberOfDays < 0 ? 0 : Int32(numberOfDays)
     }
   }

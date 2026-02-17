@@ -21,7 +21,7 @@ struct CalendarSingleLineView: View {
       self.calendarCells.append(CalendarCellView(
         date: date,
         fillBackground: Date.now.get(.day) == date.get(.day),
-        outline: i==0 || date.get(.day) == pumpSite.endDate.get(.day)
+        outline: i==0 || date.get(.day) == pumpSite.expiration.get(.day)
       ))
     }
   }

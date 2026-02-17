@@ -32,19 +32,14 @@ class SetupViewController: UIViewController {
     if testing {
       let components = DateComponents(calendar: .current, timeZone: .current, era: nil, year: 2022, month: 11, day: 26, hour: 16)
       let startDate = Calendar.current.date(from: components)!
-      pumpSiteManager.updatePumpSite(startDate: startDate)
-      pumpSiteManager.updatePumpSite(daysBtwnChanges: 3)
+      pumpSiteManager.setStartDate(startDate)
+      pumpSiteManager.setDaysBtwnChanges(3)
       // Save to CoreData
       siteDatesProvider.deleteAllEntries()
       addTestEntries()
     } else {
-      pumpSiteManager.updatePumpSite(startDate: startDatePicker.date)
-      pumpSiteManager.updatePumpSite(daysBtwnChanges: Int(stepper.value))
-      // Save to CoreData
-      siteDatesProvider.deleteAllEntries()
-
-      SiteDates.createOrUpdate(pumpSiteManager: pumpSiteManager, endDate: nil, with: AppDelegate.sharedAppDelegate.coreDataStack)
-      AppDelegate.sharedAppDelegate.coreDataStack.saveContext()
+      pumpSiteManager.setStartDate(startDatePicker.date)
+      pumpSiteManager.setDaysBtwnChanges(Int(stepper.value))
     }
 
     UserDefaultsAccessHelper.sharedInstance.setUserFinishedSetup()
