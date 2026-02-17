@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BC808A661AF44D1E70431D4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F354361D459C7B079E216E99 /* Foundation.framework */; };
 		5D007C382C0296630022F713 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C372C0296630022F713 /* View+Extensions.swift */; };
 		5D007C3A2C0298400022F713 /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C392C0298400022F713 /* PumpSite.swift */; };
 		5D007C3B2C0298400022F713 /* PumpSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D007C392C0298400022F713 /* PumpSite.swift */; };
@@ -55,6 +56,7 @@
 		5DF50C5B2926BABC00E3695C /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5A2926BABC00E3695C /* SetupViewController.swift */; };
 		5DF50C60292720E200E3695C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF50C5F292720E200E3695C /* SettingsViewModel.swift */; };
 		6A9B1D20C188259F216AD60B /* Pods_ChangeSite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */; };
+		9009DFCD86BA1436EEE056EB /* ChangeSiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319449BD843513FA87BCFA7A /* ChangeSiteTests.swift */; };
 		CB26A47A2B68DA9900AC03F4 /* CalendarSingleLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB26A4782B68DA9900AC03F4 /* CalendarSingleLineView.swift */; };
 		CB48F3612B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB48F3602B832AB00047A6E5 /* SiteStartedIntent.swift */; };
 		CB48F3622B832AB00047A6E5 /* SiteStartedIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB48F3602B832AB00047A6E5 /* SiteStartedIntent.swift */; };
@@ -78,6 +80,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5E675BA4C3E4B41B26326EC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DCD3294230023AB00BC2E07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5DCD329B230023AB00BC2E07;
+			remoteInfo = ChangeSite;
+		};
 		CBDCC1FC2B60CE2A00BD995B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DCD3294230023AB00BC2E07 /* Project object */;
@@ -102,6 +111,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1812D25352D29F50E2435D30 /* ChangeSiteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChangeSiteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		319449BD843513FA87BCFA7A /* ChangeSiteTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChangeSiteTests.swift; sourceTree = "<group>"; };
 		4E8B4F1851151FED90DFDFBA /* Pods-ChangeSiteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSiteTests.release.xcconfig"; path = "Target Support Files/Pods-ChangeSiteTests/Pods-ChangeSiteTests.release.xcconfig"; sourceTree = "<group>"; };
 		5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChangeSite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D007C372C0296630022F713 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
@@ -152,6 +163,7 @@
 		65E15DDE77717047C2C892E2 /* Pods-ChangeSite-ChangeSiteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite-ChangeSiteUITests.release.xcconfig"; path = "Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		835EC653B7795330AAB47568 /* Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChangeSite-ChangeSiteUITests/Pods-ChangeSite-ChangeSiteUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8FAB9EF048491AB4D1A9EC95 /* Pods-ChangeSite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSite.debug.xcconfig"; path = "Target Support Files/Pods-ChangeSite/Pods-ChangeSite.debug.xcconfig"; sourceTree = "<group>"; };
+		C4A636295396441DAFD13F98 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB26A4782B68DA9900AC03F4 /* CalendarSingleLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSingleLineView.swift; sourceTree = "<group>"; };
 		CB48F3602B832AB00047A6E5 /* SiteStartedIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteStartedIntent.swift; sourceTree = "<group>"; };
 		CBDCC1EF2B60CE2800BD995B /* ChangeSiteWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChangeSiteWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,10 +178,19 @@
 		CBDCC2082B60E48C00BD995B /* CSFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSFont.swift; sourceTree = "<group>"; };
 		CBDCC20E2B60EF8300BD995B /* PumpSiteUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpSiteUtils.swift; sourceTree = "<group>"; };
 		CBE4FF862BA7C71600C04AF4 /* UserDefaultsAccessHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccessHelper.swift; sourceTree = "<group>"; };
+		F354361D459C7B079E216E99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		FC11795DA6EAFA1253235116 /* Pods-ChangeSiteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChangeSiteTests.debug.xcconfig"; path = "Target Support Files/Pods-ChangeSiteTests/Pods-ChangeSiteTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		09CD6B01D34909D3927CDACD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BC808A661AF44D1E70431D4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DCD3299230023AB00BC2E07 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +230,7 @@
 				5BA805888D66D36C98F45F2A /* Pods_ChangeSite.framework */,
 				CBDCC1F02B60CE2800BD995B /* WidgetKit.framework */,
 				CBDCC1F22B60CE2800BD995B /* SwiftUI.framework */,
+				EE0859652CE91CC8BE58D753 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -301,6 +323,7 @@
 				5DCD329D230023AB00BC2E07 /* Products */,
 				31AF4A3BC3DD8B26015ED106 /* Pods */,
 				337F7A570E5EC4660DFCACA5 /* Frameworks */,
+				7EE4B3F8AAE2D8043379CF56 /* ChangeSiteTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -309,6 +332,7 @@
 			children = (
 				5DCD329C230023AB00BC2E07 /* ChangeSite.app */,
 				CBDCC1EF2B60CE2800BD995B /* ChangeSiteWidgetExtension.appex */,
+				1812D25352D29F50E2435D30 /* ChangeSiteTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,6 +395,16 @@
 			path = NewUser;
 			sourceTree = "<group>";
 		};
+		7EE4B3F8AAE2D8043379CF56 /* ChangeSiteTests */ = {
+			isa = PBXGroup;
+			children = (
+				319449BD843513FA87BCFA7A /* ChangeSiteTests.swift */,
+				C4A636295396441DAFD13F98 /* Info.plist */,
+			);
+			name = ChangeSiteTests;
+			path = ChangeSiteTests;
+			sourceTree = SOURCE_ROOT;
+		};
 		CB48F35F2B8329D70047A6E5 /* AppIntent */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +447,14 @@
 			path = CSDesign;
 			sourceTree = "<group>";
 		};
+		EE0859652CE91CC8BE58D753 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				F354361D459C7B079E216E99 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -436,6 +478,24 @@
 			productName = ChangeSite2;
 			productReference = 5DCD329C230023AB00BC2E07 /* ChangeSite.app */;
 			productType = "com.apple.product-type.application";
+		};
+		A767A3C65E502D573C612A51 /* ChangeSiteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 461103DF3DE22CCB909FEB96 /* Build configuration list for PBXNativeTarget "ChangeSiteTests" */;
+			buildPhases = (
+				FDA1CB2B6A5863B98E5C63E7 /* Sources */,
+				09CD6B01D34909D3927CDACD /* Frameworks */,
+				3ABEF7B266A3A10C8BB25DBC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C667F04BEAC1F13E11EE42C /* PBXTargetDependency */,
+			);
+			name = ChangeSiteTests;
+			productName = ChangeSiteTests;
+			productReference = 1812D25352D29F50E2435D30 /* ChangeSiteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		CBDCC1EE2B60CE2800BD995B /* ChangeSiteWidgetExtension */ = {
 			isa = PBXNativeTarget;
@@ -487,11 +547,19 @@
 			targets = (
 				5DCD329B230023AB00BC2E07 /* ChangeSite */,
 				CBDCC1EE2B60CE2800BD995B /* ChangeSiteWidgetExtension */,
+				A767A3C65E502D573C612A51 /* ChangeSiteTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3ABEF7B266A3A10C8BB25DBC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DCD329A230023AB00BC2E07 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -629,9 +697,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FDA1CB2B6A5863B98E5C63E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9009DFCD86BA1436EEE056EB /* ChangeSiteTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8C667F04BEAC1F13E11EE42C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ChangeSite;
+			target = 5DCD329B230023AB00BC2E07 /* ChangeSite */;
+			targetProxy = 5E675BA4C3E4B41B26326EC2 /* PBXContainerItemProxy */;
+		};
 		CBDCC1FD2B60CE2A00BD995B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CBDCC1EE2B60CE2800BD995B /* ChangeSiteWidgetExtension */;
@@ -659,6 +741,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		20CA11A102F16444D2FE6AAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N7P4N4U22P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChangeSiteTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSiteTests;
+				PRODUCT_NAME = ChangeSiteTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChangeSite.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChangeSite";
+			};
+			name = Debug;
+		};
 		5DCD32C2230023AE00BC2E07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -827,6 +933,31 @@
 			};
 			name = Release;
 		};
+		8771435FE8434AC84920145D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N7P4N4U22P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChangeSiteTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.EmilyMittleman.ChangeSiteTests;
+				PRODUCT_NAME = ChangeSiteTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChangeSite.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChangeSite";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		CBDCC1FF2B60CE2A00BD995B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -907,6 +1038,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		461103DF3DE22CCB909FEB96 /* Build configuration list for PBXNativeTarget "ChangeSiteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8771435FE8434AC84920145D /* Release */,
+				20CA11A102F16444D2FE6AAD /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5DCD3297230023AB00BC2E07 /* Build configuration list for PBXProject "ChangeSite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

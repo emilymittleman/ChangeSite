@@ -70,6 +70,14 @@ class SiteDatesProvider {
     return site.startDate == self.siteDates[0].startDate
   }
 
+  public func getPreviousSiteEndDate() -> Date? {
+    if siteDates.count < 2 {
+      fetchData()
+    }
+    guard siteDates.count >= 2 else { return nil }
+    return siteDates[1].endDate
+  }
+
   public func deleteAllEntries() {
     for siteDate in siteDates {
       AppDelegate.sharedAppDelegate.coreDataStack.managedContext.delete(siteDate)

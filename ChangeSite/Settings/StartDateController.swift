@@ -16,12 +16,14 @@ class StartDateController: UIViewController {
   @IBOutlet weak var setStartDateLabel: UILabel!
   @IBOutlet weak var startDatePicker: UIDatePicker!
   @IBAction func startDatePickerChanged(_ sender: Any) {
-    saveButton.isHidden = startDatePicker.date <= pumpSiteManager.startDate
+    saveButton.isHidden = Calendar.current.isDate(startDatePicker.date, equalTo: pumpSiteManager.startDate, toGranularity: .minute)
   }
 
   @IBOutlet weak var saveButton: UIButton!
   @IBAction func saveButtonPressed(_ sender: Any) {
-    pumpSiteManager.setStartDate(startDatePicker.date)
+    let oldDate = pumpSiteManager.startDate
+    let newDate = startDatePicker.date
+    pumpSiteManager.editStartDate(from: oldDate, to: newDate)
     performSegue(withIdentifier: "unwindStartDateToSettings", sender: self)
   }
 
@@ -33,7 +35,11 @@ class StartDateController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     startDatePicker.setDate(pumpSiteManager.startDate, animated: true)
-    startDatePicker.minimumDate = formatDate(pumpSiteManager.startDate)
+    if let previousEndDate = pumpSiteManager.getPreviousSiteEndDate() {
+      startDatePicker.minimumDate = previousEndDate
+    } else {
+      startDatePicker.minimumDate = nil
+    }
     saveButton.isHidden = true
   }
 
