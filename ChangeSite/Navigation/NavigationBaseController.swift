@@ -19,6 +19,16 @@ class NavigationMenuBaseController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.loadTabBar()
+
+    #if DEBUG
+    if let tabArg = ProcessInfo.processInfo.argumentValue(for: "-startTab"),
+       let tabIndex = Int(tabArg) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        self.changeTab(tab: tabIndex)
+        self.customTabBar?.selectTab(at: tabIndex)
+      }
+    }
+    #endif
   }
 
   private func loadTabBar() {

@@ -52,6 +52,15 @@ public func formatDate(_ date: Date) -> Date {
   return Calendar.current.date(bySettingHour: hours, minute: minutesHalf, second: 0, of: date)!
 }
 
+#if DEBUG
+extension ProcessInfo {
+  func argumentValue(for key: String) -> String? {
+    guard let index = arguments.firstIndex(of: key), index + 1 < arguments.count else { return nil }
+    return arguments[index + 1]
+  }
+}
+#endif
+
 // MARK: Date
 
 extension Date {

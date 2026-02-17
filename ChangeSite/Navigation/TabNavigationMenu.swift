@@ -117,6 +117,12 @@ class TabNavigationMenu: UIView {
     self.activeItem = tab
   }
 
+  func selectTab(at index: Int) {
+    guard index >= 0, index < subviews.count else { return }
+    deactivateTab(tab: activeItem)
+    activateTab(tab: index)
+  }
+
   func deactivateTab(tab: Int) {
     let inactiveTab = self.subviews[tab]
 

@@ -24,6 +24,7 @@ class LaunchViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.updateUI()
+    beginButton.accessibilityIdentifier = "beginButton"
   }
 
   private func updateUI() {
