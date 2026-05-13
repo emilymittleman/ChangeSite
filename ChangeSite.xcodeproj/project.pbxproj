@@ -33,12 +33,24 @@
 		5D8DF10C29343B0900FB2A48 /* LegendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8DF10B29343B0900FB2A48 /* LegendView.xib */; };
 		5D9A0703292AF8F700B90AEE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */; };
 		5DA3E8952C02DDAE003DDAB6 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* Font+Rubik.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7A8B9C0D1E2 /* Font+Rubik.swift */; };
+		C3D4E5F6A7B8C9D0E1F2A3B4 /* ButtonOutlineStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* ButtonOutlineStyle.swift */; };
+		AA01BB02CC03DD04EE05FF07 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01BB02CC03DD04EE05FF06 /* AppState.swift */; };
+		AA11BB12CC13DD14EE15FF17 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB12CC13DD14EE15FF16 /* LaunchView.swift */; };
+		AA21BB22CC23DD24EE25FF27 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA21BB22CC23DD24EE25FF26 /* SetupView.swift */; };
+		AA31BB32CC33DD34EE35FF37 /* ThirtyMinuteDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA31BB32CC33DD34EE35FF36 /* ThirtyMinuteDatePicker.swift */; };
+		AA41BB42CC43DD44EE45FF47 /* StartDatePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA41BB42CC43DD44EE45FF46 /* StartDatePickerSheet.swift */; };
+		AA51BB52CC53DD54EE55FF57 /* FSCalendarRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51BB52CC53DD54EE55FF56 /* FSCalendarRepresentable.swift */; };
 		5DA3E8962C02DDAE003DDAB6 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */; };
 		5DA3E8992C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89A2C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89B2C03EB1E003DDAB6 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2719291F957400BEC655 /* Rubik-Medium.ttf */; };
 		5DA3E89D2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */; };
 		5DAEB1F3299B461400A21251 /* DefaultChangeTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */; };
+		43405B321BC54B2A90828BE1 /* StartDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23048C2EEB3407B9BB0AAAC /* StartDateView.swift */; };
+		405B9E9CDDBE42149B518F1E /* DefaultChangeTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E041AD1EF4094706BF366396 /* DefaultChangeTimeView.swift */; };
+		48DD92CBE83D44FFBA35CCCC /* ReminderFrequencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A940369CEE414AA2B4F393E6 /* ReminderFrequencyView.swift */; };
+		EDF353EC05EE4D99BAA96391 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B658350569124D1BAF88ED3C /* SettingsView.swift */; };
 		5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */; };
 		5DB8911923003FE80000BFC6 /* StartDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911823003FE80000BFC6 /* StartDateController.swift */; };
 		5DB8911B2300401E0000BFC6 /* ReminderFrequencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */; };
@@ -138,9 +150,21 @@
 		5D8DF10B29343B0900FB2A48 /* LegendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegendView.xib; sourceTree = "<group>"; };
 		5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		F1A2B3C4D5E6F7A8B9C0D1E2 /* Font+Rubik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Rubik.swift"; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* ButtonOutlineStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOutlineStyle.swift; sourceTree = "<group>"; };
+		AA01BB02CC03DD04EE05FF06 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AA11BB12CC13DD14EE15FF16 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		AA21BB22CC23DD24EE25FF26 /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		AA31BB32CC33DD34EE35FF36 /* ThirtyMinuteDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirtyMinuteDatePicker.swift; sourceTree = "<group>"; };
+		AA41BB42CC43DD44EE45FF46 /* StartDatePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDatePickerSheet.swift; sourceTree = "<group>"; };
+		AA51BB52CC53DD54EE55FF56 /* FSCalendarRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarRepresentable.swift; sourceTree = "<group>"; };
 		5DA3E8982C02DF74003DDAB6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDatePickerBottomSheet.swift; sourceTree = "<group>"; };
 		5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeTimeController.swift; sourceTree = "<group>"; };
+		D23048C2EEB3407B9BB0AAAC /* StartDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateView.swift; sourceTree = "<group>"; };
+		E041AD1EF4094706BF366396 /* DefaultChangeTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeTimeView.swift; sourceTree = "<group>"; };
+		A940369CEE414AA2B4F393E6 /* ReminderFrequencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFrequencyView.swift; sourceTree = "<group>"; };
+		B658350569124D1BAF88ED3C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		5DB8911823003FE80000BFC6 /* StartDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateController.swift; sourceTree = "<group>"; };
 		5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFrequencyController.swift; sourceTree = "<group>"; };
@@ -241,6 +265,8 @@
 				5D7868822300984B00A54436 /* HomeViewController.swift */,
 				5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */,
 				5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */,
+				AA31BB32CC33DD34EE35FF36 /* ThirtyMinuteDatePicker.swift */,
+				AA41BB42CC43DD44EE45FF46 /* StartDatePickerSheet.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -253,6 +279,10 @@
 				5DB8911823003FE80000BFC6 /* StartDateController.swift */,
 				5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */,
 				5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */,
+					D23048C2EEB3407B9BB0AAAC /* StartDateView.swift */,
+					E041AD1EF4094706BF366396 /* DefaultChangeTimeView.swift */,
+					A940369CEE414AA2B4F393E6 /* ReminderFrequencyView.swift */,
+					B658350569124D1BAF88ED3C /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -298,6 +328,8 @@
 			children = (
 				5D6D270F291F94AE00BEC655 /* Fonts */,
 				5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */,
+				F1A2B3C4D5E6F7A8B9C0D1E2 /* Font+Rubik.swift */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* ButtonOutlineStyle.swift */,
 				5DA3E8982C02DF74003DDAB6 /* Media.xcassets */,
 			);
 			path = Design;
@@ -342,6 +374,7 @@
 			children = (
 				5D13E7A827A4ECC5007CC645 /* ChangeSite.entitlements */,
 				5DCD329F230023AB00BC2E07 /* AppDelegate.swift */,
+				AA01BB02CC03DD04EE05FF06 /* AppState.swift */,
 				5D09CDFC23026991006E914F /* ClassExtensions.swift */,
 				5DCD32A3230023AB00BC2E07 /* Main.storyboard */,
 				5DF50C592926BA3000E3695C /* NewUser */,
@@ -370,6 +403,7 @@
 				5DF50C5329202AD500E3695C /* CustomCalendarCell.swift */,
 				5D8DF109293436CF00FB2A48 /* LegendView.swift */,
 				5D8DF10B29343B0900FB2A48 /* LegendView.xib */,
+				AA51BB52CC53DD54EE55FF56 /* FSCalendarRepresentable.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -390,7 +424,9 @@
 			isa = PBXGroup;
 			children = (
 				5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */,
+				AA11BB12CC13DD14EE15FF16 /* LaunchView.swift */,
 				5DF50C5A2926BABC00E3695C /* SetupViewController.swift */,
+				AA21BB22CC23DD24EE25FF26 /* SetupView.swift */,
 			);
 			path = NewUser;
 			sourceTree = "<group>";
@@ -661,11 +697,23 @@
 				CBDCC20F2B60EF8300BD995B /* PumpSiteUtils.swift in Sources */,
 				5DF50C4B292012EF00E3695C /* CoreDataStack.swift in Sources */,
 				5DAEB1F3299B461400A21251 /* DefaultChangeTimeController.swift in Sources */,
+				43405B321BC54B2A90828BE1 /* StartDateView.swift in Sources */,
+				405B9E9CDDBE42149B518F1E /* DefaultChangeTimeView.swift in Sources */,
+				48DD92CBE83D44FFBA35CCCC /* ReminderFrequencyView.swift in Sources */,
+				EDF353EC05EE4D99BAA96391 /* SettingsView.swift in Sources */,
 				5DF50C522920175D00E3695C /* SiteDates+CoreDataProperties.swift in Sources */,
 				5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */,
 				5D5CBC152C423E6C0034BC3D /* DebugViewController.swift in Sources */,
 				5DF50C5429202AD500E3695C /* CustomCalendarCell.swift in Sources */,
 				5DA3E8952C02DDAE003DDAB6 /* AppColor.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* Font+Rubik.swift in Sources */,
+				C3D4E5F6A7B8C9D0E1F2A3B4 /* ButtonOutlineStyle.swift in Sources */,
+				AA01BB02CC03DD04EE05FF07 /* AppState.swift in Sources */,
+				AA11BB12CC13DD14EE15FF17 /* LaunchView.swift in Sources */,
+				AA21BB22CC23DD24EE25FF27 /* SetupView.swift in Sources */,
+				AA31BB32CC33DD34EE35FF37 /* ThirtyMinuteDatePicker.swift in Sources */,
+				AA41BB42CC43DD44EE45FF47 /* StartDatePickerSheet.swift in Sources */,
+				AA51BB52CC53DD54EE55FF57 /* FSCalendarRepresentable.swift in Sources */,
 				5DF50C512920175D00E3695C /* SiteDates+CoreDataClass.swift in Sources */,
 				5D9A0703292AF8F700B90AEE /* HomeViewModel.swift in Sources */,
 				5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */,
@@ -750,7 +798,7 @@
 				DEVELOPMENT_TEAM = N7P4N4U22P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChangeSiteTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -817,7 +865,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -873,7 +921,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -893,7 +941,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
 				INFOPLIST_FILE = "$(SRCROOT)/ChangeSite/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -918,7 +966,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7P4N4U22P;
 				INFOPLIST_FILE = "$(SRCROOT)/ChangeSite/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -942,7 +990,7 @@
 				DEVELOPMENT_TEAM = N7P4N4U22P;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChangeSiteTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -976,7 +1024,7 @@
 				INFOPLIST_FILE = ChangeSiteWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ChangeSiteWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Emily Mittleman. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1014,7 +1062,7 @@
 				INFOPLIST_FILE = ChangeSiteWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ChangeSiteWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Emily Mittleman. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

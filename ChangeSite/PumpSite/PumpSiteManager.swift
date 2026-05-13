@@ -6,12 +6,13 @@
 //  Copyright © 2020 Emily Mittleman. All rights reserved.
 //
 
+import Combine
 import Foundation
 
 let defaultStartDate = Date.now
 let defaultDaysBtwn = 3
 
-public class PumpSiteManager {
+public class PumpSiteManager: ObservableObject {
   private let storage = UserDefaultsAccessHelper.sharedInstance
   #if !BUILDING_FOR_EXTENSION
   private let coreDataStack = AppDelegate.sharedAppDelegate.coreDataStack
@@ -35,6 +36,7 @@ public class PumpSiteManager {
   // MARK: Mutators
 
   public func setStartDate(_ date: Date) {
+    objectWillChange.send()
     self.startDate = date
     #if !BUILDING_FOR_EXTENSION
     SiteDates.createOrUpdate(pumpSite: getPumpSite(), endDate: nil, with: coreDataStack)
@@ -44,6 +46,7 @@ public class PumpSiteManager {
   }
 
   public func editStartDate(from oldDate: Date, to newDate: Date) {
+    objectWillChange.send()
     #if !BUILDING_FOR_EXTENSION
     // Delete old CoreData record keyed by oldDate
     SiteDates.delete(startDate: oldDate, with: coreDataStack)
@@ -65,6 +68,7 @@ public class PumpSiteManager {
     guard daysBtwnChanges >= 1 else {
       return
     }
+    objectWillChange.send()
     self.daysBtwn = daysBtwnChanges
     #if !BUILDING_FOR_EXTENSION
     SiteDates.createOrUpdate(pumpSite: getPumpSite(), endDate: nil, with: coreDataStack)
@@ -78,6 +82,7 @@ public class PumpSiteManager {
     guard storage.isNewUser() || changeDate > self.startDate || Bundle.main.isDebug else {
       return
     }
+    objectWillChange.send()
     #if !BUILDING_FOR_EXTENSION
     // End current site
     SiteDates.createOrUpdate(pumpSite: getPumpSite(), endDate: changeDate, with: coreDataStack)
@@ -88,6 +93,7 @@ public class PumpSiteManager {
   }
 
   public func setDefaultChangeTimme(_ changeTime: Date) {
+    objectWillChange.send()
     storage.set(changeTime, forKey: .defaultChangeTime)
 
     let hours = Calendar.current.component(.hour, from: changeTime)
