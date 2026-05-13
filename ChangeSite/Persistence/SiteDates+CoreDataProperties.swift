@@ -62,6 +62,21 @@ public extension SiteDates {
     }
   }
 
+  internal class func delete(startDate: Date, with stack: CoreDataStack) {
+    let formattedDate = formatCoreDataDate(startDate)
+    let fetchRequest: NSFetchRequest<SiteDates> = SiteDates.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(SiteDates.startDate), formattedDate as NSDate)
+
+    do {
+      let results = try stack.managedContext.fetch(fetchRequest)
+      for record in results {
+        stack.managedContext.delete(record)
+      }
+    } catch let error as NSError {
+      print("Delete error: \(error) description: \(error.userInfo)")
+    }
+  }
+
   internal class func testing_addEntry(startDate: Date, expiredDate: Date, daysOverdue: Int, with stack: CoreDataStack) {
     let newSite = SiteDates(context: stack.managedContext)
     newSite.startDate = startDate

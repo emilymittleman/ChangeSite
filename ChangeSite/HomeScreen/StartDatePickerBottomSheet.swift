@@ -109,7 +109,15 @@ class StartDatePickerBottomSheet: UIView {
   }
 
   func showInView(_ view: UIView) {
-    let pickerDate = UserDefaultsAccessHelper.sharedInstance.date(for: .defaultChangeTime) ?? .now
+    let storedDefault = UserDefaultsAccessHelper.sharedInstance.date(for: .defaultChangeTime)
+    let pickerDate: Date
+    if let stored = storedDefault {
+      let hour = Calendar.current.component(.hour, from: stored)
+      let minute = Calendar.current.component(.minute, from: stored)
+      pickerDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: .now) ?? .now
+    } else {
+      pickerDate = .now
+    }
     datePicker.setDate(formatDate(pickerDate), animated: true)
     // TODO: Commented out for testing
     //datePicker.minimumDate = formatDate(viewModel.pumpSiteStartDate())

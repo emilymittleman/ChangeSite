@@ -35,6 +35,9 @@ class HomeViewController: UIViewController, FSCalendarDataSource, FSCalendarDele
 
     self.setupCalendar()
     self.setupUI()
+    newSiteButton.accessibilityIdentifier = "newSiteButton"
+    nextChangeLabel.accessibilityIdentifier = "nextChangeLabel"
+    countdownLabel.accessibilityIdentifier = "countdownLabel"
 
     NotificationCenter.default.addObserver(
       self,

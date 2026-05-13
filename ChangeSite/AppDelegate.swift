@@ -45,6 +45,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.main.bounds)
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var initialViewController: UIViewController = UIViewController()
+
+    #if DEBUG
+    if ProcessInfo.processInfo.arguments.contains("-skipSetup") {
+      if UserDefaultsAccessHelper.sharedInstance.isNewUser() {
+        pumpSiteManager!.setStartDate(Date())
+        pumpSiteManager!.setDaysBtwnChanges(3)
+        UserDefaultsAccessHelper.sharedInstance.setUserFinishedSetup()
+      }
+    }
+    if ProcessInfo.processInfo.arguments.contains("-resetUser") {
+      UserDefaultsAccessHelper.sharedInstance.clearAllData()
+      SiteDatesProvider(with: coreDataStack.managedContext).deleteAllEntries()
+    }
+    #endif
+
     let isNewUser = UserDefaultsAccessHelper.sharedInstance.isNewUser()
     if isNewUser, let vc = storyboard.instantiateViewController(withIdentifier: "LaunchScreen") as? LaunchViewController {
       vc.pumpSiteManager = pumpSiteManager

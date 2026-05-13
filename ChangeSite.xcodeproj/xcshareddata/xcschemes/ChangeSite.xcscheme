@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5DCD32AF230023AD00BC2E07"
+               BlueprintIdentifier = "A767A3C65E502D573C612A51"
                BuildableName = "ChangeSiteTests.xctest"
                BlueprintName = "ChangeSiteTests"
                ReferencedContainer = "container:ChangeSite.xcodeproj">
@@ -45,6 +45,16 @@
                BlueprintIdentifier = "5DCD32BA230023AE00BC2E07"
                BuildableName = "ChangeSiteUITests.xctest"
                BlueprintName = "ChangeSiteUITests"
+               ReferencedContainer = "container:ChangeSite.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A767A3C65E502D573C612A51"
+               BuildableName = "ChangeSiteTests.xctest"
+               BlueprintName = "ChangeSiteTests"
                ReferencedContainer = "container:ChangeSite.xcodeproj">
             </BuildableReference>
          </TestableReference>

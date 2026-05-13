@@ -34,15 +34,31 @@ public class PumpSiteManager {
 
   // MARK: Mutators
 
-  // TODO: Support editing start date
   public func setStartDate(_ date: Date) {
-    // Need to update CoreData
     self.startDate = date
     #if !BUILDING_FOR_EXTENSION
     SiteDates.createOrUpdate(pumpSite: getPumpSite(), endDate: nil, with: coreDataStack)
     coreDataStack.saveContext()
     #endif
     NotificationManager.shared.rescheduleNotifications()
+  }
+
+  public func editStartDate(from oldDate: Date, to newDate: Date) {
+    #if !BUILDING_FOR_EXTENSION
+    // Delete old CoreData record keyed by oldDate
+    SiteDates.delete(startDate: oldDate, with: coreDataStack)
+    #endif
+    // Update UserDefaults and create new CoreData record
+    setStartDate(newDate)
+  }
+
+  public func getPreviousSiteEndDate() -> Date? {
+    #if !BUILDING_FOR_EXTENSION
+    let provider = SiteDatesProvider(with: coreDataStack.managedContext)
+    return provider.getPreviousSiteEndDate()
+    #else
+    return nil
+    #endif
   }
 
   public func setDaysBtwnChanges(_ daysBtwnChanges: Int) {

@@ -56,6 +56,9 @@ class SetupViewController: UIViewController {
     super.viewDidLoad()
 
     self.updateUI()
+    saveButton.accessibilityIdentifier = "setupSaveButton"
+    startDatePicker.accessibilityIdentifier = "setupDatePicker"
+    stepper.accessibilityIdentifier = "setupStepper"
     let pickerDate = formatDate(.now)
     startDatePicker.setDate(pickerDate, animated: true)
     daysBtwn.text = String(pumpSiteManager.daysBtwn)
