@@ -6,10 +6,11 @@
 //  Copyright © 2020 Emily Mittleman. All rights reserved.
 //
 
+import Combine
 import Foundation
 import UIKit
 
-class RemindersManager {
+class RemindersManager: ObservableObject {
 
   private var reminders = [ReminderType:Reminder]()
 
@@ -48,16 +49,19 @@ class RemindersManager {
   // MARK: Mutators, Setters, and Updaters
 
   public func updateReminder(type: ReminderType, frequency: ReminderFrequency) {
+    objectWillChange.send()
     reminders[type]!.frequency = frequency
     self.saveToStorage()
   }
 
   public func updateReminder(type: ReminderType, soundOn: Bool) {
+    objectWillChange.send()
     reminders[type]!.soundOn = soundOn
     self.saveToStorage()
   }
 
   public func updateReminder(type: ReminderType, repeatingFrequency: Date) {
+    objectWillChange.send()
     reminders[type]!.repeatingFrequency = repeatingFrequency
     self.saveToStorage()
   }
