@@ -35,6 +35,12 @@
 		5DA3E8952C02DDAE003DDAB6 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */; };
 		A1B2C3D4E5F6A7B8C9D0E1F2 /* Font+Rubik.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7A8B9C0D1E2 /* Font+Rubik.swift */; };
 		C3D4E5F6A7B8C9D0E1F2A3B4 /* ButtonOutlineStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* ButtonOutlineStyle.swift */; };
+		AA01BB02CC03DD04EE05FF07 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01BB02CC03DD04EE05FF06 /* AppState.swift */; };
+		AA11BB12CC13DD14EE15FF17 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11BB12CC13DD14EE15FF16 /* LaunchView.swift */; };
+		AA21BB22CC23DD24EE25FF27 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA21BB22CC23DD24EE25FF26 /* SetupView.swift */; };
+		AA31BB32CC33DD34EE35FF37 /* ThirtyMinuteDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA31BB32CC33DD34EE35FF36 /* ThirtyMinuteDatePicker.swift */; };
+		AA41BB42CC43DD44EE45FF47 /* StartDatePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA41BB42CC43DD44EE45FF46 /* StartDatePickerSheet.swift */; };
+		AA51BB52CC53DD54EE55FF57 /* FSCalendarRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51BB52CC53DD54EE55FF56 /* FSCalendarRepresentable.swift */; };
 		5DA3E8962C02DDAE003DDAB6 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */; };
 		5DA3E8992C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89A2C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
@@ -146,6 +152,12 @@
 		5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		F1A2B3C4D5E6F7A8B9C0D1E2 /* Font+Rubik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Rubik.swift"; sourceTree = "<group>"; };
 		B2C3D4E5F6A7B8C9D0E1F2A3 /* ButtonOutlineStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOutlineStyle.swift; sourceTree = "<group>"; };
+		AA01BB02CC03DD04EE05FF06 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AA11BB12CC13DD14EE15FF16 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		AA21BB22CC23DD24EE25FF26 /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		AA31BB32CC33DD34EE35FF36 /* ThirtyMinuteDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirtyMinuteDatePicker.swift; sourceTree = "<group>"; };
+		AA41BB42CC43DD44EE45FF46 /* StartDatePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDatePickerSheet.swift; sourceTree = "<group>"; };
+		AA51BB52CC53DD54EE55FF56 /* FSCalendarRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarRepresentable.swift; sourceTree = "<group>"; };
 		5DA3E8982C02DF74003DDAB6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDatePickerBottomSheet.swift; sourceTree = "<group>"; };
 		5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeTimeController.swift; sourceTree = "<group>"; };
@@ -253,6 +265,8 @@
 				5D7868822300984B00A54436 /* HomeViewController.swift */,
 				5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */,
 				5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */,
+				AA31BB32CC33DD34EE35FF36 /* ThirtyMinuteDatePicker.swift */,
+				AA41BB42CC43DD44EE45FF46 /* StartDatePickerSheet.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -360,6 +374,7 @@
 			children = (
 				5D13E7A827A4ECC5007CC645 /* ChangeSite.entitlements */,
 				5DCD329F230023AB00BC2E07 /* AppDelegate.swift */,
+				AA01BB02CC03DD04EE05FF06 /* AppState.swift */,
 				5D09CDFC23026991006E914F /* ClassExtensions.swift */,
 				5DCD32A3230023AB00BC2E07 /* Main.storyboard */,
 				5DF50C592926BA3000E3695C /* NewUser */,
@@ -388,6 +403,7 @@
 				5DF50C5329202AD500E3695C /* CustomCalendarCell.swift */,
 				5D8DF109293436CF00FB2A48 /* LegendView.swift */,
 				5D8DF10B29343B0900FB2A48 /* LegendView.xib */,
+				AA51BB52CC53DD54EE55FF56 /* FSCalendarRepresentable.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -408,7 +424,9 @@
 			isa = PBXGroup;
 			children = (
 				5DCD32A1230023AB00BC2E07 /* LaunchViewController.swift */,
+				AA11BB12CC13DD14EE15FF16 /* LaunchView.swift */,
 				5DF50C5A2926BABC00E3695C /* SetupViewController.swift */,
+				AA21BB22CC23DD24EE25FF26 /* SetupView.swift */,
 			);
 			path = NewUser;
 			sourceTree = "<group>";
@@ -690,6 +708,12 @@
 				5DA3E8952C02DDAE003DDAB6 /* AppColor.swift in Sources */,
 				A1B2C3D4E5F6A7B8C9D0E1F2 /* Font+Rubik.swift in Sources */,
 				C3D4E5F6A7B8C9D0E1F2A3B4 /* ButtonOutlineStyle.swift in Sources */,
+				AA01BB02CC03DD04EE05FF07 /* AppState.swift in Sources */,
+				AA11BB12CC13DD14EE15FF17 /* LaunchView.swift in Sources */,
+				AA21BB22CC23DD24EE25FF27 /* SetupView.swift in Sources */,
+				AA31BB32CC33DD34EE35FF37 /* ThirtyMinuteDatePicker.swift in Sources */,
+				AA41BB42CC43DD44EE45FF47 /* StartDatePickerSheet.swift in Sources */,
+				AA51BB52CC53DD54EE55FF57 /* FSCalendarRepresentable.swift in Sources */,
 				5DF50C512920175D00E3695C /* SiteDates+CoreDataClass.swift in Sources */,
 				5D9A0703292AF8F700B90AEE /* HomeViewModel.swift in Sources */,
 				5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */,
