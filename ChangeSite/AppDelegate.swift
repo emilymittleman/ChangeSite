@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import UserNotifications
 import WidgetKit
+import SwiftUI
+import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var pumpSiteManager: PumpSiteManager?
   var remindersManager: RemindersManager?
   var notificationManager: NotificationManager?
+  var appState: AppState?
+  private var appStateCancellable: AnyCancellable?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     UserDefaultsAccessHelper.sharedInstance.setUp(withGroupID: Bundle.main.appGroupID)
@@ -61,10 +65,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     #endif
 
     let isNewUser = UserDefaultsAccessHelper.sharedInstance.isNewUser()
-    if isNewUser, let vc = storyboard.instantiateViewController(withIdentifier: "LaunchScreen") as? LaunchViewController {
-      vc.pumpSiteManager = pumpSiteManager
-      vc.remindersManager = remindersManager
-      initialViewController = vc
+    if isNewUser {
+      // SwiftUI onboarding flow — LaunchView → SetupView
+      let state = AppState(isNewUser: true)
+      self.appState = state
+
+      let launchView = LaunchView()
+        .environmentObject(pumpSiteManager!)
+        .environmentObject(remindersManager!)
+        .environmentObject(state)
+
+      initialViewController = UIHostingController(rootView: launchView)
+
+      // Observe the flag: when SetupView calls appState.isNewUser = false,
+      // swap the root VC to the main tab bar on the main thread.
+      appStateCancellable = state.$isNewUser
+        .dropFirst() // ignore the initial true
+        .filter { !$0 }
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] _ in
+          self?.presentMainTabBar()
+        }
     } else if let vc = storyboard.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController {
       vc.pumpSiteManager = pumpSiteManager
       vc.remindersManager = remindersManager
@@ -72,6 +93,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     self.window?.rootViewController = initialViewController
     self.window?.makeKeyAndVisible()
+  }
+
+  /// Swaps the window root to the UIKit tab bar after onboarding completes.
+  private func presentMainTabBar() {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    guard let vc = storyboard.instantiateViewController(withIdentifier: "navigationMenuBaseController") as? NavigationMenuBaseController else {
+      return
+    }
+    vc.pumpSiteManager = pumpSiteManager
+    vc.remindersManager = remindersManager
+
+    // Animate the root swap so the transition doesn't flash.
+    UIView.transition(
+      with: window!,
+      duration: 0.35,
+      options: .transitionCrossDissolve,
+      animations: { self.window?.rootViewController = vc },
+      completion: { _ in self.appStateCancellable = nil }
+    )
   }
 
   func applicationWillResignActive(_ application: UIApplication) {
