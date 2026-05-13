@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 enum TabItem {
@@ -24,12 +25,15 @@ enum TabItem {
     case .calendar(let pumpSiteManager):
       return CalendarViewController.viewController(pumpSiteManager: pumpSiteManager)
     case .settings(let pumpSiteManager, let remindersManager):
-      let navController = UINavigationController()
-      let settingsVC = SettingsTableViewController.viewController(pumpSiteManager: pumpSiteManager, remindersManager: remindersManager)
-      navController.viewControllers = [settingsVC]
-      return navController
+      let rootView = NavigationStack {
+        SettingsView()
+          .environmentObject(pumpSiteManager)
+          .environmentObject(remindersManager)
+      }
+      let hostingController = UIHostingController(rootView: rootView)
+      return hostingController
     #if DEBUG
-    case .debug(let pumpSiteManager, let remindersManager):
+    case .debug:
       return DebugViewController()
     #endif
     }

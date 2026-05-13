@@ -33,12 +33,18 @@
 		5D8DF10C29343B0900FB2A48 /* LegendView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8DF10B29343B0900FB2A48 /* LegendView.xib */; };
 		5D9A0703292AF8F700B90AEE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */; };
 		5DA3E8952C02DDAE003DDAB6 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* Font+Rubik.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7A8B9C0D1E2 /* Font+Rubik.swift */; };
+		C3D4E5F6A7B8C9D0E1F2A3B4 /* ButtonOutlineStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* ButtonOutlineStyle.swift */; };
 		5DA3E8962C02DDAE003DDAB6 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */; };
 		5DA3E8992C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89A2C02DF74003DDAB6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA3E8982C02DF74003DDAB6 /* Media.xcassets */; };
 		5DA3E89B2C03EB1E003DDAB6 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D6D2719291F957400BEC655 /* Rubik-Medium.ttf */; };
 		5DA3E89D2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */; };
 		5DAEB1F3299B461400A21251 /* DefaultChangeTimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */; };
+		43405B321BC54B2A90828BE1 /* StartDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23048C2EEB3407B9BB0AAAC /* StartDateView.swift */; };
+		405B9E9CDDBE42149B518F1E /* DefaultChangeTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E041AD1EF4094706BF366396 /* DefaultChangeTimeView.swift */; };
+		48DD92CBE83D44FFBA35CCCC /* ReminderFrequencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A940369CEE414AA2B4F393E6 /* ReminderFrequencyView.swift */; };
+		EDF353EC05EE4D99BAA96391 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B658350569124D1BAF88ED3C /* SettingsView.swift */; };
 		5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */; };
 		5DB8911923003FE80000BFC6 /* StartDateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911823003FE80000BFC6 /* StartDateController.swift */; };
 		5DB8911B2300401E0000BFC6 /* ReminderFrequencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */; };
@@ -138,9 +144,15 @@
 		5D8DF10B29343B0900FB2A48 /* LegendView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LegendView.xib; sourceTree = "<group>"; };
 		5D9A0702292AF8F700B90AEE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		F1A2B3C4D5E6F7A8B9C0D1E2 /* Font+Rubik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Rubik.swift"; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* ButtonOutlineStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOutlineStyle.swift; sourceTree = "<group>"; };
 		5DA3E8982C02DF74003DDAB6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		5DA3E89C2C04139F003DDAB6 /* StartDatePickerBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDatePickerBottomSheet.swift; sourceTree = "<group>"; };
 		5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeTimeController.swift; sourceTree = "<group>"; };
+		D23048C2EEB3407B9BB0AAAC /* StartDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateView.swift; sourceTree = "<group>"; };
+		E041AD1EF4094706BF366396 /* DefaultChangeTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChangeTimeView.swift; sourceTree = "<group>"; };
+		A940369CEE414AA2B4F393E6 /* ReminderFrequencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFrequencyView.swift; sourceTree = "<group>"; };
+		B658350569124D1BAF88ED3C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5DB8911623003BCF0000BFC6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		5DB8911823003FE80000BFC6 /* StartDateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateController.swift; sourceTree = "<group>"; };
 		5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFrequencyController.swift; sourceTree = "<group>"; };
@@ -253,6 +265,10 @@
 				5DB8911823003FE80000BFC6 /* StartDateController.swift */,
 				5DB8911A2300401E0000BFC6 /* ReminderFrequencyController.swift */,
 				5DAEB1F2299B461400A21251 /* DefaultChangeTimeController.swift */,
+					D23048C2EEB3407B9BB0AAAC /* StartDateView.swift */,
+					E041AD1EF4094706BF366396 /* DefaultChangeTimeView.swift */,
+					A940369CEE414AA2B4F393E6 /* ReminderFrequencyView.swift */,
+					B658350569124D1BAF88ED3C /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -298,6 +314,8 @@
 			children = (
 				5D6D270F291F94AE00BEC655 /* Fonts */,
 				5DA3E8942C02DDAE003DDAB6 /* AppColor.swift */,
+				F1A2B3C4D5E6F7A8B9C0D1E2 /* Font+Rubik.swift */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* ButtonOutlineStyle.swift */,
 				5DA3E8982C02DF74003DDAB6 /* Media.xcassets */,
 			);
 			path = Design;
@@ -661,11 +679,17 @@
 				CBDCC20F2B60EF8300BD995B /* PumpSiteUtils.swift in Sources */,
 				5DF50C4B292012EF00E3695C /* CoreDataStack.swift in Sources */,
 				5DAEB1F3299B461400A21251 /* DefaultChangeTimeController.swift in Sources */,
+				43405B321BC54B2A90828BE1 /* StartDateView.swift in Sources */,
+				405B9E9CDDBE42149B518F1E /* DefaultChangeTimeView.swift in Sources */,
+				48DD92CBE83D44FFBA35CCCC /* ReminderFrequencyView.swift in Sources */,
+				EDF353EC05EE4D99BAA96391 /* SettingsView.swift in Sources */,
 				5DF50C522920175D00E3695C /* SiteDates+CoreDataProperties.swift in Sources */,
 				5D1B011724C0635200EE9633 /* PumpSiteManager.swift in Sources */,
 				5D5CBC152C423E6C0034BC3D /* DebugViewController.swift in Sources */,
 				5DF50C5429202AD500E3695C /* CustomCalendarCell.swift in Sources */,
 				5DA3E8952C02DDAE003DDAB6 /* AppColor.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* Font+Rubik.swift in Sources */,
+				C3D4E5F6A7B8C9D0E1F2A3B4 /* ButtonOutlineStyle.swift in Sources */,
 				5DF50C512920175D00E3695C /* SiteDates+CoreDataClass.swift in Sources */,
 				5D9A0703292AF8F700B90AEE /* HomeViewModel.swift in Sources */,
 				5DB8911723003BCF0000BFC6 /* SettingsTableViewController.swift in Sources */,
